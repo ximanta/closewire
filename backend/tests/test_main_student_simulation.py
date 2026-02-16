@@ -21,7 +21,7 @@ class StudentSimulationParsingTests(unittest.TestCase):
     def test_extract_response_fields_for_student_payload(self):
         text = """
 INTERNAL_THOUGHT: He is only talking about modules. My real tension is placement after 2023 passing out.
-UPDATED_STATE: {"trust_level": 42, "financial_anxiety": 78, "skepticism": 71, "confusion_level": 65}
+UPDATED_STATS: {"resistance": 71, "trust": 42, "sentiment": "anxious", "unresolved_concerns": ["Price"]}
 MESSAGE: Sir, honestly I am from non-IT background. Placement support for fresher is real or not?
 EMOTIONAL_STATE: skeptical
 STRATEGIC_INTENT: Validate placement credibility before discussing curriculum.
@@ -30,8 +30,8 @@ STRATEGIC_INTENT: Validate placement credibility before discussing curriculum.
         self.assertIn("placement", parsed["internal_thought"].lower())
         self.assertEqual(parsed["message"], "Sir, honestly I am from non-IT background. Placement support for fresher is real or not?")
         self.assertEqual(parsed["emotional_state"], "skeptical")
-        self.assertEqual(parsed["updated_state"]["trust_level"], 42)
-        self.assertEqual(parsed["updated_state"]["skepticism"], 71)
+        self.assertEqual(parsed["updated_stats"]["trust"], 42)
+        self.assertEqual(parsed["updated_stats"]["resistance"], 71)
 
     def test_extract_response_fields_for_counsellor_payload(self):
         text = """
@@ -45,27 +45,32 @@ CONFIDENCE_SCORE: 84
         self.assertEqual(parsed["techniques"], ["workload_validation", "objection_reframing"])
         self.assertEqual(parsed["confidence_score"], 84)
         self.assertEqual(parsed["internal_thought"], "")
-        self.assertEqual(parsed["updated_state"], {})
+        self.assertEqual(parsed["updated_stats"], {})
 
     def test_invalid_updated_state_json_is_ignored(self):
         text = """
 INTERNAL_THOUGHT: This sounds too salesy.
-UPDATED_STATE: not-a-json
+UPDATED_STATS: not-a-json
 MESSAGE: Can you share refund policy once?
 EMOTIONAL_STATE: skeptical
 """
         parsed = main._extract_response_fields(text)
-        self.assertEqual(parsed["updated_state"], {})
+        self.assertEqual(parsed["updated_stats"], {})
         self.assertEqual(parsed["emotional_state"], "skeptical")
 
     def test_merge_student_inner_state_clamps_values(self):
-        current = {"trust_level": 50, "financial_anxiety": 40, "skepticism": 60, "confusion_level": 30}
-        updates = {"trust_level": 130, "financial_anxiety": -15, "skepticism": "88", "confusion_level": "oops"}
+        current = {
+            "sentiment": "curious",
+            "skepticism_level": 60,
+            "trust_score": 50,
+            "unresolved_concerns": ["Price"],
+        }
+        updates = {"resistance": 130, "trust": -15, "sentiment": "frustrated", "unresolved_concerns": ["Job Guarantee"]}
         merged = main._merge_student_inner_state(current, updates)
-        self.assertEqual(merged["trust_level"], 100)
-        self.assertEqual(merged["financial_anxiety"], 0)
-        self.assertEqual(merged["skepticism"], 88)
-        self.assertEqual(merged["confusion_level"], 30)
+        self.assertEqual(merged["skepticism_level"], 100)
+        self.assertEqual(merged["trust_score"], 0)
+        self.assertEqual(merged["sentiment"], "frustrated")
+        self.assertEqual(merged["unresolved_concerns"], ["Job Guarantee"])
 
 
 if __name__ == "__main__":

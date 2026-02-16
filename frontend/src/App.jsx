@@ -26,6 +26,7 @@ const COMMITMENT_ICONS = {
 const PILLAR_ITEM_TRUNCATE = 120;
 const STUDENT_CONTROL_PREFIXES = [
   "INTERNAL_THOUGHT:",
+  "UPDATED_STATS:",
   "UPDATED_STATE:",
   "EMOTIONAL_STATE:",
   "STRATEGIC_INTENT:",
@@ -33,8 +34,12 @@ const STUDENT_CONTROL_PREFIXES = [
 
 const extractSpokenText = (value) => {
   const raw = String(value || "");
+  const xmlMessageMatch = raw.match(/<message>\s*([\s\S]*?)\s*<\/message>/i);
+  if (xmlMessageMatch?.[1]?.trim()) {
+    return xmlMessageMatch[1].trim();
+  }
   const inlineMessageMatch = raw.match(
-    /MESSAGE:\s*(.*?)(?:(?:\n|\r|\s)(?:INTERNAL_THOUGHT|UPDATED_STATE|EMOTIONAL_STATE|STRATEGIC_INTENT|TECHNIQUES_USED|CONFIDENCE_SCORE)\s*:|$)/is
+    /MESSAGE:\s*(.*?)(?:(?:\n|\r|\s)(?:INTERNAL_THOUGHT|UPDATED_STATS|UPDATED_STATE|EMOTIONAL_STATE|STRATEGIC_INTENT|TECHNIQUES_USED|CONFIDENCE_SCORE)\s*:|$)/is
   );
   if (inlineMessageMatch?.[1]?.trim()) {
     return inlineMessageMatch[1].trim();
@@ -48,6 +53,18 @@ const extractSpokenText = (value) => {
   lines.forEach((line) => {
     const upper = line.toUpperCase();
     if (STUDENT_CONTROL_PREFIXES.some((prefix) => upper.startsWith(prefix))) return;
+    if (upper.startsWith("<THOUGHT>") || upper.startsWith("</THOUGHT>")) return;
+    if (upper.startsWith("<STATS>") || upper.startsWith("</STATS>")) return;
+    if (upper.startsWith("<INTENT>") || upper.startsWith("</INTENT>")) return;
+    if (upper.startsWith("<EMOTIONAL_STATE>") || upper.startsWith("</EMOTIONAL_STATE>")) return;
+    if (upper.startsWith("<MESSAGE>") || upper.startsWith("</MESSAGE>")) {
+      const content = line
+        .replace(/<message>/i, "")
+        .replace(/<\/message>/i, "")
+        .trim();
+      if (content) spoken.push(content);
+      return;
+    }
     if (upper.startsWith("MESSAGE:")) {
       const content = line.slice("MESSAGE:".length).trim();
       if (content) spoken.push(content);
@@ -441,7 +458,16 @@ function App() {
     };
 
     ws.onmessage = (event) => {
-      const payload = JSON.parse(event.data);
+      let payload;
+      try {
+        payload = JSON.parse(event.data);
+      } catch (error) {
+        // Keep UI alive and surface malformed payloads in dev tools.
+        // eslint-disable-next-line no-console
+        console.error("WS payload parse failed", { raw: event.data, error });
+        pushUiToast("Malformed server event received.");
+        return;
+      }
       if (payload.type === "stream_chunk") {
         const data = payload.data;
         setDrafts((prev) => {
@@ -488,17 +514,22 @@ function App() {
         setStage("completed");
         setShowReportDashboard(false);
       } else if (payload.type === "error") {
+        // eslint-disable-next-line no-console
+        console.error("Backend negotiation error", payload.data);
         pushUiToast(payload.data?.message || "Unexpected backend error");
-        setStage("idle");
       }
     };
 
-    ws.onerror = () => {
+    ws.onerror = (event) => {
+      // eslint-disable-next-line no-console
+      console.error("WebSocket error", event);
       pushUiToast("WebSocket connection failed. Please retry.");
     };
 
-    ws.onclose = () => {
+    ws.onclose = (event) => {
       if (wsRef.current !== ws) return;
+      // eslint-disable-next-line no-console
+      console.warn("WebSocket closed", { code: event.code, reason: event.reason, wasClean: event.wasClean });
       setDrafts({});
       pushUiToast("Connection closed.", "strategic", 1800);
     };

@@ -93,39 +93,59 @@ def get_client_and_models() -> Tuple[genai.Client, str, str]:
 
 
 ARCHETYPE_WEIGHTS: List[Tuple[str, int]] = [
-    ("desperate_switcher", 40),
-    ("skeptical_shopper", 30),
-    ("fomo_victim", 20),
-    ("drifter", 10),
+    ("desperate_switcher", 35),
+    ("skeptical_shopper", 20),
+    ("stagnant_pro", 20),
+    ("credential_hunter", 10),
+    ("fomo_victim", 10),
+    ("drifter", 5),
 ]
 
 ARCHETYPE_LABELS: Dict[str, str] = {
     "desperate_switcher": "Desperate Switcher",
-    "skeptical_shopper": "Skeptical Comparison Shopper",
+    "skeptical_shopper": "Skeptical Shopper",
+    "stagnant_pro": "Stagnant Pro",
+    "credential_hunter": "Credential Hunter",
     "fomo_victim": "FOMO Victim",
     "drifter": "Drifter",
 }
 
-ARCHETYPE_SOULS: Dict[str, Dict[str, str]] = {
+ARCHETYPE_CONFIGS: Dict[str, Dict[str, str]] = {
     "desperate_switcher": {
-        "soul": "Fear",
-        "trigger": "I will be left behind.",
-        "behavior": "Asks for guaranteed placement and gets overwhelmed by technical jargon.",
+        "core_drive": "Security & Job Guarantee",
+        "stress_trigger": "Technical complexity or vague answers",
+        "emotional_response": "Panic, begging for reassurance, self-doubt",
+        "language_instruction": "Indian Academic English. Use 'Sir/Ma'am' often and terms like Batch, Passing out, Gap, Scope.",
     },
     "skeptical_shopper": {
-        "soul": "Distrust",
-        "trigger": "They are trying to loot me.",
-        "behavior": "Compares with YouTube/Udemy and challenges value and refunds.",
+        "core_drive": "Value for Money & Trust",
+        "stress_trigger": "Sales talk or hidden terms",
+        "emotional_response": "Suspicion, aggression, comparing with competitors",
+        "language_instruction": "Hinglish (Urban). Use code-mixing and emphasis words like bhaiya, scene kya hai, hidden charges.",
+    },
+    "stagnant_pro": {
+        "core_drive": "Efficiency, ROI & Status",
+        "stress_trigger": "Being treated like a beginner or wasting time",
+        "emotional_response": "Arrogance, impatience, condescension",
+        "language_instruction": "Corporate Indian English. Use terms like Bandwidth, Relevant, Upskill, Package hike.",
+    },
+    "credential_hunter": {
+        "core_drive": "CV Brand Value & Accreditation",
+        "stress_trigger": "Learning heavy concepts without certificate focus",
+        "emotional_response": "Detachment, transactional checking of boxes",
+        "language_instruction": "Formal/Bureaucratic language. Ask about Validity, Hard copy, HR recognition.",
     },
     "drifter": {
-        "soul": "Laziness/Indifference",
-        "trigger": "Parents forced me.",
-        "behavior": "Focuses on attendance, holidays, and minimum effort to pass.",
+        "core_drive": "Ease of Effort & Shortcuts",
+        "stress_trigger": "Hard work, mandatory attendance, strict projects",
+        "emotional_response": "Apathy, looking for loopholes",
+        "language_instruction": "Passive Indian English. Ask about attendance, minimum marks, easy or tough.",
     },
     "fomo_victim": {
-        "soul": "Greed/Hype",
-        "trigger": "AI is the new crypto.",
-        "behavior": "Wants advanced AI outcomes without foundations.",
+        "core_drive": "Speed & Trendiness (AI/GenAI)",
+        "stress_trigger": "Foundational topics (Math/SQL) or long duration",
+        "emotional_response": "Boredom, distraction, shallow impatience",
+        "language_instruction": "Buzzword-heavy style with terms like ChatGPT, Prompt Engineering, Trending, Viral.",
     },
 }
 
@@ -152,16 +172,24 @@ class ProgramSummary(TypedDict):
     emi_or_financing_options: str
 
 
-class PersonaProfile(TypedDict):
+class StudentPersona(TypedDict):
     name: str
     archetype_id: str
     archetype_label: str
+    age: int
+    current_role: str
+    city_tier: str
     backstory: str
     trigger_event: str
     hidden_secret: str
     misconception: str
-    communication_style: str
-    common_phrases: List[str]
+    language_style: str
+    common_vocabulary: List[str]
+    financial_anxiety: int
+    skepticism: int
+    confusion_level: int
+    ego_level: int
+    # Legacy-compatible fields consumed by existing frontend/metrics.
     persona_type: str
     background: str
     career_stage: str
@@ -173,9 +201,15 @@ class PersonaProfile(TypedDict):
     expected_roi_months: int
     affordability_concern_level: int
     willingness_to_invest_score: int
-    financial_anxiety: int
-    skepticism: int
-    confusion_level: int
+    communication_style: str
+    common_phrases: List[str]
+
+
+class StudentInnerState(TypedDict):
+    sentiment: str
+    skepticism_level: int
+    trust_score: int
+    unresolved_concerns: List[str]
 
 
 class AnalyzeUrlRequest(BaseModel):
@@ -195,7 +229,7 @@ class LoginResponse(BaseModel):
 class AnalyzeUrlResponse(BaseModel):
     session_id: str
     program: Dict[str, Any]
-    persona: Dict[str, Any]
+    persona: StudentPersona
     source: str
 
 
@@ -220,9 +254,9 @@ class NegotiationState(TypedDict):
     history_for_reporting: List[Dict[str, Any]]
     counsellor_position: Dict[str, Any]
     student_position: Dict[str, Any]
-    student_inner_state: Dict[str, int]
+    student_inner_state: StudentInnerState
     program: ProgramSummary
-    persona: PersonaProfile
+    persona: StudentPersona
     deal_status: str
     negotiation_metrics: Dict[str, Any]
     retry_context: Dict[str, Any]
@@ -231,7 +265,7 @@ class NegotiationState(TypedDict):
 SESSION_STORE: Dict[str, Dict[str, Any]] = {}
 AUTH_TOKENS: Dict[str, float] = {}
 AUTH_FILE = Path(__file__).with_name("auth.json")
-TRACEABILITY_FILE = Path(__file__).with_name("conversation_tracebility.json")
+TRACEABILITY_FILE = Path(__file__).with_name("conversation_traceability.json")
 DEBUG_TRACE_FILE = Path(__file__).with_name("negotiation_debug_trace.jsonl")
 
 class ClientStreamClosed(Exception):
@@ -549,18 +583,29 @@ def _extract_labeled_block(raw: str, label: str, stop_labels: List[str]) -> str:
     return match.group(1).strip() if match else ""
 
 
+def _extract_tag_block(raw: str, tag: str) -> str:
+    closed = re.search(rf"<{tag}>\s*(.*?)\s*</{tag}>", raw, flags=re.IGNORECASE | re.DOTALL)
+    if closed:
+        return closed.group(1).strip()
+    # Fallback when model forgets closing tag.
+    open_only = re.search(rf"<{tag}>\s*(.*)$", raw, flags=re.IGNORECASE | re.DOTALL)
+    if open_only:
+        return open_only.group(1).strip()
+    return ""
+
+
 def _extract_message_block(raw: str) -> str:
     # Handles both multi-line and single-line labeled output where control labels may be inline.
     pattern = (
         r"MESSAGE:\s*(.*?)(?:(?:\n|\r|\s)"
-        r"(?:INTERNAL_THOUGHT|UPDATED_STATE|EMOTIONAL_STATE|STRATEGIC_INTENT|TECHNIQUES_USED|CONFIDENCE_SCORE)\s*:|$)"
+        r"(?:INTERNAL_THOUGHT|UPDATED_STATS|UPDATED_STATE|EMOTIONAL_STATE|STRATEGIC_INTENT|TECHNIQUES_USED|CONFIDENCE_SCORE)\s*:|$)"
     )
     match = re.search(pattern, raw, flags=re.IGNORECASE | re.DOTALL)
     if not match:
         return ""
     message = match.group(1).strip()
     message = re.sub(
-        r"(?:INTERNAL_THOUGHT|UPDATED_STATE|EMOTIONAL_STATE|STRATEGIC_INTENT|TECHNIQUES_USED|CONFIDENCE_SCORE)\s*:.*$",
+        r"(?:INTERNAL_THOUGHT|UPDATED_STATS|UPDATED_STATE|EMOTIONAL_STATE|STRATEGIC_INTENT|TECHNIQUES_USED|CONFIDENCE_SCORE)\s*:.*$",
         "",
         message,
         flags=re.IGNORECASE | re.DOTALL,
@@ -588,6 +633,7 @@ def _extract_unlabeled_message(raw: str) -> str:
         return ""
     label_prefixes = (
         "INTERNAL_THOUGHT:",
+        "UPDATED_STATS:",
         "UPDATED_STATE:",
         "MESSAGE:",
         "EMOTIONAL_STATE:",
@@ -607,10 +653,27 @@ def _clamp_score(value: Any, fallback: int = 50) -> int:
     return max(0, min(100, parsed))
 
 
-def _merge_student_inner_state(current: Dict[str, int], updates: Dict[str, Any]) -> Dict[str, int]:
-    merged = dict(current)
-    for key in ("trust_level", "financial_anxiety", "skepticism", "confusion_level"):
-        merged[key] = _clamp_score(updates.get(key, merged.get(key, 50)), merged.get(key, 50))
+def _merge_student_inner_state(current: StudentInnerState, updates: Dict[str, Any]) -> StudentInnerState:
+    merged: StudentInnerState = {
+        "sentiment": str(current.get("sentiment", "curious")),
+        "skepticism_level": _clamp_score(current.get("skepticism_level", 50)),
+        "trust_score": _clamp_score(current.get("trust_score", 50)),
+        "unresolved_concerns": [str(item) for item in (current.get("unresolved_concerns") or [])],
+    }
+    if not updates:
+        return merged
+    merged["skepticism_level"] = _clamp_score(
+        updates.get("skepticism_level", updates.get("resistance", merged["skepticism_level"])),
+        merged["skepticism_level"],
+    )
+    merged["trust_score"] = _clamp_score(
+        updates.get("trust_score", updates.get("trust", merged["trust_score"])),
+        merged["trust_score"],
+    )
+    if updates.get("sentiment"):
+        merged["sentiment"] = str(updates.get("sentiment")).strip().lower()
+    if isinstance(updates.get("unresolved_concerns"), list):
+        merged["unresolved_concerns"] = [str(item).strip() for item in updates["unresolved_concerns"] if str(item).strip()]
     return merged
 
 
@@ -649,45 +712,84 @@ def _extract_response_text_from_non_stream(response: Any) -> str:
 
 def _extract_response_fields(text: str) -> Dict[str, Any]:
     raw = text or ""
-    message = _extract_message_block(raw)
     techniques: List[str] = []
-    intent = _extract_labeled_block(raw, "STRATEGIC_INTENT", ["MESSAGE", "EMOTIONAL_STATE", "CONFIDENCE_SCORE"])
-    thought = _extract_labeled_block(
+    message = _extract_tag_block(raw, "message") or _extract_message_block(raw)
+    thought = _extract_tag_block(raw, "thought") or _extract_labeled_block(
         raw,
         "INTERNAL_THOUGHT",
-        ["UPDATED_STATE", "MESSAGE", "STRATEGIC_INTENT", "EMOTIONAL_STATE"],
+        ["UPDATED_STATS", "UPDATED_STATE", "MESSAGE", "STRATEGIC_INTENT", "EMOTIONAL_STATE"],
     )
-    updated_state_raw = _extract_labeled_block(
+    intent = _extract_tag_block(raw, "intent") or _extract_labeled_block(
         raw,
-        "UPDATED_STATE",
-        ["MESSAGE", "STRATEGIC_INTENT", "EMOTIONAL_STATE", "INTERNAL_THOUGHT"],
+        "STRATEGIC_INTENT",
+        ["MESSAGE", "EMOTIONAL_STATE", "CONFIDENCE_SCORE"],
     )
-    updated_state = _extract_first_json_object(updated_state_raw)
-
+    emotional_state = (
+        _extract_tag_block(raw, "emotional_state")
+        or _extract_tag_block(raw, "emotion")
+        or "calm"
+    )
     confidence = 60
-    emotional_state = "calm"
 
-    techniques_match = re.search(r"TECHNIQUES_USED:\s*\[(.*?)\]", raw, flags=re.IGNORECASE | re.DOTALL)
-    if techniques_match:
-        techniques = [
-            item.strip().strip('"').strip("'")
-            for item in techniques_match.group(1).split(",")
-            if item.strip()
-        ]
+    updated_stats_raw = _extract_tag_block(raw, "stats")
+    if not updated_stats_raw:
+        updated_stats_raw = _extract_labeled_block(
+            raw,
+            "UPDATED_STATS",
+            ["MESSAGE", "STRATEGIC_INTENT", "EMOTIONAL_STATE", "INTERNAL_THOUGHT", "UPDATED_STATE"],
+        )
+    if not updated_stats_raw:
+        updated_stats_raw = _extract_labeled_block(
+            raw,
+            "UPDATED_STATE",
+            ["MESSAGE", "STRATEGIC_INTENT", "EMOTIONAL_STATE", "INTERNAL_THOUGHT", "UPDATED_STATS"],
+        )
+    updated_stats = _extract_first_json_object(updated_stats_raw)
 
-    confidence_match = re.search(r"CONFIDENCE_SCORE:\s*([0-9]+(?:\.[0-9]+)?)", raw, flags=re.IGNORECASE)
-    if confidence_match:
-        try:
-            confidence = int(float(confidence_match.group(1)))
-        except Exception:
-            confidence = 60
+    techniques_raw = _extract_tag_block(raw, "techniques")
+    if techniques_raw:
+        parsed_techniques = _extract_first_json_object(f"{{\"items\": {techniques_raw}}}").get("items", [])
+        if isinstance(parsed_techniques, list):
+            techniques = [str(item).strip() for item in parsed_techniques if str(item).strip()]
+        elif not techniques:
+            techniques = [item.strip() for item in techniques_raw.split(",") if item.strip()]
+    if not techniques:
+        techniques_match = re.search(r"TECHNIQUES_USED:\s*\[(.*?)\]", raw, flags=re.IGNORECASE | re.DOTALL)
+        if techniques_match:
+            techniques = [
+                item.strip().strip('"').strip("'")
+                for item in techniques_match.group(1).split(",")
+                if item.strip()
+            ]
 
-    emotional_match = re.search(r"EMOTIONAL_STATE:\s*([a-zA-Z_ -]+)", raw, flags=re.IGNORECASE)
-    if emotional_match:
-        emotional_state = emotional_match.group(1).strip().lower()
+    confidence_raw = _extract_tag_block(raw, "confidence") or _extract_tag_block(raw, "confidence_score")
+    if confidence_raw:
+        confidence = _clamp_score(confidence_raw, 60)
+    else:
+        confidence_match = re.search(r"CONFIDENCE_SCORE:\s*([0-9]+(?:\.[0-9]+)?)", raw, flags=re.IGNORECASE)
+        if confidence_match:
+            try:
+                confidence = int(float(confidence_match.group(1)))
+            except Exception:
+                confidence = 60
+
+    if emotional_state == "calm":
+        emotional_match = re.search(r"EMOTIONAL_STATE:\s*([a-zA-Z_ -]+)", raw, flags=re.IGNORECASE)
+        if emotional_match:
+            emotional_state = emotional_match.group(1).strip().lower()
 
     if not message:
-        message = _extract_unlabeled_message(raw)
+        clean_text = re.sub(r"<thought>.*?</thought>", " ", raw, flags=re.IGNORECASE | re.DOTALL)
+        clean_text = re.sub(r"<stats>.*?</stats>", " ", clean_text, flags=re.IGNORECASE | re.DOTALL)
+        clean_text = re.sub(r"<intent>.*?</intent>", " ", clean_text, flags=re.IGNORECASE | re.DOTALL)
+        clean_text = re.sub(r"<emotional_state>.*?</emotional_state>", " ", clean_text, flags=re.IGNORECASE | re.DOTALL)
+        clean_text = re.sub(r"<emotion>.*?</emotion>", " ", clean_text, flags=re.IGNORECASE | re.DOTALL)
+        clean_text = re.sub(r"<techniques>.*?</techniques>", " ", clean_text, flags=re.IGNORECASE | re.DOTALL)
+        clean_text = re.sub(r"<confidence(?:_score)?>.*?</confidence(?:_score)?>", " ", clean_text, flags=re.IGNORECASE | re.DOTALL)
+        clean_text = clean_text.replace("<message>", " ").replace("</message>", " ")
+        message = _extract_unlabeled_message(clean_text)
+    if not message:
+        message = "..."
 
     message = re.sub(r"\s+\n", "\n", message).strip()
     return {
@@ -697,7 +799,7 @@ def _extract_response_fields(text: str) -> Dict[str, Any]:
         "confidence_score": max(0, min(100, confidence)),
         "emotional_state": emotional_state,
         "internal_thought": thought,
-        "updated_state": updated_state,
+        "updated_stats": updated_stats,
     }
 
 
@@ -794,37 +896,52 @@ PAGE_TEXT:
     return _to_plain_json(parsed), source
 
 
-def _generate_persona(program: ProgramSummary) -> PersonaProfile:
+def _generate_persona(program: ProgramSummary) -> StudentPersona:
     client, negotiation_model_name, _ = get_client_and_models()
     archetype_id = random.choices(
         [item[0] for item in ARCHETYPE_WEIGHTS],
         weights=[item[1] for item in ARCHETYPE_WEIGHTS],
         k=1,
     )[0]
-    archetype = ARCHETYPE_SOULS.get(archetype_id, ARCHETYPE_SOULS["desperate_switcher"])
+    archetype = ARCHETYPE_CONFIGS.get(archetype_id, ARCHETYPE_CONFIGS["desperate_switcher"])
+    language_style = "Hinglish" if archetype_id == "skeptical_shopper" else random.choice(
+        ["Indian Academic English", "Corporate Indian English", "Formal Indian English", "Passive Indian English"]
+    )
     prompt = f"""
-Generate a realistic Indian-context prospective student persona and call the function.
+Generate a realistic Indian learner persona and call the function.
 You MUST keep archetype_id exactly as: {archetype_id}
 Archetype label: {ARCHETYPE_LABELS.get(archetype_id, archetype_id)}
-Archetype soul: {archetype['soul']}
-Archetype trigger: {archetype['trigger']}
-Archetype behavior: {archetype['behavior']}
+Core drive: {archetype['core_drive']}
+Stress trigger: {archetype['stress_trigger']}
+Emotional response: {archetype['emotional_response']}
+Language instruction: {archetype['language_instruction']}
 
-Use realistic Indian English context: package, fresher, passing out year, backlog, tension, placement.
-No profanity. Keep spoken behavior human, repetitive when anxiety remains unresolved.
+Use realistic Indian context.
+If archetype_id is skeptical_shopper, force language_style as Hinglish with code-mixing.
+No profanity.
 PROGRAM:
 {json.dumps(program)}
 """
-    fallback: PersonaProfile = {
+    fallback: StudentPersona = {
         "name": random.choice(["Aman", "Riya", "Saurabh", "Neha", "Anjali", "Nikhil"]),
         "archetype_id": archetype_id,
         "archetype_label": ARCHETYPE_LABELS.get(archetype_id, archetype_id),
-        "backstory": "Non-IT fresher exploring AI course after delayed placements.",
-        "trigger_event": archetype["trigger"],
-        "hidden_secret": "Has not told counsellor yet about serious family pressure around job timeline.",
-        "misconception": "Believes a certificate directly guarantees package without fundamentals.",
-        "communication_style": random.choice(["timid", "aggressive", "confused", "challenging"]),
-        "common_phrases": ["Is placement guaranteed?", "I am from middle class family", "I am getting tension"],
+        "age": random.randint(21, 34),
+        "current_role": random.choice(
+            ["BPO Employee", "Final Year B.Tech Student", "Manual Tester", "Support Engineer", "Job Seeker"]
+        ),
+        "city_tier": random.choice(["Tier-1", "Tier-2"]),
+        "backstory": "Family expectations are rising and career progress feels stuck.",
+        "trigger_event": "Saw a friend get a better package after upskilling.",
+        "hidden_secret": "Scared of wasting money and failing to complete what is started.",
+        "misconception": "Certificate alone guarantees shortlisting and placement.",
+        "language_style": language_style,
+        "common_vocabulary": ["Package", "Placement", "Fresher", "Backlog", "Refund", "Scope"],
+        "financial_anxiety": random.randint(45, 95),
+        "skepticism": random.randint(30, 95),
+        "confusion_level": random.randint(25, 85),
+        "ego_level": random.randint(20, 85),
+        # Legacy compatibility
         "persona_type": archetype_id,
         "background": "Prospective learner evaluating an AI upskilling path.",
         "career_stage": random.choice(["early", "mid"]),
@@ -836,9 +953,8 @@ PROGRAM:
         "expected_roi_months": random.randint(4, 18),
         "affordability_concern_level": random.randint(45, 90),
         "willingness_to_invest_score": random.randint(25, 75),
-        "financial_anxiety": random.randint(45, 95),
-        "skepticism": random.randint(35, 90),
-        "confusion_level": random.randint(25, 85),
+        "communication_style": random.choice(["timid", "aggressive", "confused", "challenging"]),
+        "common_phrases": ["Placement ka scene kya hai?", "Is this really worth it?", "Mera paisa waste toh nahi hoga?"],
     }
     parsed = _call_function_json(
         client=client,
@@ -852,51 +968,37 @@ PROGRAM:
                 "name": {"type": "string"},
                 "archetype_id": {"type": "string", "enum": list(ARCHETYPE_LABELS.keys())},
                 "archetype_label": {"type": "string"},
+                "age": {"type": "integer"},
+                "current_role": {"type": "string"},
+                "city_tier": {"type": "string", "enum": ["Tier-1", "Tier-2"]},
                 "backstory": {"type": "string"},
                 "trigger_event": {"type": "string"},
                 "hidden_secret": {"type": "string"},
                 "misconception": {"type": "string"},
-                "communication_style": {"type": "string"},
-                "common_phrases": {"type": "array", "items": {"type": "string"}},
-                "persona_type": {"type": "string"},
-                "background": {"type": "string"},
-                "career_stage": {"type": "string"},
-                "financial_sensitivity": {"type": "string"},
-                "risk_tolerance": {"type": "string"},
-                "emotional_tone": {"type": "string"},
-                "primary_objections": {"type": "array", "items": {"type": "string"}},
-                "walk_away_likelihood": {"type": "number"},
-                "expected_roi_months": {"type": "integer"},
-                "affordability_concern_level": {"type": "integer"},
-                "willingness_to_invest_score": {"type": "integer"},
+                "language_style": {"type": "string"},
+                "common_vocabulary": {"type": "array", "items": {"type": "string"}},
                 "financial_anxiety": {"type": "integer"},
                 "skepticism": {"type": "integer"},
                 "confusion_level": {"type": "integer"},
+                "ego_level": {"type": "integer"},
             },
             "required": [
                 "name",
                 "archetype_id",
                 "archetype_label",
+                "age",
+                "current_role",
+                "city_tier",
                 "backstory",
                 "trigger_event",
                 "hidden_secret",
                 "misconception",
-                "communication_style",
-                "common_phrases",
-                "persona_type",
-                "background",
-                "career_stage",
-                "financial_sensitivity",
-                "risk_tolerance",
-                "emotional_tone",
-                "primary_objections",
-                "walk_away_likelihood",
-                "expected_roi_months",
-                "affordability_concern_level",
-                "willingness_to_invest_score",
+                "language_style",
+                "common_vocabulary",
                 "financial_anxiety",
                 "skepticism",
                 "confusion_level",
+                "ego_level",
             ],
         },
         fallback=fallback,
@@ -908,22 +1010,53 @@ PROGRAM:
     parsed["archetype_label"] = str(
         parsed.get("archetype_label") or ARCHETYPE_LABELS.get(parsed["archetype_id"], parsed["archetype_id"])
     )
-    parsed["persona_type"] = str(parsed.get("persona_type") or parsed["archetype_id"])
-    parsed["walk_away_likelihood"] = float(max(0.0, min(1.0, float(parsed.get("walk_away_likelihood", 0.4)))))
-    parsed["expected_roi_months"] = int(
-        max(1, min(60, int(parsed.get("expected_roi_months", fallback["expected_roi_months"]))))
+    parsed["age"] = int(max(18, min(50, int(parsed.get("age", fallback["age"])))))
+    parsed["current_role"] = str(parsed.get("current_role") or fallback["current_role"])
+    parsed["city_tier"] = "Tier-1" if str(parsed.get("city_tier")).strip() == "Tier-1" else "Tier-2"
+    parsed["language_style"] = (
+        "Hinglish" if parsed["archetype_id"] == "skeptical_shopper" else str(parsed.get("language_style") or fallback["language_style"])
     )
-    parsed["affordability_concern_level"] = int(
-        max(0, min(100, int(parsed.get("affordability_concern_level", fallback["affordability_concern_level"])))
-    ))
-    parsed["willingness_to_invest_score"] = int(
-        max(0, min(100, int(parsed.get("willingness_to_invest_score", fallback["willingness_to_invest_score"])))
-    ))
+    parsed["common_vocabulary"] = [str(item) for item in (parsed.get("common_vocabulary") or fallback["common_vocabulary"])][:8]
     parsed["financial_anxiety"] = _clamp_score(parsed.get("financial_anxiety", fallback["financial_anxiety"]))
     parsed["skepticism"] = _clamp_score(parsed.get("skepticism", fallback["skepticism"]))
     parsed["confusion_level"] = _clamp_score(parsed.get("confusion_level", fallback["confusion_level"]))
+    parsed["ego_level"] = _clamp_score(parsed.get("ego_level", fallback["ego_level"]))
+    # Legacy-compatible fields expected by current UI and pricing logic.
+    parsed["persona_type"] = str(parsed.get("persona_type") or parsed["archetype_id"])
+    parsed["background"] = str(parsed.get("background") or fallback["background"])
+    parsed["career_stage"] = str(parsed.get("career_stage") or fallback["career_stage"])
+    parsed["financial_sensitivity"] = str(parsed.get("financial_sensitivity") or fallback["financial_sensitivity"])
+    parsed["risk_tolerance"] = str(parsed.get("risk_tolerance") or fallback["risk_tolerance"])
+    parsed["emotional_tone"] = str(parsed.get("emotional_tone") or fallback["emotional_tone"])
+    parsed["primary_objections"] = [str(item) for item in (parsed.get("primary_objections") or fallback["primary_objections"])][:6]
+    parsed["walk_away_likelihood"] = float(max(0.0, min(1.0, float(parsed.get("walk_away_likelihood", fallback["walk_away_likelihood"])))))
+    parsed["expected_roi_months"] = int(max(1, min(60, int(parsed.get("expected_roi_months", fallback["expected_roi_months"])))))
+    parsed["affordability_concern_level"] = int(max(0, min(100, int(parsed.get("affordability_concern_level", fallback["affordability_concern_level"])))))
+    parsed["willingness_to_invest_score"] = int(max(0, min(100, int(parsed.get("willingness_to_invest_score", fallback["willingness_to_invest_score"])))))
+    parsed["communication_style"] = str(parsed.get("communication_style") or fallback["communication_style"])
     parsed["common_phrases"] = [str(item) for item in (parsed.get("common_phrases") or fallback["common_phrases"])][:6]
     return parsed
+
+
+def _is_valid_student_persona_schema(persona: Dict[str, Any]) -> bool:
+    required = {
+        "archetype_id",
+        "archetype_label",
+        "age",
+        "current_role",
+        "city_tier",
+        "backstory",
+        "trigger_event",
+        "hidden_secret",
+        "misconception",
+        "language_style",
+        "common_vocabulary",
+        "financial_anxiety",
+        "skepticism",
+        "confusion_level",
+        "ego_level",
+    }
+    return required.issubset(set(persona.keys()))
 
 
 def _build_counsellor_prompt(state: NegotiationState) -> str:
@@ -984,11 +1117,12 @@ ADVANCED RULE:
 If primary objection remains unresolved, address it directly before attempting close.
 
 OUTPUT FORMAT:
-MESSAGE: <dialogue>
-TECHNIQUES_USED: [consultative_selling, objection_reframing, roi_framing, workload_validation, etc]
-STRATEGIC_INTENT: <one sentence>
-CONFIDENCE_SCORE: <0-100>
-MESSAGE must end as a complete sentence, never cut mid-sentence.
+<message>dialogue</message>
+<techniques>["consultative_selling","objection_reframing","roi_framing"]</techniques>
+<intent>one sentence strategic intent</intent>
+<confidence>0-100</confidence>
+<emotional_state>calm/frustrated/confused/excited/skeptical</emotional_state>
+Do not output anything outside these tags.
 """
 
 
@@ -996,24 +1130,32 @@ def _build_student_prompt(state: NegotiationState) -> str:
     transcript = "\n".join(
         f"{m['agent'].upper()}: {m['content']}" for m in _trim_messages(state["messages"], 12)
     )
+    persona = state["persona"]
     inner_state = state.get("student_inner_state", {})
-    phrases = ", ".join(state["persona"].get("common_phrases", []))
+    config = ARCHETYPE_CONFIGS.get(persona.get("archetype_id", "desperate_switcher"), ARCHETYPE_CONFIGS["desperate_switcher"])
+    vocabulary = ", ".join(persona.get("common_vocabulary", []))
     return f"""
-ROLE: Prospective Student.
+ROLE: You are {persona.get('name')}, a {persona.get('age')} year old {persona.get('current_role')}.
+ARCHETYPE: {persona.get('archetype_label')}
+CITY CONTEXT: {persona.get('city_tier')}
 
-PERSONA:
-{json.dumps(state['persona'])}
+YOUR STORY: {persona.get('backstory')}
+HIDDEN SECRET: {persona.get('hidden_secret')}
+MISCONCEPTION: {persona.get('misconception')}
 
-STUDENT INNER STATE:
-{json.dumps(inner_state)}
+--- PSYCHOLOGICAL PROFILE ---
+PRIMARY MOTIVATION: {config.get('core_drive')}
+WHAT STRESSES YOU: {config.get('stress_trigger')}
+YOUR DEFAULT REACTION: {config.get('emotional_response')}
+LANGUAGE STYLE: {persona.get('language_style')}
+LANGUAGE INSTRUCTION: {config.get('language_instruction')}
+COMMON VOCABULARY: {vocabulary}
 
-MANDATORY BEHAVIOR:
-- You are a flawed human, not a helpful assistant.
-- Think first about fear/trust, then respond.
-- If counsellor gives long technical answer, ignore most of it and ask what matters to you.
-- If anxiety is unresolved, repeat concern in a new wording.
-- Use Indian English naturally (package, fresher, passing out year, backlog, tension, placement).
-- No profanity.
+CURRENT STATE:
+- sentiment: {inner_state.get('sentiment', 'curious')}
+- resistance_level: {inner_state.get('skepticism_level', 50)}/100
+- trust_level: {inner_state.get('trust_score', 50)}/100
+- unresolved_concerns: {", ".join(inner_state.get('unresolved_concerns', [])) or "none"}
 
 PROGRAM:
 {json.dumps(state['program'])}
@@ -1021,24 +1163,29 @@ PROGRAM:
 CURRENT OFFER FROM COUNSELLOR:
 {state['counsellor_position']['current_offer']}
 
-CONTEXT:
+TRANSCRIPT SO FAR:
 {transcript}
 
-YOUR PERSONAL ANCHORS:
-- Archetype: {state['persona'].get('archetype_id')}
-- Trigger event: {state['persona'].get('trigger_event')}
-- Hidden secret (do not reveal early): {state['persona'].get('hidden_secret')}
-- Misconception: {state['persona'].get('misconception')}
-- Communication style: {state['persona'].get('communication_style')}
-- Common phrases to blend naturally: {phrases}
+--- INSTRUCTIONS ---
+1. ANALYZE RESPONSE:
+- Did counsellor address PRIMARY MOTIVATION?
+- If no, or if they hit stress trigger, increase resistance.
+2. GENERATE INTERNAL_THOUGHT:
+- Be raw, emotional, irrational, and human.
+3. GENERATE MESSAGE:
+- Speak naturally per LANGUAGE STYLE and vocabulary.
+- Do not reveal hidden secret too early.
+- Repeat unresolved concerns if still unanswered.
+- If archetype is skeptical_shopper, code-mix Hinglish for emphasis.
+4. Keep MESSAGE complete and not cut mid sentence.
 
-Output exactly:
-INTERNAL_THOUGHT: <private and unfiltered reaction>
-UPDATED_STATE: <single-line JSON with trust_level, financial_anxiety, skepticism, confusion_level as 0-100 integers>
-MESSAGE: <dialogue>
-EMOTIONAL_STATE: calm/frustrated/confused/excited/skeptical
-STRATEGIC_INTENT: <why responding this way>
-MESSAGE must be complete and not cut mid-sentence.
+--- OUTPUT FORMAT ---
+<thought>raw inner monologue</thought>
+<stats>{{"resistance": <int>, "trust": <int>, "sentiment": "<str>", "unresolved_concerns": ["<concern>"]}}</stats>
+<message>spoken response</message>
+<emotional_state>calm/frustrated/confused/excited/skeptical</emotional_state>
+<intent>why responding this way</intent>
+Do not output anything outside these tags.
 """
 
 
@@ -1165,8 +1312,16 @@ async def _stream_agent_response(
         )
         if not full_text.strip():
             finish_reasons = retry_finish_reasons
-            reason_note = f" finish_reasons={finish_reasons}" if finish_reasons else ""
-            raise RuntimeError(f"{agent} returned empty response from model.{reason_note}")
+            _write_debug_trace(
+                "empty_model_fallback",
+                {
+                    "agent": agent,
+                    "round": round_number,
+                    "message_id": message_id,
+                    "finish_reasons": finish_reasons,
+                },
+            )
+            full_text = "<message>...</message>"
 
     fields = _extract_response_fields(full_text)
     _write_debug_trace(
@@ -1178,51 +1333,24 @@ async def _stream_agent_response(
             "message_chars": len(fields.get("message", "")),
             "intent_chars": len(fields.get("intent", "")),
             "thought_chars": len(fields.get("internal_thought", "")),
-            "has_updated_state": bool(fields.get("updated_state")),
+            "has_updated_stats": bool(fields.get("updated_stats")),
             "emotional_state": fields.get("emotional_state"),
         },
     )
     if not fields.get("message", "").strip():
-        unlabeled = _extract_unlabeled_message(full_text)
-        if unlabeled.strip():
-            fields["message"] = unlabeled.strip()
-        else:
-            _write_debug_trace(
-                "parse_error",
-                {
-                    "agent": agent,
-                    "round": round_number,
-                    "message_id": message_id,
-                    "reason": "no_parseable_message",
-                    "raw_head": _truncate_trace_text(full_text, 260),
-                },
-            )
-            raise RuntimeError(
-                f"{agent} response had no parseable MESSAGE block. Raw head={full_text[:180]!r}"
-            )
-    if agent == "student":
-        # Hard stop: never allow a student turn with control labels only or blank spoken text.
-        control_only = re.fullmatch(
-            r"(?is)\s*(?:INTERNAL_THOUGHT|UPDATED_STATE|EMOTIONAL_STATE|STRATEGIC_INTENT|TECHNIQUES_USED|CONFIDENCE_SCORE)\s*:.*",
-            fields["message"].strip(),
+        fields["message"] = "..."
+        _write_debug_trace(
+            "parse_message_fallback",
+            {
+                "agent": agent,
+                "round": round_number,
+                "message_id": message_id,
+                "raw_head": _truncate_trace_text(full_text, 260),
+            },
         )
-        if not fields["message"].strip() or control_only:
-            _write_debug_trace(
-                "student_spoken_missing",
-                {
-                    "agent": agent,
-                    "round": round_number,
-                    "message_id": message_id,
-                    "message": _truncate_trace_text(fields.get("message", ""), 180),
-                    "raw_head": _truncate_trace_text(full_text, 260),
-                },
-            )
-            raise RuntimeError(
-                f"student response missing spoken learner message. Raw head={full_text[:220]!r}"
-            )
     merged_state = dict(student_inner_state or {})
     if agent == "student":
-        merged_state = _merge_student_inner_state(merged_state or {}, fields.get("updated_state", {}))
+        merged_state = _merge_student_inner_state(merged_state or {}, fields.get("updated_stats", {}))
 
     msg = {
         "id": message_id,
@@ -1234,6 +1362,7 @@ async def _stream_agent_response(
         "confidence_score": fields["confidence_score"],
         "emotional_state": fields["emotional_state"],
         "internal_thought": fields.get("internal_thought", ""),
+        "updated_stats": merged_state,
         "updated_state": merged_state,
         "timestamp": datetime.now().isoformat(),
     }
@@ -1246,7 +1375,7 @@ async def _stream_agent_response(
                     "round": round_number,
                     "message_id": message_id,
                     "thought": fields["internal_thought"],
-                    "updated_state": merged_state,
+                    "updated_stats": merged_state,
                 },
             },
         )
@@ -1312,11 +1441,29 @@ def _update_metrics(state: NegotiationState, counsellor_msg: Dict[str, Any], stu
     )
     metrics["objection_intensity"] = min(100, max(0, metrics["objection_intensity"] + (objection_hits - 2) * 2))
     inner = state.get("student_inner_state", {})
+    student_text = (student_msg.get("content") or "").lower()
+    unresolved = set(inner.get("unresolved_concerns", []))
+    if any(token in student_text for token in ["price", "fee", "cost", "expensive", "refund"]):
+        unresolved.add("Price")
+    if any(token in student_text for token in ["placement", "job", "package", "guarantee"]):
+        unresolved.add("Job Guarantee")
+    if any(token in student_text for token in ["time", "hours", "attendance", "effort"]):
+        unresolved.add("Effort/Time")
+    inner["unresolved_concerns"] = sorted(unresolved)
+    if emotional in {"frustrated", "confused"}:
+        inner["sentiment"] = emotional
+    elif emotional in {"excited", "calm"}:
+        inner["sentiment"] = "curious"
+
     metrics["objection_intensity"] = min(
         100,
-        int((metrics["objection_intensity"] * 0.7) + (inner.get("skepticism", 50) * 0.2) + (inner.get("confusion_level", 40) * 0.1)),
+        int(
+            (metrics["objection_intensity"] * 0.7)
+            + (inner.get("skepticism_level", 50) * 0.2)
+            + (state["persona"].get("confusion_level", 40) * 0.1)
+        ),
     )
-    metrics["trust_index"] = min(100, max(0, int((metrics["trust_index"] * 0.75) + (inner.get("trust_level", 50) * 0.25))))
+    metrics["trust_index"] = min(100, max(0, int((metrics["trust_index"] * 0.75) + (inner.get("trust_score", 50) * 0.25))))
     retry_modifier = int(metrics.get("retry_modifier", 0))
     trust_score = min(100, metrics["trust_index"] + (retry_modifier // 2))
     willingness = min(100, int(state["persona"].get("willingness_to_invest_score", 50)) + retry_modifier)
@@ -1475,8 +1622,13 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             await _ws_send_json(websocket, {"type": "error", "data": {"message": "Invalid session_id"}})
             return
 
-        persona = session["persona"]
         program = session["program"]
+        persona = session["persona"]
+        if not _is_valid_student_persona_schema(persona):
+            logger.warning("Session %s had legacy persona schema. Regenerating StudentPersona.", config.session_id)
+            persona = _to_plain_json(_generate_persona(program))
+            session["persona"] = persona
+
         financials = _derive_financials(program, persona)
         last_run = session.get("last_run", {})
         previous_analysis = last_run.get("analysis", {}) if config.retry_mode else {}
@@ -1504,10 +1656,10 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 "current_offer": financials["student_opening"],
             },
             "student_inner_state": {
-                "trust_level": _clamp_score(55 - (persona.get("skepticism", 50) // 3), 45),
-                "financial_anxiety": _clamp_score(persona.get("financial_anxiety", persona.get("affordability_concern_level", 50))),
-                "skepticism": _clamp_score(persona.get("skepticism", 50)),
-                "confusion_level": _clamp_score(persona.get("confusion_level", 40)),
+                "sentiment": "anxious" if int(persona.get("financial_anxiety", 50)) > 65 else "curious",
+                "skepticism_level": _clamp_score(persona.get("skepticism", 50)),
+                "trust_score": _clamp_score(55 - (int(persona.get("skepticism", 50)) // 3), 45),
+                "unresolved_concerns": ["Price", "Job Guarantee"],
             },
             "program": program,
             "persona": persona,
@@ -1576,10 +1728,11 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             )
             state["student_inner_state"] = _merge_student_inner_state(
                 state["student_inner_state"],
-                student_msg.get("updated_state", {}),
+                student_msg.get("updated_stats", {}),
             )
             spoken_student_msg = dict(student_msg)
             spoken_student_msg["internal_thought"] = ""
+            spoken_student_msg["updated_stats"] = {}
             spoken_student_msg["updated_state"] = {}
             state["messages"].append(spoken_student_msg)
             state["history_for_reporting"].append(student_msg)

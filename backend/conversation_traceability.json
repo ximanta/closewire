@@ -1,0 +1,478 @@
+{
+  "generated_at": "2026-02-16T15:20:39.205982",
+  "session_id": "54f46381-14c4-412e-8423-8550a8df956c",
+  "deal_status": "failed",
+  "round": 6,
+  "max_rounds": 5,
+  "persona": {
+    "age": 38,
+    "common_vocabulary": [
+      "Bandwidth",
+      "Relevant",
+      "Upskill",
+      "Package hike"
+    ],
+    "confusion_level": 4,
+    "city_tier": "Tier-1",
+    "trigger_event": "During a recent appraisal discussion, his manager subtly hinted that while his contributions are valuable, his \"skillset relevance\" might become a concern for future \"critical projects.\" He also saw a younger, less experienced colleague get fast-tracked for an AI-focused project, which stung his ego and made him realize the need to \"upskill\" for better \"package hike\" opportunities.",
+    "archetype_label": "Stagnant Pro",
+    "language_style": "Corporate Indian English",
+    "current_role": "Senior Software Engineer",
+    "archetype_id": "stagnant_pro",
+    "backstory": "Rajesh has been in the IT industry for 15 years, steadily climbing the corporate ladder. He's proud of his \"bandwidth\" and experience, having seen multiple tech cycles. He believes in \"relevant\" skills and \"ROI\" for any investment, be it time or money. He's often the most senior person in his immediate team, and frankly, a bit set in his ways. He finds younger colleagues' enthusiasm for new, unproven tech a bit naive. His \"package hike\" has been consistent, but he's noticed a subtle shift in project allocations towards those with \"upskilled\" AI capabilities, which he finds a bit irritating.",
+    "skepticism": 8,
+    "name": "Rajesh Kumar",
+    "misconception": "AI is just glorified automation, a fad that will eventually be replaced by the next big thing. It doesn't require deep engineering, just basic scripting. My core software engineering skills are far more valuable in the long run. These \"Agentic AI Systems\" are probably just marketing jargon for complex if-else statements.",
+    "ego_level": 9,
+    "financial_anxiety": 6,
+    "hidden_secret": "Despite his outward confidence, Rajesh secretly worries about becoming obsolete. He's observed younger colleagues discussing complex AI concepts he doesn't fully grasp, and it's a source of quiet anxiety that he'd never admit.",
+    "persona_type": "stagnant_pro",
+    "background": "Prospective learner evaluating an AI upskilling path.",
+    "career_stage": "early",
+    "financial_sensitivity": "medium",
+    "risk_tolerance": "medium",
+    "emotional_tone": "anxious",
+    "primary_objections": [
+      "Placement credibility",
+      "Fee value",
+      "Difficulty for freshers",
+      "Time commitment"
+    ],
+    "walk_away_likelihood": 0.48,
+    "expected_roi_months": 4,
+    "affordability_concern_level": 76,
+    "willingness_to_invest_score": 29,
+    "communication_style": "confused",
+    "common_phrases": [
+      "Placement ka scene kya hai?",
+      "Is this really worth it?",
+      "Mera paisa waste toh nahi hoga?"
+    ]
+  },
+  "program": {
+    "program_name": "Building Agentic AI Systems",
+    "program_fee_inr": "1,50,000 + GST. Booking fees: 1,500 + GST. Upfront payment with 5% concession: 1,42,500 (inclusive of concession)."
+  },
+  "student_inner_state": {
+    "sentiment": "frustrated",
+    "skepticism_level": 50,
+    "trust_score": 40,
+    "unresolved_concerns": [
+      "Effort/Time",
+      "Job Guarantee",
+      "Price"
+    ]
+  },
+  "negotiation_metrics": {
+    "round": 5,
+    "max_rounds": 5,
+    "concession_count_counsellor": 0,
+    "concession_count_student": 0,
+    "tone_escalation": 35,
+    "objection_intensity": 27,
+    "trust_index": 38,
+    "close_probability": 48,
+    "sentiment_indicator": "negative",
+    "retry_modifier": 0
+  },
+  "final_offers": {
+    "counsellor": 165000,
+    "student": 107400
+  },
+  "analysis": {
+    "primary_unresolved_objection": "The lack of concrete, detailed information on the *actual engineering depth* of the program (beyond glorified automation/scripting) and a clear, *tangible ROI* for a senior professional's significant time and financial investment.",
+    "mistakes": [
+      "Failed to provide specific, technical answers to the student's questions about engineering depth.",
+      "Relied on rephrasing or acknowledging student's points instead of offering solutions.",
+      "Did not adequately address the ROI for a senior professional or justify the program's value beyond buzzwords."
+    ],
+    "strengths": [
+      "The counsellor acknowledged the student's experience and apologized for initial missteps, demonstrating some empathy and willingness to correct course on a superficial level."
+    ],
+    "negotiation_score": 48,
+    "skill_recommendations": [
+      "Develop deeper technical understanding of the program's content to address specific engineering questions.",
+      "Learn to articulate tangible ROI and value propositions tailored for highly experienced professionals.",
+      "Move beyond acknowledging objections to providing concrete, detailed solutions and examples.",
+      "Practice active listening to identify and directly address the *underlying* concerns, not just the stated ones."
+    ],
+    "winner": "student",
+    "commitment_signal": "none",
+    "trust_delta": -5,
+    "enrollment_likelihood": 48,
+    "pivotal_moments": [
+      "Round 1: Counsellor's initial misstep about 'difficulty for freshers' immediately set a negative tone.",
+      "Round 4: Student's 'let's cut to the chase' indicating growing impatience and frustration with the lack of substance.",
+      "Round 5: Student explicitly stating that acknowledging points isn't enough, demanding 'the *how*' and reiterating all prior objections."
+    ],
+    "why": "The counsellor failed to provide specific, technical details regarding the 'engineering depth' of the program, despite the student's repeated requests. They also couldn't articulate a tangible ROI for a senior professional's time and investment beyond surface-level reassurances, leading to the student's increasing frustration and distrust of the program's value."
+  },
+  "transcript": [
+    {
+      "id": "927ca287-2b38-4376-918b-ee4242aa0af3",
+      "round": 1,
+      "agent": "counsellor",
+      "content": "Hello Rajesh, thank you for reaching out and showing interest in our 'Building Agentic AI Systems' program. I understand you're looking to upskill and ensure your capabilities remain highly relevant for critical projects, potentially even for a better package hike. That's a very sensible approach in today's evolving tech landscape.\nLet me clarify how this program is specifically designed for experienced professionals like yourself, addressing some of the key concerns you might have.\nFirstly, regarding the curriculum and \"difficulty for freshers",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:19:31.052071"
+    },
+    {
+      "id": "430454a3-4189-495d-8160-7e89918c64cc",
+      "round": 1,
+      "agent": "student",
+      "content": "Hmm, counsellor. I appreciate you reaching out. But I must say, talking about \"difficulty for freshers\" isn't quite the relevant angle for someone with my experience. I've been in the IT industry for 15 years, seen multiple tech cycles, and my primary concern isn't whether freshers can grasp something. My bandwidth is quite high, and I'm looking for how this program offers a solid ROI for a senior professional like myself.\nFrankly, these \"Agentic AI Systems\" and all sound like a lot of marketing jargon. I need to understand how this is genuinely different from glorified automation or just complex scripting. My core software engineering skills are robust; I need to see how this program truly adds value and isn't just chasing the next fad.\nSo, let's keep it relevant. How is this tailored for someone at *my* level, and what's the actual engineering depth involved, beyond just new buzzwords?",
+      "techniques": [],
+      "strategic_intent": "to redirect the conversation to my specific needs and challenge the program's perceived value and depth, while subtly hinting at my misconception without revealing my secret anxiety",
+      "confidence_score": 60,
+      "emotional_state": "frustrated",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:19:37.206314"
+    },
+    {
+      "id": "192fc4e2-ff61-440e-86d4-2006e0b83377",
+      "round": 2,
+      "agent": "counsellor",
+      "content": "My apologies, Rajesh. You are absolutely right to call me out on that. My intention was to highlight the structured progression of the curriculum, but I misspoke by framing it in terms of \"freshers.\"",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:19:43.743543"
+    },
+    {
+      "id": "88e023f7-cb24-4772-8c7d-fbb5eab58dca",
+      "round": 2,
+      "agent": "student",
+      "content": "...",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:19:50.473706"
+    },
+    {
+      "id": "3d9f2aa7-39fc-44e0-aadd-57dfefd311bf",
+      "round": 3,
+      "agent": "counsellor",
+      "content": "Thank you, Rajesh, for that crucial clarification. My apologies again for the initial misstep. You're absolutely right; with your 15 years of industry experience and strong software engineering background, your perspective is one",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:20:00.090980"
+    },
+    {
+      "id": "a91c0ad9-2d51-4027-879c-41e75d3bf7c1",
+      "round": 3,
+      "agent": "student",
+      "content": "Understood, counsellor. I appreciate the clarification on your intent and the apology. However, my core questions still remain unaddressed. I need to understand, with my 15 years of industry experience and strong software engineering background, how this \"Agentic AI Systems\" program offers a genuine step up, beyond what I perceive as glorified automation or basic scripting.\nWhat is the *actual engineering depth* involved here? How does it leverage advanced software engineering principles, not just new buzzwords? I need to see the ROI for my time and investment. How will this truly enhance my capabilities for critical projects and ensure a significant package hike? Frankly, I'm looking for specifics, not just reassurance. How is this tailored for someone at *my* level, and what's the tangible value, beyond just \"upskilling\" generally?",
+      "techniques": [],
+      "strategic_intent": "reiterate core questions, push for specific value proposition and engineering depth relevant to my experience, and emphasize ROI for my career",
+      "confidence_score": 60,
+      "emotional_state": "impatient",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:20:07.216398"
+    },
+    {
+      "id": "7210bbb7-2657-431e-be38-d74f40a6a791",
+      "round": 4,
+      "agent": "counsellor",
+      "content": "Understood, Rajesh. Thank you for clearly articulating your concerns and expectations. You are absolutely right to question the \"actual engineering depth\" and how a program like \"Building Agentic AI Systems\" differentiates itself from \"glor",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:20:13.813021"
+    },
+    {
+      "id": "7dc44157-c92a-4d8f-819a-590b97253854",
+      "round": 4,
+      "agent": "student",
+      "content": "Counsellor, let's cut to the chase. I've explained my background and my expectations multiple times now. I'm looking for *substance*, not just a rephrasing of my own questions. When I say \"actual engineering depth,\" I mean things like: are we talking about designing robust, scalable architectures for these \"Agentic AI Systems\"? Or is it just stitching together APIs with some Python scripts? My concern is that this is simply glorified automation, perhaps with some fancy new libraries, but fundamentally not requiring the deep engineering acumen I've built over 15 years.\nHow does this program ensure a tangible ROI for someone at my level? How will it directly translate into a significant package hike and more critical project allocations? I need to see how this isn't just a fad, but a foundational shift that warrants my time and investment. Tell me, what are the *advanced software engineering principles* that are being applied here, beyond just the surface-level buzzwords like \"Agentic AI\" or \"LLMs\"? What about the effort/time commitment versus the actual benefit for a senior professional? And frankly, the price, for something that I'm still not convinced is more than just scripting, needs to be justified with concrete value.",
+      "techniques": [],
+      "strategic_intent": "to demand specific, technical answers that justify the program's value for a senior engineer and address ROI, package hike, and the perceived lack of engineering depth",
+      "confidence_score": 60,
+      "emotional_state": "frustrated",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:20:18.486842"
+    },
+    {
+      "id": "0d2be08e-e478-46a7-9e4f-ea02e435b06b",
+      "round": 5,
+      "agent": "counsellor",
+      "content": "Rajesh, your point about \"actual engineering depth\" is absolutely critical, especially with your 15 years of robust software engineering experience. I understand you need to see how this program moves beyond mere scripting or glorified",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:20:25.054525"
+    },
+    {
+      "id": "3bd666ef-8edf-4ab4-9f27-8478b5862ecb",
+      "round": 5,
+      "agent": "student",
+      "content": "Counsellor, with all due respect, simply acknowledging my points about \"actual engineering depth\" and \"moving beyond mere scripting\" isn't providing the specific answers I'm looking for. I need to understand the *how*.\nWhen you say \"engineering depth,\" are we talking about designing resilient, highly available, and scalable distributed systems for these Agentic AI workloads? What kind of architectural patterns beyond basic microservices are we leveraging? Are there discussions around performance optimization, cost management for LLM inference, or robust error handling in multi-agent environments? Because frankly, \"stitching together APIs with some Python scripts\" is precisely what I'm worried this might be. My existing bandwidth already covers that.\nI've been quite clear: I need to see the tangible ROI for my time and investment. How does this program specifically contribute to a significant package hike or secure more critical, high-impact project allocations for someone at *my* level? What are the *advanced software engineering principles* that are being applied and taught here, beyond just the surface-level buzzwords? And again, the effort/time commitment versus the actual benefit for a senior professional needs to be justified. The price is a significant factor, and right now, I'm not seeing the concrete value that warrants it, especially if it's just glorified automation.",
+      "techniques": [],
+      "strategic_intent": "reiterate specific technical and ROI demands, emphasize frustration with lack of concrete answers, challenge the program's perceived depth against my experience, and push back on the value proposition relative to cost and time investment.",
+      "confidence_score": 60,
+      "emotional_state": "frustrated",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:20:30.131353"
+    }
+  ],
+  "history_for_reporting": [
+    {
+      "id": "927ca287-2b38-4376-918b-ee4242aa0af3",
+      "round": 1,
+      "agent": "counsellor",
+      "content": "Hello Rajesh, thank you for reaching out and showing interest in our 'Building Agentic AI Systems' program. I understand you're looking to upskill and ensure your capabilities remain highly relevant for critical projects, potentially even for a better package hike. That's a very sensible approach in today's evolving tech landscape.\nLet me clarify how this program is specifically designed for experienced professionals like yourself, addressing some of the key concerns you might have.\nFirstly, regarding the curriculum and \"difficulty for freshers",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:19:31.052071"
+    },
+    {
+      "id": "430454a3-4189-495d-8160-7e89918c64cc",
+      "round": 1,
+      "agent": "student",
+      "content": "Hmm, counsellor. I appreciate you reaching out. But I must say, talking about \"difficulty for freshers\" isn't quite the relevant angle for someone with my experience. I've been in the IT industry for 15 years, seen multiple tech cycles, and my primary concern isn't whether freshers can grasp something. My bandwidth is quite high, and I'm looking for how this program offers a solid ROI for a senior professional like myself.\nFrankly, these \"Agentic AI Systems\" and all sound like a lot of marketing jargon. I need to understand how this is genuinely different from glorified automation or just complex scripting. My core software engineering skills are robust; I need to see how this program truly adds value and isn't just chasing the next fad.\nSo, let's keep it relevant. How is this tailored for someone at *my* level, and what's the actual engineering depth involved, beyond just new buzzwords?",
+      "techniques": [],
+      "strategic_intent": "to redirect the conversation to my specific needs and challenge the program's perceived value and depth, while subtly hinting at my misconception without revealing my secret anxiety",
+      "confidence_score": 60,
+      "emotional_state": "frustrated",
+      "internal_thought": "Okay, so the counsellor started off by acknowledging the \"package hike\" and \"relevant\" skills, which is good, hits my primary motivation. But then they immediately jumped to \"difficulty for freshers\" and didn't even finish the sentence! What is this? Am I a fresher? I've been in the industry for 15 years, I'm a Senior Software Engineer. This is a waste of my bandwidth. They need to understand who they are talking to. My time is valuable. This \"Agentic AI Systems\" sounds like marketing jargon, and they haven't clarified that at all. This incomplete sentence and vague start is irritating. I need specific, relevant information, not half-baked statements about freshers. My concerns about price and job guarantee are still hanging too, but the immediate issue is this lack of focus on *my* profile. I need to push back a bit, show them I'm not someone to be taken lightly or given incomplete thoughts.",
+      "updated_stats": {
+        "sentiment": "annoyed_curious",
+        "skepticism_level": 15,
+        "trust_score": 50,
+        "unresolved_concerns": [
+          "Price",
+          "Job Guarantee"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "annoyed_curious",
+        "skepticism_level": 15,
+        "trust_score": 50,
+        "unresolved_concerns": [
+          "Price",
+          "Job Guarantee"
+        ]
+      },
+      "timestamp": "2026-02-16T15:19:37.206314"
+    },
+    {
+      "id": "192fc4e2-ff61-440e-86d4-2006e0b83377",
+      "round": 2,
+      "agent": "counsellor",
+      "content": "My apologies, Rajesh. You are absolutely right to call me out on that. My intention was to highlight the structured progression of the curriculum, but I misspoke by framing it in terms of \"freshers.\"",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:19:43.743543"
+    },
+    {
+      "id": "88e023f7-cb24-4772-8c7d-fbb5eab58dca",
+      "round": 2,
+      "agent": "student",
+      "content": "...",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {
+        "sentiment": "frustrated",
+        "skepticism_level": 15,
+        "trust_score": 50,
+        "unresolved_concerns": [
+          "Job Guarantee",
+          "Price"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "frustrated",
+        "skepticism_level": 15,
+        "trust_score": 50,
+        "unresolved_concerns": [
+          "Job Guarantee",
+          "Price"
+        ]
+      },
+      "timestamp": "2026-02-16T15:19:50.473706"
+    },
+    {
+      "id": "3d9f2aa7-39fc-44e0-aadd-57dfefd311bf",
+      "round": 3,
+      "agent": "counsellor",
+      "content": "Thank you, Rajesh, for that crucial clarification. My apologies again for the initial misstep. You're absolutely right; with your 15 years of industry experience and strong software engineering background, your perspective is one",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:20:00.090980"
+    },
+    {
+      "id": "a91c0ad9-2d51-4027-879c-41e75d3bf7c1",
+      "round": 3,
+      "agent": "student",
+      "content": "Understood, counsellor. I appreciate the clarification on your intent and the apology. However, my core questions still remain unaddressed. I need to understand, with my 15 years of industry experience and strong software engineering background, how this \"Agentic AI Systems\" program offers a genuine step up, beyond what I perceive as glorified automation or basic scripting.\nWhat is the *actual engineering depth* involved here? How does it leverage advanced software engineering principles, not just new buzzwords? I need to see the ROI for my time and investment. How will this truly enhance my capabilities for critical projects and ensure a significant package hike? Frankly, I'm looking for specifics, not just reassurance. How is this tailored for someone at *my* level, and what's the tangible value, beyond just \"upskilling\" generally?",
+      "techniques": [],
+      "strategic_intent": "reiterate core questions, push for specific value proposition and engineering depth relevant to my experience, and emphasize ROI for my career",
+      "confidence_score": 60,
+      "emotional_state": "impatient",
+      "internal_thought": "Okay, so the counsellor apologized, which is fine, but it was just an apology. They still haven't actually *answered* my question about the engineering depth or how this \"Agentic AI\" stuff is more than just glorified automation. They simply acknowledged my experience. That's not good enough. My time is valuable, I can't be sitting here for platitudes. I need concrete information, not just a soft apology. I'm still feeling like they're not grasping my level or what I'm looking for. This is becoming a waste of my bandwidth. I need to push them harder to get to the actual value proposition for *me*. And what about my package hike and job guarantee? Still no mention.",
+      "updated_stats": {
+        "sentiment": "impatient",
+        "skepticism_level": 25,
+        "trust_score": 50,
+        "unresolved_concerns": [
+          "Job Guarantee",
+          "Price"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "impatient",
+        "skepticism_level": 25,
+        "trust_score": 50,
+        "unresolved_concerns": [
+          "Job Guarantee",
+          "Price"
+        ]
+      },
+      "timestamp": "2026-02-16T15:20:07.216398"
+    },
+    {
+      "id": "7210bbb7-2657-431e-be38-d74f40a6a791",
+      "round": 4,
+      "agent": "counsellor",
+      "content": "Understood, Rajesh. Thank you for clearly articulating your concerns and expectations. You are absolutely right to question the \"actual engineering depth\" and how a program like \"Building Agentic AI Systems\" differentiates itself from \"glor",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:20:13.813021"
+    },
+    {
+      "id": "7dc44157-c92a-4d8f-819a-590b97253854",
+      "round": 4,
+      "agent": "student",
+      "content": "Counsellor, let's cut to the chase. I've explained my background and my expectations multiple times now. I'm looking for *substance*, not just a rephrasing of my own questions. When I say \"actual engineering depth,\" I mean things like: are we talking about designing robust, scalable architectures for these \"Agentic AI Systems\"? Or is it just stitching together APIs with some Python scripts? My concern is that this is simply glorified automation, perhaps with some fancy new libraries, but fundamentally not requiring the deep engineering acumen I've built over 15 years.\nHow does this program ensure a tangible ROI for someone at my level? How will it directly translate into a significant package hike and more critical project allocations? I need to see how this isn't just a fad, but a foundational shift that warrants my time and investment. Tell me, what are the *advanced software engineering principles* that are being applied here, beyond just the surface-level buzzwords like \"Agentic AI\" or \"LLMs\"? What about the effort/time commitment versus the actual benefit for a senior professional? And frankly, the price, for something that I'm still not convinced is more than just scripting, needs to be justified with concrete value.",
+      "techniques": [],
+      "strategic_intent": "to demand specific, technical answers that justify the program's value for a senior engineer and address ROI, package hike, and the perceived lack of engineering depth",
+      "confidence_score": 60,
+      "emotional_state": "frustrated",
+      "internal_thought": "This counsellor is still not getting it. \"Differentiate itself from 'glor'?\" They cut themselves off, but it sounds like they were just about to re-explain what I already said it *wasn't*. My primary motivation is ROI and status, and they are completely failing to address how this gives *me* a solid return on my time and money, or how it elevates my professional standing beyond what I already have. They are just repeating my words and not providing answers. This is exactly what stresses me out – wasting time with vague discussions. My resistance is definitely going up. I need concrete examples, not just marketing jargon. \"Agentic AI\" still sounds like a fancy name for scripting to me. I need to push them to tell me how it's *deep engineering* and not just a superficial skill. And how it impacts my package hike directly.",
+      "updated_stats": {
+        "sentiment": "impatient",
+        "skepticism_level": 35,
+        "trust_score": 45,
+        "unresolved_concerns": [
+          "Effort/Time",
+          "Job Guarantee",
+          "Price"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "impatient",
+        "skepticism_level": 35,
+        "trust_score": 45,
+        "unresolved_concerns": [
+          "Effort/Time",
+          "Job Guarantee",
+          "Price"
+        ]
+      },
+      "timestamp": "2026-02-16T15:20:18.486842"
+    },
+    {
+      "id": "0d2be08e-e478-46a7-9e4f-ea02e435b06b",
+      "round": 5,
+      "agent": "counsellor",
+      "content": "Rajesh, your point about \"actual engineering depth\" is absolutely critical, especially with your 15 years of robust software engineering experience. I understand you need to see how this program moves beyond mere scripting or glorified",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-16T15:20:25.054525"
+    },
+    {
+      "id": "3bd666ef-8edf-4ab4-9f27-8478b5862ecb",
+      "round": 5,
+      "agent": "student",
+      "content": "Counsellor, with all due respect, simply acknowledging my points about \"actual engineering depth\" and \"moving beyond mere scripting\" isn't providing the specific answers I'm looking for. I need to understand the *how*.\nWhen you say \"engineering depth,\" are we talking about designing resilient, highly available, and scalable distributed systems for these Agentic AI workloads? What kind of architectural patterns beyond basic microservices are we leveraging? Are there discussions around performance optimization, cost management for LLM inference, or robust error handling in multi-agent environments? Because frankly, \"stitching together APIs with some Python scripts\" is precisely what I'm worried this might be. My existing bandwidth already covers that.\nI've been quite clear: I need to see the tangible ROI for my time and investment. How does this program specifically contribute to a significant package hike or secure more critical, high-impact project allocations for someone at *my* level? What are the *advanced software engineering principles* that are being applied and taught here, beyond just the surface-level buzzwords? And again, the effort/time commitment versus the actual benefit for a senior professional needs to be justified. The price is a significant factor, and right now, I'm not seeing the concrete value that warrants it, especially if it's just glorified automation.",
+      "techniques": [],
+      "strategic_intent": "reiterate specific technical and ROI demands, emphasize frustration with lack of concrete answers, challenge the program's perceived depth against my experience, and push back on the value proposition relative to cost and time investment.",
+      "confidence_score": 60,
+      "emotional_state": "frustrated",
+      "internal_thought": "This counsellor is really testing my patience. I've asked for specifics on engineering depth, ROI, package hike, and they just keep *acknowledging* my concerns without actually *addressing* them. It's like they're reading a script that says \"acknowledge customer's point\" but not \"actually answer the customer's point.\" I'm a Senior Software Engineer, not a fresher. I need to know the technical meat of this, not just marketing fluff. \"Moves beyond mere scripting\" - how, exactly? Give me concrete examples! This is a complete waste of my bandwidth. I'm repeating myself for the fourth time. This is why I find these upskilling programs so irritating; everyone just talks about \"upskill\" but no one can justify the ROI for my time and investment. Is this just another fad they're trying to push? And the price is still sitting there, completely unjustified.",
+      "updated_stats": {
+        "sentiment": "frustrated",
+        "skepticism_level": 50,
+        "trust_score": 40,
+        "unresolved_concerns": [
+          "Effort/Time",
+          "Job Guarantee",
+          "Price"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "frustrated",
+        "skepticism_level": 50,
+        "trust_score": 40,
+        "unresolved_concerns": [
+          "Effort/Time",
+          "Job Guarantee",
+          "Price"
+        ]
+      },
+      "timestamp": "2026-02-16T15:20:30.131353"
+    }
+  ]
+}
