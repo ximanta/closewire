@@ -1,18 +1,23 @@
 /* frontend/src/components/AnalysisDashboard.css */
+.analysis-dashboard,
+.analysis-dashboard * {
+  font-family: var(--font-ui, "Segoe UI", "Helvetica Neue", Arial, sans-serif);
+}
+
 .analysis-dashboard {
   max-width: 1400px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 16px;
 }
 
 .outcome-banner {
-  padding: 40px;
-  border-radius: 20px;
+  padding: 20px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
   backdrop-filter: blur(10px);
   animation: slideDown 0.5s ease-out;
 }
@@ -117,8 +122,8 @@
 
 .tab-content {
   background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 40px;
+  border-radius: 12px;
+  padding: 20px;
   backdrop-filter: blur(10px);
   min-height: 500px;
 }

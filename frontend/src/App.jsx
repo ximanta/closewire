@@ -491,7 +491,7 @@ function App() {
         session_id: sessionId,
         auth_token: authToken,
         transcript: messages,
-        analysis: { ...(analysis.judge || {}), metric_events: metricEventHistory },
+        analysis: { ...(analysis.judge || {}), metric_events: metricEventHistory, run_history: runHistory },
       }),
     });
     if (!res.ok) {
@@ -502,7 +502,7 @@ function App() {
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `Negotiation_Coaching_Report_${Date.now()}.pdf`;
+    a.download = `Program_Counsellor_Report_${Date.now()}.pdf`;
     document.body.appendChild(a);
     a.click();
     a.remove();
@@ -628,7 +628,7 @@ function App() {
             <article className={`agentIdentity counsellor ${momentumValue > 65 ? "glow" : ""}`}>
               <h3>{counsellorName || "Admissions Counsellor"}</h3>
               <p>{program?.program_name || "Program"}</p>
-              <strong>Enrollment Guide</strong>
+              <strong>Program Counseller</strong>
             </article>
             <article className={`agentIdentity student ${momentumValue < 40 ? "glow" : ""}`}>
               <h3>Prospective Student</h3>
@@ -673,13 +673,13 @@ function App() {
               </div>
             ))}
           </div>
+          {stage === "negotiating" && (
+            <div className={`metricsRibbon bottomRibbon ${(metrics?.close_probability ?? 0) > 80 ? "glow" : ""}`}>
+              {renderMetricChips()}
+            </div>
+          )}
 
         </section>
-      )}
-      {stage === "negotiating" && (
-        <div className={`metricsRibbon bottomRibbon ${(metrics?.close_probability ?? 0) > 80 ? "glow" : ""}`}>
-          {renderMetricChips()}
-        </div>
       )}
 
       {stage === "completed" && analysis && (

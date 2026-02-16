@@ -28,8 +28,9 @@ from google import genai
 from google.genai import types
 from pydantic import BaseModel, HttpUrl
 from reportlab.lib.pagesizes import letter
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import PageBreak, Paragraph, SimpleDocTemplate, Spacer
+from reportlab.lib import colors
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.platypus import PageBreak, Paragraph, SimpleDocTemplate, Spacer, Table, TableStyle
 from typing_extensions import TypedDict
 
 logging.basicConfig(level=logging.INFO)
@@ -1181,82 +1182,214 @@ async def generate_report(payload: ReportRequest) -> StreamingResponse:
     persona = session.get("persona", {})
 
     buf = BytesIO()
-    doc = SimpleDocTemplate(buf, pagesize=letter, title="Negotiation Coaching Report")
+    doc = SimpleDocTemplate(
+        buf,
+        pagesize=letter,
+        title="Program Counsellor Report",
+        leftMargin=30,
+        rightMargin=30,
+        topMargin=26,
+        bottomMargin=26,
+    )
     styles = getSampleStyleSheet()
     story: List[Any] = []
 
-    story.append(Paragraph("Negotiation Coaching Report", styles["Title"]))
-    story.append(Spacer(1, 12))
-    story.append(Paragraph(f"Generated: {datetime.now().isoformat()}", styles["Normal"]))
-    story.append(Spacer(1, 12))
-
     judge = payload.analysis or {}
-    story.append(Paragraph("Final Outcome Summary", styles["Heading2"]))
-    story.append(Paragraph(f"Outcome: {judge.get('winner', 'no-deal')}", styles["BodyText"]))
-    story.append(Paragraph(judge.get("why", "No summary available."), styles["BodyText"]))
-    story.append(Spacer(1, 12))
+    winner = str(judge.get("winner", "no-deal"))
+    commitment = str(judge.get("commitment_signal", "none"))
+    commitment_map = {
+        "none": "No Commitment",
+        "soft_commitment": "Exploring Enrollment",
+        "conditional_commitment": "Conditional Yes",
+        "strong_commitment": "Confirmed Enrollment",
+    }
 
-    story.append(Paragraph("Commitment Signal Level", styles["Heading2"]))
-    story.append(Paragraph(str(judge.get("commitment_signal", "none")), styles["BodyText"]))
+    title_style = ParagraphStyle(
+        "ReportTitle",
+        parent=styles["Title"],
+        fontSize=22,
+        leading=26,
+        textColor=colors.HexColor("#0B1A37"),
+        spaceAfter=6,
+    )
+    subtitle_style = ParagraphStyle(
+        "ReportSubTitle",
+        parent=styles["Normal"],
+        fontSize=9,
+        leading=12,
+        textColor=colors.HexColor("#4A638F"),
+        spaceAfter=10,
+    )
+    section_style = ParagraphStyle(
+        "SectionHeading",
+        parent=styles["Heading2"],
+        fontSize=12,
+        leading=14,
+        textColor=colors.HexColor("#1D4A8C"),
+        spaceBefore=8,
+        spaceAfter=6,
+    )
+    body_style = ParagraphStyle(
+        "ReportBody",
+        parent=styles["BodyText"],
+        fontSize=9.5,
+        leading=13.5,
+        textColor=colors.HexColor("#1C2F52"),
+    )
+    meta_style = ParagraphStyle(
+        "ReportMeta",
+        parent=styles["BodyText"],
+        fontSize=8.8,
+        leading=12,
+        textColor=colors.HexColor("#4B6087"),
+    )
+
+    def card_table(rows: List[List[str]], col_widths: Optional[List[int]] = None) -> Table:
+        table = Table(rows, colWidths=col_widths)
+        table.setStyle(
+            TableStyle(
+                [
+                    ("BACKGROUND", (0, 0), (-1, -1), colors.HexColor("#F4F8FF")),
+                    ("BOX", (0, 0), (-1, -1), 0.8, colors.HexColor("#C1D3F2")),
+                    ("INNERGRID", (0, 0), (-1, -1), 0.4, colors.HexColor("#D7E4FA")),
+                    ("LEFTPADDING", (0, 0), (-1, -1), 8),
+                    ("RIGHTPADDING", (0, 0), (-1, -1), 8),
+                    ("TOPPADDING", (0, 0), (-1, -1), 6),
+                    ("BOTTOMPADDING", (0, 0), (-1, -1), 6),
+                    ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                ]
+            )
+        )
+        return table
+
+    def append_bullets(title: str, items: List[str], fallback_text: str) -> None:
+        story.append(Paragraph(title, section_style))
+        if not items:
+            story.append(Paragraph(fallback_text, body_style))
+            story.append(Spacer(1, 6))
+            return
+        for item in items:
+            story.append(Paragraph(f"- {str(item)}", body_style))
+        story.append(Spacer(1, 6))
+
+    story.append(Paragraph("Program Counsellor Report", title_style))
+    story.append(Paragraph(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", subtitle_style))
+
+    summary_rows = [
+        ["Outcome", winner],
+        ["Final Score", f"{judge.get('negotiation_score', 0)} / 100"],
+        ["Commitment Signal", commitment_map.get(commitment, commitment)],
+        ["Enrollment Likelihood", f"{judge.get('enrollment_likelihood', 0)}%"],
+        ["Trust Delta", str(judge.get("trust_delta", 0))],
+    ]
+    story.append(Paragraph("Outcome Summary", section_style))
+    story.append(card_table(summary_rows, [130, 390]))
+    story.append(Spacer(1, 8))
+    story.append(Paragraph(str(judge.get("why", "No summary available.")), body_style))
+    story.append(Spacer(1, 10))
+
+    story.append(Paragraph("Persona and Context", section_style))
+    persona_rows = [
+        ["Student", str(persona.get("name", "Unknown"))],
+        ["Persona Type", str(persona.get("persona_type", "n/a"))],
+        ["Career Stage", str(persona.get("career_stage", "n/a"))],
+        ["Risk Tolerance", str(persona.get("risk_tolerance", "n/a"))],
+        ["Program", str(program.get("program_name", "Unknown"))],
+    ]
+    story.append(card_table(persona_rows, [130, 390]))
+    story.append(Spacer(1, 8))
+    story.append(Paragraph("Primary Unresolved Objection", section_style))
+    story.append(Paragraph(str(judge.get("primary_unresolved_objection", "Not specified")), body_style))
     story.append(Spacer(1, 8))
 
-    story.append(Paragraph("Enrollment Likelihood %", styles["Heading2"]))
-    story.append(Paragraph(str(judge.get("enrollment_likelihood", 0)), styles["BodyText"]))
-    story.append(Spacer(1, 8))
+    run_history = payload.analysis.get("run_history", []) if isinstance(payload.analysis, dict) else []
+    if isinstance(run_history, list) and len(run_history) > 1:
+        story.append(Paragraph("Performance Progression", section_style))
+        progression_rows = [["Run", "Score", "Delta vs Previous", "Delta vs Baseline"]]
+        baseline_score = float(run_history[0].get("score", 0))
+        previous_score = None
+        for idx, run in enumerate(run_history):
+            score = float(run.get("score", 0))
+            delta_prev = "-" if previous_score is None else f"{score - previous_score:+.0f}"
+            delta_base = f"{score - baseline_score:+.0f}"
+            progression_rows.append([f"Run {idx + 1}", f"{score:.0f}", delta_prev, delta_base])
+            previous_score = score
+        progression_table = Table(progression_rows, colWidths=[90, 70, 150, 150])
+        progression_table.setStyle(
+            TableStyle(
+                [
+                    ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#DCEBFF")),
+                    ("TEXTCOLOR", (0, 0), (-1, 0), colors.HexColor("#133A77")),
+                    ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+                    ("BACKGROUND", (0, 1), (-1, -1), colors.HexColor("#F7FAFF")),
+                    ("GRID", (0, 0), (-1, -1), 0.5, colors.HexColor("#C9DCF7")),
+                    ("ALIGN", (1, 1), (-1, -1), "CENTER"),
+                    ("LEFTPADDING", (0, 0), (-1, -1), 6),
+                    ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+                    ("TOPPADDING", (0, 0), (-1, -1), 5),
+                    ("BOTTOMPADDING", (0, 0), (-1, -1), 5),
+                ]
+            )
+        )
+        story.append(progression_table)
+        story.append(Spacer(1, 8))
 
-    story.append(Paragraph("Primary Objection", styles["Heading2"]))
-    story.append(Paragraph(str(judge.get("primary_unresolved_objection", "Not specified")), styles["BodyText"]))
-    story.append(Spacer(1, 12))
+    append_bullets("Key Turning Points", [str(x) for x in judge.get("pivotal_moments", [])], "No pivotal moments captured.")
+    append_bullets("Strengths", [str(x) for x in judge.get("strengths", [])], "No strengths captured.")
+    append_bullets("Mistakes", [str(x) for x in judge.get("mistakes", [])], "No mistakes captured.")
+    append_bullets(
+        "Opportunities and Coaching Insights",
+        [str(x) for x in judge.get("skill_recommendations", [])],
+        "No coaching recommendations captured.",
+    )
 
-    story.append(Paragraph("Program Analyzed", styles["Heading2"]))
-    story.append(Paragraph(str(program.get("program_name", "Unknown")), styles["BodyText"]))
-    story.append(Paragraph(str(program.get("value_proposition", "")), styles["BodyText"]))
-    story.append(Spacer(1, 12))
-
-    story.append(Paragraph("Persona Profile", styles["Heading2"]))
-    story.append(Paragraph(str(persona.get("name", "Unknown")), styles["BodyText"]))
-    story.append(Paragraph(str(persona.get("background", "")), styles["BodyText"]))
     story.append(PageBreak())
-
-    story.append(Paragraph("Strengths", styles["Heading2"]))
-    for item in judge.get("strengths", []):
-        story.append(Paragraph(f"- {item}", styles["BodyText"]))
-    story.append(Spacer(1, 10))
-
-    story.append(Paragraph("Mistakes", styles["Heading2"]))
-    for item in judge.get("mistakes", []):
-        story.append(Paragraph(f"- {item}", styles["BodyText"]))
-    story.append(Spacer(1, 10))
-
-    story.append(Paragraph("Skill Recommendations", styles["Heading2"]))
-    for item in judge.get("skill_recommendations", []):
-        story.append(Paragraph(f"- {item}", styles["BodyText"]))
-    story.append(Spacer(1, 12))
-
-    story.append(Paragraph("Strategic Metric Events", styles["Heading2"]))
+    story.append(Paragraph("Conversation Metrics Timeline", section_style))
     metric_events = judge.get("metric_events", [])
     if metric_events:
-        for event in metric_events[-30:]:
-            round_value = event.get("round", "-")
-            text = str(event.get("text", "")).strip()
-            tone = str(event.get("tone", "neutral")).strip()
-            story.append(Paragraph(f"Round {round_value} [{tone}] - {text}", styles["BodyText"]))
+        metric_rows = [["Round", "Tone", "Event"]]
+        for event in metric_events[-40:]:
+            metric_rows.append(
+                [
+                    str(event.get("round", "-")),
+                    str(event.get("tone", "neutral")),
+                    str(event.get("text", "")).strip()[:120],
+                ]
+            )
+        metric_table = Table(metric_rows, colWidths=[60, 90, 370])
+        metric_table.setStyle(
+            TableStyle(
+                [
+                    ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#E6EFFF")),
+                    ("TEXTCOLOR", (0, 0), (-1, 0), colors.HexColor("#133A77")),
+                    ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+                    ("GRID", (0, 0), (-1, -1), 0.45, colors.HexColor("#C9DCF7")),
+                    ("BACKGROUND", (0, 1), (-1, -1), colors.HexColor("#F9FBFF")),
+                    ("VALIGN", (0, 0), (-1, -1), "TOP"),
+                    ("LEFTPADDING", (0, 0), (-1, -1), 6),
+                    ("RIGHTPADDING", (0, 0), (-1, -1), 6),
+                    ("TOPPADDING", (0, 0), (-1, -1), 4),
+                    ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+                ]
+            )
+        )
+        story.append(metric_table)
     else:
-        story.append(Paragraph("No metric events captured.", styles["BodyText"]))
-    story.append(Spacer(1, 12))
+        story.append(Paragraph("No metric events captured.", body_style))
+    story.append(Spacer(1, 10))
 
-    story.append(Paragraph("Transcript", styles["Heading2"]))
+    story.append(Paragraph("Transcript", section_style))
     for msg in payload.transcript:
-        agent = (msg.get("agent") or "").upper()
-        rnd = msg.get("round")
-        content = (msg.get("content") or "").replace("\n", "<br/>")
-        story.append(Paragraph(f"Round {rnd} - {agent}", styles["Heading4"]))
-        story.append(Paragraph(content, styles["BodyText"]))
-        story.append(Spacer(1, 8))
+        agent = str(msg.get("agent", "")).upper() or "UNKNOWN"
+        rnd = msg.get("round", "-")
+        content = str(msg.get("content", "")).replace("\n", "<br/>")
+        story.append(Paragraph(f"Round {rnd} - {agent}", meta_style))
+        story.append(Paragraph(content, body_style))
+        story.append(Spacer(1, 6))
 
     doc.build(story)
     buf.seek(0)
-    filename = f"Negotiation_Coaching_Report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+    filename = f"Program_Counsellor_Report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
     return StreamingResponse(
         buf,
         media_type="application/pdf",

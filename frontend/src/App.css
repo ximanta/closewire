@@ -7,6 +7,16 @@
   --positive: #49e68c;
   --negative: #ff6f7d;
   --strategic: #a585ff;
+  --font-ui: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 }
 
 * {
@@ -25,8 +35,28 @@ body,
 body {
   background: var(--base);
   color: var(--text);
-  font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
   overflow: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-ui);
 }
 
 .app {
@@ -38,6 +68,14 @@ body {
   background-position: center bottom;
   background-size: cover;
   padding: 18px;
+}
+
+.app.stage-completed {
+  padding: 0;
+}
+
+.app.stage-completed .sceneOverlay {
+  display: none;
 }
 
 .sceneOverlay {
@@ -61,11 +99,12 @@ body {
 }
 
 .hero {
-  min-height: 85vh;
+  min-height: 86vh;
   display: grid;
   place-content: center;
   text-align: center;
-  gap: 10px;
+  gap: var(--space-3);
+  padding: var(--space-4);
 }
 
 .hero h1 {
@@ -81,11 +120,11 @@ body {
 }
 
 .inputRow {
-  margin-top: 12px;
+  margin-top: var(--space-3);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .inputRow input {
@@ -103,12 +142,13 @@ body {
 .downloadBtn,
 .ghostBtn {
   min-height: 58px;
-  padding: 16px 22px;
-  border-radius: 12px;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
   border: 0;
   font-weight: 700;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
 }
 
 .inputRow button,
@@ -127,8 +167,9 @@ body {
   min-height: 82vh;
   display: grid;
   place-content: center;
-  gap: 12px;
+  gap: var(--space-3);
   text-align: center;
+  padding: var(--space-4);
 }
 
 .activationOverlay h2 {
@@ -167,8 +208,6 @@ body {
 .arenaScene {
   height: 100%;
   position: relative;
-  padding-top: 56px;
-  padding-bottom: 94px;
   display: flex;
   flex-direction: column;
   min-height: 0;
@@ -257,7 +296,7 @@ body {
 }
 
 .projectionLane {
-  margin-top: 18px;
+  margin-top: 12px;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -265,11 +304,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 10px 140px;
+  padding: 0 12px;
 }
 
 .projectionCard {
-  width: min(72%, 980px);
+  width: min(74%, 980px);
   background: rgba(17, 34, 51, 0.85);
   backdrop-filter: blur(4px);
   border-radius: 12px;
@@ -306,9 +345,12 @@ body {
   margin: 0 0 7px;
   line-height: 1.45;
   font-size: 0.98rem;
+  color: #eaf2ff;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   word-break: break-word;
+  text-indent: 0;
+  padding-inline-start: 2px;
 }
 
 .projectionCard details {
@@ -394,13 +436,12 @@ body {
 }
 
 .bottomRibbon {
-  position: fixed;
-  top: auto;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: sticky;
+  bottom: 0;
+  left: auto;
+  transform: none;
   z-index: 25;
-  margin: 0;
+  margin: 8px auto 0;
 }
 
 .metricsRibbon.glow {
@@ -821,7 +862,7 @@ body {
 
 @media (max-width: 1080px) {
   .projectionCard {
-    width: min(86%, 860px);
+    width: min(88%, 860px);
   }
   .resultGrid {
     grid-template-columns: 1fr;
@@ -851,16 +892,16 @@ body {
 .resultOverlay {
   background: rgba(4, 7, 18, 0.86);
   backdrop-filter: blur(7px);
-  padding: 14px;
+  padding: 0;
   z-index: 30;
 }
 
 .resultCard {
-  width: min(1540px, calc(100vw - 28px));
-  margin: 0 auto;
-  height: calc(100vh - 28px);
-  border-radius: 14px;
-  border: 1px solid rgba(102, 136, 195, 0.35);
+  width: 100vw;
+  margin: 0;
+  height: 100vh;
+  border-radius: 0;
+  border: 0;
   background: linear-gradient(160deg, rgba(18, 34, 60, 0.95) 0%, rgba(8, 13, 30, 0.96) 100%);
   display: flex;
   flex-direction: column;
@@ -869,15 +910,15 @@ body {
 
 .resultScrollBody {
   overflow: auto;
-  padding: 14px 14px 22px;
+  padding: 18px 20px 52px;
 }
 
 .outcomeSummaryCard {
   border-radius: 12px;
   border: 1px solid rgba(86, 122, 190, 0.35);
   background: linear-gradient(140deg, rgba(22, 44, 78, 0.9), rgba(10, 17, 33, 0.9));
-  padding: 14px;
-  margin-bottom: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
 }
 
 .resultCard h2 {
@@ -901,8 +942,8 @@ body {
   border-radius: 12px;
   border: 1px solid rgba(88, 123, 184, 0.32);
   background: linear-gradient(140deg, rgba(17, 31, 56, 0.92), rgba(8, 15, 30, 0.95));
-  padding: 14px;
-  margin-bottom: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
 }
 
 .personaIdentity {
@@ -946,8 +987,8 @@ body {
   border-radius: 12px;
   border: 1px solid rgba(235, 73, 93, 0.75);
   background: linear-gradient(130deg, rgba(90, 17, 29, 0.65), rgba(43, 10, 20, 0.65));
-  padding: 12px 14px;
-  margin-bottom: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
 }
 
 .objectionTitle {
@@ -963,8 +1004,8 @@ body {
   border: 2px solid rgba(66, 148, 255, 0.84);
   border-radius: 12px;
   background: linear-gradient(145deg, rgba(19, 43, 78, 0.95), rgba(8, 14, 29, 0.96));
-  padding: 14px;
-  margin-bottom: 12px;
+  padding: 16px;
+  margin-bottom: 14px;
   box-shadow: 0 0 0 4px rgba(66, 148, 255, 0.12);
 }
 
@@ -1112,16 +1153,16 @@ body {
 
 .pillarsGrid {
   display: grid;
-  gap: 12px;
+  gap: 14px;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .pillarCard {
   border-radius: 12px;
   border: 1px solid rgba(88, 121, 181, 0.45);
   background: linear-gradient(145deg, rgba(17, 33, 58, 0.9), rgba(7, 13, 27, 0.92));
-  padding: 12px;
+  padding: 14px;
   height: 380px;
   display: flex;
   flex-direction: column;
@@ -1180,8 +1221,8 @@ body {
   border-radius: 12px;
   border: 1px solid rgba(86, 123, 182, 0.32);
   background: linear-gradient(140deg, rgba(16, 29, 53, 0.9), rgba(8, 14, 29, 0.92));
-  padding: 12px;
-  margin-bottom: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
 }
 
 .coachingInsightsPanel h4 {
@@ -1205,17 +1246,31 @@ body {
 .resultActions {
   display: flex;
   justify-content: center;
-  gap: 8px;
-  padding: 10px 12px;
+  gap: 6px;
+  padding: 4px 8px;
 }
 
 .stickyActions {
-  position: sticky;
+  position: fixed;
+  left: 0;
+  right: 0;
   bottom: 0;
-  background: rgba(6, 12, 25, 0.76);
-  border-top: 1px solid rgba(83, 113, 170, 0.32);
-  backdrop-filter: blur(8px);
+  width: 100%;
+  margin: 0;
+  background: rgba(6, 12, 25, 0.9);
+  border-top: 1px solid rgba(83, 113, 170, 0.4);
+  backdrop-filter: blur(6px);
   z-index: 4;
+}
+
+.stickyActions .downloadBtn,
+.stickyActions .ghostBtn {
+  min-height: 36px;
+  padding: 6px 10px;
+  font-size: 0.78rem;
+  line-height: 1;
+  border-radius: 8px;
+  letter-spacing: 0;
 }
 
 .finalMetricChips {
@@ -1226,8 +1281,8 @@ body {
   border-radius: 12px;
   border: 1px solid rgba(87, 118, 176, 0.36);
   background: linear-gradient(140deg, rgba(15, 31, 57, 0.92), rgba(8, 14, 28, 0.93));
-  padding: 12px;
-  margin-bottom: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
 }
 
 .timelineHeaderRow {
@@ -1419,8 +1474,11 @@ body {
 
 @media (max-width: 900px) {
   .resultCard {
-    width: calc(100vw - 14px);
-    height: calc(100vh - 14px);
+    width: 100vw;
+    height: 100vh;
+  }
+  .resultScrollBody {
+    padding: 14px 12px 50px;
   }
   .pillarsGrid {
     grid-template-columns: 1fr;
@@ -1435,5 +1493,111 @@ body {
   .timelineHeaderRow {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* Desktop vs Mobile Optimization */
+@media (min-width: 1360px) {
+  body {
+    font-size: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 5.2vw, 4.4rem);
+  }
+  .subtitle {
+    font-size: 1.05rem;
+  }
+  .inputRow input {
+    min-height: 64px;
+    font-size: 1.06rem;
+  }
+  .inputRow button,
+  .downloadBtn,
+  .ghostBtn {
+    min-height: 60px;
+    font-size: 0.98rem;
+  }
+  .resultScrollBody {
+    padding: 24px 24px 28px;
+  }
+  .pillarCard {
+    height: 392px;
+  }
+  .metricChip {
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+  .app {
+    padding: 12px;
+  }
+  .hero {
+    min-height: 82vh;
+    gap: 10px;
+    padding: 10px;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  .inputRow {
+    gap: 10px;
+  }
+  .inputRow input {
+    min-height: 54px;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    border-radius: 10px;
+  }
+  .inputRow button,
+  .downloadBtn,
+  .ghostBtn {
+    min-height: 48px;
+    padding: 10px 14px;
+    font-size: 0.86rem;
+    border-radius: 10px;
+  }
+  .metricsRibbon {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+  .metricChip {
+    padding: 6px 9px;
+    font-size: 0.78rem;
+  }
+  .resultScrollBody {
+    padding: 12px 10px 46px;
+  }
+  .outcomeSummaryCard,
+  .personaTopCard,
+  .primaryObjectionAlert,
+  .retryPerformanceCard,
+  .coachingInsightsPanel,
+  .metricEventsPanel {
+    padding: 11px;
+    margin-bottom: 10px;
+  }
+  .resultCard h2 {
+    font-size: 1.03rem;
+  }
+  .resultCard h3 {
+    font-size: 0.9rem;
+    margin: 4px 0 7px;
+  }
+  .resultActions {
+    gap: 5px;
+    padding: 3px 6px;
+  }
+  .stickyActions .downloadBtn,
+  .stickyActions .ghostBtn {
+    min-height: 34px;
+    padding: 5px 8px;
+    font-size: 0.74rem;
+  }
+  .timelineTrack {
+    grid-auto-columns: minmax(165px, 190px);
   }
 }
