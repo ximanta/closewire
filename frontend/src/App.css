@@ -215,12 +215,12 @@ textarea {
 
 .momentumBar {
   width: min(58vw, 900px);
-  margin: 0 auto 14px;
+  margin: 0 auto 6px;
 }
 
 .momentumTrack {
   display: flex;
-  height: 10px;
+  height: 7px;
   border-radius: 999px;
   overflow: hidden;
   background: rgba(78, 99, 137, 0.25);
@@ -243,9 +243,9 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 7px;
+  margin-top: 4px;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.78rem;
 }
 
 .momentumBar.hot .momentumTrack {
@@ -255,28 +255,44 @@ textarea {
 .agentLayer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-  margin-top: 20px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
 }
 
 .agentIdentity {
-  min-width: 260px;
-  max-width: 340px;
-  padding: 14px;
-  border-radius: 12px;
-  background: rgba(16, 28, 48, 0.82);
+  min-width: 0;
+  max-width: 46%;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(16, 28, 48, 0.72);
   border: 1px solid rgba(172, 196, 244, 0.28);
   transition: box-shadow 0.35s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  backdrop-filter: blur(3px);
 }
 
 .agentIdentity h3 {
-  margin: 0 0 5px;
+  margin: 0;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .agentIdentity p {
-  margin: 0 0 10px;
+  margin: 0;
   color: var(--muted);
+  font-size: 0.74rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.agentIdentity strong {
+  font-size: 0.72rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
 }
 
 .agentIdentity.counsellor strong {
@@ -296,7 +312,7 @@ textarea {
 }
 
 .projectionLane {
-  margin-top: 12px;
+  margin-top: 6px;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -420,16 +436,16 @@ textarea {
   position: sticky;
   top: 8px;
   z-index: 20;
-  margin: 0 auto 10px;
+  margin: 0 auto 6px;
   width: fit-content;
   max-width: calc(100vw - 24px);
   display: flex;
-  gap: 10px;
+  gap: 8px;
   overflow-x: auto;
   white-space: nowrap;
   flex-wrap: nowrap;
-  padding: 10px 14px;
-  border-radius: 12px;
+  padding: 8px 10px;
+  border-radius: 10px;
   border: 1px solid rgba(152, 177, 230, 0.28);
   background: rgba(9, 18, 34, 0.94);
   color: #dce8ff;
@@ -441,7 +457,7 @@ textarea {
   left: auto;
   transform: none;
   z-index: 25;
-  margin: 8px auto 0;
+  margin: 4px auto 0;
 }
 
 .metricsRibbon.glow {
@@ -449,13 +465,13 @@ textarea {
 }
 
 .metricsRibbon span {
-  font-size: 0.9rem;
+  font-size: 0.82rem;
 }
 
 .metricChip {
   display: inline-flex;
   align-items: center;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 999px;
   border: 1px solid rgba(169, 192, 240, 0.36);
   background: rgba(22, 38, 66, 0.92);
