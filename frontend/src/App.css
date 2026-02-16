@@ -259,7 +259,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding-bottom: 12px;
+  padding: 0 10px 12px;
 }
 
 .projectionCard {
@@ -299,6 +299,8 @@ body {
   margin: 0 0 7px;
   line-height: 1.35;
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .projectionCard details {

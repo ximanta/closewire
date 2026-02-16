@@ -97,6 +97,12 @@ class ProgramSummary(TypedDict):
     certification_details: str
     curriculum_modules: List[str]
     learning_outcomes: List[str]
+    cohort_start_dates: List[str]
+    faqs: List[str]
+    projects_use_cases: List[str]
+    program_curriculum_coverage: str
+    tools_frameworks_technologies: List[str]
+    emi_or_financing_options: str
 
 
 class PersonaProfile(TypedDict):
@@ -139,6 +145,7 @@ class NegotiationConfig(BaseModel):
     session_id: str
     auth_token: str
     demo_mode: bool = True
+    retry_mode: bool = False
 
 
 class ReportRequest(BaseModel):
@@ -158,6 +165,7 @@ class NegotiationState(TypedDict):
     persona: PersonaProfile
     deal_status: str
     negotiation_metrics: Dict[str, Any]
+    retry_context: Dict[str, Any]
 
 
 SESSION_STORE: Dict[str, Dict[str, Any]] = {}
@@ -488,6 +496,12 @@ def _analyze_program(url: str) -> Tuple[ProgramSummary, str]:
         "certification_details": "Certificate on successful completion.",
         "curriculum_modules": ["Foundations", "Hands-on projects"],
         "learning_outcomes": ["Practical skills", "Career readiness"],
+        "cohort_start_dates": [],
+        "faqs": [],
+        "projects_use_cases": [],
+        "program_curriculum_coverage": "Not specified",
+        "tools_frameworks_technologies": [],
+        "emi_or_financing_options": "Not specified",
     }
     prompt = f"""
 Analyze content of this URL for an enrollment counsellor. Extract concrete facts only.
@@ -517,6 +531,12 @@ PAGE_TEXT:
                 "certification_details": {"type": "string"},
                 "curriculum_modules": {"type": "array", "items": {"type": "string"}},
                 "learning_outcomes": {"type": "array", "items": {"type": "string"}},
+                "cohort_start_dates": {"type": "array", "items": {"type": "string"}},
+                "faqs": {"type": "array", "items": {"type": "string"}},
+                "projects_use_cases": {"type": "array", "items": {"type": "string"}},
+                "program_curriculum_coverage": {"type": "string"},
+                "tools_frameworks_technologies": {"type": "array", "items": {"type": "string"}},
+                "emi_or_financing_options": {"type": "string"},
             },
             "required": [
                 "program_name",
@@ -532,6 +552,12 @@ PAGE_TEXT:
                 "certification_details",
                 "curriculum_modules",
                 "learning_outcomes",
+                "cohort_start_dates",
+                "faqs",
+                "projects_use_cases",
+                "program_curriculum_coverage",
+                "tools_frameworks_technologies",
+                "emi_or_financing_options",
             ],
         },
         fallback=fallback,
@@ -618,40 +644,60 @@ def _build_counsellor_prompt(state: NegotiationState) -> str:
     transcript = "\n".join(
         f"{m['agent'].upper()}: {m['content']}" for m in _trim_messages(state["messages"], 12)
     )
+    retry_context = state.get("retry_context", {})
+    retry_note = ""
+    if retry_context.get("is_retry"):
+        mistakes = retry_context.get("mistakes", [])
+        unresolved = retry_context.get("primary_unresolved_objection", "Not specified")
+        retry_note = f"""
+PREVIOUS ATTEMPT FAILED.
+Failure Reasons:
+- {", ".join(mistakes) if mistakes else "Not available"}
+- Unresolved Objection: {unresolved}
+In this run:
+- Correct previous mistakes.
+- Resolve the main objection earlier.
+- Improve emotional calibration.
+"""
     return f"""
 ROLE: Senior Admissions Counsellor.
 
-GOAL:
-Guide the prospective student to make an informed enrollment decision.
+PRIMARY OBJECTIVE:
+Guide the student toward a confident enrollment decision using only factual program data.
 
-PROGRAM:
+DO NOT:
+- Promise guaranteed jobs
+- Overstate placement outcomes
+- Invent program details
+
+PROGRAM DATA:
 {json.dumps(state['program'])}
 
 STUDENT PERSONA:
 {json.dumps(state['persona'])}
 
-FEE CONTEXT:
-- Listed Program Fee (INR): {state['counsellor_position']['program_fee_inr']}
-- Current Discussed Fee (INR): {state['counsellor_position']['current_offer']}
-
-METRICS:
-{json.dumps(state['negotiation_metrics'])}
-
-CONTEXT:
+PRIOR TRANSCRIPT:
 {transcript}
+{retry_note}
 
-You must:
-- Clarify curriculum, duration, and expected effort.
-- Address workload concerns honestly.
-- Explain career pathways realistically.
-- Avoid false promises.
-- Use program facts from extracted URL content.
-- Handle financial questions ethically (discount/EMI only if plausible).
+STRATEGY REQUIREMENTS:
+- Clarify curriculum and modules.
+- Explain workload realistically.
+- Address ROI concerns using data.
+- Handle discount requests ethically.
+- Offer EMI or scholarship framing when plausible.
+- Reduce affordability anxiety.
+- Build trust gradually.
+- Detect emotional state shifts.
+- Move toward commitment questions after objections resolved.
 
-Output exactly:
+ADVANCED RULE:
+If primary objection remains unresolved, address it directly before attempting close.
+
+OUTPUT FORMAT:
 MESSAGE: <dialogue>
-TECHNIQUES_USED: [list]
-STRATEGIC_INTENT: <one-line>
+TECHNIQUES_USED: [consultative_selling, objection_reframing, roi_framing, workload_validation, etc]
+STRATEGIC_INTENT: <one sentence>
 CONFIDENCE_SCORE: <0-100>
 """
 
@@ -812,31 +858,27 @@ def _update_metrics(state: NegotiationState, counsellor_msg: Dict[str, Any], stu
         if token in objections_text.lower()
     )
     metrics["objection_intensity"] = min(100, max(0, metrics["objection_intensity"] + (objection_hits - 2) * 2))
-
-    gap = abs(coun_offer - stu_offer)
-    budget = max(state["student_position"]["budget"], 1)
-    budget_proximity = max(0, 100 - int((gap / budget) * 100))
-    alignment_score = max(0, 100 - int((gap / max(coun_offer, 1)) * 100))
-    trust_score = metrics["trust_index"]
-    metrics["close_probability"] = int((alignment_score * 0.4) + (trust_score * 0.3) + (budget_proximity * 0.3))
+    retry_modifier = int(metrics.get("retry_modifier", 0))
+    trust_score = min(100, metrics["trust_index"] + (retry_modifier // 2))
+    willingness = min(100, int(state["persona"].get("willingness_to_invest_score", 50)) + retry_modifier)
+    metrics["close_probability"] = int(
+        (trust_score * 0.35)
+        + ((100 - metrics["objection_intensity"]) * 0.25)
+        + ((100 - metrics["tone_escalation"]) * 0.15)
+        + (willingness * 0.25)
+    )
     metrics["sentiment_indicator"] = "negative" if emotional in {"frustrated", "confused"} else "positive"
 
 
-def _decide_outcome(state: NegotiationState, counsellor_msg: Dict[str, Any], student_msg: Dict[str, Any]) -> str:
-    confidence = int(counsellor_msg.get("confidence_score", 60))
-    student_budget = state["student_position"]["budget"]
-    offer = state["counsellor_position"]["current_offer"]
-    emotional = (student_msg.get("emotional_state") or "calm").lower()
-    walk_away = float(state["persona"].get("walk_away_likelihood", 0.4))
+def _decide_outcome_from_judge(state: NegotiationState, analysis: Dict[str, Any]) -> str:
+    commitment = str(analysis.get("commitment_signal", "none"))
+    likelihood = int(float(analysis.get("enrollment_likelihood", 0)))
 
-    if confidence > 80 and student_budget >= offer:
+    if commitment in {"conditional_commitment", "strong_commitment"} and likelihood >= 65:
         return "closed"
-
-    if emotional == "frustrated" and state["negotiation_metrics"]["tone_escalation"] > 70:
+    if likelihood < 35:
         return "failed"
-    if walk_away > 0.75 and emotional in {"frustrated", "skeptical"}:
-        return "failed"
-    return "ongoing"
+    return "failed"
 
 
 async def _judge_outcome(state: NegotiationState) -> Dict[str, Any]:
@@ -845,7 +887,31 @@ async def _judge_outcome(state: NegotiationState) -> Dict[str, Any]:
         f"Round {m['round']} {m['agent'].upper()}: {m['content']}" for m in state["messages"]
     )
     prompt = f"""
-Analyze this negotiation transcript and call the function with the final structured verdict.
+You are an expert admissions audit evaluator.
+
+Analyze the full enrollment counselling transcript.
+
+Determine:
+1. Commitment signal level:
+   - none
+   - soft_commitment
+   - conditional_commitment
+   - strong_commitment
+2. Enrollment likelihood (0-100)
+3. Primary unresolved objection
+4. Trust delta (-20 to +20)
+5. Who won:
+   - counsellor (student likely to enroll)
+   - student (not convinced)
+   - no-deal
+
+Do NOT evaluate based on price convergence alone.
+Focus on emotional trajectory and objection handling.
+
+Be realistic and critical.
+Return structured function output only.
+
+Call the function with the final structured verdict.
 METRICS:
 {json.dumps(state['negotiation_metrics'])}
 
@@ -866,6 +932,13 @@ TRANSCRIPT:
             "properties": {
                 "winner": {"type": "string"},
                 "why": {"type": "string"},
+                "commitment_signal": {
+                    "type": "string",
+                    "enum": ["none", "soft_commitment", "conditional_commitment", "strong_commitment"],
+                },
+                "enrollment_likelihood": {"type": "number"},
+                "primary_unresolved_objection": {"type": "string"},
+                "trust_delta": {"type": "number"},
                 "strengths": {"type": "array", "items": {"type": "string"}},
                 "mistakes": {"type": "array", "items": {"type": "string"}},
                 "pivotal_moments": {"type": "array", "items": {"type": "string"}},
@@ -875,6 +948,10 @@ TRANSCRIPT:
             "required": [
                 "winner",
                 "why",
+                "commitment_signal",
+                "enrollment_likelihood",
+                "primary_unresolved_objection",
+                "trust_delta",
                 "strengths",
                 "mistakes",
                 "pivotal_moments",
@@ -885,6 +962,10 @@ TRANSCRIPT:
         fallback={
             "winner": "no-deal",
             "why": "Unable to parse analysis output.",
+            "commitment_signal": "none",
+            "enrollment_likelihood": 0,
+            "primary_unresolved_objection": "Unknown",
+            "trust_delta": 0,
             "strengths": [],
             "mistakes": [],
             "pivotal_moments": [],
@@ -938,6 +1019,15 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
         persona = session["persona"]
         program = session["program"]
         financials = _derive_financials(program, persona)
+        last_run = session.get("last_run", {})
+        previous_analysis = last_run.get("analysis", {}) if config.retry_mode else {}
+        retry_modifier = min(15, int(float(previous_analysis.get("negotiation_score", 0)) / 10)) if previous_analysis else 0
+        retry_context = {
+            "is_retry": bool(previous_analysis),
+            "mistakes": previous_analysis.get("mistakes", []),
+            "primary_unresolved_objection": previous_analysis.get("primary_unresolved_objection", ""),
+            "retry_modifier": retry_modifier,
+        }
 
         state: NegotiationState = {
             "round": 1,
@@ -961,15 +1051,31 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 "max_rounds": DEFAULT_NEGOTIATION_MAX_ROUNDS,
                 "concession_count_counsellor": 0,
                 "concession_count_student": 0,
-                "tone_escalation": 15,
+                "tone_escalation": max(0, 15 - retry_modifier),
                 "objection_intensity": 45,
-                "trust_index": 50,
+                "trust_index": min(100, 50 + retry_modifier),
                 "close_probability": 45,
                 "sentiment_indicator": "neutral",
+                "retry_modifier": retry_modifier,
             },
+            "retry_context": retry_context,
         }
 
-        await _ws_send_json(websocket, {"type": "session_ready", "data": {"program": state["program"], "persona": state["persona"]}})
+        await _ws_send_json(
+            websocket,
+            {
+                "type": "session_ready",
+                "data": {
+                    "program": state["program"],
+                    "persona": state["persona"],
+                    "retry_context": state["retry_context"],
+                    "initial_offers": {
+                        "counsellor_offer": state["counsellor_position"]["current_offer"],
+                        "student_offer": state["student_position"]["current_offer"],
+                    },
+                },
+            },
+        )
         await _ws_send_json(websocket, {"type": "metrics_update", "data": state["negotiation_metrics"]})
 
         client, negotiation_model_name, _ = get_client_and_models()
@@ -1002,7 +1108,6 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             state["messages"].append(student_msg)
 
             _update_metrics(state, counsellor_msg, student_msg)
-            state["deal_status"] = _decide_outcome(state, counsellor_msg, student_msg)
             state["negotiation_metrics"]["round"] = state["round"]
             state["negotiation_metrics"]["max_rounds"] = state["max_rounds"]
 
@@ -1021,17 +1126,12 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             )
             await _ws_send_json(websocket, {"type": "metrics_update", "data": state["negotiation_metrics"]})
 
-            if state["deal_status"] != "ongoing":
-                break
-
             state["round"] += 1
             if config.demo_mode:
                 await asyncio.sleep(0.6)
 
-        if state["deal_status"] == "ongoing":
-            state["deal_status"] = "failed"
-
         analysis = await _judge_outcome(state)
+        state["deal_status"] = _decide_outcome_from_judge(state, analysis)
         await _ws_send_json(
             websocket,
             {
@@ -1045,6 +1145,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                         "counsellor": state["counsellor_position"]["current_offer"],
                         "student": state["student_position"]["current_offer"],
                     },
+                    "retry_context": state["retry_context"],
                 },
             },
         )
@@ -1083,16 +1184,47 @@ async def generate_report(payload: ReportRequest) -> StreamingResponse:
     story.append(Paragraph(f"Generated: {datetime.now().isoformat()}", styles["Normal"]))
     story.append(Spacer(1, 12))
 
+    judge = payload.analysis or {}
+    story.append(Paragraph("Final Outcome Summary", styles["Heading2"]))
+    story.append(Paragraph(f"Outcome: {judge.get('winner', 'no-deal')}", styles["BodyText"]))
+    story.append(Paragraph(judge.get("why", "No summary available."), styles["BodyText"]))
+    story.append(Spacer(1, 12))
+
+    story.append(Paragraph("Commitment Signal Level", styles["Heading2"]))
+    story.append(Paragraph(str(judge.get("commitment_signal", "none")), styles["BodyText"]))
+    story.append(Spacer(1, 8))
+
+    story.append(Paragraph("Enrollment Likelihood %", styles["Heading2"]))
+    story.append(Paragraph(str(judge.get("enrollment_likelihood", 0)), styles["BodyText"]))
+    story.append(Spacer(1, 8))
+
+    story.append(Paragraph("Primary Objection", styles["Heading2"]))
+    story.append(Paragraph(str(judge.get("primary_unresolved_objection", "Not specified")), styles["BodyText"]))
+    story.append(Spacer(1, 12))
+
     story.append(Paragraph("Program Analyzed", styles["Heading2"]))
-    story.append(Paragraph(json.dumps(program, indent=2).replace("\n", "<br/>"), styles["Code"]))
+    story.append(Paragraph(str(program.get("program_name", "Unknown")), styles["BodyText"]))
+    story.append(Paragraph(str(program.get("value_proposition", "")), styles["BodyText"]))
     story.append(Spacer(1, 12))
 
     story.append(Paragraph("Persona Profile", styles["Heading2"]))
-    story.append(Paragraph(json.dumps(persona, indent=2).replace("\n", "<br/>"), styles["Code"]))
+    story.append(Paragraph(str(persona.get("name", "Unknown")), styles["BodyText"]))
+    story.append(Paragraph(str(persona.get("background", "")), styles["BodyText"]))
     story.append(PageBreak())
 
-    story.append(Paragraph("Outcome", styles["Heading2"]))
-    story.append(Paragraph(json.dumps(payload.analysis, indent=2).replace("\n", "<br/>"), styles["Code"]))
+    story.append(Paragraph("Strengths", styles["Heading2"]))
+    for item in judge.get("strengths", []):
+        story.append(Paragraph(f"- {item}", styles["BodyText"]))
+    story.append(Spacer(1, 10))
+
+    story.append(Paragraph("Mistakes", styles["Heading2"]))
+    for item in judge.get("mistakes", []):
+        story.append(Paragraph(f"- {item}", styles["BodyText"]))
+    story.append(Spacer(1, 10))
+
+    story.append(Paragraph("Skill Recommendations", styles["Heading2"]))
+    for item in judge.get("skill_recommendations", []):
+        story.append(Paragraph(f"- {item}", styles["BodyText"]))
     story.append(Spacer(1, 12))
 
     story.append(Paragraph("Transcript", styles["Heading2"]))

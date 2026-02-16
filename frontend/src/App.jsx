@@ -22,6 +22,9 @@ function App() {
   const [metrics, setMetrics] = useState(null);
   const [stateUpdate, setStateUpdate] = useState(null);
   const [analysis, setAnalysis] = useState(null);
+  const [runHistory, setRunHistory] = useState([]);
+  const [counsellorName, setCounsellorName] = useState("");
+  const [initialOffers, setInitialOffers] = useState({ counsellor_offer: 0, student_offer: 0 });
   const [activationIndex, setActivationIndex] = useState(0);
   const [metricToasts, setMetricToasts] = useState([]);
   const [uiToasts, setUiToasts] = useState([]);
@@ -39,10 +42,10 @@ function App() {
   const uiToastTimerRef = useRef({});
 
   const offers = useMemo(() => {
-    const counsellor = stateUpdate?.counsellor_offer ?? 0;
-    const student = stateUpdate?.student_offer ?? 0;
+    const counsellor = stateUpdate?.counsellor_offer ?? initialOffers.counsellor_offer ?? 0;
+    const student = stateUpdate?.student_offer ?? initialOffers.student_offer ?? 0;
     return { counsellor, student };
-  }, [stateUpdate]);
+  }, [stateUpdate, initialOffers]);
 
   const orderedDrafts = useMemo(() => Object.values(drafts), [drafts]);
   const allCards = useMemo(
@@ -64,6 +67,16 @@ function App() {
 
   const bgUrl = `${process.env.PUBLIC_URL || ""}/negotiation.png`;
 
+  const generateCounsellorName = () => {
+    const firstNames = ["Preetam", "Riya", "Arjun", "Neha", "Aman", "Karan", "Sana", "Vikram"];
+    const lastInitials = ["K", "P", "S", "M", "R", "D", "T", "N"];
+    const first = firstNames[Math.floor(Math.random() * firstNames.length)];
+    const last = lastInitials[Math.floor(Math.random() * lastInitials.length)];
+    return `${first} ${last}`;
+  };
+
+  const formatOffer = (value) => `INR ${Number(value || 0).toLocaleString("en-IN")}`;
+
   const pushUiToast = (text, tone = "negative", timeoutMs = 2800) => {
     const id = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     setUiToasts((current) => [...current, { id, text, tone }].slice(-4));
@@ -75,6 +88,9 @@ function App() {
 
   const resetRun = () => {
     if (wsRef.current) {
+      wsRef.current.onclose = null;
+      wsRef.current.onerror = null;
+      wsRef.current.onmessage = null;
       wsRef.current.close();
       wsRef.current = null;
     }
@@ -85,6 +101,7 @@ function App() {
     setAnalysis(null);
     setMetricToasts([]);
     setActivationIndex(0);
+    setInitialOffers({ counsellor_offer: 0, student_offer: 0 });
     prevMetricsRef.current = null;
     setShowRestartPulse(false);
   };
@@ -176,6 +193,7 @@ function App() {
       pushUiToast("Enter a valid program URL to continue.", "strategic");
       return;
     }
+    setRunHistory([]);
     resetRun();
     setStage("analyzing");
 
@@ -198,63 +216,84 @@ function App() {
       setSessionId(analyzeData.session_id);
       setProgram(analyzeData.program);
       setPersona(analyzeData.persona);
+      setCounsellorName(generateCounsellorName());
       setStage("negotiating");
-
-      const ws = new WebSocket(WS_URL);
-      wsRef.current = ws;
-
-        ws.onopen = () => {
-          ws.send(
-            JSON.stringify({
-              session_id: analyzeData.session_id,
-              auth_token: token,
-              demo_mode: true,
-            })
-          );
-        };
-
-      ws.onmessage = (event) => {
-        const payload = JSON.parse(event.data);
-        if (payload.type === "stream_chunk") {
-          const data = payload.data;
-          setDrafts((prev) => {
-            const current = prev[data.message_id] || { id: data.message_id, agent: data.agent, text: "" };
-            return { ...prev, [data.message_id]: { ...current, text: `${current.text}${data.text}` } };
-          });
-        } else if (payload.type === "message_complete") {
-          const msg = payload.data;
-          setMessages((prev) => [...prev, msg]);
-          setDrafts((prev) => {
-            const next = { ...prev };
-            delete next[msg.id];
-            return next;
-          });
-        } else if (payload.type === "metrics_update") {
-          setMetrics(payload.data);
-        } else if (payload.type === "state_update") {
-          setStateUpdate(payload.data);
-        } else if (payload.type === "analysis") {
-          setAnalysis(payload.data);
-          setStage("completed");
-        } else if (payload.type === "error") {
-          pushUiToast(payload.data?.message || "Unexpected backend error");
-          setStage("idle");
-        }
-      };
-
-      ws.onerror = () => {
-        pushUiToast("WebSocket connection failed. Please retry.");
-        setStage("idle");
-      };
-
-      ws.onclose = () => {
-        setDrafts({});
-        setStage((prev) => (prev === "negotiating" ? "idle" : prev));
-      };
+      startWebsocketNegotiation(analyzeData.session_id, token, false);
     } catch (error) {
       pushUiToast(error.message || "Failed to start negotiation");
       setStage("idle");
     }
+  };
+
+  const startWebsocketNegotiation = (targetSessionId, token, retryMode = false) => {
+    const ws = new WebSocket(WS_URL);
+    wsRef.current = ws;
+
+    ws.onopen = () => {
+      ws.send(
+        JSON.stringify({
+          session_id: targetSessionId,
+          auth_token: token,
+          demo_mode: true,
+          retry_mode: retryMode,
+        })
+      );
+    };
+
+    ws.onmessage = (event) => {
+      const payload = JSON.parse(event.data);
+      if (payload.type === "stream_chunk") {
+        const data = payload.data;
+        setDrafts((prev) => {
+          const current = prev[data.message_id] || { id: data.message_id, agent: data.agent, text: "" };
+          return { ...prev, [data.message_id]: { ...current, text: `${current.text}${data.text}` } };
+        });
+      } else if (payload.type === "message_complete") {
+        const msg = payload.data;
+        setMessages((prev) => [...prev, msg]);
+        setDrafts((prev) => {
+          const next = { ...prev };
+          delete next[msg.id];
+          return next;
+        });
+      } else if (payload.type === "metrics_update") {
+        setMetrics(payload.data);
+      } else if (payload.type === "state_update") {
+        setStateUpdate(payload.data);
+      } else if (payload.type === "session_ready") {
+        const data = payload.data || {};
+        if (data.initial_offers) {
+          setInitialOffers({
+            counsellor_offer: data.initial_offers.counsellor_offer ?? 0,
+            student_offer: data.initial_offers.student_offer ?? 0,
+          });
+        }
+      } else if (payload.type === "analysis") {
+        setAnalysis(payload.data);
+        setRunHistory((prev) => [
+          ...prev,
+          {
+            label: retryMode ? `Run ${prev.length + 1} (Retry)` : `Run ${prev.length + 1}`,
+            score: payload.data?.judge?.negotiation_score ?? 0,
+          },
+        ]);
+        setStage("completed");
+      } else if (payload.type === "error") {
+        pushUiToast(payload.data?.message || "Unexpected backend error");
+        setStage("idle");
+      }
+    };
+
+    ws.onerror = () => {
+      pushUiToast("WebSocket connection failed. Please retry.");
+      setStage("idle");
+    };
+
+    ws.onclose = () => {
+      if (wsRef.current !== ws) return;
+      setDrafts({});
+      setStage((prev) => (prev === "negotiating" ? "idle" : prev));
+    };
   };
 
   const handlePasswordSubmit = async (event) => {
@@ -284,7 +323,19 @@ function App() {
 
   const startNewSimulation = () => {
     resetRun();
+    setRunHistory([]);
+    setCounsellorName("");
     setStage("idle");
+  };
+
+  const retrySimulation = () => {
+    if (!sessionId || !authToken) {
+      pushUiToast("Session missing. Start a new simulation.", "strategic");
+      return;
+    }
+    resetRun();
+    setStage("negotiating");
+    startWebsocketNegotiation(sessionId, authToken, true);
   };
 
   const downloadReport = async () => {
@@ -320,8 +371,8 @@ function App() {
 
       {stage === "idle" && (
         <section className="hero">
-          <h1>Negotia: The Negotiation Arena</h1>
-          <p className="subtitle">Live AI strategy simulation and coaching-grade insight</p>
+          <h1>Negotia</h1>
+          <p className="subtitle">Your Personal AI Powered Career Counseler</p>
           <div className="inputRow">
             <input
               type="url"
@@ -403,14 +454,14 @@ function App() {
 
           <div className="agentLayer">
             <article className={`agentIdentity counsellor ${momentumValue > 65 ? "glow" : ""}`}>
-              <h3>AI Counsellor</h3>
+              <h3>{counsellorName || "Admissions Counsellor"}</h3>
               <p>{program?.program_name || "Program"}</p>
-              <strong>${offers.counsellor.toLocaleString()}</strong>
+              <strong>{formatOffer(offers.counsellor)}</strong>
             </article>
             <article className={`agentIdentity student ${momentumValue < 40 ? "glow" : ""}`}>
               <h3>Prospective Student</h3>
               <p>{persona?.name || "Persona"}</p>
-              <strong>${offers.student.toLocaleString()}</strong>
+              <strong>{formatOffer(offers.student)}</strong>
             </article>
           </div>
 
@@ -418,7 +469,11 @@ function App() {
             {allCards.map((msg, idx) => (
               <article key={`${msg.id || idx}`} className={`projectionCard ${msg.agent} ${msg.draft ? "draft" : ""}`}>
                 <header>
-                  <strong>{msg.agent === "counsellor" ? "AI Counsellor" : "Prospective Student"}</strong>
+                  <strong>
+                    {msg.agent === "counsellor"
+                      ? (counsellorName || "Admissions Counsellor")
+                      : (persona?.name || "Prospective Student")}
+                  </strong>
                   <span>{msg.round ? `Round ${msg.round}` : "Streaming"}</span>
                 </header>
                 <p>{msg.content}</p>
@@ -451,7 +506,7 @@ function App() {
             <span>Round {metrics?.round || 1} / {maxRounds}</span>
             <span>Concessions: {metrics?.concession_count_counsellor ?? 0} - {metrics?.concession_count_student ?? 0}</span>
             <span>Tension: {metrics?.tone_escalation ?? 0}%</span>
-            <span>Close Probability: {metrics?.close_probability ?? 0}%</span>
+            <span>Enrollment Probability: {metrics?.close_probability ?? 0}%</span>
             <span>Sentiment: {metrics?.sentiment_indicator || "neutral"}</span>
           </div>
         </section>
@@ -463,6 +518,7 @@ function App() {
             <h2>RESULT: {(analysis?.judge?.winner || analysis?.winner || "no-deal").toUpperCase()}</h2>
             <h3>Final Score: {analysis?.judge?.negotiation_score ?? 0} / 100</h3>
             <p>{analysis?.judge?.why || "Simulation completed."}</p>
+            <p>Commitment: <strong>{analysis?.judge?.commitment_signal || "none"}</strong> | Enrollment Likelihood: <strong>{analysis?.judge?.enrollment_likelihood ?? 0}%</strong> | Trust Delta: <strong>{analysis?.judge?.trust_delta ?? 0}</strong></p>
             <div className="resultGrid">
               <article>
                 <h4>Key Turning Points</h4>
@@ -477,9 +533,17 @@ function App() {
                 <ul>{(analysis?.judge?.skill_recommendations || []).map((x) => <li key={x}>{x}</li>)}</ul>
               </article>
             </div>
+            {runHistory.length >= 2 && (
+              <p>
+                {runHistory[0].label} Score: {runHistory[0].score} | {runHistory[1].label} Score: {runHistory[1].score} | Improvement: {runHistory[1].score - runHistory[0].score >= 0 ? "+" : ""}{runHistory[1].score - runHistory[0].score}
+              </p>
+            )}
             <div className="resultActions">
               <button className="downloadBtn" onClick={downloadReport}>
                 Download Coaching Report (PDF)
+              </button>
+              <button className="downloadBtn" onClick={retrySimulation}>
+                Retry Simulation (Improved Strategy)
               </button>
               <button className={`ghostBtn ${showRestartPulse ? "pulse" : ""}`} onClick={startNewSimulation}>
                 Start New Simulation
