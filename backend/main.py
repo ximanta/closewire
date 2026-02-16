@@ -9,8 +9,10 @@ import hmac
 import json
 import logging
 import os
+import queue
 import random
 import re
+import threading
 import uuid
 from datetime import datetime
 from io import BytesIO
@@ -60,6 +62,7 @@ NEGOTIATION_MAX_ROUNDS_LIMIT = _env_int("NEGOTIATION_MAX_ROUNDS_LIMIT", 20, 1, 1
 AUTH_TOKEN_TTL_SECONDS = _env_int("AUTH_TOKEN_TTL_SECONDS", 43200, 60, 604800)
 NEGOTIATION_DEBUG_TRACE = _env_bool("NEGOTIATION_DEBUG_TRACE", True)
 NEGOTIATION_STREAM_CONSOLE_LOG = _env_bool("NEGOTIATION_STREAM_CONSOLE_LOG", True)
+NEGOTIATION_STREAM_IDLE_TIMEOUT_SECONDS = _env_int("NEGOTIATION_STREAM_IDLE_TIMEOUT_SECONDS", 25, 5, 120)
 
 app = FastAPI(title="AI Negotiation Arena")
 app.add_middleware(
@@ -835,6 +838,28 @@ def _trim_messages(messages: List[Dict[str, Any]], max_messages: int = 12) -> Li
     return messages[-max_messages:]
 
 
+def _compact_text(value: Any, limit: int) -> str:
+    text = str(value or "").strip()
+    if len(text) <= limit:
+        return text
+    return f"{text[:limit].rstrip()}..."
+
+
+def _student_program_snapshot(program: Dict[str, Any]) -> Dict[str, Any]:
+    return {
+        "program_name": program.get("program_name", ""),
+        "value_proposition": program.get("value_proposition", ""),
+        "duration": program.get("duration", ""),
+        "format": program.get("format", ""),
+        "weekly_time_commitment": program.get("weekly_time_commitment", ""),
+        "program_fee_inr": program.get("program_fee_inr", ""),
+        "placement_support_details": program.get("placement_support_details", ""),
+        "certification_details": program.get("certification_details", ""),
+        "curriculum_modules": list(program.get("curriculum_modules", [])[:8]),
+        "emi_or_financing_options": program.get("emi_or_financing_options", ""),
+    }
+
+
 def _analyze_program(url: str) -> Tuple[ProgramSummary, str]:
     client, negotiation_model_name, _ = get_client_and_models()
     source = "url_content"
@@ -1152,20 +1177,21 @@ Quality constraints:
 
 def _build_student_prompt(state: NegotiationState) -> str:
     transcript = "\n".join(
-        f"{m['agent'].upper()}: {m['content']}" for m in _trim_messages(state["messages"], 12)
+        f"{m['agent'].upper()}: {m['content']}" for m in _trim_messages(state["messages"], 6)
     )
     persona = state["persona"]
     inner_state = state.get("student_inner_state", {})
     config = ARCHETYPE_CONFIGS.get(persona.get("archetype_id", "desperate_switcher"), ARCHETYPE_CONFIGS["desperate_switcher"])
     vocabulary = ", ".join(persona.get("common_vocabulary", []))
+    program_snapshot = _student_program_snapshot(state["program"])
     return f"""
 ROLE: You are {persona.get('name')}, a {persona.get('age')} year old {persona.get('current_role')}.
 ARCHETYPE: {persona.get('archetype_label')}
 CITY CONTEXT: {persona.get('city_tier')}
 
-YOUR STORY: {persona.get('backstory')}
-HIDDEN SECRET: {persona.get('hidden_secret')}
-MISCONCEPTION: {persona.get('misconception')}
+YOUR STORY: {_compact_text(persona.get('backstory'), 320)}
+HIDDEN SECRET: {_compact_text(persona.get('hidden_secret'), 200)}
+MISCONCEPTION: {_compact_text(persona.get('misconception'), 180)}
 
 --- PSYCHOLOGICAL PROFILE ---
 PRIMARY MOTIVATION: {config.get('core_drive')}
@@ -1182,7 +1208,7 @@ CURRENT STATE:
 - unresolved_concerns: {", ".join(inner_state.get('unresolved_concerns', [])) or "none"}
 
 PROGRAM:
-{json.dumps(state['program'])}
+{json.dumps(program_snapshot)}
 
 CURRENT OFFER FROM COUNSELLOR:
 {state['counsellor_position']['current_offer']}
@@ -1213,6 +1239,88 @@ Do not output anything outside these tags.
 """
 
 
+def _retry_with_structured_json(
+    client: genai.Client,
+    model_name: str,
+    agent: str,
+    prompt: str,
+) -> Dict[str, Any]:
+    if agent == "student":
+        fallback = {
+            "message": "I am still processing this. Please clarify one key point for me.",
+            "internal_thought": "No internal thought captured",
+            "updated_stats": {},
+            "emotional_state": "calm",
+            "intent": "No Intent detected",
+            "confidence_score": 50,
+            "techniques": [],
+        }
+        retry_prompt = f"""
+You are recovering from a failed stream for a learner turn.
+Return a complete structured response in one function call.
+Keep MESSAGE under 180 words.
+ORIGINAL_PROMPT:
+{prompt}
+"""
+        parsed = _call_function_json(
+            client=client,
+            model_name=model_name,
+            prompt=retry_prompt,
+            function_name="set_retry_student_response",
+            function_description="Return a complete learner turn in structured JSON format.",
+            parameters_schema={
+                "type": "object",
+                "properties": {
+                    "message": {"type": "string"},
+                    "internal_thought": {"type": "string"},
+                    "updated_stats": {"type": "object"},
+                    "emotional_state": {"type": "string"},
+                    "intent": {"type": "string"},
+                    "confidence_score": {"type": "number"},
+                    "techniques": {"type": "array", "items": {"type": "string"}},
+                },
+                "required": ["message"],
+            },
+            fallback=fallback,
+        )
+        return _to_plain_json(parsed)
+
+    fallback = {
+        "message": "Could you share your top concern so I can address it directly?",
+        "emotional_state": "calm",
+        "intent": "No Intent detected",
+        "confidence_score": 50,
+        "techniques": [],
+    }
+    retry_prompt = f"""
+You are recovering from a failed stream for a counsellor turn.
+Return a complete spoken counsellor response only.
+Keep message under 180 words and end in a complete sentence.
+ORIGINAL_PROMPT:
+{prompt}
+"""
+    parsed = _call_function_json(
+        client=client,
+        model_name=model_name,
+        prompt=retry_prompt,
+        function_name="set_retry_counsellor_response",
+        function_description="Return a complete counsellor turn in structured JSON format.",
+        parameters_schema={
+            "type": "object",
+            "properties": {
+                "message": {"type": "string"},
+                "emotional_state": {"type": "string"},
+                "intent": {"type": "string"},
+                "confidence_score": {"type": "number"},
+                "techniques": {"type": "array", "items": {"type": "string"}},
+            },
+            "required": ["message"],
+        },
+        fallback=fallback,
+    )
+    return _to_plain_json(parsed)
+
+
 async def _stream_agent_response(
     websocket: WebSocket,
     client: genai.Client,
@@ -1241,16 +1349,47 @@ async def _stream_agent_response(
         },
     )
     try:
+        config_kwargs: Dict[str, Any] = {
+            "temperature": 0.85,
+            "top_p": 0.95,
+        }
         config = types.GenerateContentConfig(
-            temperature=0.85,
-            top_p=0.95,
+            **config_kwargs,
         )
-        response_stream = client.models.generate_content_stream(
-            model=model_name,
-            contents=prompt,
-            config=config,
-        )
-        for chunk in response_stream:
+        stream_queue: queue.Queue = queue.Queue()
+
+        def _stream_worker() -> None:
+            try:
+                response_stream = client.models.generate_content_stream(
+                    model=model_name,
+                    contents=prompt,
+                    config=config,
+                )
+                for next_chunk in response_stream:
+                    stream_queue.put(("chunk", next_chunk))
+                stream_queue.put(("done", None))
+            except Exception as worker_exc:
+                stream_queue.put(("error", worker_exc))
+
+        threading.Thread(target=_stream_worker, daemon=True).start()
+
+        while True:
+            try:
+                event_type, payload = await asyncio.wait_for(
+                    asyncio.to_thread(stream_queue.get),
+                    timeout=NEGOTIATION_STREAM_IDLE_TIMEOUT_SECONDS,
+                )
+            except asyncio.TimeoutError as timeout_exc:
+                raise TimeoutError(
+                    f"{agent} stream idle timeout after {NEGOTIATION_STREAM_IDLE_TIMEOUT_SECONDS}s"
+                ) from timeout_exc
+
+            if event_type == "done":
+                break
+            if event_type == "error":
+                raise payload
+
+            chunk = payload
             stream_chunk_count += 1
             chunk_reasons = _collect_chunk_finish_reasons(chunk)
             if chunk_reasons:
@@ -1287,34 +1426,50 @@ async def _stream_agent_response(
             if demo_mode:
                 await asyncio.sleep(0.03)
     except Exception as exc:
-        marker = f"{type(exc).__name__}: {exc}"
-        disconnected = (
-            "ClientDisconnected" in marker
-            or "ConnectionClosed" in marker
-            or websocket.client_state.name == "DISCONNECTED"
-        )
-        if disconnected:
-            logger.info("Client disconnected while streaming %s", agent)
-            raise ClientStreamClosed() from exc
-        logger.exception("Streaming failed for %s", agent)
-        _write_debug_trace(
-            "stream_exception",
-            {
-                "agent": agent,
-                "round": round_number,
-                "message_id": message_id,
-                "error_type": type(exc).__name__,
-                "error": _truncate_trace_text(exc),
-                "chunk_count": stream_chunk_count,
-                "nonempty_chunk_count": stream_nonempty_chunk_count,
-                "buffer_chars": len(full_text),
-            },
-        )
-        try:
-            await _ws_send_json(websocket, {"type": "error", "data": {"message": f"{agent} streaming failed"}})
-        except ClientStreamClosed:
-            logger.info("Skipped error send because websocket already closed")
-        raise
+        if isinstance(exc, TimeoutError):
+            logger.warning("Streaming idle timeout for %s; switching to structured retry.", agent)
+            _write_debug_trace(
+                "stream_timeout",
+                {
+                    "agent": agent,
+                    "round": round_number,
+                    "message_id": message_id,
+                    "error": _truncate_trace_text(exc),
+                    "chunk_count": stream_chunk_count,
+                    "nonempty_chunk_count": stream_nonempty_chunk_count,
+                    "buffer_chars": len(full_text),
+                },
+            )
+            full_text = ""
+        else:
+            marker = f"{type(exc).__name__}: {exc}"
+            disconnected = (
+                "ClientDisconnected" in marker
+                or "ConnectionClosed" in marker
+                or websocket.client_state.name == "DISCONNECTED"
+            )
+            if disconnected:
+                logger.info("Client disconnected while streaming %s", agent)
+                raise ClientStreamClosed() from exc
+            logger.exception("Streaming failed for %s", agent)
+            _write_debug_trace(
+                "stream_exception",
+                {
+                    "agent": agent,
+                    "round": round_number,
+                    "message_id": message_id,
+                    "error_type": type(exc).__name__,
+                    "error": _truncate_trace_text(exc),
+                    "chunk_count": stream_chunk_count,
+                    "nonempty_chunk_count": stream_nonempty_chunk_count,
+                    "buffer_chars": len(full_text),
+                },
+            )
+            try:
+                await _ws_send_json(websocket, {"type": "error", "data": {"message": f"{agent} streaming failed"}})
+            except ClientStreamClosed:
+                logger.info("Skipped error send because websocket already closed")
+            raise
 
     _write_debug_trace(
         "stream_complete",
@@ -1342,8 +1497,10 @@ async def _stream_agent_response(
             full_text,
         )
 
+    generation_mode = "stream"
     if not full_text.strip():
-        logger.warning("Empty stream text for %s; retrying once with non-stream generate_content.", agent)
+        generation_mode = "structured_retry"
+        logger.warning("Empty stream text for %s; retrying once with structured JSON call.", agent)
         _write_debug_trace(
             "nonstream_retry_start",
             {
@@ -1352,13 +1509,37 @@ async def _stream_agent_response(
                 "message_id": message_id,
             },
         )
-        retry_response = client.models.generate_content(
-            model=model_name,
-            contents=prompt,
-            config=config,
+        retry_payload = _retry_with_structured_json(
+            client=client,
+            model_name=model_name,
+            agent=agent,
+            prompt=prompt,
         )
-        full_text = _extract_response_text_from_non_stream(retry_response)
-        retry_finish_reasons = _collect_candidate_finish_reasons(retry_response)
+        retry_message = str(retry_payload.get("message", "")).strip()
+        if not retry_message:
+            retry_message = (
+                "I am still evaluating this. Please share your top concern so I can respond precisely."
+                if agent == "student"
+                else "Could you share your top concern so I can address it directly?"
+            )
+        retry_thought = str(retry_payload.get("internal_thought", "")).strip() or "No internal thought captured"
+        retry_intent = str(retry_payload.get("intent", "")).strip() or "No Intent detected"
+        retry_emotion = str(retry_payload.get("emotional_state", "")).strip() or "calm"
+        retry_stats = retry_payload.get("updated_stats", {})
+        if not isinstance(retry_stats, dict):
+            retry_stats = {}
+
+        if agent == "student":
+            full_text = (
+                f"<thought>{retry_thought}</thought>\n"
+                f"<stats>{json.dumps(retry_stats, ensure_ascii=False)}</stats>\n"
+                f"<message>{retry_message}</message>\n"
+                f"<emotional_state>{retry_emotion}</emotional_state>\n"
+                f"<intent>{retry_intent}</intent>"
+            )
+        else:
+            full_text = retry_message
+
         _write_debug_trace(
             "nonstream_retry_complete",
             {
@@ -1366,12 +1547,18 @@ async def _stream_agent_response(
                 "round": round_number,
                 "message_id": message_id,
                 "retry_chars": len(full_text),
-                "finish_reasons": retry_finish_reasons,
+                "finish_reasons": ["structured_json_retry"],
                 "retry_head": _truncate_trace_text(full_text, 220),
             },
         )
+        if full_text.strip():
+            await _ws_send_json(
+                websocket,
+                {"type": "stream_chunk", "data": {"agent": agent, "text": full_text, "message_id": message_id}},
+            )
         if not full_text.strip():
-            finish_reasons = retry_finish_reasons
+            generation_mode = "fallback"
+            finish_reasons = ["structured_json_retry_empty"]
             _write_debug_trace(
                 "empty_model_fallback",
                 {
@@ -1438,6 +1625,7 @@ async def _stream_agent_response(
         "updated_stats": merged_state,
         "updated_state": merged_state,
         "timestamp": datetime.now().isoformat(),
+        "generation_mode": generation_mode,
     }
     if agent == "student" and fields.get("internal_thought"):
         await _ws_send_json(
@@ -1771,6 +1959,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
         await _ws_send_json(websocket, {"type": "metrics_update", "data": state["negotiation_metrics"]})
 
         client, negotiation_model_name, _ = get_client_and_models()
+        student_generation_failures = 0
 
         while state["round"] <= state["max_rounds"] and state["deal_status"] == "ongoing":
             counsellor_id = str(uuid.uuid4())
@@ -1799,6 +1988,31 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 config.demo_mode,
                 student_inner_state=state["student_inner_state"],
             )
+            if str(student_msg.get("generation_mode", "stream")) == "stream":
+                student_generation_failures = 0
+            else:
+                student_generation_failures += 1
+                _write_debug_trace(
+                    "student_generation_degraded",
+                    {
+                        "round": state["round"],
+                        "generation_mode": student_msg.get("generation_mode"),
+                        "consecutive_failures": student_generation_failures,
+                    },
+                )
+            if student_generation_failures >= 2:
+                state["deal_status"] = "failed"
+                await _ws_send_json(
+                    websocket,
+                    {
+                        "type": "warning",
+                        "data": {
+                            "message": "Student generation became unstable. Ending run safely.",
+                            "reason": "student_generation_unstable",
+                        },
+                    },
+                )
+
             state["student_inner_state"] = _merge_student_inner_state(
                 state["student_inner_state"],
                 student_msg.get("updated_stats", {}),

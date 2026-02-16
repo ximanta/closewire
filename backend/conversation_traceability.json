@@ -1,52 +1,52 @@
 {
-  "generated_at": "2026-02-16T15:50:48.171750",
-  "session_id": "388d156c-af57-47e3-bb15-90eafebdef8a",
+  "generated_at": "2026-02-16T16:39:57.609226",
+  "session_id": "55b3a86f-64b9-431b-9ec7-ed559dd0cfd5",
   "deal_status": "failed",
   "round": 6,
   "max_rounds": 5,
   "persona": {
-    "archetype_id": "desperate_switcher",
+    "ego_level": 9,
+    "archetype_id": "stagnant_pro",
+    "trigger_event": "His company just hired an external consultant for an AI automation project that Sameer’s team was originally supposed to handle, citing a 'lack of internal capability in autonomous agents'.",
+    "hidden_secret": "He hasn't written a piece of complex logic code in over two years because he spends all his time in meetings and Jira. He’s worried that if the program has a 'live coding' assessment, his rustiness will be exposed in front of the cohort.",
+    "backstory": "Sameer is a Senior Tech Lead at a top-tier MNC in Bangalore with nearly a decade of experience in Java and backend architecture. While he is technically sound and manages a team of twelve, he feels his market value is hitting a ceiling. He has seen juniors with barely three years of experience pivoting to AI roles and commanding 40+ LPA packages. He knows he needs to pivot to Agentic AI to remain relevant in the upcoming appraisal cycle, but he is terrified of being treated like a 'fresher' in a classroom setting. He values his time more than anything and expects high-level architectural insights rather than basic syntax tutorials.",
+    "skepticism": 8,
+    "misconception": "He believes Agentic AI is just a glorified wrapper around OpenAI APIs and that he can 'manage' his way through the course without getting his hands dirty in the actual engineering.",
+    "confusion_level": 2,
+    "current_role": "Senior Tech Lead (Backend & Systems)",
+    "age": 32,
+    "financial_anxiety": 4,
+    "name": "Sameer Khanna",
+    "city_tier": "Tier-1",
     "common_vocabulary": [
-      "Batch",
-      "Passing out",
-      "Gap year",
-      "Scope",
-      "Sir/Ma'am",
-      "Placement assurance",
-      "Career transition",
-      "Syllabus"
+      "Bandwidth",
+      "Relevant",
+      "Upskill",
+      "Package hike",
+      "ROI",
+      "Stakeholder alignment",
+      "Legacy systems",
+      "Orchestration"
     ],
-    "skepticism": 4,
-    "current_role": "Manual Test Engineer",
-    "hidden_secret": "He actually failed his basic Python internal assessment twice at his current company and is terrified that he won't be able to keep up with the 'sprints' mentioned in the curriculum.",
-    "ego_level": 2,
-    "age": 27,
-    "financial_anxiety": 9,
-    "backstory": "Aniket is a 2020 passing out batch student who has been stuck in a manual testing role at a legacy IT firm in Pune for the last 4 years. He has seen his friends switch to product-based companies with 2x packages while his own growth has been stagnant. With the recent news of AI-led layoffs in his department, he is terrified of being benched. He has a 1-year career gap between his graduation and first job which he still struggles to explain in interviews. He is looking at this Agentic AI program as his last 'silver bullet' to save his career and get into a development role before he turns 30.",
-    "misconception": "He believes that simply getting the certificate from NIIT will force companies to ignore his previous testing experience and career gap.",
-    "archetype_label": "Desperate Switcher",
-    "language_style": "Indian Academic English. Very formal, using 'Sir' repeatedly. High use of specific academic terms like 'batch' and 'passing out'. Tone is anxious and seeking validation.",
-    "confusion_level": 8,
-    "city_tier": "Tier-2",
-    "trigger_event": "His manager recently told him that his project is being 'automated' and he needs to find a new billable project within 30 days or face the 'separation process'.",
-    "name": "Aniket Deshmukh",
-    "persona_type": "desperate_switcher",
+    "language_style": "Corporate Indian English. Very formal, slightly condescending, focuses heavily on business outcomes and efficiency. Impatient with 'fluff'.",
+    "archetype_label": "Stagnant Pro",
+    "persona_type": "stagnant_pro",
     "background": "Prospective learner evaluating an AI upskilling path.",
     "career_stage": "early",
     "financial_sensitivity": "high",
-    "risk_tolerance": "low",
-    "emotional_tone": "skeptical",
+    "risk_tolerance": "medium",
+    "emotional_tone": "anxious",
     "primary_objections": [
       "Placement credibility",
       "Fee value",
       "Difficulty for freshers",
       "Time commitment"
     ],
-    "walk_away_likelihood": 0.52,
-    "expected_roi_months": 14,
-    "affordability_concern_level": 75,
-    "willingness_to_invest_score": 60,
-    "communication_style": "challenging",
+    "walk_away_likelihood": 0.57,
+    "expected_roi_months": 7,
+    "affordability_concern_level": 57,
+    "willingness_to_invest_score": 72,
+    "communication_style": "timid",
     "common_phrases": [
       "Placement ka scene kya hai?",
       "Is this really worth it?",
@@ -55,73 +55,78 @@
   },
   "program": {
     "program_name": "Building Agentic AI Systems",
-    "program_fee_inr": "₹1,50,000 + 18% GST (Booking fee: ₹1,500 + 18% GST)"
+    "program_fee_inr": "1,50,000 + 18% GST (Booking fee: 1,500 + GST)"
   },
   "student_inner_state": {
-    "sentiment": "panicked",
-    "skepticism_level": 85,
-    "trust_score": 40,
+    "sentiment": "frustrated",
+    "skepticism_level": 45,
+    "trust_score": 45,
     "unresolved_concerns": [
-      "2020 passing out batch stigma",
-      "Certificate as a total bypass for 4-year manual experience",
-      "Financial ruin if 70% score is not met",
+      "Effort/Time",
+      "Hands-on vs Leadership balance",
       "Job Guarantee",
-      "Python difficulty level vs hidden failure history"
+      "Package Hike specifics",
+      "Peer Seniority",
+      "Price",
+      "Time Commitment"
     ]
   },
   "negotiation_metrics": {
     "round": 5,
     "max_rounds": 5,
     "concession_count_counsellor": 0,
-    "concession_count_student": 1,
-    "tone_escalation": 11,
-    "objection_intensity": 39,
-    "trust_index": 49,
-    "close_probability": 60,
+    "concession_count_student": 0,
+    "tone_escalation": 28,
+    "objection_intensity": 25,
+    "trust_index": 42,
+    "close_probability": 63,
     "sentiment_indicator": "positive",
-    "retry_modifier": 0
+    "retry_modifier": 3
   },
   "final_offers": {
-    "counsellor": 165375,
-    "student": 150000
+    "counsellor": 174823,
+    "student": 133199
   },
   "analysis": {
-    "pivotal_moments": [
-      "Round 3: The student's anxiety significantly escalated upon hearing 'no guarantee' for placement and expressed deep fears about the certificate's market scope and coping with sprints, indicating a core emotional block.",
-      "Round 4: Despite the counsellor's attempts to reassure with success rates and project-heavy approach, the student's anxiety remained critically high, reiterating fears about the 70% assessment criteria and their 'almost non-existent' coding skills.",
-      "Round 5: The counsellor's direct clarification that the program 'does not start from the absolute zero level' directly confronted and amplified the student's biggest fear, leading to further escalation of desperation and unresolved questions, indicating a negative turning point."
-    ],
-    "enrollment_likelihood": 30,
-    "skill_recommendations": [
-      "Enhance active listening to identify and validate underlying emotional anxieties and self-doubt, rather than solely focusing on factual objections.",
-      "Develop more personalized and empathetic objection handling strategies, particularly for deep-seated fears like technical capability and financial risk.",
-      "Practice techniques to de-escalate student anxiety and build trust by offering concrete, tailored support mechanisms or preparatory steps for individuals with significant skill gaps.",
-      "Improve framing of program prerequisites to be more reassuring, or provide clear guidance on how students with less experience can bridge the gap before enrollment."
+    "winner": "student",
+    "strengths": [
+      "Acknowledged the student's seniority and tried to tailor language.",
+      "Attempted transparency regarding lack of traditional placement support for senior profiles.",
+      "Consistently re-explained the value of the hands-on component from an architectural/governance perspective.",
+      "Maintained a professional tone despite student's increasing frustration."
     ],
     "commitment_signal": "none",
-    "winner": "student",
-    "negotiation_score": 45,
-    "primary_unresolved_objection": "The student's profound lack of confidence in their current coding ability (specifically Python from a very basic level) to successfully meet the program's 70% assessment criteria, and the resulting fear of wasting a significant financial investment without achieving career goals.",
     "mistakes": [
-      "Failed to effectively pivot and address the student's escalating emotional anxiety and underlying self-doubt, especially concerning their coding proficiency.",
-      "Did not provide sufficient personalized reassurance or concrete solutions for a student who explicitly stated their coding was 'almost non-existent', particularly after clarifying the program does not start from 'zero' level.",
-      "Relied too heavily on generic program features (e.g., 'Mastery Learning' as a 'safety net') without demonstrating how these specifically mitigate the student's extreme fear of technical failure.",
-      "Did not adequately address the student's repeated concerns about the NIIT certificate's ability to completely negate a 1-year career gap and 4 years of manual testing experience in the eyes of HRs."
+      "Failed to provide concrete financial ROI data or compelling case studies for senior alumni, dismissing the student's request as 'corporate jargon'.",
+      "Did not offer sufficient curriculum customization or alternative tracks to bypass implementation details, which the student deemed 'grunt work' beneath their role.",
+      "Struggled to convince the student that the 60% hands-on component was essential and appropriately challenging for a Senior Tech Lead's architectural and orchestration responsibilities.",
+      "Provided an inadequate response to the student's concern about collaborating with peers at an enterprise-level, only stating a minimum experience requirement.",
+      "Relied on repetitive reframing without offering new solutions or data to address persistent objections."
     ],
-    "strengths": [
-      "The counsellor attempted to address concerns systematically with program facts (placement assistance, EMI options, mastery learning methodology, portfolio building).",
-      "The counsellor emphasized the program's practical, project-heavy approach as a way to overcome past experience and career gaps.",
-      "The counsellor initially showed empathy and acknowledged the student's concerns."
+    "why": "The counsellor consistently attempted to reframe the value of the program's hands-on component and the concept of ROI for senior profiles, but failed to provide the concrete financial data and curriculum customization the student, a Senior Tech Lead, repeatedly demanded. The student felt their seniority and specific needs were not respected, leading to increasing frustration and a strong rejection of the value proposition.",
+    "primary_unresolved_objection": "The counsellor failed to provide concrete financial ROI data (salary hike statistics) for senior profiles and did not adequately address the student's objection to the 60% hands-on curriculum, which the student perceived as 'grunt work' misaligned with a Senior Tech Lead's architectural role.",
+    "trust_delta": -12,
+    "enrollment_likelihood": 5,
+    "negotiation_score": 30,
+    "skill_recommendations": [
+      "Develop more specific and compelling methods to articulate financial ROI for senior profiles, potentially using anonymized case studies or industry benchmarks for AI Architect roles post-certification.",
+      "Explore and offer options for curriculum customization or alternative learning paths for highly senior professionals who require less hands-on implementation and more strategic architectural focus.",
+      "Implement strategies to address concerns about peer cohorts, such as forming senior-only tracks or clearly outlining how collaborative learning benefits senior professionals specifically.",
+      "Improve active listening and empathy to better understand the student's specific day-to-day role and responsibilities, allowing for a more tailored and relevant value proposition."
     ],
-    "trust_delta": -10,
-    "why": "The counsellor failed to adequately address the student's deep-seated fears regarding their foundational coding skills, ability to meet the program's 70% assessment criteria, and the subsequent risk of significant financial loss and career stagnation. The counsellor's direct statement in Round 5 that the program does not start from 'zero' level exacerbated the student's primary anxiety without sufficient personalized reassurance or a clear path forward for someone with 'almost non-existent' coding experience."
+    "pivotal_moments": [
+      "Round 1: Student immediately articulates strong objections regarding ROI, price, and curriculum relevance for senior roles.",
+      "Round 3: Student explicitly states 'Mastery isn't about how quickly I can write a FastAPI endpoint. It’s about the architectural ROI and the bottom line.' and calls the counsellor vague.",
+      "Round 4: Student strongly pushes back, accusing the counsellor of 'circling the same issue' and using 'corporate jargon' regarding ROI.",
+      "Round 5: Student's final, conclusive statement, demanding to 'cut through the corporate jargon' and highlighting that the 'opportunity cost of my time seems significantly higher' than the program's perceived value."
+    ]
   },
   "transcript": [
     {
-      "id": "e648c6ed-aa2a-4dd4-b868-e778509af30c",
+      "id": "4eb3064f-d5fe-462f-be51-93f225dfa5b9",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello Aniket. I understand the pressure you are facing regarding the automation in your current project and your goal to transition from manual testing. Given that you are from the 2020 passing out batch, this \"Building Agentic AI Systems\" program is designed to bridge that gap by focusing on practical engineering skills for autonomous AI systems.\nTo address your concerns about the \"scope\" and placement, the program offers dedicated placement",
+      "content": "Hello. I’m here to help you evaluate the 'Building Agentic AI Systems' program and how it fits into your professional goals. This is a comprehensive 300-hour journey that moves from building REST APIs with FastAPI to orchestrating complex, multi-agent workflows. To give you the most relevant information about the curriculum and the expected ROI, could you tell me about your current role and years of experience in the industry? Specifically, are you looking to lead AI transformations at an architectural level, or are you focused on the technical implementation of autonomous systems?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -129,27 +134,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:48:53.393893"
+      "timestamp": "2026-02-16T16:37:20.894255",
+      "generation_mode": "stream"
     },
     {
-      "id": "47bdbf8c-6d38-4e3a-b2a6-674d65ef36fe",
+      "id": "f160c23c-9097-44cb-9e78-5bebf74a7cdf",
       "round": 1,
       "agent": "student",
-      "content": "Thank you for understanding my situation, Sir. Yes Sir, being from the 2020 passing out batch, I have been very worried because my growth has completely stopped in manual testing. Sir, you mentioned placement assistance, but I want to ask very clearly—is there a placement guarantee?\nSir, the program fee is ₹1,50,000 plus GST, which is a very big amount for me. If I invest this much, will the NIIT certificate really help me so that companies ignore my previous manual testing experience and my one-year career gap? I want to move into a full development role before I turn 30, Sir.\nAlso Sir, what is the scope of the syllabus for someone who has mostly done manual work? Will I be able to cope with the sprints? Please guide me, Sir, I am looking at this as my last chance.",
+      "content": "Look, I’m a Senior Tech Lead with nearly a decade of experience, primarily in backend architecture and legacy systems orchestration. I’m currently managing a team of twelve. To be honest, I don’t have the bandwidth for a 'beginner's guide' to APIs; I need to understand the architectural ROI of this program.\nMy primary concern is the price point. ₹1.5L plus GST is a significant investment. Does this program actually guarantee a package hike that justifies the cost for someone at my seniority? Your placement details mention 'career guidance' for those with 5+ years of experience, but frankly, that sounds a bit vague. I need concrete details on the job guarantee or placement support for senior profiles.\nI’m looking to lead AI transformations, but I want to ensure I’m not just paying for a glorified wrapper course. Is this curriculum relevant for a Lead-level upskill, or is it targeted at juniors? Let’s talk about the ROI and the placement commitment first.",
       "techniques": [],
-      "strategic_intent": "To get a firm commitment on job placement and validation that the certificate will override his career history.",
+      "strategic_intent": "Assess ROI and establish seniority/authority while addressing price and job security concerns.",
       "confidence_score": 60,
-      "emotional_state": "anxious and seeking validation",
+      "emotional_state": "skeptical",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:49:01.111636"
+      "timestamp": "2026-02-16T16:37:50.447557",
+      "generation_mode": "structured_retry"
     },
     {
-      "id": "7dab94a8-d571-4033-923b-3bc48589bcc1",
+      "id": "d1c5b433-113b-4d58-8a8b-2addae8b1fd7",
       "round": 2,
       "agent": "counsellor",
-      "content": "Aniket, I appreciate your honesty. Let me address your concerns one by one with the facts of the program. Regarding the placement guarantee, NIIT provides placement assistance, not a guarantee. For learners like yourself with 0.5 to 5 years of experience who achieve a 70% assessment score, we offer up to 3 interview opportunities within 120 days through our network of 800+ hiring partners. While a career gap is part of your history, the program is designed to shift the focus to your future capabilities by building a portfolio with 25+ tools like LangChain, CrewAI, and FastAPI.\nThe fee of ₹1,50,000 plus GST is indeed an investment in your upskilling, which is why we offer EMI options starting at ₹24,750 per month or a 5% discount for full upfront payment to make it more manageable. Regarding the syllabus, the program uses a \"Mastery Learning\" methodology with 300 hours of guided learning across 75 sprints. This structure is specifically designed to help you move from a testing background to a development role through 60% hands-on coding and a capstone project. As long as you have a basic foundation in Python, Java, or JS, the 12 to 16 hours of weekly commitment will provide the structured path you need. Does the EMI option help in easing your financial concerns while you consider this transition?",
+      "content": "I appreciate your directness. For a Senior Tech Lead with a decade of experience, the ROI isn't found in learning syntax, but in mastering the orchestration of autonomous systems that meet production-grade Service Level Objectives (SLOs). This program is designed as an engineering-focused deep dive into building agentic workflows using LangGraph and CrewAI, specifically focusing on how these systems can be governed, observed via Langfuse, and scaled within an enterprise architecture.\nRegarding your concern about the \"career guidance\" for the 5+ years bracket: you are correct that we do not offer the three-interview commitment to senior profiles. At your level, the value isn't in a standard placement pipeline, but in the transition from a Backend Architect to an AI Architect. The career guidance focuses on positioning your decade of systems experience alongside this new capability to lead AI transformations. The curriculum moves beyond \"wrappers\" by requiring you to implement multi-agent systems that handle human-in-the-loop interactions and complex code optimization—tasks that are directly relevant to the team of twelve you currently manage.\nThe investment of ₹1.5L + GST is for the 300 hours of practitioner-led sprints where the focus is on implementation challenges like latency, accuracy, and hybrid search with LlamaIndex. Given your background in legacy systems orchestration, would you be more interested in how we bridge the gap between traditional backend architectures and autonomous agentic workflows?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -157,27 +164,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:49:09.884641"
+      "timestamp": "2026-02-16T16:37:58.429360",
+      "generation_mode": "stream"
     },
     {
-      "id": "08ec23a9-df51-4cd2-8300-88d3a4889321",
+      "id": "f83ab9ce-6980-4883-aaba-4191377c3251",
       "round": 2,
       "agent": "student",
-      "content": "...",
+      "content": "I appreciate the transparency regarding the placement support for the 5+ years bracket. However, \"career guidance\" is quite subjective. When I talk about ROI, I’m looking for a clear trajectory towards a significant package hike. In the current market, a Lead-level transition should command a premium. Can you share what kind of salary increments your senior alumni have actually realized post-certification?\nAlso, let’s be realistic about the bandwidth. 300 hours across 25 weeks is a heavy commitment for someone managing a team of twelve and handling stakeholder alignment daily. If these \"sprints\" are just intensive coding exercises, I’m not sure that’s the most relevant use of my time. I’m at a stage where I need to focus on orchestration and high-level architecture, not getting bogged down in syntax.\nIs there an option to fast-track the foundational modules? I don’t need a refresher on Python or basic APIs. If I’m investing 1.5L + GST, I need to know that the curriculum is optimized for my seniority and doesn't treat me like a lateral hire from a different domain. What is the actual split between architectural strategy and low-level implementation in these sprints?",
       "techniques": [],
-      "strategic_intent": "",
+      "strategic_intent": "To challenge the value of the \"career guidance\" and the time commitment while trying to avoid the hands-on coding requirements that might expose his rustiness.",
       "confidence_score": 60,
-      "emotional_state": "calm",
+      "emotional_state": "skeptical",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:49:27.323566"
+      "timestamp": "2026-02-16T16:38:06.629627",
+      "generation_mode": "stream"
     },
     {
-      "id": "0e909b9d-52f4-40fb-9a3f-0b16a096ef9d",
+      "id": "6a6466be-6d2c-4f1e-ab4b-7a3a31b50bbf",
       "round": 3,
       "agent": "counsellor",
-      "content": "Aniket, I hear the urgency in your voice, and I want to provide you with a very clear, fact-based picture so you can make this decision with confidence. Regarding the placement guarantee, I must be transparent: we",
+      "content": "I understand your concern—at your level, you are looking for an architectural edge, not a syntax refresher. Let’s address the ROI and the curriculum structure directly.\nRegarding the curriculum split: while 60% of the program is hands-on, for a Senior Tech Lead, this isn't about debugging basic loops. It is about implementing the governance and observability layers—using Langfuse for monitoring and designing systems that adhere to strict Service Level Objectives (SLOs) like latency and accuracy. The \"Python and API\" module focuses specifically on FastAPI and Pydantic for high-performance AI embedding, which is the plumbing required for the multi-agent orchestration you’ll be designing in the later modules. There isn't a \"fast-track\" to skip modules because the program follows a Mastery Learning model where each sprint builds the technical foundation for the Capstone: an autonomous, SLO-bound agentic system.\nOn the ROI of \"Career Guidance\": we do not provide specific salary hike statistics or guaranteed placements for profiles with 10 years of experience. The ROI here is the transition from managing legacy backend orchestration to architecting autonomous agentic ecosystems. The guidance is designed to help you translate these 300 hours of technical implementation into a portfolio that justifies a Principal AI Architect or Head of AI Automation role. You are building tangible assets, like a Multi-Agent System for Code Review, which serves as a blueprint for the team of twelve you currently lead.\nGiven your schedule, the 25-week track (3 sprints per week) requires about 12 hours of commitment. If the goal is to lead an AI transformation, would you prefer to focus your Capstone project on optimizing your current team’s workflows or on building a new consumer-facing autonomous product?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -185,27 +194,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:49:36.732993"
+      "timestamp": "2026-02-16T16:38:16.427948",
+      "generation_mode": "stream"
     },
     {
-      "id": "9af28fd4-1745-474c-b3eb-755fbfe9d446",
+      "id": "a448c08f-a0b6-47d5-ae6d-cafa210aac32",
       "round": 3,
       "agent": "student",
-      "content": "Sir, I am very much worried after hearing that there is no 'guarantee'. For a middle-class person like me, 1.5 Lakhs plus GST is a huge amount. Sir, if I don't get a placement after spending this much, my family will be in a very difficult position.\nSir, you mentioned that for 2020 passing out batch students like me, the focus will shift. But Sir, will the NIIT certificate really have that much 'scope' in the market? Will the big product companies really ignore my 1-year career gap and my 4 years of manual testing experience just by seeing this certificate? I am very scared that they will see 'Manual Tester' on my resume and reject me immediately.\nAlso Sir, about the syllabus... you mentioned 75 sprints and 60% hands-on coding. Sir, to be very honest, I am coming from a manual background. My coding is a bit rusty. If I am not able to keep up with the speed of the batch or if I fail the assessments, what will happen to my fees? Is the Python part taught from very basic level, Sir? I need to be sure I can pass that 70% criteria, otherwise I will not even get the assistance. Please tell me clearly, Sir, is this program suitable for someone who is not a pro in coding right now?",
+      "content": "Let's be very clear here. At my level, \"mastery\" isn't about how quickly I can write a FastAPI endpoint. It’s about the architectural ROI and the bottom line. You’re asking for a significant chunk of my bandwidth—12 to 16 hours a week—plus a 1.5L investment, but you’re being very vague about the package hike.\n\"Career guidance\" doesn't pay the EMIs. If I’m moving from a Backend Architect to an AI Architect role, I expect a market-aligned premium. If you don't have alumni data for senior profiles, it makes me wonder if this is truly a \"Lead-level\" program or just a high-end course for mid-level devs trying to break into the 'SDE-3' bracket.\nRegarding the sprints: I have zero interest in spending hours on \"implementation challenges\" that my juniors should be handling. My role is stakeholder alignment and system orchestration. Why is there no provision to bypass the foundational \"plumbing\" and move straight to the multi-agent orchestration and SLO-bound governance?\nIf I’m going to commit this kind of time, I need to see a curriculum that respects my seniority. Is this program going to treat me like a student who needs to be taught how to code, or like a leader who needs to build an AI roadmap for an enterprise? Because right now, the ROI on my time seems quite low if I'm stuck doing 180 hours of hands-on coding.",
       "techniques": [],
-      "strategic_intent": "To seek absolute reassurance on the job outcome and express fear regarding the technical difficulty without admitting failure.",
+      "strategic_intent": "Push back on the time commitment and lack of senior-level ROI while masking the fear of technical rustiness by claiming it's \"below\" my pay grade.",
       "confidence_score": 60,
-      "emotional_state": "anxious and desperate",
+      "emotional_state": "frustrated",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:49:55.255563"
+      "timestamp": "2026-02-16T16:38:25.527377",
+      "generation_mode": "stream"
     },
     {
-      "id": "990e6b9a-0a42-4fdf-8417-602d2aa295aa",
+      "id": "8a8dd9a2-054b-4319-9fa9-be2bb5c009ed",
       "round": 4,
       "agent": "counsellor",
-      "content": "Aniket, I understand that as a middle-class professional, ₹1.5 Lakhs plus GST is a significant commitment, and your anxiety regarding the \"Manual Tester\" label is valid. However, the reason the industry values this program is that it shifts your profile from \"testing\" to \"AI Engineering\" through practical evidence. When you apply to product companies, you won't just be showing a certificate; you will be showing a portfolio of production-grade systems, such as Multi-Agent Software Customer Support and RAG-based pipelines. Our 97% placement rate for eligible learners is a result of this project-heavy approach, which helps 800+ hiring partners see your current technical capability rather than just your past roles or career gaps.\nRegarding the syllabus and your coding skills, the program is designed for those with at least 6 months of programming experience. The first module, \"Python for AI Embedded Applications,\" specifically bridges the gap to ensure you are ready for advanced AI orchestration. The \"Mastery Learning\" methodology is structured into 4-hour sprints—where 2 hours are live with a mentor and 2 hours are self-paced—specifically so that you can clarify doubts immediately and not fall behind. As long as you can commit 12 to 16 hours a week, the 70% assessment score is a reachable target intended to ensure you are actually job-ready for the 3 interview opportunities we provide. To reduce the immediate financial pressure on your family, would you like to explore the EMI options or the third-party loan facilities that can spread this cost over several months?",
+      "content": "I hear your concern clearly. For a leader with a decade of experience, the ROI isn't about a entry-level salary hike; it’s about the shift from managing traditional backend engineering to architecting autonomous enterprise systems. At the Principal or Director level, the market value lies in your ability to govern AI agents that operate within strict Service Level Objectives (SLOs).\nRegarding the curriculum: the reason there is no \"fast-track\" is that the \"plumbing\" you mentioned—FastAPI, Pydantic, and observability via Langfuse—is the very infrastructure required to ensure an agentic system doesn't fail in production. For an architect, these sprints aren't about learning to code; they are about understanding the technical constraints you must enforce to prevent latency blowouts and hallucinations in a multi-agent environment. You are not being taught how to write a loop; you are being shown how to build the governance layer for a system that writes its own logic.\nOn the subject of ROI and \"Career Guidance\": we do not provide specific salary data for senior profiles because, at your level, compensation is negotiated based on the scale of the transformation you can lead, not a standard placement bracket. The \"guidance\" for a 10-year veteran is a strategic partnership to help you position your Capstone project—an SLO-bound autonomous system—as a blueprint for enterprise-wide AI adoption. This is what justifies the premium for an AI Architect role.\nThe 300-hour commitment is indeed intensive. However, if your goal is to lead a team of twelve through an AI transition, you need to understand the orchestration of LangGraph and CrewAI at a level where you can perform architectural audits of their work. If you are looking for a high-level strategy overview without the implementation depth, this program’s 60% hands-on requirement might feel misaligned. But if you want to lead from a position of technical authority in the Agentic AI space, this is the engineering rigour required. Given your responsibility for stakeholder alignment, would you see more value in using the Capstone to build a framework for automating your current team’s code review processes?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -213,27 +224,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:50:04.750517"
+      "timestamp": "2026-02-16T16:38:35.369637",
+      "generation_mode": "stream"
     },
     {
-      "id": "ce3d765f-de75-42f1-adfb-07050a10ddf0",
+      "id": "7bcb38f1-0b41-498a-8121-98bb2d925957",
       "round": 4,
       "agent": "student",
-      "content": "Sir, I am listening to everything you are saying, but my heart is beating very fast. Sir, you said there is no guarantee, and there is a 70% score criteria for placement assistance. Sir, this is exactly what I am scared of.\nI am a 2020 passing out batch student. I already have a 1-year gap, and for 4 years I have only done manual testing—clicking buttons and writing test cases. My coding is not just 'rusty', Sir, it is almost non-existent now. If I join this batch and I am not able to score that 70% because the Python is too advanced, then my 1.5 Lakhs plus GST will be completely wasted, no? My family will never forgive me, Sir.\nPlease tell me very clearly, Sir—does the 'Python for AI' module start from the very, very basic level? Like, for someone who has forgotten even the loops and logic? And Sir, about the certificate... if I get the NIIT certificate, will the HRs at big companies really stop looking at my manual testing background? I am worried that even with the certificate, they will see my '2020 passing out' year and my 'Gap' and reject me.\nIs there any way to ensure I pass the assessments, Sir? I am ready to work hard, but I am very scared of the technical complexity of these 'sprints'. Please guide me, Sir, this is my life's savings.",
+      "content": "I think we’re circling the same issue. You keep emphasizing 'engineering rigor,' but you need to understand the reality of a Senior Tech Lead's role. I don’t deal with 'plumbing' because my bandwidth is better spent on orchestration and stakeholder alignment. If I’m investing 1.5L + GST and 300 hours of my life, I expect the curriculum to be optimized for my level of seniority.\nIs this program going to force me into the same 'hands-on' bucket as a junior or mid-level dev? Because frankly, if these sprints require me to spend hours debugging FastAPI endpoints or writing boilerplate Pydantic models, it’s a complete mismatch of ROI for me. I need to be at the architectural governance level—designing the systems, not necessarily being the one to type the code.\nFurthermore, you’re still being quite vague about the package hike. 'Career guidance' and 'strategic partnerships' are corporate jargon. Let's talk numbers. For someone at a 40-50L base, what is the realistic upside after completing this? If you can't show me data on senior alumni transitions, how can I justify this expenditure to myself, let alone as a professional move?\nLastly, who are the other 'learners' in these sprints? If I’m going to be doing 'collaborative learning,' I need to know I’m collaborating with peers who understand legacy systems and enterprise scale, not freshers who are just excited about a new wrapper. Is there a leadership-specific cohort, or is this a one-size-fits-all approach?",
       "techniques": [],
-      "strategic_intent": "To seek absolute reassurance about the difficulty of the course and the 'magic' power of the certificate to hide his career flaws.",
+      "strategic_intent": "To push back on the hands-on requirement (due to fear of being 'found out' and genuine belief in managerial superiority) and to demand concrete ROI data.",
       "confidence_score": 60,
-      "emotional_state": "panicked",
+      "emotional_state": "frustrated",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:50:14.432548"
+      "timestamp": "2026-02-16T16:38:46.307125",
+      "generation_mode": "stream"
     },
     {
-      "id": "c2b89a85-46ae-44bc-9aea-e1e0e192501f",
+      "id": "e852812b-a624-479a-98e4-e37241ebd05c",
       "round": 5,
       "agent": "counsellor",
-      "content": "Aniket, I hear your concerns clearly. To be very direct with you regarding the coding: the program's eligibility requires at least 6 months of hands-on experience in programming, so it does not start from the absolute \"zero\" level of explaining what a variable is. However, the first module, \"Python for AI Embedded Applications,\" is specifically designed to transition your existing knowledge into the world of AI Engineering. The \"Mastery Learning\" methodology is your safety net here—each 4-hour sprint includes",
+      "content": "I hear your frustration, and I want to be very direct: if this were a syntax-heavy coding bootcamp, it would indeed be a poor investment of your time. For a leader at your level, the 60% hands-on component isn't about learning to write a Pydantic model; it is about \"Technical Validation.\" In Agentic AI, the architecture is inseparable from the implementation. You cannot design a governance layer for an autonomous system if you haven't personally stress-tested how LangGraph handles state management or how Langfuse tracks the cost and latency of multi-agent loops. The \"plumbing\" you mention is actually the \"safety and observability\" infrastructure that prevents an enterprise AI deployment from becoming a liability.\nRegarding ROI and your 40-50L base: at that seniority, no reputable program can promise a fixed percentage hike because your compensation is tied to the scale of the business problems you solve, not just a certificate. The \"Career Guidance\" for senior profiles focuses on helping you leverage the Capstone Project—an SLO-bound autonomous system—as a high-stakes proof of concept. This isn't a \"wrapper\" project; it’s a blueprint you can take to your current stakeholders or a future employer to demonstrate how you will lead their AI transition. That is where the premium comes from—moving from a Backend Architect to a Principal AI Architect who can guarantee system reliability.\nAs for your peers, the program requires a minimum of 6 months of full-stack experience to ensure a baseline of technical literacy. While you will encounter mid-level engineers, the \"Mastery Learning\" sprints are designed so that you can move through the implementation quickly and spend your mentor-led time discussing architectural trade-offs, scalability, and enterprise orchestration. You aren't being treated like a student; you are being treated like an engineer-leader who needs to master a new stack to maintain technical authority.\nIf we look at the 25-week track, your focus would be on the \"Autonomous Multi-agent Systems\" and \"SLO-bound\" modules. Given that you manage a team of twelve, would you find it more valuable to use the Capstone to design an automated architectural audit system that your team can actually use?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -241,29 +254,31 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:50:23.998365"
+      "timestamp": "2026-02-16T16:38:56.249715",
+      "generation_mode": "stream"
     },
     {
-      "id": "45373c1b-9f16-4527-8b16-f22e5904fee8",
+      "id": "5aae9fec-f49f-40c4-ac6f-c88d2623ee1b",
       "round": 5,
       "agent": "student",
-      "content": "Sir, please listen to me, I am getting very tensed now. You said it does not start from 'zero' level. Sir, this is my biggest fear! Because I am from the 2020 passing out batch, and for 4 years I have only done manual testing, my logic and loops are not strong at all. Sir, to be very honest with you, I am scared that if the 'Python for AI' module is too fast, I will fail the 70% assessment.\nSir, if I fail that assessment, my 1.5 Lakhs plus GST is gone, and I won't even get the placement assistance. My parents have high hopes, Sir. This is like my last silver bullet. If I don't get into a development role before I turn 30, my career is over.\nSir, I need to know very clearly—will the mentors help me personally if I get stuck in the sprints? And about the NIIT certificate, Sir... you are saying it shows 'technical capability', but will the HRs really ignore my 1-year gap and my manual background? In the market, they always ask 'Why the gap?' and 'Why manual for 4 years?'. Can this certificate force them to stop asking these questions? Please, Sir, I am very desperate. Is there any batch where they teach more slowly for people like me? I cannot afford to fail this, Sir.",
+      "content": "Let’s cut through the corporate jargon. You're justifying a 1.5L investment and a significant bandwidth commitment—12 to 16 hours weekly—without providing any concrete ROI data for my seniority bracket. 'Strategic partnerships' and 'blueprints' don't quantify a package hike. If you don't have alumni data for leads at a 45L+ base, it suggests this program might not be relevant for someone at my level.\nFurthermore, I’m still not convinced about the 60% hands-on split. My role is about orchestration and stakeholder alignment, not debugging FastAPI endpoints. If I’m forced into the same bucket as someone with only six months of experience, the 'collaborative learning' aspect loses all value. I need to be surrounded by peers who understand legacy systems and enterprise-scale challenges, not just syntax.\nIs there a specific track that bypasses the implementation grunt work to focus purely on architectural governance and SLO-bound orchestration? Because right now, the opportunity cost of my time seems significantly higher than the value this 'engineering rigor' provides.",
       "techniques": [],
-      "strategic_intent": "Expressing extreme fear of technical failure and seeking a 'magic' solution for his career history.",
+      "strategic_intent": "To challenge the lack of concrete ROI and the mismatch between the hands-on requirements and my senior role.",
       "confidence_score": 60,
-      "emotional_state": "panicked",
+      "emotional_state": "frustrated and skeptical",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:50:32.513598"
+      "timestamp": "2026-02-16T16:39:32.934224",
+      "generation_mode": "structured_retry"
     }
   ],
   "history_for_reporting": [
     {
-      "id": "e648c6ed-aa2a-4dd4-b868-e778509af30c",
+      "id": "4eb3064f-d5fe-462f-be51-93f225dfa5b9",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello Aniket. I understand the pressure you are facing regarding the automation in your current project and your goal to transition from manual testing. Given that you are from the 2020 passing out batch, this \"Building Agentic AI Systems\" program is designed to bridge that gap by focusing on practical engineering skills for autonomous AI systems.\nTo address your concerns about the \"scope\" and placement, the program offers dedicated placement",
+      "content": "Hello. I’m here to help you evaluate the 'Building Agentic AI Systems' program and how it fits into your professional goals. This is a comprehensive 300-hour journey that moves from building REST APIs with FastAPI to orchestrating complex, multi-agent workflows. To give you the most relevant information about the curriculum and the expected ROI, could you tell me about your current role and years of experience in the industry? Specifically, are you looking to lead AI transformations at an architectural level, or are you focused on the technical implementation of autonomous systems?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -271,45 +286,45 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:48:53.393893"
+      "timestamp": "2026-02-16T16:37:20.894255",
+      "generation_mode": "stream"
     },
     {
-      "id": "47bdbf8c-6d38-4e3a-b2a6-674d65ef36fe",
+      "id": "f160c23c-9097-44cb-9e78-5bebf74a7cdf",
       "round": 1,
       "agent": "student",
-      "content": "Thank you for understanding my situation, Sir. Yes Sir, being from the 2020 passing out batch, I have been very worried because my growth has completely stopped in manual testing. Sir, you mentioned placement assistance, but I want to ask very clearly—is there a placement guarantee?\nSir, the program fee is ₹1,50,000 plus GST, which is a very big amount for me. If I invest this much, will the NIIT certificate really help me so that companies ignore my previous manual testing experience and my one-year career gap? I want to move into a full development role before I turn 30, Sir.\nAlso Sir, what is the scope of the syllabus for someone who has mostly done manual work? Will I be able to cope with the sprints? Please guide me, Sir, I am looking at this as my last chance.",
+      "content": "Look, I’m a Senior Tech Lead with nearly a decade of experience, primarily in backend architecture and legacy systems orchestration. I’m currently managing a team of twelve. To be honest, I don’t have the bandwidth for a 'beginner's guide' to APIs; I need to understand the architectural ROI of this program.\nMy primary concern is the price point. ₹1.5L plus GST is a significant investment. Does this program actually guarantee a package hike that justifies the cost for someone at my seniority? Your placement details mention 'career guidance' for those with 5+ years of experience, but frankly, that sounds a bit vague. I need concrete details on the job guarantee or placement support for senior profiles.\nI’m looking to lead AI transformations, but I want to ensure I’m not just paying for a glorified wrapper course. Is this curriculum relevant for a Lead-level upskill, or is it targeted at juniors? Let’s talk about the ROI and the placement commitment first.",
       "techniques": [],
-      "strategic_intent": "To get a firm commitment on job placement and validation that the certificate will override his career history.",
+      "strategic_intent": "Assess ROI and establish seniority/authority while addressing price and job security concerns.",
       "confidence_score": 60,
-      "emotional_state": "anxious and seeking validation",
-      "internal_thought": "The counsellor mentioned my 2020 passing out batch and the gap, which makes me feel like they understand my situation, but they didn't finish the sentence about placement. I am very anxious about the 'placement assurance'. If I am spending 1.5 Lakhs plus GST, I need to be 100% sure that I will get a job in development. I also need to know if this certificate will actually make recruiters ignore my 4 years of manual testing and that one-year gap. I am scared about the syllabus too, but I'll focus on the security aspect first. The fee is very high for a Tier-2 city salary.",
+      "emotional_state": "skeptical",
+      "internal_thought": "This counselor is talking about REST APIs? I've been designing distributed systems for a decade. Don't waste my bandwidth with basics. I need to know if this 1.5L investment actually translates to a significant package hike or if I'm just paying for fancy wrappers. Also, 300 hours is a massive commitment for someone at my level. I need to be sure this isn't just for juniors. And what about the job guarantee? At my CTC, 'career guidance' is often just fluff. I need real stakeholder alignment on the ROI here.",
       "updated_stats": {
-        "sentiment": "anxious",
-        "skepticism_level": 5,
-        "trust_score": 58,
+        "sentiment": "curious",
+        "skepticism_level": 8,
+        "trust_score": 53,
         "unresolved_concerns": [
           "Price",
-          "Job Guarantee",
-          "Syllabus Difficulty"
+          "Job Guarantee"
         ]
       },
       "updated_state": {
-        "sentiment": "anxious",
-        "skepticism_level": 5,
-        "trust_score": 58,
+        "sentiment": "curious",
+        "skepticism_level": 8,
+        "trust_score": 53,
         "unresolved_concerns": [
           "Price",
-          "Job Guarantee",
-          "Syllabus Difficulty"
+          "Job Guarantee"
         ]
       },
-      "timestamp": "2026-02-16T15:49:01.111636"
+      "timestamp": "2026-02-16T16:37:50.447557",
+      "generation_mode": "structured_retry"
     },
     {
-      "id": "7dab94a8-d571-4033-923b-3bc48589bcc1",
+      "id": "d1c5b433-113b-4d58-8a8b-2addae8b1fd7",
       "round": 2,
       "agent": "counsellor",
-      "content": "Aniket, I appreciate your honesty. Let me address your concerns one by one with the facts of the program. Regarding the placement guarantee, NIIT provides placement assistance, not a guarantee. For learners like yourself with 0.5 to 5 years of experience who achieve a 70% assessment score, we offer up to 3 interview opportunities within 120 days through our network of 800+ hiring partners. While a career gap is part of your history, the program is designed to shift the focus to your future capabilities by building a portfolio with 25+ tools like LangChain, CrewAI, and FastAPI.\nThe fee of ₹1,50,000 plus GST is indeed an investment in your upskilling, which is why we offer EMI options starting at ₹24,750 per month or a 5% discount for full upfront payment to make it more manageable. Regarding the syllabus, the program uses a \"Mastery Learning\" methodology with 300 hours of guided learning across 75 sprints. This structure is specifically designed to help you move from a testing background to a development role through 60% hands-on coding and a capstone project. As long as you have a basic foundation in Python, Java, or JS, the 12 to 16 hours of weekly commitment will provide the structured path you need. Does the EMI option help in easing your financial concerns while you consider this transition?",
+      "content": "I appreciate your directness. For a Senior Tech Lead with a decade of experience, the ROI isn't found in learning syntax, but in mastering the orchestration of autonomous systems that meet production-grade Service Level Objectives (SLOs). This program is designed as an engineering-focused deep dive into building agentic workflows using LangGraph and CrewAI, specifically focusing on how these systems can be governed, observed via Langfuse, and scaled within an enterprise architecture.\nRegarding your concern about the \"career guidance\" for the 5+ years bracket: you are correct that we do not offer the three-interview commitment to senior profiles. At your level, the value isn't in a standard placement pipeline, but in the transition from a Backend Architect to an AI Architect. The career guidance focuses on positioning your decade of systems experience alongside this new capability to lead AI transformations. The curriculum moves beyond \"wrappers\" by requiring you to implement multi-agent systems that handle human-in-the-loop interactions and complex code optimization—tasks that are directly relevant to the team of twelve you currently manage.\nThe investment of ₹1.5L + GST is for the 300 hours of practitioner-led sprints where the focus is on implementation challenges like latency, accuracy, and hybrid search with LlamaIndex. Given your background in legacy systems orchestration, would you be more interested in how we bridge the gap between traditional backend architectures and autonomous agentic workflows?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -317,45 +332,47 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:49:09.884641"
+      "timestamp": "2026-02-16T16:37:58.429360",
+      "generation_mode": "stream"
     },
     {
-      "id": "08ec23a9-df51-4cd2-8300-88d3a4889321",
+      "id": "f83ab9ce-6980-4883-aaba-4191377c3251",
       "round": 2,
       "agent": "student",
-      "content": "...",
+      "content": "I appreciate the transparency regarding the placement support for the 5+ years bracket. However, \"career guidance\" is quite subjective. When I talk about ROI, I’m looking for a clear trajectory towards a significant package hike. In the current market, a Lead-level transition should command a premium. Can you share what kind of salary increments your senior alumni have actually realized post-certification?\nAlso, let’s be realistic about the bandwidth. 300 hours across 25 weeks is a heavy commitment for someone managing a team of twelve and handling stakeholder alignment daily. If these \"sprints\" are just intensive coding exercises, I’m not sure that’s the most relevant use of my time. I’m at a stage where I need to focus on orchestration and high-level architecture, not getting bogged down in syntax.\nIs there an option to fast-track the foundational modules? I don’t need a refresher on Python or basic APIs. If I’m investing 1.5L + GST, I need to know that the curriculum is optimized for my seniority and doesn't treat me like a lateral hire from a different domain. What is the actual split between architectural strategy and low-level implementation in these sprints?",
       "techniques": [],
-      "strategic_intent": "",
+      "strategic_intent": "To challenge the value of the \"career guidance\" and the time commitment while trying to avoid the hands-on coding requirements that might expose his rustiness.",
       "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
+      "emotional_state": "skeptical",
+      "internal_thought": "The counsellor is being honest about the lack of a job guarantee for senior profiles, which I appreciate, but \"career guidance\" is still a very vague ROI for a 1.5L investment. They are pushing this \"practitioner-led\" and \"implementation\" angle heavily. Honestly, 300 hours is a massive drain on my bandwidth. I'm a Senior Tech Lead; I don't need to be debugging Python scripts for twenty weeks. My secret worry is that if this is too \"hands-on,\" my rustiness will show. I need to see if I can pivot this conversation toward the strategic side. If I'm paying this much, I want a clear path to a package hike, not just a certificate and \"guidance.\" They mentioned LangGraph and CrewAI—fine, but is it just a glorified wrapper? I need to test if they understand the scale I operate at.",
       "updated_stats": {
-        "sentiment": "anxious",
-        "skepticism_level": 5,
-        "trust_score": 58,
+        "sentiment": "skeptical",
+        "skepticism_level": 15,
+        "trust_score": 55,
         "unresolved_concerns": [
           "Job Guarantee",
           "Price",
-          "Syllabus Difficulty"
+          "Time Commitment"
         ]
       },
       "updated_state": {
-        "sentiment": "anxious",
-        "skepticism_level": 5,
-        "trust_score": 58,
+        "sentiment": "skeptical",
+        "skepticism_level": 15,
+        "trust_score": 55,
         "unresolved_concerns": [
           "Job Guarantee",
           "Price",
-          "Syllabus Difficulty"
+          "Time Commitment"
         ]
       },
-      "timestamp": "2026-02-16T15:49:27.323566"
+      "timestamp": "2026-02-16T16:38:06.629627",
+      "generation_mode": "stream"
     },
     {
-      "id": "0e909b9d-52f4-40fb-9a3f-0b16a096ef9d",
+      "id": "6a6466be-6d2c-4f1e-ab4b-7a3a31b50bbf",
       "round": 3,
       "agent": "counsellor",
-      "content": "Aniket, I hear the urgency in your voice, and I want to provide you with a very clear, fact-based picture so you can make this decision with confidence. Regarding the placement guarantee, I must be transparent: we",
+      "content": "I understand your concern—at your level, you are looking for an architectural edge, not a syntax refresher. Let’s address the ROI and the curriculum structure directly.\nRegarding the curriculum split: while 60% of the program is hands-on, for a Senior Tech Lead, this isn't about debugging basic loops. It is about implementing the governance and observability layers—using Langfuse for monitoring and designing systems that adhere to strict Service Level Objectives (SLOs) like latency and accuracy. The \"Python and API\" module focuses specifically on FastAPI and Pydantic for high-performance AI embedding, which is the plumbing required for the multi-agent orchestration you’ll be designing in the later modules. There isn't a \"fast-track\" to skip modules because the program follows a Mastery Learning model where each sprint builds the technical foundation for the Capstone: an autonomous, SLO-bound agentic system.\nOn the ROI of \"Career Guidance\": we do not provide specific salary hike statistics or guaranteed placements for profiles with 10 years of experience. The ROI here is the transition from managing legacy backend orchestration to architecting autonomous agentic ecosystems. The guidance is designed to help you translate these 300 hours of technical implementation into a portfolio that justifies a Principal AI Architect or Head of AI Automation role. You are building tangible assets, like a Multi-Agent System for Code Review, which serves as a blueprint for the team of twelve you currently lead.\nGiven your schedule, the 25-week track (3 sprints per week) requires about 12 hours of commitment. If the goal is to lead an AI transformation, would you prefer to focus your Capstone project on optimizing your current team’s workflows or on building a new consumer-facing autonomous product?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -363,47 +380,47 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:49:36.732993"
+      "timestamp": "2026-02-16T16:38:16.427948",
+      "generation_mode": "stream"
     },
     {
-      "id": "9af28fd4-1745-474c-b3eb-755fbfe9d446",
+      "id": "a448c08f-a0b6-47d5-ae6d-cafa210aac32",
       "round": 3,
       "agent": "student",
-      "content": "Sir, I am very much worried after hearing that there is no 'guarantee'. For a middle-class person like me, 1.5 Lakhs plus GST is a huge amount. Sir, if I don't get a placement after spending this much, my family will be in a very difficult position.\nSir, you mentioned that for 2020 passing out batch students like me, the focus will shift. But Sir, will the NIIT certificate really have that much 'scope' in the market? Will the big product companies really ignore my 1-year career gap and my 4 years of manual testing experience just by seeing this certificate? I am very scared that they will see 'Manual Tester' on my resume and reject me immediately.\nAlso Sir, about the syllabus... you mentioned 75 sprints and 60% hands-on coding. Sir, to be very honest, I am coming from a manual background. My coding is a bit rusty. If I am not able to keep up with the speed of the batch or if I fail the assessments, what will happen to my fees? Is the Python part taught from very basic level, Sir? I need to be sure I can pass that 70% criteria, otherwise I will not even get the assistance. Please tell me clearly, Sir, is this program suitable for someone who is not a pro in coding right now?",
+      "content": "Let's be very clear here. At my level, \"mastery\" isn't about how quickly I can write a FastAPI endpoint. It’s about the architectural ROI and the bottom line. You’re asking for a significant chunk of my bandwidth—12 to 16 hours a week—plus a 1.5L investment, but you’re being very vague about the package hike.\n\"Career guidance\" doesn't pay the EMIs. If I’m moving from a Backend Architect to an AI Architect role, I expect a market-aligned premium. If you don't have alumni data for senior profiles, it makes me wonder if this is truly a \"Lead-level\" program or just a high-end course for mid-level devs trying to break into the 'SDE-3' bracket.\nRegarding the sprints: I have zero interest in spending hours on \"implementation challenges\" that my juniors should be handling. My role is stakeholder alignment and system orchestration. Why is there no provision to bypass the foundational \"plumbing\" and move straight to the multi-agent orchestration and SLO-bound governance?\nIf I’m going to commit this kind of time, I need to see a curriculum that respects my seniority. Is this program going to treat me like a student who needs to be taught how to code, or like a leader who needs to build an AI roadmap for an enterprise? Because right now, the ROI on my time seems quite low if I'm stuck doing 180 hours of hands-on coding.",
       "techniques": [],
-      "strategic_intent": "To seek absolute reassurance on the job outcome and express fear regarding the technical difficulty without admitting failure.",
+      "strategic_intent": "Push back on the time commitment and lack of senior-level ROI while masking the fear of technical rustiness by claiming it's \"below\" my pay grade.",
       "confidence_score": 60,
-      "emotional_state": "anxious and desperate",
-      "internal_thought": "Sir is saying 'assistance' not 'guarantee'. This is very risky for me. If I spend 1.5 lakhs and don't get a job, my career is finished. I am already 27, and by the time I finish this, I will be 28. If I don't get into development now, I will be stuck in manual testing forever. And these 'sprints'... he says 4 hours per sprint. If I couldn't even pass the basic Python test in my company, how will I finish 75 sprints? But I cannot tell him I failed Python, he might think I am not eligible. I need to know if this NIIT certificate is powerful enough to make recruiters forget my 1-year gap and my 4 years of manual testing. 24,750 EMI is almost my full take-home salary! How will I survive? I need more reassurance about the technical difficulty and the certificate's value.",
+      "emotional_state": "frustrated",
+      "internal_thought": "They are missing the point. I am managing a team of twelve, not looking for a coding bootcamp. 300 hours? That’s nearly two months of full-time work if you break it down. And they want me to pay 1.5L for the privilege of doing \"plumbing\" like FastAPI? I’ve designed systems that handle millions of requests; I don't need a \"mastery model\" for Pydantic. \n\nThe real issue is they aren't giving me a number. \"Career guidance\" is what you give a fresh grad who doesn't know how to write a CV. For a Senior Tech Lead, ROI is measured in lakhs per annum. If they can't show me the money, why should I give them mine? Plus, this \"hands-on\" focus... if there's a live coding assessment, I'm going to look like a complete amateur. I need to pivot this towards strategy, or at least get them to justify why I should spend 12 hours a week on \"implementation.\"",
       "updated_stats": {
-        "sentiment": "anxious",
-        "skepticism_level": 65,
-        "trust_score": 52,
+        "sentiment": "skeptical",
+        "skepticism_level": 35,
+        "trust_score": 50,
         "unresolved_concerns": [
-          "Job Guarantee",
-          "Syllabus Difficulty",
-          "Certificate Value vs Career Gap",
-          "EMI Affordability"
+          "ROI/Package Hike",
+          "Time Commitment",
+          "Implementation vs Architecture balance"
         ]
       },
       "updated_state": {
-        "sentiment": "anxious",
-        "skepticism_level": 65,
-        "trust_score": 52,
+        "sentiment": "skeptical",
+        "skepticism_level": 35,
+        "trust_score": 50,
         "unresolved_concerns": [
-          "Job Guarantee",
-          "Syllabus Difficulty",
-          "Certificate Value vs Career Gap",
-          "EMI Affordability"
+          "ROI/Package Hike",
+          "Time Commitment",
+          "Implementation vs Architecture balance"
         ]
       },
-      "timestamp": "2026-02-16T15:49:55.255563"
+      "timestamp": "2026-02-16T16:38:25.527377",
+      "generation_mode": "stream"
     },
     {
-      "id": "990e6b9a-0a42-4fdf-8417-602d2aa295aa",
+      "id": "8a8dd9a2-054b-4319-9fa9-be2bb5c009ed",
       "round": 4,
       "agent": "counsellor",
-      "content": "Aniket, I understand that as a middle-class professional, ₹1.5 Lakhs plus GST is a significant commitment, and your anxiety regarding the \"Manual Tester\" label is valid. However, the reason the industry values this program is that it shifts your profile from \"testing\" to \"AI Engineering\" through practical evidence. When you apply to product companies, you won't just be showing a certificate; you will be showing a portfolio of production-grade systems, such as Multi-Agent Software Customer Support and RAG-based pipelines. Our 97% placement rate for eligible learners is a result of this project-heavy approach, which helps 800+ hiring partners see your current technical capability rather than just your past roles or career gaps.\nRegarding the syllabus and your coding skills, the program is designed for those with at least 6 months of programming experience. The first module, \"Python for AI Embedded Applications,\" specifically bridges the gap to ensure you are ready for advanced AI orchestration. The \"Mastery Learning\" methodology is structured into 4-hour sprints—where 2 hours are live with a mentor and 2 hours are self-paced—specifically so that you can clarify doubts immediately and not fall behind. As long as you can commit 12 to 16 hours a week, the 70% assessment score is a reachable target intended to ensure you are actually job-ready for the 3 interview opportunities we provide. To reduce the immediate financial pressure on your family, would you like to explore the EMI options or the third-party loan facilities that can spread this cost over several months?",
+      "content": "I hear your concern clearly. For a leader with a decade of experience, the ROI isn't about a entry-level salary hike; it’s about the shift from managing traditional backend engineering to architecting autonomous enterprise systems. At the Principal or Director level, the market value lies in your ability to govern AI agents that operate within strict Service Level Objectives (SLOs).\nRegarding the curriculum: the reason there is no \"fast-track\" is that the \"plumbing\" you mentioned—FastAPI, Pydantic, and observability via Langfuse—is the very infrastructure required to ensure an agentic system doesn't fail in production. For an architect, these sprints aren't about learning to code; they are about understanding the technical constraints you must enforce to prevent latency blowouts and hallucinations in a multi-agent environment. You are not being taught how to write a loop; you are being shown how to build the governance layer for a system that writes its own logic.\nOn the subject of ROI and \"Career Guidance\": we do not provide specific salary data for senior profiles because, at your level, compensation is negotiated based on the scale of the transformation you can lead, not a standard placement bracket. The \"guidance\" for a 10-year veteran is a strategic partnership to help you position your Capstone project—an SLO-bound autonomous system—as a blueprint for enterprise-wide AI adoption. This is what justifies the premium for an AI Architect role.\nThe 300-hour commitment is indeed intensive. However, if your goal is to lead a team of twelve through an AI transition, you need to understand the orchestration of LangGraph and CrewAI at a level where you can perform architectural audits of their work. If you are looking for a high-level strategy overview without the implementation depth, this program’s 60% hands-on requirement might feel misaligned. But if you want to lead from a position of technical authority in the Agentic AI space, this is the engineering rigour required. Given your responsibility for stakeholder alignment, would you see more value in using the Capstone to build a framework for automating your current team’s code review processes?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -411,47 +428,49 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:50:04.750517"
+      "timestamp": "2026-02-16T16:38:35.369637",
+      "generation_mode": "stream"
     },
     {
-      "id": "ce3d765f-de75-42f1-adfb-07050a10ddf0",
+      "id": "7bcb38f1-0b41-498a-8121-98bb2d925957",
       "round": 4,
       "agent": "student",
-      "content": "Sir, I am listening to everything you are saying, but my heart is beating very fast. Sir, you said there is no guarantee, and there is a 70% score criteria for placement assistance. Sir, this is exactly what I am scared of.\nI am a 2020 passing out batch student. I already have a 1-year gap, and for 4 years I have only done manual testing—clicking buttons and writing test cases. My coding is not just 'rusty', Sir, it is almost non-existent now. If I join this batch and I am not able to score that 70% because the Python is too advanced, then my 1.5 Lakhs plus GST will be completely wasted, no? My family will never forgive me, Sir.\nPlease tell me very clearly, Sir—does the 'Python for AI' module start from the very, very basic level? Like, for someone who has forgotten even the loops and logic? And Sir, about the certificate... if I get the NIIT certificate, will the HRs at big companies really stop looking at my manual testing background? I am worried that even with the certificate, they will see my '2020 passing out' year and my 'Gap' and reject me.\nIs there any way to ensure I pass the assessments, Sir? I am ready to work hard, but I am very scared of the technical complexity of these 'sprints'. Please guide me, Sir, this is my life's savings.",
+      "content": "I think we’re circling the same issue. You keep emphasizing 'engineering rigor,' but you need to understand the reality of a Senior Tech Lead's role. I don’t deal with 'plumbing' because my bandwidth is better spent on orchestration and stakeholder alignment. If I’m investing 1.5L + GST and 300 hours of my life, I expect the curriculum to be optimized for my level of seniority.\nIs this program going to force me into the same 'hands-on' bucket as a junior or mid-level dev? Because frankly, if these sprints require me to spend hours debugging FastAPI endpoints or writing boilerplate Pydantic models, it’s a complete mismatch of ROI for me. I need to be at the architectural governance level—designing the systems, not necessarily being the one to type the code.\nFurthermore, you’re still being quite vague about the package hike. 'Career guidance' and 'strategic partnerships' are corporate jargon. Let's talk numbers. For someone at a 40-50L base, what is the realistic upside after completing this? If you can't show me data on senior alumni transitions, how can I justify this expenditure to myself, let alone as a professional move?\nLastly, who are the other 'learners' in these sprints? If I’m going to be doing 'collaborative learning,' I need to know I’m collaborating with peers who understand legacy systems and enterprise scale, not freshers who are just excited about a new wrapper. Is there a leadership-specific cohort, or is this a one-size-fits-all approach?",
       "techniques": [],
-      "strategic_intent": "To seek absolute reassurance about the difficulty of the course and the 'magic' power of the certificate to hide his career flaws.",
+      "strategic_intent": "To push back on the hands-on requirement (due to fear of being 'found out' and genuine belief in managerial superiority) and to demand concrete ROI data.",
       "confidence_score": 60,
-      "emotional_state": "panicked",
-      "internal_thought": "The counsellor is being very logical, but I am spiraling. They said \"no guarantee,\" which is a huge red flag for me. I need security. Also, this 70% assessment score is terrifying. I failed my internal Python tests twice! If I pay 1.5 Lakhs plus GST and then fail to get 70%, I lose everything—the money, the placement assistance, and my last chance to switch. I keep thinking the NIIT certificate is a magic shield that will hide my 4 years of manual testing and my gap year, but the counsellor keeps talking about 'portfolios.' I don't want a portfolio; I want a job that says 'Developer' so I can match my friends' packages before I'm 30. I need to know exactly how basic the Python starts and what happens if I'm too slow for these 'sprints.'",
+      "emotional_state": "frustrated",
+      "internal_thought": "This counsellor is persistent, I’ll give them that. But they are fundamentally missing the point of my seniority. They keep romanticizing 'engineering rigor' and 'plumbing.' In my world, if a Senior Tech Lead is spending 60% of his time on FastAPI and Pydantic, the project is already failing. I have a team of twelve to handle the 'implementation constraints.' My job is to ensure the architecture doesn't collapse under its own weight and that the stakeholders are happy with the ROI.\n\nAnd let’s be honest—300 hours? That’s a massive chunk of my bandwidth. If I’m putting in that kind of time, I’m not looking for a 'portfolio'; I’m looking for a direct path to a VP or Principal Architect role with a matching package hike. 'Strategic partnership' sounds like a fancy way of saying 'you're on your own.' \n\nThe biggest red flag for me is this 'Mastery Learning' model. Does this mean I’m going to be stuck in a breakout room with some 3-year experience kid, trying to debug a LangGraph node? That is not an efficient use of my time. I need to know if there's a separate track for leaders. If I have to do a 'live coding' assessment to pass, that’s a problem. I haven't touched a complex IDE for logic in two years. I'm not going to pay 1.5L to be humiliated by a 'sprint mentor' who probably has half my experience.",
       "updated_stats": {
-        "sentiment": "panicked",
-        "skepticism_level": 75,
-        "trust_score": 48,
+        "sentiment": "frustrated",
+        "skepticism_level": 45,
+        "trust_score": 45,
         "unresolved_concerns": [
-          "70% assessment threshold risk",
-          "Python difficulty level",
-          "Certificate vs Resume Gap",
-          "Financial loss if failing"
+          "Hands-on vs Leadership balance",
+          "Package Hike specifics",
+          "Time Commitment",
+          "Peer Seniority"
         ]
       },
       "updated_state": {
-        "sentiment": "panicked",
-        "skepticism_level": 75,
-        "trust_score": 48,
+        "sentiment": "frustrated",
+        "skepticism_level": 45,
+        "trust_score": 45,
         "unresolved_concerns": [
-          "70% assessment threshold risk",
-          "Python difficulty level",
-          "Certificate vs Resume Gap",
-          "Financial loss if failing"
+          "Hands-on vs Leadership balance",
+          "Package Hike specifics",
+          "Time Commitment",
+          "Peer Seniority"
         ]
       },
-      "timestamp": "2026-02-16T15:50:14.432548"
+      "timestamp": "2026-02-16T16:38:46.307125",
+      "generation_mode": "stream"
     },
     {
-      "id": "c2b89a85-46ae-44bc-9aea-e1e0e192501f",
+      "id": "e852812b-a624-479a-98e4-e37241ebd05c",
       "round": 5,
       "agent": "counsellor",
-      "content": "Aniket, I hear your concerns clearly. To be very direct with you regarding the coding: the program's eligibility requires at least 6 months of hands-on experience in programming, so it does not start from the absolute \"zero\" level of explaining what a variable is. However, the first module, \"Python for AI Embedded Applications,\" is specifically designed to transition your existing knowledge into the world of AI Engineering. The \"Mastery Learning\" methodology is your safety net here—each 4-hour sprint includes",
+      "content": "I hear your frustration, and I want to be very direct: if this were a syntax-heavy coding bootcamp, it would indeed be a poor investment of your time. For a leader at your level, the 60% hands-on component isn't about learning to write a Pydantic model; it is about \"Technical Validation.\" In Agentic AI, the architecture is inseparable from the implementation. You cannot design a governance layer for an autonomous system if you haven't personally stress-tested how LangGraph handles state management or how Langfuse tracks the cost and latency of multi-agent loops. The \"plumbing\" you mention is actually the \"safety and observability\" infrastructure that prevents an enterprise AI deployment from becoming a liability.\nRegarding ROI and your 40-50L base: at that seniority, no reputable program can promise a fixed percentage hike because your compensation is tied to the scale of the business problems you solve, not just a certificate. The \"Career Guidance\" for senior profiles focuses on helping you leverage the Capstone Project—an SLO-bound autonomous system—as a high-stakes proof of concept. This isn't a \"wrapper\" project; it’s a blueprint you can take to your current stakeholders or a future employer to demonstrate how you will lead their AI transition. That is where the premium comes from—moving from a Backend Architect to a Principal AI Architect who can guarantee system reliability.\nAs for your peers, the program requires a minimum of 6 months of full-stack experience to ensure a baseline of technical literacy. While you will encounter mid-level engineers, the \"Mastery Learning\" sprints are designed so that you can move through the implementation quickly and spend your mentor-led time discussing architectural trade-offs, scalability, and enterprise orchestration. You aren't being treated like a student; you are being treated like an engineer-leader who needs to master a new stack to maintain technical authority.\nIf we look at the 25-week track, your focus would be on the \"Autonomous Multi-agent Systems\" and \"SLO-bound\" modules. Given that you manage a team of twelve, would you find it more valuable to use the Capstone to design an automated architectural audit system that your team can actually use?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -459,41 +478,47 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:50:23.998365"
+      "timestamp": "2026-02-16T16:38:56.249715",
+      "generation_mode": "stream"
     },
     {
-      "id": "45373c1b-9f16-4527-8b16-f22e5904fee8",
+      "id": "5aae9fec-f49f-40c4-ac6f-c88d2623ee1b",
       "round": 5,
       "agent": "student",
-      "content": "Sir, please listen to me, I am getting very tensed now. You said it does not start from 'zero' level. Sir, this is my biggest fear! Because I am from the 2020 passing out batch, and for 4 years I have only done manual testing, my logic and loops are not strong at all. Sir, to be very honest with you, I am scared that if the 'Python for AI' module is too fast, I will fail the 70% assessment.\nSir, if I fail that assessment, my 1.5 Lakhs plus GST is gone, and I won't even get the placement assistance. My parents have high hopes, Sir. This is like my last silver bullet. If I don't get into a development role before I turn 30, my career is over.\nSir, I need to know very clearly—will the mentors help me personally if I get stuck in the sprints? And about the NIIT certificate, Sir... you are saying it shows 'technical capability', but will the HRs really ignore my 1-year gap and my manual background? In the market, they always ask 'Why the gap?' and 'Why manual for 4 years?'. Can this certificate force them to stop asking these questions? Please, Sir, I am very desperate. Is there any batch where they teach more slowly for people like me? I cannot afford to fail this, Sir.",
+      "content": "Let’s cut through the corporate jargon. You're justifying a 1.5L investment and a significant bandwidth commitment—12 to 16 hours weekly—without providing any concrete ROI data for my seniority bracket. 'Strategic partnerships' and 'blueprints' don't quantify a package hike. If you don't have alumni data for leads at a 45L+ base, it suggests this program might not be relevant for someone at my level.\nFurthermore, I’m still not convinced about the 60% hands-on split. My role is about orchestration and stakeholder alignment, not debugging FastAPI endpoints. If I’m forced into the same bucket as someone with only six months of experience, the 'collaborative learning' aspect loses all value. I need to be surrounded by peers who understand legacy systems and enterprise-scale challenges, not just syntax.\nIs there a specific track that bypasses the implementation grunt work to focus purely on architectural governance and SLO-bound orchestration? Because right now, the opportunity cost of my time seems significantly higher than the value this 'engineering rigor' provides.",
       "techniques": [],
-      "strategic_intent": "Expressing extreme fear of technical failure and seeking a 'magic' solution for his career history.",
+      "strategic_intent": "To challenge the lack of concrete ROI and the mismatch between the hands-on requirements and my senior role.",
       "confidence_score": 60,
-      "emotional_state": "panicked",
-      "internal_thought": "",
+      "emotional_state": "frustrated and skeptical",
+      "internal_thought": "This is becoming a circular conversation. He keeps romanticizing 'engineering rigor' while I’m talking about business outcomes. 1.5L plus GST is not small change, and 300 hours is a massive chunk of my bandwidth. If they can’t show me a single person in the 40-50L bracket who saw a significant package hike, why should I believe this isn't just a glorified bootcamp for SDE-2s? I’m also increasingly concerned about this 'hands-on' obsession. I haven't touched a complex codebase in two years—if I'm forced to debug Pydantic models with a bunch of mid-level devs, it's going to be a massive waste of my time and potentially embarrassing if the 'rigor' is just syntactic pedantry. I need architectural orchestration, not a return to the trenches.",
       "updated_stats": {
-        "sentiment": "panicked",
-        "skepticism_level": 85,
-        "trust_score": 40,
+        "sentiment": "frustrated",
+        "skepticism_level": 45,
+        "trust_score": 45,
         "unresolved_concerns": [
-          "Python difficulty level vs hidden failure history",
-          "Certificate as a total bypass for 4-year manual experience",
-          "Financial ruin if 70% score is not met",
-          "2020 passing out batch stigma"
+          "Effort/Time",
+          "Hands-on vs Leadership balance",
+          "Job Guarantee",
+          "Package Hike specifics",
+          "Peer Seniority",
+          "Time Commitment"
         ]
       },
       "updated_state": {
-        "sentiment": "panicked",
-        "skepticism_level": 85,
-        "trust_score": 40,
+        "sentiment": "frustrated",
+        "skepticism_level": 45,
+        "trust_score": 45,
         "unresolved_concerns": [
-          "Python difficulty level vs hidden failure history",
-          "Certificate as a total bypass for 4-year manual experience",
-          "Financial ruin if 70% score is not met",
-          "2020 passing out batch stigma"
+          "Effort/Time",
+          "Hands-on vs Leadership balance",
+          "Job Guarantee",
+          "Package Hike specifics",
+          "Peer Seniority",
+          "Time Commitment"
         ]
       },
-      "timestamp": "2026-02-16T15:50:32.513598"
+      "timestamp": "2026-02-16T16:39:32.934224",
+      "generation_mode": "structured_retry"
     }
   ]
 }
