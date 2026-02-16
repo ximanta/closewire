@@ -59,6 +59,7 @@ DEFAULT_NEGOTIATION_MAX_ROUNDS = _env_int("NEGOTIATION_MAX_ROUNDS", 10, 1, 50)
 NEGOTIATION_MAX_ROUNDS_LIMIT = _env_int("NEGOTIATION_MAX_ROUNDS_LIMIT", 20, 1, 100)
 AUTH_TOKEN_TTL_SECONDS = _env_int("AUTH_TOKEN_TTL_SECONDS", 43200, 60, 604800)
 NEGOTIATION_DEBUG_TRACE = _env_bool("NEGOTIATION_DEBUG_TRACE", True)
+NEGOTIATION_STREAM_CONSOLE_LOG = _env_bool("NEGOTIATION_STREAM_CONSOLE_LOG", True)
 
 app = FastAPI(title="AI Negotiation Arena")
 app.add_middleware(
@@ -314,6 +315,23 @@ def _collect_candidate_finish_reasons(response: Any) -> List[str]:
         if reason:
             reasons.append(reason)
     return reasons
+
+
+def _collect_chunk_finish_reasons(chunk: Any) -> List[str]:
+    reasons: List[str] = []
+    for candidate in getattr(chunk, "candidates", []) or []:
+        reason = str(getattr(candidate, "finish_reason", "")).strip()
+        if reason:
+            reasons.append(reason)
+    return reasons
+
+
+def _looks_truncated_message(text: str) -> bool:
+    value = (text or "").strip()
+    if not value:
+        return False
+    terminal = (".", "!", "?", "\"", "'", ")", "]", "}", "```", "</message>")
+    return not value.endswith(terminal)
 
 
 def _write_debug_trace(event: str, payload: Dict[str, Any]) -> None:
@@ -803,6 +821,16 @@ def _extract_response_fields(text: str) -> Dict[str, Any]:
     }
 
 
+def _extract_counsellor_message(text: str) -> str:
+    raw = (text or "").strip()
+    if not raw:
+        return "..."
+    tagged = _extract_tag_block(raw, "message")
+    if tagged:
+        return re.sub(r"\s+\n", "\n", tagged).strip() or "..."
+    return re.sub(r"\s+\n", "\n", raw).strip() or "..."
+
+
 def _trim_messages(messages: List[Dict[str, Any]], max_messages: int = 12) -> List[Dict[str, Any]]:
     return messages[-max_messages:]
 
@@ -1060,9 +1088,6 @@ def _is_valid_student_persona_schema(persona: Dict[str, Any]) -> bool:
 
 
 def _build_counsellor_prompt(state: NegotiationState) -> str:
-    visible_persona = dict(state["persona"])
-    visible_persona.pop("hidden_secret", None)
-    visible_persona.pop("misconception", None)
     transcript = "\n".join(
         f"{m['agent'].upper()}: {m['content']}" for m in _trim_messages(state["messages"], 12)
     )
@@ -1095,9 +1120,6 @@ DO NOT:
 PROGRAM DATA:
 {json.dumps(state['program'])}
 
-STUDENT PERSONA:
-{json.dumps(visible_persona)}
-
 PRIOR TRANSCRIPT:
 {transcript}
 {retry_note}
@@ -1112,17 +1134,19 @@ STRATEGY REQUIREMENTS:
 - Build trust gradually.
 - Detect emotional state shifts.
 - Move toward commitment questions after objections resolved.
+- Do not assume personal background, pressure, finances, or fears unless the student explicitly states them in transcript.
+- If transcript is empty (first turn), start with neutral discovery questions before positioning.
 
 ADVANCED RULE:
 If primary objection remains unresolved, address it directly before attempting close.
 
 OUTPUT FORMAT:
-<message>dialogue</message>
-<techniques>["consultative_selling","objection_reframing","roi_framing"]</techniques>
-<intent>one sentence strategic intent</intent>
-<confidence>0-100</confidence>
-<emotional_state>calm/frustrated/confused/excited/skeptical</emotional_state>
-Do not output anything outside these tags.
+Return only the spoken counsellor dialogue as plain text.
+Do not use XML tags, JSON, prefixes, or metadata.
+Quality constraints:
+- Keep response length as per user question and context. Prefarably crisp.
+- Always end with a complete sentence.
+- Do not end mid-phrase (for example ending with words like "to", "and", "if this is", "aapki", etc.).
 """
 
 
@@ -1203,6 +1227,7 @@ async def _stream_agent_response(
     full_text = ""
     stream_chunk_count = 0
     stream_nonempty_chunk_count = 0
+    stream_finish_reasons: List[str] = []
     _write_debug_trace(
         "turn_start",
         {
@@ -1219,7 +1244,6 @@ async def _stream_agent_response(
         config = types.GenerateContentConfig(
             temperature=0.85,
             top_p=0.95,
-            max_output_tokens=1200,
         )
         response_stream = client.models.generate_content_stream(
             model=model_name,
@@ -1228,11 +1252,34 @@ async def _stream_agent_response(
         )
         for chunk in response_stream:
             stream_chunk_count += 1
+            chunk_reasons = _collect_chunk_finish_reasons(chunk)
+            if chunk_reasons:
+                stream_finish_reasons.extend(chunk_reasons)
             text = _extract_chunk_text(chunk)
             if not text:
+                if NEGOTIATION_STREAM_CONSOLE_LOG:
+                    logger.info(
+                        "[LLM_STREAM] agent=%s round=%s message_id=%s chunk=%s chars=0 finish_reasons=%s",
+                        agent,
+                        round_number,
+                        message_id,
+                        stream_chunk_count,
+                        chunk_reasons,
+                    )
                 continue
             stream_nonempty_chunk_count += 1
             full_text += text
+            if NEGOTIATION_STREAM_CONSOLE_LOG:
+                logger.info(
+                    "[LLM_STREAM] agent=%s round=%s message_id=%s chunk=%s chars=%s finish_reasons=%s text=%r",
+                    agent,
+                    round_number,
+                    message_id,
+                    stream_chunk_count,
+                    len(text),
+                    chunk_reasons,
+                    text,
+                )
             await _ws_send_json(
                 websocket,
                 {"type": "stream_chunk", "data": {"agent": agent, "text": text, "message_id": message_id}},
@@ -1279,8 +1326,21 @@ async def _stream_agent_response(
             "nonempty_chunk_count": stream_nonempty_chunk_count,
             "buffer_chars": len(full_text),
             "buffer_head": _truncate_trace_text(full_text, 220),
+            "finish_reasons": stream_finish_reasons,
         },
     )
+    if NEGOTIATION_STREAM_CONSOLE_LOG:
+        logger.info(
+            "[LLM_STREAM_END] agent=%s round=%s message_id=%s chunks=%s nonempty=%s chars=%s finish_reasons=%s text=%r",
+            agent,
+            round_number,
+            message_id,
+            stream_chunk_count,
+            stream_nonempty_chunk_count,
+            len(full_text),
+            stream_finish_reasons,
+            full_text,
+        )
 
     if not full_text.strip():
         logger.warning("Empty stream text for %s; retrying once with non-stream generate_content.", agent)
@@ -1324,6 +1384,8 @@ async def _stream_agent_response(
             full_text = "<message>...</message>"
 
     fields = _extract_response_fields(full_text)
+    if agent == "counsellor":
+        fields["message"] = _extract_counsellor_message(full_text)
     _write_debug_trace(
         "parse_result",
         {
@@ -1337,6 +1399,17 @@ async def _stream_agent_response(
             "emotional_state": fields.get("emotional_state"),
         },
     )
+    if _looks_truncated_message(fields.get("message", "")):
+        _write_debug_trace(
+            "message_truncated_heuristic",
+            {
+                "agent": agent,
+                "round": round_number,
+                "message_id": message_id,
+                "message_chars": len(fields.get("message", "")),
+                "message_tail": _truncate_trace_text(fields.get("message", "")[-80:], 120),
+            },
+        )
     if not fields.get("message", "").strip():
         fields["message"] = "..."
         _write_debug_trace(

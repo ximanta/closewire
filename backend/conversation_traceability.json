@@ -1,48 +1,52 @@
 {
-  "generated_at": "2026-02-16T15:20:39.205982",
-  "session_id": "54f46381-14c4-412e-8423-8550a8df956c",
+  "generated_at": "2026-02-16T15:50:48.171750",
+  "session_id": "388d156c-af57-47e3-bb15-90eafebdef8a",
   "deal_status": "failed",
   "round": 6,
   "max_rounds": 5,
   "persona": {
-    "age": 38,
+    "archetype_id": "desperate_switcher",
     "common_vocabulary": [
-      "Bandwidth",
-      "Relevant",
-      "Upskill",
-      "Package hike"
+      "Batch",
+      "Passing out",
+      "Gap year",
+      "Scope",
+      "Sir/Ma'am",
+      "Placement assurance",
+      "Career transition",
+      "Syllabus"
     ],
-    "confusion_level": 4,
-    "city_tier": "Tier-1",
-    "trigger_event": "During a recent appraisal discussion, his manager subtly hinted that while his contributions are valuable, his \"skillset relevance\" might become a concern for future \"critical projects.\" He also saw a younger, less experienced colleague get fast-tracked for an AI-focused project, which stung his ego and made him realize the need to \"upskill\" for better \"package hike\" opportunities.",
-    "archetype_label": "Stagnant Pro",
-    "language_style": "Corporate Indian English",
-    "current_role": "Senior Software Engineer",
-    "archetype_id": "stagnant_pro",
-    "backstory": "Rajesh has been in the IT industry for 15 years, steadily climbing the corporate ladder. He's proud of his \"bandwidth\" and experience, having seen multiple tech cycles. He believes in \"relevant\" skills and \"ROI\" for any investment, be it time or money. He's often the most senior person in his immediate team, and frankly, a bit set in his ways. He finds younger colleagues' enthusiasm for new, unproven tech a bit naive. His \"package hike\" has been consistent, but he's noticed a subtle shift in project allocations towards those with \"upskilled\" AI capabilities, which he finds a bit irritating.",
-    "skepticism": 8,
-    "name": "Rajesh Kumar",
-    "misconception": "AI is just glorified automation, a fad that will eventually be replaced by the next big thing. It doesn't require deep engineering, just basic scripting. My core software engineering skills are far more valuable in the long run. These \"Agentic AI Systems\" are probably just marketing jargon for complex if-else statements.",
-    "ego_level": 9,
-    "financial_anxiety": 6,
-    "hidden_secret": "Despite his outward confidence, Rajesh secretly worries about becoming obsolete. He's observed younger colleagues discussing complex AI concepts he doesn't fully grasp, and it's a source of quiet anxiety that he'd never admit.",
-    "persona_type": "stagnant_pro",
+    "skepticism": 4,
+    "current_role": "Manual Test Engineer",
+    "hidden_secret": "He actually failed his basic Python internal assessment twice at his current company and is terrified that he won't be able to keep up with the 'sprints' mentioned in the curriculum.",
+    "ego_level": 2,
+    "age": 27,
+    "financial_anxiety": 9,
+    "backstory": "Aniket is a 2020 passing out batch student who has been stuck in a manual testing role at a legacy IT firm in Pune for the last 4 years. He has seen his friends switch to product-based companies with 2x packages while his own growth has been stagnant. With the recent news of AI-led layoffs in his department, he is terrified of being benched. He has a 1-year career gap between his graduation and first job which he still struggles to explain in interviews. He is looking at this Agentic AI program as his last 'silver bullet' to save his career and get into a development role before he turns 30.",
+    "misconception": "He believes that simply getting the certificate from NIIT will force companies to ignore his previous testing experience and career gap.",
+    "archetype_label": "Desperate Switcher",
+    "language_style": "Indian Academic English. Very formal, using 'Sir' repeatedly. High use of specific academic terms like 'batch' and 'passing out'. Tone is anxious and seeking validation.",
+    "confusion_level": 8,
+    "city_tier": "Tier-2",
+    "trigger_event": "His manager recently told him that his project is being 'automated' and he needs to find a new billable project within 30 days or face the 'separation process'.",
+    "name": "Aniket Deshmukh",
+    "persona_type": "desperate_switcher",
     "background": "Prospective learner evaluating an AI upskilling path.",
     "career_stage": "early",
-    "financial_sensitivity": "medium",
-    "risk_tolerance": "medium",
-    "emotional_tone": "anxious",
+    "financial_sensitivity": "high",
+    "risk_tolerance": "low",
+    "emotional_tone": "skeptical",
     "primary_objections": [
       "Placement credibility",
       "Fee value",
       "Difficulty for freshers",
       "Time commitment"
     ],
-    "walk_away_likelihood": 0.48,
-    "expected_roi_months": 4,
-    "affordability_concern_level": 76,
-    "willingness_to_invest_score": 29,
-    "communication_style": "confused",
+    "walk_away_likelihood": 0.52,
+    "expected_roi_months": 14,
+    "affordability_concern_level": 75,
+    "willingness_to_invest_score": 60,
+    "communication_style": "challenging",
     "common_phrases": [
       "Placement ka scene kya hai?",
       "Is this really worth it?",
@@ -51,68 +55,73 @@
   },
   "program": {
     "program_name": "Building Agentic AI Systems",
-    "program_fee_inr": "1,50,000 + GST. Booking fees: 1,500 + GST. Upfront payment with 5% concession: 1,42,500 (inclusive of concession)."
+    "program_fee_inr": "₹1,50,000 + 18% GST (Booking fee: ₹1,500 + 18% GST)"
   },
   "student_inner_state": {
-    "sentiment": "frustrated",
-    "skepticism_level": 50,
+    "sentiment": "panicked",
+    "skepticism_level": 85,
     "trust_score": 40,
     "unresolved_concerns": [
-      "Effort/Time",
+      "2020 passing out batch stigma",
+      "Certificate as a total bypass for 4-year manual experience",
+      "Financial ruin if 70% score is not met",
       "Job Guarantee",
-      "Price"
+      "Python difficulty level vs hidden failure history"
     ]
   },
   "negotiation_metrics": {
     "round": 5,
     "max_rounds": 5,
     "concession_count_counsellor": 0,
-    "concession_count_student": 0,
-    "tone_escalation": 35,
-    "objection_intensity": 27,
-    "trust_index": 38,
-    "close_probability": 48,
-    "sentiment_indicator": "negative",
+    "concession_count_student": 1,
+    "tone_escalation": 11,
+    "objection_intensity": 39,
+    "trust_index": 49,
+    "close_probability": 60,
+    "sentiment_indicator": "positive",
     "retry_modifier": 0
   },
   "final_offers": {
-    "counsellor": 165000,
-    "student": 107400
+    "counsellor": 165375,
+    "student": 150000
   },
   "analysis": {
-    "primary_unresolved_objection": "The lack of concrete, detailed information on the *actual engineering depth* of the program (beyond glorified automation/scripting) and a clear, *tangible ROI* for a senior professional's significant time and financial investment.",
+    "pivotal_moments": [
+      "Round 3: The student's anxiety significantly escalated upon hearing 'no guarantee' for placement and expressed deep fears about the certificate's market scope and coping with sprints, indicating a core emotional block.",
+      "Round 4: Despite the counsellor's attempts to reassure with success rates and project-heavy approach, the student's anxiety remained critically high, reiterating fears about the 70% assessment criteria and their 'almost non-existent' coding skills.",
+      "Round 5: The counsellor's direct clarification that the program 'does not start from the absolute zero level' directly confronted and amplified the student's biggest fear, leading to further escalation of desperation and unresolved questions, indicating a negative turning point."
+    ],
+    "enrollment_likelihood": 30,
+    "skill_recommendations": [
+      "Enhance active listening to identify and validate underlying emotional anxieties and self-doubt, rather than solely focusing on factual objections.",
+      "Develop more personalized and empathetic objection handling strategies, particularly for deep-seated fears like technical capability and financial risk.",
+      "Practice techniques to de-escalate student anxiety and build trust by offering concrete, tailored support mechanisms or preparatory steps for individuals with significant skill gaps.",
+      "Improve framing of program prerequisites to be more reassuring, or provide clear guidance on how students with less experience can bridge the gap before enrollment."
+    ],
+    "commitment_signal": "none",
+    "winner": "student",
+    "negotiation_score": 45,
+    "primary_unresolved_objection": "The student's profound lack of confidence in their current coding ability (specifically Python from a very basic level) to successfully meet the program's 70% assessment criteria, and the resulting fear of wasting a significant financial investment without achieving career goals.",
     "mistakes": [
-      "Failed to provide specific, technical answers to the student's questions about engineering depth.",
-      "Relied on rephrasing or acknowledging student's points instead of offering solutions.",
-      "Did not adequately address the ROI for a senior professional or justify the program's value beyond buzzwords."
+      "Failed to effectively pivot and address the student's escalating emotional anxiety and underlying self-doubt, especially concerning their coding proficiency.",
+      "Did not provide sufficient personalized reassurance or concrete solutions for a student who explicitly stated their coding was 'almost non-existent', particularly after clarifying the program does not start from 'zero' level.",
+      "Relied too heavily on generic program features (e.g., 'Mastery Learning' as a 'safety net') without demonstrating how these specifically mitigate the student's extreme fear of technical failure.",
+      "Did not adequately address the student's repeated concerns about the NIIT certificate's ability to completely negate a 1-year career gap and 4 years of manual testing experience in the eyes of HRs."
     ],
     "strengths": [
-      "The counsellor acknowledged the student's experience and apologized for initial missteps, demonstrating some empathy and willingness to correct course on a superficial level."
+      "The counsellor attempted to address concerns systematically with program facts (placement assistance, EMI options, mastery learning methodology, portfolio building).",
+      "The counsellor emphasized the program's practical, project-heavy approach as a way to overcome past experience and career gaps.",
+      "The counsellor initially showed empathy and acknowledged the student's concerns."
     ],
-    "negotiation_score": 48,
-    "skill_recommendations": [
-      "Develop deeper technical understanding of the program's content to address specific engineering questions.",
-      "Learn to articulate tangible ROI and value propositions tailored for highly experienced professionals.",
-      "Move beyond acknowledging objections to providing concrete, detailed solutions and examples.",
-      "Practice active listening to identify and directly address the *underlying* concerns, not just the stated ones."
-    ],
-    "winner": "student",
-    "commitment_signal": "none",
-    "trust_delta": -5,
-    "enrollment_likelihood": 48,
-    "pivotal_moments": [
-      "Round 1: Counsellor's initial misstep about 'difficulty for freshers' immediately set a negative tone.",
-      "Round 4: Student's 'let's cut to the chase' indicating growing impatience and frustration with the lack of substance.",
-      "Round 5: Student explicitly stating that acknowledging points isn't enough, demanding 'the *how*' and reiterating all prior objections."
-    ],
-    "why": "The counsellor failed to provide specific, technical details regarding the 'engineering depth' of the program, despite the student's repeated requests. They also couldn't articulate a tangible ROI for a senior professional's time and investment beyond surface-level reassurances, leading to the student's increasing frustration and distrust of the program's value."
+    "trust_delta": -10,
+    "why": "The counsellor failed to adequately address the student's deep-seated fears regarding their foundational coding skills, ability to meet the program's 70% assessment criteria, and the subsequent risk of significant financial loss and career stagnation. The counsellor's direct statement in Round 5 that the program does not start from 'zero' level exacerbated the student's primary anxiety without sufficient personalized reassurance or a clear path forward for someone with 'almost non-existent' coding experience."
   },
   "transcript": [
     {
-      "id": "927ca287-2b38-4376-918b-ee4242aa0af3",
+      "id": "e648c6ed-aa2a-4dd4-b868-e778509af30c",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello Rajesh, thank you for reaching out and showing interest in our 'Building Agentic AI Systems' program. I understand you're looking to upskill and ensure your capabilities remain highly relevant for critical projects, potentially even for a better package hike. That's a very sensible approach in today's evolving tech landscape.\nLet me clarify how this program is specifically designed for experienced professionals like yourself, addressing some of the key concerns you might have.\nFirstly, regarding the curriculum and \"difficulty for freshers",
+      "content": "Hello Aniket. I understand the pressure you are facing regarding the automation in your current project and your goal to transition from manual testing. Given that you are from the 2020 passing out batch, this \"Building Agentic AI Systems\" program is designed to bridge that gap by focusing on practical engineering skills for autonomous AI systems.\nTo address your concerns about the \"scope\" and placement, the program offers dedicated placement",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -120,27 +129,27 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:19:31.052071"
+      "timestamp": "2026-02-16T15:48:53.393893"
     },
     {
-      "id": "430454a3-4189-495d-8160-7e89918c64cc",
+      "id": "47bdbf8c-6d38-4e3a-b2a6-674d65ef36fe",
       "round": 1,
       "agent": "student",
-      "content": "Hmm, counsellor. I appreciate you reaching out. But I must say, talking about \"difficulty for freshers\" isn't quite the relevant angle for someone with my experience. I've been in the IT industry for 15 years, seen multiple tech cycles, and my primary concern isn't whether freshers can grasp something. My bandwidth is quite high, and I'm looking for how this program offers a solid ROI for a senior professional like myself.\nFrankly, these \"Agentic AI Systems\" and all sound like a lot of marketing jargon. I need to understand how this is genuinely different from glorified automation or just complex scripting. My core software engineering skills are robust; I need to see how this program truly adds value and isn't just chasing the next fad.\nSo, let's keep it relevant. How is this tailored for someone at *my* level, and what's the actual engineering depth involved, beyond just new buzzwords?",
+      "content": "Thank you for understanding my situation, Sir. Yes Sir, being from the 2020 passing out batch, I have been very worried because my growth has completely stopped in manual testing. Sir, you mentioned placement assistance, but I want to ask very clearly—is there a placement guarantee?\nSir, the program fee is ₹1,50,000 plus GST, which is a very big amount for me. If I invest this much, will the NIIT certificate really help me so that companies ignore my previous manual testing experience and my one-year career gap? I want to move into a full development role before I turn 30, Sir.\nAlso Sir, what is the scope of the syllabus for someone who has mostly done manual work? Will I be able to cope with the sprints? Please guide me, Sir, I am looking at this as my last chance.",
       "techniques": [],
-      "strategic_intent": "to redirect the conversation to my specific needs and challenge the program's perceived value and depth, while subtly hinting at my misconception without revealing my secret anxiety",
+      "strategic_intent": "To get a firm commitment on job placement and validation that the certificate will override his career history.",
       "confidence_score": 60,
-      "emotional_state": "frustrated",
+      "emotional_state": "anxious and seeking validation",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:19:37.206314"
+      "timestamp": "2026-02-16T15:49:01.111636"
     },
     {
-      "id": "192fc4e2-ff61-440e-86d4-2006e0b83377",
+      "id": "7dab94a8-d571-4033-923b-3bc48589bcc1",
       "round": 2,
       "agent": "counsellor",
-      "content": "My apologies, Rajesh. You are absolutely right to call me out on that. My intention was to highlight the structured progression of the curriculum, but I misspoke by framing it in terms of \"freshers.\"",
+      "content": "Aniket, I appreciate your honesty. Let me address your concerns one by one with the facts of the program. Regarding the placement guarantee, NIIT provides placement assistance, not a guarantee. For learners like yourself with 0.5 to 5 years of experience who achieve a 70% assessment score, we offer up to 3 interview opportunities within 120 days through our network of 800+ hiring partners. While a career gap is part of your history, the program is designed to shift the focus to your future capabilities by building a portfolio with 25+ tools like LangChain, CrewAI, and FastAPI.\nThe fee of ₹1,50,000 plus GST is indeed an investment in your upskilling, which is why we offer EMI options starting at ₹24,750 per month or a 5% discount for full upfront payment to make it more manageable. Regarding the syllabus, the program uses a \"Mastery Learning\" methodology with 300 hours of guided learning across 75 sprints. This structure is specifically designed to help you move from a testing background to a development role through 60% hands-on coding and a capstone project. As long as you have a basic foundation in Python, Java, or JS, the 12 to 16 hours of weekly commitment will provide the structured path you need. Does the EMI option help in easing your financial concerns while you consider this transition?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -148,10 +157,10 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:19:43.743543"
+      "timestamp": "2026-02-16T15:49:09.884641"
     },
     {
-      "id": "88e023f7-cb24-4772-8c7d-fbb5eab58dca",
+      "id": "08ec23a9-df51-4cd2-8300-88d3a4889321",
       "round": 2,
       "agent": "student",
       "content": "...",
@@ -162,13 +171,13 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:19:50.473706"
+      "timestamp": "2026-02-16T15:49:27.323566"
     },
     {
-      "id": "3d9f2aa7-39fc-44e0-aadd-57dfefd311bf",
+      "id": "0e909b9d-52f4-40fb-9a3f-0b16a096ef9d",
       "round": 3,
       "agent": "counsellor",
-      "content": "Thank you, Rajesh, for that crucial clarification. My apologies again for the initial misstep. You're absolutely right; with your 15 years of industry experience and strong software engineering background, your perspective is one",
+      "content": "Aniket, I hear the urgency in your voice, and I want to provide you with a very clear, fact-based picture so you can make this decision with confidence. Regarding the placement guarantee, I must be transparent: we",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -176,27 +185,27 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:20:00.090980"
+      "timestamp": "2026-02-16T15:49:36.732993"
     },
     {
-      "id": "a91c0ad9-2d51-4027-879c-41e75d3bf7c1",
+      "id": "9af28fd4-1745-474c-b3eb-755fbfe9d446",
       "round": 3,
       "agent": "student",
-      "content": "Understood, counsellor. I appreciate the clarification on your intent and the apology. However, my core questions still remain unaddressed. I need to understand, with my 15 years of industry experience and strong software engineering background, how this \"Agentic AI Systems\" program offers a genuine step up, beyond what I perceive as glorified automation or basic scripting.\nWhat is the *actual engineering depth* involved here? How does it leverage advanced software engineering principles, not just new buzzwords? I need to see the ROI for my time and investment. How will this truly enhance my capabilities for critical projects and ensure a significant package hike? Frankly, I'm looking for specifics, not just reassurance. How is this tailored for someone at *my* level, and what's the tangible value, beyond just \"upskilling\" generally?",
+      "content": "Sir, I am very much worried after hearing that there is no 'guarantee'. For a middle-class person like me, 1.5 Lakhs plus GST is a huge amount. Sir, if I don't get a placement after spending this much, my family will be in a very difficult position.\nSir, you mentioned that for 2020 passing out batch students like me, the focus will shift. But Sir, will the NIIT certificate really have that much 'scope' in the market? Will the big product companies really ignore my 1-year career gap and my 4 years of manual testing experience just by seeing this certificate? I am very scared that they will see 'Manual Tester' on my resume and reject me immediately.\nAlso Sir, about the syllabus... you mentioned 75 sprints and 60% hands-on coding. Sir, to be very honest, I am coming from a manual background. My coding is a bit rusty. If I am not able to keep up with the speed of the batch or if I fail the assessments, what will happen to my fees? Is the Python part taught from very basic level, Sir? I need to be sure I can pass that 70% criteria, otherwise I will not even get the assistance. Please tell me clearly, Sir, is this program suitable for someone who is not a pro in coding right now?",
       "techniques": [],
-      "strategic_intent": "reiterate core questions, push for specific value proposition and engineering depth relevant to my experience, and emphasize ROI for my career",
+      "strategic_intent": "To seek absolute reassurance on the job outcome and express fear regarding the technical difficulty without admitting failure.",
       "confidence_score": 60,
-      "emotional_state": "impatient",
+      "emotional_state": "anxious and desperate",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:20:07.216398"
+      "timestamp": "2026-02-16T15:49:55.255563"
     },
     {
-      "id": "7210bbb7-2657-431e-be38-d74f40a6a791",
+      "id": "990e6b9a-0a42-4fdf-8417-602d2aa295aa",
       "round": 4,
       "agent": "counsellor",
-      "content": "Understood, Rajesh. Thank you for clearly articulating your concerns and expectations. You are absolutely right to question the \"actual engineering depth\" and how a program like \"Building Agentic AI Systems\" differentiates itself from \"glor",
+      "content": "Aniket, I understand that as a middle-class professional, ₹1.5 Lakhs plus GST is a significant commitment, and your anxiety regarding the \"Manual Tester\" label is valid. However, the reason the industry values this program is that it shifts your profile from \"testing\" to \"AI Engineering\" through practical evidence. When you apply to product companies, you won't just be showing a certificate; you will be showing a portfolio of production-grade systems, such as Multi-Agent Software Customer Support and RAG-based pipelines. Our 97% placement rate for eligible learners is a result of this project-heavy approach, which helps 800+ hiring partners see your current technical capability rather than just your past roles or career gaps.\nRegarding the syllabus and your coding skills, the program is designed for those with at least 6 months of programming experience. The first module, \"Python for AI Embedded Applications,\" specifically bridges the gap to ensure you are ready for advanced AI orchestration. The \"Mastery Learning\" methodology is structured into 4-hour sprints—where 2 hours are live with a mentor and 2 hours are self-paced—specifically so that you can clarify doubts immediately and not fall behind. As long as you can commit 12 to 16 hours a week, the 70% assessment score is a reachable target intended to ensure you are actually job-ready for the 3 interview opportunities we provide. To reduce the immediate financial pressure on your family, would you like to explore the EMI options or the third-party loan facilities that can spread this cost over several months?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -204,27 +213,27 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:20:13.813021"
+      "timestamp": "2026-02-16T15:50:04.750517"
     },
     {
-      "id": "7dc44157-c92a-4d8f-819a-590b97253854",
+      "id": "ce3d765f-de75-42f1-adfb-07050a10ddf0",
       "round": 4,
       "agent": "student",
-      "content": "Counsellor, let's cut to the chase. I've explained my background and my expectations multiple times now. I'm looking for *substance*, not just a rephrasing of my own questions. When I say \"actual engineering depth,\" I mean things like: are we talking about designing robust, scalable architectures for these \"Agentic AI Systems\"? Or is it just stitching together APIs with some Python scripts? My concern is that this is simply glorified automation, perhaps with some fancy new libraries, but fundamentally not requiring the deep engineering acumen I've built over 15 years.\nHow does this program ensure a tangible ROI for someone at my level? How will it directly translate into a significant package hike and more critical project allocations? I need to see how this isn't just a fad, but a foundational shift that warrants my time and investment. Tell me, what are the *advanced software engineering principles* that are being applied here, beyond just the surface-level buzzwords like \"Agentic AI\" or \"LLMs\"? What about the effort/time commitment versus the actual benefit for a senior professional? And frankly, the price, for something that I'm still not convinced is more than just scripting, needs to be justified with concrete value.",
+      "content": "Sir, I am listening to everything you are saying, but my heart is beating very fast. Sir, you said there is no guarantee, and there is a 70% score criteria for placement assistance. Sir, this is exactly what I am scared of.\nI am a 2020 passing out batch student. I already have a 1-year gap, and for 4 years I have only done manual testing—clicking buttons and writing test cases. My coding is not just 'rusty', Sir, it is almost non-existent now. If I join this batch and I am not able to score that 70% because the Python is too advanced, then my 1.5 Lakhs plus GST will be completely wasted, no? My family will never forgive me, Sir.\nPlease tell me very clearly, Sir—does the 'Python for AI' module start from the very, very basic level? Like, for someone who has forgotten even the loops and logic? And Sir, about the certificate... if I get the NIIT certificate, will the HRs at big companies really stop looking at my manual testing background? I am worried that even with the certificate, they will see my '2020 passing out' year and my 'Gap' and reject me.\nIs there any way to ensure I pass the assessments, Sir? I am ready to work hard, but I am very scared of the technical complexity of these 'sprints'. Please guide me, Sir, this is my life's savings.",
       "techniques": [],
-      "strategic_intent": "to demand specific, technical answers that justify the program's value for a senior engineer and address ROI, package hike, and the perceived lack of engineering depth",
+      "strategic_intent": "To seek absolute reassurance about the difficulty of the course and the 'magic' power of the certificate to hide his career flaws.",
       "confidence_score": 60,
-      "emotional_state": "frustrated",
+      "emotional_state": "panicked",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:20:18.486842"
+      "timestamp": "2026-02-16T15:50:14.432548"
     },
     {
-      "id": "0d2be08e-e478-46a7-9e4f-ea02e435b06b",
+      "id": "c2b89a85-46ae-44bc-9aea-e1e0e192501f",
       "round": 5,
       "agent": "counsellor",
-      "content": "Rajesh, your point about \"actual engineering depth\" is absolutely critical, especially with your 15 years of robust software engineering experience. I understand you need to see how this program moves beyond mere scripting or glorified",
+      "content": "Aniket, I hear your concerns clearly. To be very direct with you regarding the coding: the program's eligibility requires at least 6 months of hands-on experience in programming, so it does not start from the absolute \"zero\" level of explaining what a variable is. However, the first module, \"Python for AI Embedded Applications,\" is specifically designed to transition your existing knowledge into the world of AI Engineering. The \"Mastery Learning\" methodology is your safety net here—each 4-hour sprint includes",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -232,29 +241,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:20:25.054525"
+      "timestamp": "2026-02-16T15:50:23.998365"
     },
     {
-      "id": "3bd666ef-8edf-4ab4-9f27-8478b5862ecb",
+      "id": "45373c1b-9f16-4527-8b16-f22e5904fee8",
       "round": 5,
       "agent": "student",
-      "content": "Counsellor, with all due respect, simply acknowledging my points about \"actual engineering depth\" and \"moving beyond mere scripting\" isn't providing the specific answers I'm looking for. I need to understand the *how*.\nWhen you say \"engineering depth,\" are we talking about designing resilient, highly available, and scalable distributed systems for these Agentic AI workloads? What kind of architectural patterns beyond basic microservices are we leveraging? Are there discussions around performance optimization, cost management for LLM inference, or robust error handling in multi-agent environments? Because frankly, \"stitching together APIs with some Python scripts\" is precisely what I'm worried this might be. My existing bandwidth already covers that.\nI've been quite clear: I need to see the tangible ROI for my time and investment. How does this program specifically contribute to a significant package hike or secure more critical, high-impact project allocations for someone at *my* level? What are the *advanced software engineering principles* that are being applied and taught here, beyond just the surface-level buzzwords? And again, the effort/time commitment versus the actual benefit for a senior professional needs to be justified. The price is a significant factor, and right now, I'm not seeing the concrete value that warrants it, especially if it's just glorified automation.",
+      "content": "Sir, please listen to me, I am getting very tensed now. You said it does not start from 'zero' level. Sir, this is my biggest fear! Because I am from the 2020 passing out batch, and for 4 years I have only done manual testing, my logic and loops are not strong at all. Sir, to be very honest with you, I am scared that if the 'Python for AI' module is too fast, I will fail the 70% assessment.\nSir, if I fail that assessment, my 1.5 Lakhs plus GST is gone, and I won't even get the placement assistance. My parents have high hopes, Sir. This is like my last silver bullet. If I don't get into a development role before I turn 30, my career is over.\nSir, I need to know very clearly—will the mentors help me personally if I get stuck in the sprints? And about the NIIT certificate, Sir... you are saying it shows 'technical capability', but will the HRs really ignore my 1-year gap and my manual background? In the market, they always ask 'Why the gap?' and 'Why manual for 4 years?'. Can this certificate force them to stop asking these questions? Please, Sir, I am very desperate. Is there any batch where they teach more slowly for people like me? I cannot afford to fail this, Sir.",
       "techniques": [],
-      "strategic_intent": "reiterate specific technical and ROI demands, emphasize frustration with lack of concrete answers, challenge the program's perceived depth against my experience, and push back on the value proposition relative to cost and time investment.",
+      "strategic_intent": "Expressing extreme fear of technical failure and seeking a 'magic' solution for his career history.",
       "confidence_score": 60,
-      "emotional_state": "frustrated",
+      "emotional_state": "panicked",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:20:30.131353"
+      "timestamp": "2026-02-16T15:50:32.513598"
     }
   ],
   "history_for_reporting": [
     {
-      "id": "927ca287-2b38-4376-918b-ee4242aa0af3",
+      "id": "e648c6ed-aa2a-4dd4-b868-e778509af30c",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello Rajesh, thank you for reaching out and showing interest in our 'Building Agentic AI Systems' program. I understand you're looking to upskill and ensure your capabilities remain highly relevant for critical projects, potentially even for a better package hike. That's a very sensible approach in today's evolving tech landscape.\nLet me clarify how this program is specifically designed for experienced professionals like yourself, addressing some of the key concerns you might have.\nFirstly, regarding the curriculum and \"difficulty for freshers",
+      "content": "Hello Aniket. I understand the pressure you are facing regarding the automation in your current project and your goal to transition from manual testing. Given that you are from the 2020 passing out batch, this \"Building Agentic AI Systems\" program is designed to bridge that gap by focusing on practical engineering skills for autonomous AI systems.\nTo address your concerns about the \"scope\" and placement, the program offers dedicated placement",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -262,43 +271,45 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:19:31.052071"
+      "timestamp": "2026-02-16T15:48:53.393893"
     },
     {
-      "id": "430454a3-4189-495d-8160-7e89918c64cc",
+      "id": "47bdbf8c-6d38-4e3a-b2a6-674d65ef36fe",
       "round": 1,
       "agent": "student",
-      "content": "Hmm, counsellor. I appreciate you reaching out. But I must say, talking about \"difficulty for freshers\" isn't quite the relevant angle for someone with my experience. I've been in the IT industry for 15 years, seen multiple tech cycles, and my primary concern isn't whether freshers can grasp something. My bandwidth is quite high, and I'm looking for how this program offers a solid ROI for a senior professional like myself.\nFrankly, these \"Agentic AI Systems\" and all sound like a lot of marketing jargon. I need to understand how this is genuinely different from glorified automation or just complex scripting. My core software engineering skills are robust; I need to see how this program truly adds value and isn't just chasing the next fad.\nSo, let's keep it relevant. How is this tailored for someone at *my* level, and what's the actual engineering depth involved, beyond just new buzzwords?",
+      "content": "Thank you for understanding my situation, Sir. Yes Sir, being from the 2020 passing out batch, I have been very worried because my growth has completely stopped in manual testing. Sir, you mentioned placement assistance, but I want to ask very clearly—is there a placement guarantee?\nSir, the program fee is ₹1,50,000 plus GST, which is a very big amount for me. If I invest this much, will the NIIT certificate really help me so that companies ignore my previous manual testing experience and my one-year career gap? I want to move into a full development role before I turn 30, Sir.\nAlso Sir, what is the scope of the syllabus for someone who has mostly done manual work? Will I be able to cope with the sprints? Please guide me, Sir, I am looking at this as my last chance.",
       "techniques": [],
-      "strategic_intent": "to redirect the conversation to my specific needs and challenge the program's perceived value and depth, while subtly hinting at my misconception without revealing my secret anxiety",
+      "strategic_intent": "To get a firm commitment on job placement and validation that the certificate will override his career history.",
       "confidence_score": 60,
-      "emotional_state": "frustrated",
-      "internal_thought": "Okay, so the counsellor started off by acknowledging the \"package hike\" and \"relevant\" skills, which is good, hits my primary motivation. But then they immediately jumped to \"difficulty for freshers\" and didn't even finish the sentence! What is this? Am I a fresher? I've been in the industry for 15 years, I'm a Senior Software Engineer. This is a waste of my bandwidth. They need to understand who they are talking to. My time is valuable. This \"Agentic AI Systems\" sounds like marketing jargon, and they haven't clarified that at all. This incomplete sentence and vague start is irritating. I need specific, relevant information, not half-baked statements about freshers. My concerns about price and job guarantee are still hanging too, but the immediate issue is this lack of focus on *my* profile. I need to push back a bit, show them I'm not someone to be taken lightly or given incomplete thoughts.",
+      "emotional_state": "anxious and seeking validation",
+      "internal_thought": "The counsellor mentioned my 2020 passing out batch and the gap, which makes me feel like they understand my situation, but they didn't finish the sentence about placement. I am very anxious about the 'placement assurance'. If I am spending 1.5 Lakhs plus GST, I need to be 100% sure that I will get a job in development. I also need to know if this certificate will actually make recruiters ignore my 4 years of manual testing and that one-year gap. I am scared about the syllabus too, but I'll focus on the security aspect first. The fee is very high for a Tier-2 city salary.",
       "updated_stats": {
-        "sentiment": "annoyed_curious",
-        "skepticism_level": 15,
-        "trust_score": 50,
+        "sentiment": "anxious",
+        "skepticism_level": 5,
+        "trust_score": 58,
         "unresolved_concerns": [
           "Price",
-          "Job Guarantee"
+          "Job Guarantee",
+          "Syllabus Difficulty"
         ]
       },
       "updated_state": {
-        "sentiment": "annoyed_curious",
-        "skepticism_level": 15,
-        "trust_score": 50,
+        "sentiment": "anxious",
+        "skepticism_level": 5,
+        "trust_score": 58,
         "unresolved_concerns": [
           "Price",
-          "Job Guarantee"
+          "Job Guarantee",
+          "Syllabus Difficulty"
         ]
       },
-      "timestamp": "2026-02-16T15:19:37.206314"
+      "timestamp": "2026-02-16T15:49:01.111636"
     },
     {
-      "id": "192fc4e2-ff61-440e-86d4-2006e0b83377",
+      "id": "7dab94a8-d571-4033-923b-3bc48589bcc1",
       "round": 2,
       "agent": "counsellor",
-      "content": "My apologies, Rajesh. You are absolutely right to call me out on that. My intention was to highlight the structured progression of the curriculum, but I misspoke by framing it in terms of \"freshers.\"",
+      "content": "Aniket, I appreciate your honesty. Let me address your concerns one by one with the facts of the program. Regarding the placement guarantee, NIIT provides placement assistance, not a guarantee. For learners like yourself with 0.5 to 5 years of experience who achieve a 70% assessment score, we offer up to 3 interview opportunities within 120 days through our network of 800+ hiring partners. While a career gap is part of your history, the program is designed to shift the focus to your future capabilities by building a portfolio with 25+ tools like LangChain, CrewAI, and FastAPI.\nThe fee of ₹1,50,000 plus GST is indeed an investment in your upskilling, which is why we offer EMI options starting at ₹24,750 per month or a 5% discount for full upfront payment to make it more manageable. Regarding the syllabus, the program uses a \"Mastery Learning\" methodology with 300 hours of guided learning across 75 sprints. This structure is specifically designed to help you move from a testing background to a development role through 60% hands-on coding and a capstone project. As long as you have a basic foundation in Python, Java, or JS, the 12 to 16 hours of weekly commitment will provide the structured path you need. Does the EMI option help in easing your financial concerns while you consider this transition?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -306,10 +317,10 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:19:43.743543"
+      "timestamp": "2026-02-16T15:49:09.884641"
     },
     {
-      "id": "88e023f7-cb24-4772-8c7d-fbb5eab58dca",
+      "id": "08ec23a9-df51-4cd2-8300-88d3a4889321",
       "round": 2,
       "agent": "student",
       "content": "...",
@@ -319,30 +330,32 @@
       "emotional_state": "calm",
       "internal_thought": "",
       "updated_stats": {
-        "sentiment": "frustrated",
-        "skepticism_level": 15,
-        "trust_score": 50,
+        "sentiment": "anxious",
+        "skepticism_level": 5,
+        "trust_score": 58,
         "unresolved_concerns": [
           "Job Guarantee",
-          "Price"
+          "Price",
+          "Syllabus Difficulty"
         ]
       },
       "updated_state": {
-        "sentiment": "frustrated",
-        "skepticism_level": 15,
-        "trust_score": 50,
+        "sentiment": "anxious",
+        "skepticism_level": 5,
+        "trust_score": 58,
         "unresolved_concerns": [
           "Job Guarantee",
-          "Price"
+          "Price",
+          "Syllabus Difficulty"
         ]
       },
-      "timestamp": "2026-02-16T15:19:50.473706"
+      "timestamp": "2026-02-16T15:49:27.323566"
     },
     {
-      "id": "3d9f2aa7-39fc-44e0-aadd-57dfefd311bf",
+      "id": "0e909b9d-52f4-40fb-9a3f-0b16a096ef9d",
       "round": 3,
       "agent": "counsellor",
-      "content": "Thank you, Rajesh, for that crucial clarification. My apologies again for the initial misstep. You're absolutely right; with your 15 years of industry experience and strong software engineering background, your perspective is one",
+      "content": "Aniket, I hear the urgency in your voice, and I want to provide you with a very clear, fact-based picture so you can make this decision with confidence. Regarding the placement guarantee, I must be transparent: we",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -350,43 +363,47 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:20:00.090980"
+      "timestamp": "2026-02-16T15:49:36.732993"
     },
     {
-      "id": "a91c0ad9-2d51-4027-879c-41e75d3bf7c1",
+      "id": "9af28fd4-1745-474c-b3eb-755fbfe9d446",
       "round": 3,
       "agent": "student",
-      "content": "Understood, counsellor. I appreciate the clarification on your intent and the apology. However, my core questions still remain unaddressed. I need to understand, with my 15 years of industry experience and strong software engineering background, how this \"Agentic AI Systems\" program offers a genuine step up, beyond what I perceive as glorified automation or basic scripting.\nWhat is the *actual engineering depth* involved here? How does it leverage advanced software engineering principles, not just new buzzwords? I need to see the ROI for my time and investment. How will this truly enhance my capabilities for critical projects and ensure a significant package hike? Frankly, I'm looking for specifics, not just reassurance. How is this tailored for someone at *my* level, and what's the tangible value, beyond just \"upskilling\" generally?",
+      "content": "Sir, I am very much worried after hearing that there is no 'guarantee'. For a middle-class person like me, 1.5 Lakhs plus GST is a huge amount. Sir, if I don't get a placement after spending this much, my family will be in a very difficult position.\nSir, you mentioned that for 2020 passing out batch students like me, the focus will shift. But Sir, will the NIIT certificate really have that much 'scope' in the market? Will the big product companies really ignore my 1-year career gap and my 4 years of manual testing experience just by seeing this certificate? I am very scared that they will see 'Manual Tester' on my resume and reject me immediately.\nAlso Sir, about the syllabus... you mentioned 75 sprints and 60% hands-on coding. Sir, to be very honest, I am coming from a manual background. My coding is a bit rusty. If I am not able to keep up with the speed of the batch or if I fail the assessments, what will happen to my fees? Is the Python part taught from very basic level, Sir? I need to be sure I can pass that 70% criteria, otherwise I will not even get the assistance. Please tell me clearly, Sir, is this program suitable for someone who is not a pro in coding right now?",
       "techniques": [],
-      "strategic_intent": "reiterate core questions, push for specific value proposition and engineering depth relevant to my experience, and emphasize ROI for my career",
+      "strategic_intent": "To seek absolute reassurance on the job outcome and express fear regarding the technical difficulty without admitting failure.",
       "confidence_score": 60,
-      "emotional_state": "impatient",
-      "internal_thought": "Okay, so the counsellor apologized, which is fine, but it was just an apology. They still haven't actually *answered* my question about the engineering depth or how this \"Agentic AI\" stuff is more than just glorified automation. They simply acknowledged my experience. That's not good enough. My time is valuable, I can't be sitting here for platitudes. I need concrete information, not just a soft apology. I'm still feeling like they're not grasping my level or what I'm looking for. This is becoming a waste of my bandwidth. I need to push them harder to get to the actual value proposition for *me*. And what about my package hike and job guarantee? Still no mention.",
+      "emotional_state": "anxious and desperate",
+      "internal_thought": "Sir is saying 'assistance' not 'guarantee'. This is very risky for me. If I spend 1.5 lakhs and don't get a job, my career is finished. I am already 27, and by the time I finish this, I will be 28. If I don't get into development now, I will be stuck in manual testing forever. And these 'sprints'... he says 4 hours per sprint. If I couldn't even pass the basic Python test in my company, how will I finish 75 sprints? But I cannot tell him I failed Python, he might think I am not eligible. I need to know if this NIIT certificate is powerful enough to make recruiters forget my 1-year gap and my 4 years of manual testing. 24,750 EMI is almost my full take-home salary! How will I survive? I need more reassurance about the technical difficulty and the certificate's value.",
       "updated_stats": {
-        "sentiment": "impatient",
-        "skepticism_level": 25,
-        "trust_score": 50,
+        "sentiment": "anxious",
+        "skepticism_level": 65,
+        "trust_score": 52,
         "unresolved_concerns": [
           "Job Guarantee",
-          "Price"
+          "Syllabus Difficulty",
+          "Certificate Value vs Career Gap",
+          "EMI Affordability"
         ]
       },
       "updated_state": {
-        "sentiment": "impatient",
-        "skepticism_level": 25,
-        "trust_score": 50,
+        "sentiment": "anxious",
+        "skepticism_level": 65,
+        "trust_score": 52,
         "unresolved_concerns": [
           "Job Guarantee",
-          "Price"
+          "Syllabus Difficulty",
+          "Certificate Value vs Career Gap",
+          "EMI Affordability"
         ]
       },
-      "timestamp": "2026-02-16T15:20:07.216398"
+      "timestamp": "2026-02-16T15:49:55.255563"
     },
     {
-      "id": "7210bbb7-2657-431e-be38-d74f40a6a791",
+      "id": "990e6b9a-0a42-4fdf-8417-602d2aa295aa",
       "round": 4,
       "agent": "counsellor",
-      "content": "Understood, Rajesh. Thank you for clearly articulating your concerns and expectations. You are absolutely right to question the \"actual engineering depth\" and how a program like \"Building Agentic AI Systems\" differentiates itself from \"glor",
+      "content": "Aniket, I understand that as a middle-class professional, ₹1.5 Lakhs plus GST is a significant commitment, and your anxiety regarding the \"Manual Tester\" label is valid. However, the reason the industry values this program is that it shifts your profile from \"testing\" to \"AI Engineering\" through practical evidence. When you apply to product companies, you won't just be showing a certificate; you will be showing a portfolio of production-grade systems, such as Multi-Agent Software Customer Support and RAG-based pipelines. Our 97% placement rate for eligible learners is a result of this project-heavy approach, which helps 800+ hiring partners see your current technical capability rather than just your past roles or career gaps.\nRegarding the syllabus and your coding skills, the program is designed for those with at least 6 months of programming experience. The first module, \"Python for AI Embedded Applications,\" specifically bridges the gap to ensure you are ready for advanced AI orchestration. The \"Mastery Learning\" methodology is structured into 4-hour sprints—where 2 hours are live with a mentor and 2 hours are self-paced—specifically so that you can clarify doubts immediately and not fall behind. As long as you can commit 12 to 16 hours a week, the 70% assessment score is a reachable target intended to ensure you are actually job-ready for the 3 interview opportunities we provide. To reduce the immediate financial pressure on your family, would you like to explore the EMI options or the third-party loan facilities that can spread this cost over several months?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -394,45 +411,47 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:20:13.813021"
+      "timestamp": "2026-02-16T15:50:04.750517"
     },
     {
-      "id": "7dc44157-c92a-4d8f-819a-590b97253854",
+      "id": "ce3d765f-de75-42f1-adfb-07050a10ddf0",
       "round": 4,
       "agent": "student",
-      "content": "Counsellor, let's cut to the chase. I've explained my background and my expectations multiple times now. I'm looking for *substance*, not just a rephrasing of my own questions. When I say \"actual engineering depth,\" I mean things like: are we talking about designing robust, scalable architectures for these \"Agentic AI Systems\"? Or is it just stitching together APIs with some Python scripts? My concern is that this is simply glorified automation, perhaps with some fancy new libraries, but fundamentally not requiring the deep engineering acumen I've built over 15 years.\nHow does this program ensure a tangible ROI for someone at my level? How will it directly translate into a significant package hike and more critical project allocations? I need to see how this isn't just a fad, but a foundational shift that warrants my time and investment. Tell me, what are the *advanced software engineering principles* that are being applied here, beyond just the surface-level buzzwords like \"Agentic AI\" or \"LLMs\"? What about the effort/time commitment versus the actual benefit for a senior professional? And frankly, the price, for something that I'm still not convinced is more than just scripting, needs to be justified with concrete value.",
+      "content": "Sir, I am listening to everything you are saying, but my heart is beating very fast. Sir, you said there is no guarantee, and there is a 70% score criteria for placement assistance. Sir, this is exactly what I am scared of.\nI am a 2020 passing out batch student. I already have a 1-year gap, and for 4 years I have only done manual testing—clicking buttons and writing test cases. My coding is not just 'rusty', Sir, it is almost non-existent now. If I join this batch and I am not able to score that 70% because the Python is too advanced, then my 1.5 Lakhs plus GST will be completely wasted, no? My family will never forgive me, Sir.\nPlease tell me very clearly, Sir—does the 'Python for AI' module start from the very, very basic level? Like, for someone who has forgotten even the loops and logic? And Sir, about the certificate... if I get the NIIT certificate, will the HRs at big companies really stop looking at my manual testing background? I am worried that even with the certificate, they will see my '2020 passing out' year and my 'Gap' and reject me.\nIs there any way to ensure I pass the assessments, Sir? I am ready to work hard, but I am very scared of the technical complexity of these 'sprints'. Please guide me, Sir, this is my life's savings.",
       "techniques": [],
-      "strategic_intent": "to demand specific, technical answers that justify the program's value for a senior engineer and address ROI, package hike, and the perceived lack of engineering depth",
+      "strategic_intent": "To seek absolute reassurance about the difficulty of the course and the 'magic' power of the certificate to hide his career flaws.",
       "confidence_score": 60,
-      "emotional_state": "frustrated",
-      "internal_thought": "This counsellor is still not getting it. \"Differentiate itself from 'glor'?\" They cut themselves off, but it sounds like they were just about to re-explain what I already said it *wasn't*. My primary motivation is ROI and status, and they are completely failing to address how this gives *me* a solid return on my time and money, or how it elevates my professional standing beyond what I already have. They are just repeating my words and not providing answers. This is exactly what stresses me out – wasting time with vague discussions. My resistance is definitely going up. I need concrete examples, not just marketing jargon. \"Agentic AI\" still sounds like a fancy name for scripting to me. I need to push them to tell me how it's *deep engineering* and not just a superficial skill. And how it impacts my package hike directly.",
+      "emotional_state": "panicked",
+      "internal_thought": "The counsellor is being very logical, but I am spiraling. They said \"no guarantee,\" which is a huge red flag for me. I need security. Also, this 70% assessment score is terrifying. I failed my internal Python tests twice! If I pay 1.5 Lakhs plus GST and then fail to get 70%, I lose everything—the money, the placement assistance, and my last chance to switch. I keep thinking the NIIT certificate is a magic shield that will hide my 4 years of manual testing and my gap year, but the counsellor keeps talking about 'portfolios.' I don't want a portfolio; I want a job that says 'Developer' so I can match my friends' packages before I'm 30. I need to know exactly how basic the Python starts and what happens if I'm too slow for these 'sprints.'",
       "updated_stats": {
-        "sentiment": "impatient",
-        "skepticism_level": 35,
-        "trust_score": 45,
+        "sentiment": "panicked",
+        "skepticism_level": 75,
+        "trust_score": 48,
         "unresolved_concerns": [
-          "Effort/Time",
-          "Job Guarantee",
-          "Price"
+          "70% assessment threshold risk",
+          "Python difficulty level",
+          "Certificate vs Resume Gap",
+          "Financial loss if failing"
         ]
       },
       "updated_state": {
-        "sentiment": "impatient",
-        "skepticism_level": 35,
-        "trust_score": 45,
+        "sentiment": "panicked",
+        "skepticism_level": 75,
+        "trust_score": 48,
         "unresolved_concerns": [
-          "Effort/Time",
-          "Job Guarantee",
-          "Price"
+          "70% assessment threshold risk",
+          "Python difficulty level",
+          "Certificate vs Resume Gap",
+          "Financial loss if failing"
         ]
       },
-      "timestamp": "2026-02-16T15:20:18.486842"
+      "timestamp": "2026-02-16T15:50:14.432548"
     },
     {
-      "id": "0d2be08e-e478-46a7-9e4f-ea02e435b06b",
+      "id": "c2b89a85-46ae-44bc-9aea-e1e0e192501f",
       "round": 5,
       "agent": "counsellor",
-      "content": "Rajesh, your point about \"actual engineering depth\" is absolutely critical, especially with your 15 years of robust software engineering experience. I understand you need to see how this program moves beyond mere scripting or glorified",
+      "content": "Aniket, I hear your concerns clearly. To be very direct with you regarding the coding: the program's eligibility requires at least 6 months of hands-on experience in programming, so it does not start from the absolute \"zero\" level of explaining what a variable is. However, the first module, \"Python for AI Embedded Applications,\" is specifically designed to transition your existing knowledge into the world of AI Engineering. The \"Mastery Learning\" methodology is your safety net here—each 4-hour sprint includes",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -440,39 +459,41 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-16T15:20:25.054525"
+      "timestamp": "2026-02-16T15:50:23.998365"
     },
     {
-      "id": "3bd666ef-8edf-4ab4-9f27-8478b5862ecb",
+      "id": "45373c1b-9f16-4527-8b16-f22e5904fee8",
       "round": 5,
       "agent": "student",
-      "content": "Counsellor, with all due respect, simply acknowledging my points about \"actual engineering depth\" and \"moving beyond mere scripting\" isn't providing the specific answers I'm looking for. I need to understand the *how*.\nWhen you say \"engineering depth,\" are we talking about designing resilient, highly available, and scalable distributed systems for these Agentic AI workloads? What kind of architectural patterns beyond basic microservices are we leveraging? Are there discussions around performance optimization, cost management for LLM inference, or robust error handling in multi-agent environments? Because frankly, \"stitching together APIs with some Python scripts\" is precisely what I'm worried this might be. My existing bandwidth already covers that.\nI've been quite clear: I need to see the tangible ROI for my time and investment. How does this program specifically contribute to a significant package hike or secure more critical, high-impact project allocations for someone at *my* level? What are the *advanced software engineering principles* that are being applied and taught here, beyond just the surface-level buzzwords? And again, the effort/time commitment versus the actual benefit for a senior professional needs to be justified. The price is a significant factor, and right now, I'm not seeing the concrete value that warrants it, especially if it's just glorified automation.",
+      "content": "Sir, please listen to me, I am getting very tensed now. You said it does not start from 'zero' level. Sir, this is my biggest fear! Because I am from the 2020 passing out batch, and for 4 years I have only done manual testing, my logic and loops are not strong at all. Sir, to be very honest with you, I am scared that if the 'Python for AI' module is too fast, I will fail the 70% assessment.\nSir, if I fail that assessment, my 1.5 Lakhs plus GST is gone, and I won't even get the placement assistance. My parents have high hopes, Sir. This is like my last silver bullet. If I don't get into a development role before I turn 30, my career is over.\nSir, I need to know very clearly—will the mentors help me personally if I get stuck in the sprints? And about the NIIT certificate, Sir... you are saying it shows 'technical capability', but will the HRs really ignore my 1-year gap and my manual background? In the market, they always ask 'Why the gap?' and 'Why manual for 4 years?'. Can this certificate force them to stop asking these questions? Please, Sir, I am very desperate. Is there any batch where they teach more slowly for people like me? I cannot afford to fail this, Sir.",
       "techniques": [],
-      "strategic_intent": "reiterate specific technical and ROI demands, emphasize frustration with lack of concrete answers, challenge the program's perceived depth against my experience, and push back on the value proposition relative to cost and time investment.",
+      "strategic_intent": "Expressing extreme fear of technical failure and seeking a 'magic' solution for his career history.",
       "confidence_score": 60,
-      "emotional_state": "frustrated",
-      "internal_thought": "This counsellor is really testing my patience. I've asked for specifics on engineering depth, ROI, package hike, and they just keep *acknowledging* my concerns without actually *addressing* them. It's like they're reading a script that says \"acknowledge customer's point\" but not \"actually answer the customer's point.\" I'm a Senior Software Engineer, not a fresher. I need to know the technical meat of this, not just marketing fluff. \"Moves beyond mere scripting\" - how, exactly? Give me concrete examples! This is a complete waste of my bandwidth. I'm repeating myself for the fourth time. This is why I find these upskilling programs so irritating; everyone just talks about \"upskill\" but no one can justify the ROI for my time and investment. Is this just another fad they're trying to push? And the price is still sitting there, completely unjustified.",
+      "emotional_state": "panicked",
+      "internal_thought": "",
       "updated_stats": {
-        "sentiment": "frustrated",
-        "skepticism_level": 50,
+        "sentiment": "panicked",
+        "skepticism_level": 85,
         "trust_score": 40,
         "unresolved_concerns": [
-          "Effort/Time",
-          "Job Guarantee",
-          "Price"
+          "Python difficulty level vs hidden failure history",
+          "Certificate as a total bypass for 4-year manual experience",
+          "Financial ruin if 70% score is not met",
+          "2020 passing out batch stigma"
         ]
       },
       "updated_state": {
-        "sentiment": "frustrated",
-        "skepticism_level": 50,
+        "sentiment": "panicked",
+        "skepticism_level": 85,
         "trust_score": 40,
         "unresolved_concerns": [
-          "Effort/Time",
-          "Job Guarantee",
-          "Price"
+          "Python difficulty level vs hidden failure history",
+          "Certificate as a total bypass for 4-year manual experience",
+          "Financial ruin if 70% score is not met",
+          "2020 passing out batch stigma"
         ]
       },
-      "timestamp": "2026-02-16T15:20:30.131353"
+      "timestamp": "2026-02-16T15:50:32.513598"
     }
   ]
 }
