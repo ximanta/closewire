@@ -17,11 +17,13 @@ const COMMITMENT_LABELS = {
   strong_commitment: "Confirmed Enrollment",
 };
 const COMMITMENT_ICONS = {
-  none: "⚪",
-  soft_commitment: "🟡",
-  conditional_commitment: "🟠",
-  strong_commitment: "🟢",
+  none: "[ ]",
+  soft_commitment: "[~]",
+  conditional_commitment: "[!]",
+  strong_commitment: "[+]",
 };
+
+const PILLAR_ITEM_TRUNCATE = 120;
 
 function App() {
   const [programUrl, setProgramUrl] = useState("https://www.niit.com/india/building-agentic-ai-systems/");
@@ -47,6 +49,7 @@ function App() {
   const [passwordInput, setPasswordInput] = useState("");
   const [authError, setAuthError] = useState("");
   const [pendingStart, setPendingStart] = useState(false);
+  const [expandedContent, setExpandedContent] = useState(null);
 
   const wsRef = useRef(null);
   const projectionRef = useRef(null);
@@ -95,12 +98,27 @@ function App() {
       .map(([round, events]) => ({ round: Number(round), events }))
       .sort((left, right) => left.round - right.round);
   }, [metricEventHistory]);
-  const retryComparison = useMemo(() => {
+  const retryPerformance = useMemo(() => {
     if (runHistory.length < 2) return null;
-    const first = runHistory[0];
-    const second = runHistory[1];
-    const delta = second.score - first.score;
-    return { first, second, delta };
+    const baseline = runHistory[0]?.score ?? 0;
+    const bestScore = Math.max(...runHistory.map((run) => run.score));
+    const points = runHistory.map((run, index) => {
+      const previous = runHistory[index - 1];
+      return {
+        ...run,
+        runNumber: index + 1,
+        deltaFromPrevious: index === 0 ? 0 : run.score - previous.score,
+        deltaFromBaseline: run.score - baseline,
+        isBest: run.score === bestScore,
+      };
+    });
+    return {
+      baseline,
+      bestScore,
+      points,
+      latest: points[points.length - 1],
+      previous: points[points.length - 2],
+    };
   }, [runHistory]);
   const roundInsights = useMemo(() => {
     const objectionTokens = ["price", "cost", "expensive", "risk", "uncertain", "time", "trust", "proof"];
@@ -118,6 +136,9 @@ function App() {
       const closeDelta = row.events
         .filter((event) => event.text.toLowerCase().includes("close"))
         .reduce((sum, event) => sum + (parseInt(event.text, 10) || 0), 0);
+      const resistanceDelta = row.events
+        .filter((event) => event.text.toLowerCase().includes("resistance"))
+        .reduce((sum, event) => sum + (parseInt(event.text, 10) || 0), 0);
       const tacticalMove = latestCounsellor?.strategic_intent
         || (latestCounsellor?.techniques || []).slice(0, 2).join(", ")
         || "Consultative follow-up";
@@ -125,12 +146,18 @@ function App() {
         .slice(0, 3)
         .map((event) => event.text.replace(" Resistance", "R").replace(" Trust", "T").replace(" Close Prob", "CP"))
         .join("  ");
+      const metricChips = row.events.slice(0, 3).map((event) => ({
+        text: event.text,
+        tone: event.tone || "strategic",
+      }));
       return {
         round: row.round,
         compactDelta: compactDelta || "No major swing",
+        metricChips,
         emotionalShift: latestStudent?.emotional_state || "calm",
         objectionSpike: objectionHits,
         trustDelta,
+        resistanceDelta,
         closeDelta,
         tacticalMove,
       };
@@ -155,12 +182,12 @@ function App() {
   const outcomeHeadline = useMemo(() => {
     const winner = analysis?.judge?.winner || analysis?.winner || "no-deal";
     if (winner === "counsellor") {
-      return `🎯 ${counsellorName || "Counsellor"} Successfully Secured Enrollment`;
+      return `${counsellorName || "Counsellor"} Successfully Secured Enrollment`;
     }
     if (winner === "student") {
-      return `⚠️ ${persona?.name || "Student"} Was Not Convinced`;
+      return `${persona?.name || "Student"} Was Not Convinced`;
     }
-    return "📌 Outcome: No Deal";
+    return "Outcome: No Deal";
   }, [analysis, counsellorName, persona]);
 
   const bgUrl = `${process.env.PUBLIC_URL || ""}/negotiation.png`;
@@ -199,6 +226,7 @@ function App() {
     setMetricToasts([]);
     setActivationIndex(0);
     setMetricEventHistory([]);
+    setExpandedContent(null);
     prevMetricsRef.current = null;
     setShowRestartPulse(false);
   };
@@ -276,6 +304,22 @@ function App() {
   useEffect(() => {
     if (stage === "completed") setShowRestartPulse(true);
   }, [stage]);
+
+  useEffect(() => {
+    if (!expandedContent) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onEscape = (event) => {
+      if (event.key === "Escape") {
+        setExpandedContent(null);
+      }
+    };
+    window.addEventListener("keydown", onEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onEscape);
+    };
+  }, [expandedContent]);
 
   useEffect(() => {
     if (stage !== "negotiating" && stage !== "completed") return;
@@ -465,6 +509,31 @@ function App() {
     window.URL.revokeObjectURL(url);
   };
 
+  const renderTruncatedList = (items, title) => (
+    <ul>
+      {items.map((item, index) => {
+        const text = String(item || "").trim();
+        const shouldTruncate = text.length > PILLAR_ITEM_TRUNCATE;
+        const preview = shouldTruncate ? `${text.slice(0, PILLAR_ITEM_TRUNCATE).trimEnd()}...` : text;
+        return (
+          <li key={`${title}-${index}-${text.slice(0, 16)}`}>
+            <span>{preview}</span>
+            {shouldTruncate && (
+              <button
+                type="button"
+                className="inlineMoreBtn"
+                onClick={() => setExpandedContent({ title, text })}
+              >
+                more
+              </button>
+            )}
+          </li>
+        );
+      })}
+      {!items.length && <li className="emptyItem">No insights available.</li>}
+    </ul>
+  );
+
   return (
     <main className={`app stage-${stage}`} style={{ backgroundImage: `url(${bgUrl})` }}>
       <div className="sceneOverlay" />
@@ -616,88 +685,174 @@ function App() {
       {stage === "completed" && analysis && (
         <section className="resultOverlay">
           <div className="resultCard">
-            <h2>{outcomeHeadline}</h2>
-            <h3>Final Score: {analysis?.judge?.negotiation_score ?? 0} / 100</h3>
-            <p>{analysis?.judge?.why || "Simulation completed."}</p>
-            {retryComparison && (
-              <div className="retryPerformanceCard">
-                <div className="retryCardTitle">Retry Performance</div>
-                <div className="retryCardStats">
-                  <span>Run 1 Score: {retryComparison.first.score}</span>
-                  <span>Run 2 Score: {retryComparison.second.score}</span>
-                  <span className={`retryDelta ${retryComparison.delta >= 0 ? "improved" : "degraded"}`}>
-                    {retryComparison.delta >= 0 ? "▲" : "▼"} Improvement: {retryComparison.delta >= 0 ? "+" : ""}{retryComparison.delta}
+            <div className="resultScrollBody">
+              <header className="outcomeSummaryCard">
+                <h2>{outcomeHeadline}</h2>
+                <h3>Final Score: {analysis?.judge?.negotiation_score ?? 0} / 100</h3>
+                <p>{analysis?.judge?.why || "Simulation completed."}</p>
+                <div className="finalMetricChips">
+                  <span className="metricChip">
+                    {COMMITMENT_ICONS[analysis?.judge?.commitment_signal] || COMMITMENT_ICONS.none}{" "}
+                    {COMMITMENT_LABELS[analysis?.judge?.commitment_signal] || COMMITMENT_LABELS.none}
                   </span>
+                  <span className="metricChip">Enrollment Likelihood {analysis?.judge?.enrollment_likelihood ?? 0}%</span>
+                  <span className="metricChip">Trust Delta {analysis?.judge?.trust_delta ?? 0}</span>
                 </div>
-              </div>
-            )}
-            <div className="finalMetricChips">
-              <span className="metricChip">
-                {COMMITMENT_ICONS[analysis?.judge?.commitment_signal] || COMMITMENT_ICONS.none}{" "}
-                {COMMITMENT_LABELS[analysis?.judge?.commitment_signal] || COMMITMENT_LABELS.none}
-              </span>
-              <span className="metricChip">Enrollment Likelihood {analysis?.judge?.enrollment_likelihood ?? 0}%</span>
-              <span className="metricChip">Trust Delta {analysis?.judge?.trust_delta ?? 0}</span>
-              <span className="metricChip">Primary Objection {analysis?.judge?.primary_unresolved_objection || "n/a"}</span>
-            </div>
-            <div className="resultGrid">
-              <article>
-                <h4>Key Turning Points</h4>
-                <ul>{(analysis?.judge?.pivotal_moments || []).map((x) => <li key={x}>{x}</li>)}</ul>
-              </article>
-              <article>
-                <h4>Strengths</h4>
-                <ul>{(analysis?.judge?.strengths || []).map((x) => <li key={x}>{x}</li>)}</ul>
-              </article>
-              <article>
-                <h4>Coaching Insights</h4>
-                <ul>{(analysis?.judge?.skill_recommendations || []).map((x) => <li key={x}>{x}</li>)}</ul>
-              </article>
-              <article>
-                <h4>Mistakes</h4>
-                <ul>{(analysis?.judge?.mistakes || []).map((x) => <li key={x}>{x}</li>)}</ul>
-              </article>
-              <article>
-                <h4>Persona Snapshot</h4>
-                <ul>
-                  <li>Name: {persona?.name || "Unknown"}</li>
-                  <li>Career Stage: {persona?.career_stage || "n/a"}</li>
-                  <li>Risk Tolerance: {persona?.risk_tolerance || "n/a"}</li>
-                  <li>Primary Objections: {(persona?.primary_objections || []).slice(0, 2).join(", ") || "n/a"}</li>
-                </ul>
-              </article>
-            </div>
-            <article className="metricEventsPanel">
-              <h4>Strategic Metric Events</h4>
-              <div className="timelineTrack">
-                {roundInsights.length === 0 ? (
-                  <div className="metricEventItem">No metric events captured.</div>
-                ) : (
-                  roundInsights.map((row, index) => (
-                    <button
-                      key={`round-${row.round}`}
-                      className={`timelineNode ${activeRoundInsight?.round === row.round ? "active" : ""}`}
-                      onClick={() => setSelectedTimelineRound(row.round)}
-                      type="button"
-                    >
-                      <span className="roundNode">R{row.round}</span>
-                      <span className="roundDelta">{row.compactDelta}</span>
-                      {index < roundInsights.length - 1 && <span className="timelineConnector" />}
-                    </button>
-                  ))
-                )}
-              </div>
-              {activeRoundInsight && (
-                <div className="timelineDetailCard">
-                  <div><strong>Emotional Shift:</strong> {activeRoundInsight.emotionalShift}</div>
-                  <div><strong>Objection Spike:</strong> {activeRoundInsight.objectionSpike}</div>
-                  <div><strong>Trust Change:</strong> {activeRoundInsight.trustDelta >= 0 ? "+" : ""}{activeRoundInsight.trustDelta}</div>
-                  <div><strong>Close Probability Shift:</strong> {activeRoundInsight.closeDelta >= 0 ? "+" : ""}{activeRoundInsight.closeDelta}</div>
-                  <div><strong>Tactical Move:</strong> {activeRoundInsight.tacticalMove}</div>
+              </header>
+
+              <section className="personaTopCard">
+                <div className="personaIdentity">
+                  <span className="personaAvatar">{(persona?.name || "P").slice(0, 1).toUpperCase()}</span>
+                  <div>
+                    <h4>{persona?.name || "Prospective Student"}</h4>
+                    <p>{persona?.persona_type || "Learner Profile"}</p>
+                  </div>
                 </div>
+                <div className="personaDetailRow">
+                  <span><strong>Career Stage:</strong> {persona?.career_stage || "n/a"}</span>
+                  <span><strong>Risk Tolerance:</strong> {persona?.risk_tolerance || "n/a"}</span>
+                  <span><strong>Primary Objections:</strong> {(persona?.primary_objections || []).slice(0, 2).join(", ") || "n/a"}</span>
+                </div>
+              </section>
+
+              <section className="primaryObjectionAlert">
+                <div className="objectionTitle">Primary Unresolved Objection</div>
+                <p>{analysis?.judge?.primary_unresolved_objection || "n/a"}</p>
+              </section>
+
+              {retryPerformance && (
+                <section className="retryPerformanceCard">
+                  <div className="retryCardHeader">
+                    <h4>Performance Progression</h4>
+                    <span className="retryActiveBadge">Retry Analysis</span>
+                  </div>
+                  <div className="retryCardBody">
+                    <div className="runScoreBlocks">
+                      <div className="runScoreBlock">
+                        <span>Run 1</span>
+                        <strong>{retryPerformance.baseline}</strong>
+                      </div>
+                      <div className="runScoreBlock">
+                        <span>Run {retryPerformance.latest.runNumber}</span>
+                        <strong>{retryPerformance.latest.score}</strong>
+                      </div>
+                    </div>
+                    <div className={`retryDeltaCallout ${retryPerformance.latest.deltaFromPrevious >= 0 ? "improved" : "degraded"}`}>
+                      <div className="deltaValue">
+                        {retryPerformance.latest.deltaFromPrevious >= 0 ? "↗" : "↘"} {retryPerformance.latest.deltaFromPrevious >= 0 ? "+" : ""}
+                        {retryPerformance.latest.deltaFromPrevious}
+                      </div>
+                      <div className="deltaMeta">
+                        <span>Vs previous run</span>
+                        <span>Baseline {retryPerformance.latest.deltaFromBaseline >= 0 ? "+" : ""}{retryPerformance.latest.deltaFromBaseline}</span>
+                      </div>
+                    </div>
+                    <div className="sparklineWrap">
+                      <div className="sparklineHeader">
+                        <span>Progress</span>
+                        <span className="bestRunBadge">Best {retryPerformance.bestScore}</span>
+                      </div>
+                      <div className="sparklineBars">
+                        {retryPerformance.points.map((run) => (
+                          <div key={run.label} className={`sparklineBar ${run.isBest ? "best" : ""}`} style={{ height: `${Math.max(18, run.score)}%` }}>
+                            <span>R{run.runNumber}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </section>
               )}
-            </article>
-            <div className="resultActions">
+
+              <div className="pillarsGrid">
+                <article className="pillarCard">
+                  <h4>Key Turning Points</h4>
+                  <div className="pillarContent">
+                    {renderTruncatedList(analysis?.judge?.pivotal_moments || [], "Key Turning Points")}
+                  </div>
+                </article>
+                <article className="pillarCard">
+                  <h4>Strengths</h4>
+                  <div className="pillarContent">
+                    {renderTruncatedList(analysis?.judge?.strengths || [], "Strengths")}
+                  </div>
+                </article>
+                <article className="pillarCard">
+                  <h4>Mistakes</h4>
+                  <div className="pillarContent">
+                    {renderTruncatedList(analysis?.judge?.mistakes || [], "Mistakes")}
+                  </div>
+                </article>
+                <article className="pillarCard">
+                  <h4>Opportunities</h4>
+                  <div className="pillarContent">
+                    {renderTruncatedList(analysis?.judge?.skill_recommendations || [], "Opportunities")}
+                  </div>
+                </article>
+              </div>
+
+              <article className="coachingInsightsPanel">
+                <h4>Coaching Insights</h4>
+                <div className="insightRows">
+                  {(analysis?.judge?.skill_recommendations || []).map((insight, index) => (
+                    <div key={`insight-${index}`} className="insightRow">
+                      {insight}
+                    </div>
+                  ))}
+                  {!(analysis?.judge?.skill_recommendations || []).length && (
+                    <div className="insightRow">No coaching insights available.</div>
+                  )}
+                </div>
+              </article>
+
+              <article className="metricEventsPanel">
+                <div className="timelineHeaderRow">
+                  <h4>Conversation Metrics Timeline</h4>
+                  <div className="timelineLegend">
+                    <span><i className="legendDot positive" /> Positive</span>
+                    <span><i className="legendDot negative" /> Negative</span>
+                    <span><i className="legendDot strategic" /> Strategic</span>
+                  </div>
+                </div>
+                <div className="timelineTrack">
+                  {roundInsights.length === 0 ? (
+                    <div className="metricEventItem">No metric events captured.</div>
+                  ) : (
+                    roundInsights.map((row, index) => (
+                      <button
+                        key={`round-${row.round}`}
+                        className={`timelineNode ${activeRoundInsight?.round === row.round ? "active" : ""}`}
+                        onClick={() => setSelectedTimelineRound(row.round)}
+                        type="button"
+                      >
+                        <span className="roundNode">Round {row.round}</span>
+                        <span className="roundDelta">{row.compactDelta}</span>
+                        <div className="roundMetricChips">
+                          {row.metricChips.map((chip, chipIndex) => (
+                            <span key={`${row.round}-${chipIndex}`} className={`miniMetricChip ${chip.tone}`}>
+                              {chip.text}
+                            </span>
+                          ))}
+                          {!row.metricChips.length && <span className="miniMetricChip strategic">No shift</span>}
+                        </div>
+                        {index < roundInsights.length - 1 && <span className="timelineConnector" />}
+                      </button>
+                    ))
+                  )}
+                </div>
+                {activeRoundInsight && (
+                  <div className="timelineDetailCard">
+                    <div><strong>Emotional Shift:</strong> {activeRoundInsight.emotionalShift}</div>
+                    <div><strong>Objection Spike:</strong> {activeRoundInsight.objectionSpike}</div>
+                    <div><strong>Trust Change:</strong> {activeRoundInsight.trustDelta >= 0 ? "+" : ""}{activeRoundInsight.trustDelta}</div>
+                    <div><strong>Resistance Change:</strong> {activeRoundInsight.resistanceDelta >= 0 ? "+" : ""}{activeRoundInsight.resistanceDelta}</div>
+                    <div><strong>Close Probability Shift:</strong> {activeRoundInsight.closeDelta >= 0 ? "+" : ""}{activeRoundInsight.closeDelta}</div>
+                    <div><strong>Tactical Move:</strong> {activeRoundInsight.tacticalMove}</div>
+                  </div>
+                )}
+              </article>
+            </div>
+            <div className="resultActions stickyActions">
               <button className="downloadBtn" onClick={downloadReport}>
                 Download Coaching Report (PDF)
               </button>
@@ -710,6 +865,21 @@ function App() {
             </div>
           </div>
         </section>
+      )}
+      {expandedContent && (
+        <div className="contentModalOverlay" onClick={() => setExpandedContent(null)} role="presentation">
+          <section className="contentModalCard" onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true">
+            <header>
+              <h4>{expandedContent.title}</h4>
+              <button type="button" onClick={() => setExpandedContent(null)} aria-label="Close detail">
+                X
+              </button>
+            </header>
+            <div className="contentModalBody">
+              <p>{expandedContent.text}</p>
+            </div>
+          </section>
+        </div>
       )}
     </main>
   );

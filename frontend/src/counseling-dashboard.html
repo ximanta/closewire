@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counseling Simulation Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #040712;
+            color: #E5E7EB;
+            padding: 24px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header Section */
+        .header {
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .outcome-banner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .outcome-icon {
+            width: 32px;
+            height: 32px;
+            background: #FFA500;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .outcome-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .score-display {
+            font-size: 18px;
+            font-weight: 600;
+            color: #60A5FA;
+            margin-bottom: 12px;
+        }
+
+        .outcome-summary {
+            font-size: 14px;
+            color: #94A3B8;
+            line-height: 1.7;
+        }
+
+        .tags-row {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid;
+        }
+
+        .tag-conditional {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: #DC2626;
+            color: #FCA5A5;
+        }
+
+        .tag-enrollment {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: #3B82F6;
+            color: #93C5FD;
+        }
+
+        .tag-trust {
+            background: rgba(34, 197, 94, 0.1);
+            border-color: #22C55E;
+            color: #86EFAC;
+        }
+
+        /* Persona Card - Now at top */
+        .persona-card {
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .persona-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .persona-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .persona-info h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 2px;
+        }
+
+        .persona-info p {
+            font-size: 13px;
+            color: #94A3B8;
+        }
+
+        .persona-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #334155;
+        }
+
+        .persona-detail-item {
+            font-size: 13px;
+        }
+
+        .persona-detail-item strong {
+            color: #60A5FA;
+            font-weight: 600;
+        }
+
+        /* Primary Objection Alert */
+        .objection-alert {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.1));
+            border: 1px solid #DC2626;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: start;
+            gap: 12px;
+        }
+
+        .objection-alert-icon {
+            color: #FCA5A5;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .objection-alert-content {
+            flex: 1;
+        }
+
+        .objection-alert-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #FCA5A5;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .objection-alert-text {
+            font-size: 14px;
+            color: #E5E7EB;
+            line-height: 1.6;
+        }
+
+        /* Retry Performance Card - Highlighted */
+        .retry-performance {
+            background: linear-gradient(135deg, #1E3A5F 0%, #0F172A 100%);
+            border: 2px solid #3B82F6;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .retry-header {
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .retry-badge {
+            background: #3B82F6;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .retry-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .run-scores {
+            display: flex;
+            gap: 16px;
+        }
+
+        .run-score {
+            flex: 1;
+        }
+
+        .run-label {
+            font-size: 12px;
+            color: #94A3B8;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .run-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .improvement-indicator {
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 8px;
+            background: rgba(34, 197, 94, 0.15);
+            border: 1px solid #22C55E;
+        }
+
+        .improvement-indicator.degraded {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: #EF4444;
+        }
+
+        .improvement-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #22C55E;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .improvement-value.degraded {
+            color: #EF4444;
+        }
+
+        .improvement-label {
+            font-size: 12px;
+            color: #94A3B8;
+            margin-top: 4px;
+        }
+
+        .sparkline-container {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 16px;
+            min-width: 200px;
+        }
+
+        .sparkline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .sparkline-title {
+            font-size: 12px;
+            color: #94A3B8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .best-run-badge {
+            background: linear-gradient(135deg, #F59E0B, #D97706);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .sparkline {
+            height: 60px;
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .sparkline-bar {
+            flex: 1;
+            background: linear-gradient(to top, #3B82F6, #60A5FA);
+            border-radius: 3px 3px 0 0;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .sparkline-bar:hover {
+            background: linear-gradient(to top, #2563EB, #3B82F6);
+        }
+
+        .sparkline-bar.best {
+            background: linear-gradient(to top, #F59E0B, #FBBF24);
+        }
+
+        .sparkline-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+        }
+
+        .sparkline-stat span {
+            color: #94A3B8;
+            margin-right: 4px;
+        }
+
+        .sparkline-stat strong {
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        /* Four Pillars Grid */
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .pillar-card {
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pillar-card:hover {
+            border-color: #3B82F6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+
+        .pillar-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #60A5FA;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .pillar-icon {
+            width: 24px;
+            height: 24px;
+            background: rgba(59, 130, 246, 0.2);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pillar-content {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .pillar-content ul {
+            list-style: none;
+            font-size: 13px;
+            color: #CBD5E1;
+        }
+
+        .pillar-content li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .pillar-content li:before {
+            content: "•";
+            position: absolute;
+            left: 6px;
+            color: #60A5FA;
+            font-weight: bold;
+        }
+
+        .pillar-item-text {
+            display: inline;
+        }
+
+        .pillar-item-truncated {
+            display: inline;
+        }
+
+        .pillar-item-full {
+            display: none;
+        }
+
+        .read-more-btn {
+            color: #3B82F6;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            margin-left: 4px;
+            transition: color 0.2s ease;
+        }
+
+        .read-more-btn:hover {
+            color: #60A5FA;
+            text-decoration: underline;
+        }
+
+        /* Modal for expanded content */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(4, 7, 18, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            border: 2px solid #3B82F6;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #1E293B;
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #3B82F6;
+            border-radius: 4px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close {
+            background: rgba(148, 163, 184, 0.1);
+            border: 1px solid #334155;
+            color: #94A3B8;
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #EF4444;
+            color: #FCA5A5;
+        }
+
+        .modal-body {
+            font-size: 14px;
+            color: #CBD5E1;
+            line-height: 1.8;
+        }
+
+        .modal-body ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-body li {
+            margin-bottom: 16px;
+            padding-left: 24px;
+            position: relative;
+        }
+
+        .modal-body li:before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: #60A5FA;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .modal-body strong {
+            color: #60A5FA;
+            font-weight: 600;
+        }
+
+        /* Coaching Insights - Below Pillars */
+        .coaching-insights {
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .coaching-insights-header {
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .insights-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .insight-item {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 14px;
+            font-size: 13px;
+            color: #CBD5E1;
+            line-height: 1.6;
+        }
+
+        .insight-item strong {
+            color: #60A5FA;
+            font-weight: 600;
+        }
+
+        /* Conversation Timeline - Redesigned */
+        .conversation-timeline {
+            background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .timeline-header {
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .timeline-legend {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .legend-dot.green { background: #22C55E; }
+        .legend-dot.red { background: #EF4444; }
+        .legend-dot.purple { background: #A855F7; }
+
+        .timeline-container {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline-track {
+            display: flex;
+            gap: 8px;
+            position: relative;
+            overflow-x: auto;
+            padding-bottom: 12px;
+        }
+
+        .timeline-track::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .timeline-track::-webkit-scrollbar-track {
+            background: #1E293B;
+            border-radius: 3px;
+        }
+
+        .timeline-track::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+
+        .round-node {
+            flex-shrink: 0;
+            width: 140px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid #334155;
+            border-radius: 10px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .round-node:hover {
+            border-color: #3B82F6;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        .round-node.active {
+            border-color: #3B82F6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .round-number {
+            font-size: 11px;
+            color: #94A3B8;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .round-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .metric-chip {
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .metric-chip.positive {
+            background: rgba(34, 197, 94, 0.2);
+            color: #86EFAC;
+            border: 1px solid #22C55E;
+        }
+
+        .metric-chip.negative {
+            background: rgba(239, 68, 68, 0.2);
+            color: #FCA5A5;
+            border: 1px solid #EF4444;
+        }
+
+        .metric-chip.strategic {
+            background: rgba(168, 85, 247, 0.2);
+            color: #C084FC;
+            border: 1px solid #A855F7;
+        }
+
+        .round-details {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .round-details.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .detail-item {
+            font-size: 13px;
+        }
+
+        .detail-label {
+            color: #94A3B8;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* Action Buttons - Fixed at Bottom */
+        .action-bar {
+            position: sticky;
+            bottom: 0;
+            background: linear-gradient(to top, #040712 0%, #040712 80%, transparent 100%);
+            padding: 20px 0 0;
+            margin-top: 24px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid #334155;
+            border-radius: 12px;
+            padding: 16px;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #2563EB, #1D4ED8);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(59, 130, 246, 0.1);
+            color: #60A5FA;
+            border: 1px solid #3B82F6;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #94A3B8;
+            border: 1px solid #334155;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(148, 163, 184, 0.1);
+            color: #CBD5E1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body {
+                padding: 16px;
+            }
+
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pillar-card {
+                height: auto;
+                min-height: 280px;
+            }
+
+            .retry-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sparkline-container {
+                min-width: auto;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .modal-content {
+                padding: 24px;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Outcome -->
+        <div class="header">
+            <div class="outcome-banner">
+                <div class="outcome-icon">⚠️</div>
+                <div class="outcome-title">Rajesh Kumar Was Not Convinced</div>
+            </div>
+            <div class="score-display">Final Score: 61 / 100</div>
+            <div class="outcome-summary">
+                The student's primary objection regarding the practicalities of managing the 12-16 hours/week study commitment alongside a demanding full-time job remains largely unresolved. While the counsellor provided structural details, the student is consistently asking for more concrete, actual examples and specific time management techniques from successful professionals. This indicates the counsellor has not yet fully alleviated the student's specific anxieties about feasibility for their personal situation.
+            </div>
+            <div class="tags-row">
+                <div class="tag tag-conditional">⭕ Conditional Yes</div>
+                <div class="tag tag-enrollment">Enrollment Likelihood 61%</div>
+                <div class="tag tag-trust">Trust Delta 3</div>
+            </div>
+        </div>
+
+        <!-- Persona Card - Now at Top -->
+        <div class="persona-card">
+            <div class="persona-header">
+                <div class="persona-avatar">RK</div>
+                <div class="persona-info">
+                    <h3>Rajesh Kumar</h3>
+                    <p>Student Profile</p>
+                </div>
+            </div>
+            <div class="persona-details">
+                <div class="persona-detail-item">
+                    <strong>Career:</strong> Mid-career professional looking to specialize in AI to advance his career
+                </div>
+                <div class="persona-detail-item">
+                    <strong>Risk Tolerance:</strong> Moderate, willing to take calculated risks for significant career advancement
+                </div>
+                <div class="persona-detail-item">
+                    <strong>Primary Concern:</strong> The significant time commitment (12-16 hours/week) required alongside a full-time job
+                </div>
+                <div class="persona-detail-item">
+                    <strong>ROI Expectation:</strong> Ensuring a strong Return on Investment (ROI) and tangible career progression
+                </div>
+            </div>
+        </div>
+
+        <!-- Primary Objection Alert -->
+        <div class="objection-alert">
+            <div class="objection-alert-icon">🚨</div>
+            <div class="objection-alert-content">
+                <div class="objection-alert-title">Primary Unresolved Objection</div>
+                <div class="objection-alert-text">
+                    Managing the 12-16 hours/week study commitment alongside a demanding full-time job, requiring more concrete examples and specific time management techniques.
+                </div>
+            </div>
+        </div>
+
+        <!-- Retry Performance Card - Highlighted (Only shown after first retry) -->
+        <div class="retry-performance">
+            <div class="retry-header">
+                <span>Performance Progression</span>
+                <span class="retry-badge">RETRY ANALYSIS</span>
+            </div>
+            <div class="retry-content">
+                <div class="run-scores">
+                    <div class="run-score">
+                        <div class="run-label">Run 1</div>
+                        <div class="run-value">55</div>
+                    </div>
+                    <div class="run-score">
+                        <div class="run-label">Run 2</div>
+                        <div class="run-value">61</div>
+                    </div>
+                </div>
+                <div class="improvement-indicator">
+                    <div class="improvement-value">
+                        <span>↗</span>
+                        <span>+6</span>
+                    </div>
+                    <div class="improvement-label">Improvement</div>
+                </div>
+                <div class="sparkline-container">
+                    <div class="sparkline-header">
+                        <div class="sparkline-title">Progress Trend</div>
+                        <div class="best-run-badge">★ Best: R2</div>
+                    </div>
+                    <div class="sparkline">
+                        <div class="sparkline-bar" style="height: 75%;"></div>
+                        <div class="sparkline-bar best" style="height: 100%;"></div>
+                    </div>
+                    <div class="sparkline-stats">
+                        <div class="sparkline-stat">
+                            <span>Δ vs Prev:</span>
+                            <strong style="color: #22C55E;">+6</strong>
+                        </div>
+                        <div class="sparkline-stat">
+                            <span>Δ vs Base:</span>
+                            <strong style="color: #22C55E;">+6</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Four Pillars -->
+        <div class="pillars-grid">
+            <!-- Key Turning Points -->
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-icon">🔄</div>
+                    Key Turning Points
+                </div>
+                <div class="pillar-content">
+                    <ul>
+                        <li><strong>Round 3:</strong> <span class="pillar-item-text" data-full="Student explicitly asked for 'a more concrete example' of how most people successfully integrate 12-16 hours a week into their existing schedules while maintaining work-life balance">Student explicitly asked for 'a more concrete example' of how most people successfully integrate 12-16 hours a week...<a class="read-more-btn" onclick="showModal('Key Turning Points - Round 3', this.previousElementSibling.dataset.full)">more</a></span></li>
+                        <li><strong>Round 4:</strong> <span class="pillar-item-text" data-full="Student stated that 'fitting in another 8+ hours every weekend...still feels like a significant hurdle', indicating previous explanations were insufficient and the concern remained unresolved">Student stated that 'fitting in another 8+ hours every weekend...still feels like a significant hurdle', indicating previous explanations...<a class="read-more-btn" onclick="showModal('Key Turning Points - Round 4', this.previousElementSibling.dataset.full)">more</a></span></li>
+                        <li><strong>Round 5:</strong> <span class="pillar-item-text" data-full="Student reiterated the need for 'actual examples or specific time management techniques that successful professionals in the 25-week track' utilize, showing persistent dissatisfaction with generic advice">Student reiterated the need for 'actual examples or specific time management techniques that successful professionals in the 25-week track' utilize...<a class="read-more-btn" onclick="showModal('Key Turning Points - Round 5', this.previousElementSibling.dataset.full)">more</a></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Strengths -->
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-icon">✅</div>
+                    Strengths
+                </div>
+                <div class="pillar-content">
+                    <ul>
+                        <li><span class="pillar-item-text" data-full="Counsellor consistently acknowledged and validated the student's concerns throughout the conversation, showing genuine understanding of the challenges faced by working professionals pursuing additional education">Counsellor consistently acknowledged and validated the student's concerns throughout the conversation, showing genuine understanding...<a class="read-more-btn" onclick="showModal('Strengths', this.previousElementSibling.dataset.full)">more</a></span></li>
+                        <li><span class="pillar-item-text" data-full="Counsellor provided detailed information about the program's structure, including sprint durations and synchronous/asynchronous components, giving the student a clear picture of what to expect">Counsellor provided detailed information about the program's structure, including sprint durations and synchronous/asynchronous components...<a class="read-more-btn" onclick="showModal('Strengths', this.previousElementSibling.dataset.full)">more</a></span></li>
+                        <li><span class="pillar-item-text" data-full="Counsellor showed consistent empathy and understanding of the student's challenges as a working professional, maintaining a supportive and non-judgmental tone throughout">Counsellor showed consistent empathy and understanding of the student's challenges as a working professional, maintaining a supportive...<a class="read-more-btn" onclick="showModal('Strengths', this.previousElementSibling.dataset.full)">more</a></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Mistakes -->
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-icon">❌</div>
+                    Mistakes
+                </div>
+                <div class="pillar-content">
+                    <ul>
+                        <li><span class="pillar-item-text" data-full="Counsellor's examples of time management were still somewhat generic and theoretical, failing to provide the 'actual examples or specific time management techniques' the student repeatedly requested, which left the core objection unresolved">Counsellor's examples of time management were still somewhat generic and theoretical, failing to provide the 'actual examples or specific...<a class="read-more-btn" onclick="showModal('Mistakes', this.previousElementSibling.dataset.full)">more</a></span></li>
+                        <li><span class="pillar-item-text" data-full="Did not proactively offer social proof such as connecting with alumni or more tailored case studies to address the student's specific time management anxieties and provide concrete evidence of feasibility">Did not proactively offer social proof such as connecting with alumni or more tailored case studies to address the student's specific...<a class="read-more-btn" onclick="showModal('Mistakes', this.previousElementSibling.dataset.full)">more</a></span></li>
+                        <li><span class="pillar-item-text" data-full="Did not fully explore the underlying reasons for the student's continued skepticism regarding time management feasibility, missing an opportunity to address deeper concerns about work-life balance and career impact">Did not fully explore the underlying reasons for the student's continued skepticism regarding time management feasibility, missing an opportunity...<a class="read-more-btn" onclick="showModal('Mistakes', this.previousElementSibling.dataset.full)">more</a></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Opportunities -->
+            <div class="pillar-card">
+                <div class="pillar-header">
+                    <div class="pillar-icon">🎯</div>
+                    Opportunities
+                </div>
+                <div class="pillar-content">
+                    <ul>
+                        <li><span class="pillar-item-text" data-full="Provide specific case studies or testimonials from past students who successfully managed 12-16 hours/week alongside demanding jobs, showing exact weekly schedules and time management techniques">Provide specific case studies or testimonials from past students who successfully managed 12-16 hours/week alongside demanding jobs...<a class="read-more-btn" onclick="showModal('Opportunities', this.previousElementSibling.dataset.full)">more</a></span></li>
+                        <li><span class="pillar-item-text" data-full="Offer to connect Rajesh with current students or alumni who have similar professional backgrounds for peer-to-peer insights and reassurance about program feasibility">Offer to connect Rajesh with current students or alumni who have similar professional backgrounds for peer-to-peer...<a class="read-more-btn" onclick="showModal('Opportunities', this.previousElementSibling.dataset.full)">more</a></span></li>
+                        <li><span class="pillar-item-text" data-full="Create a personalized time management plan based on Rajesh's specific work schedule, showing how 12-16 hours can be realistically distributed across weekdays and weekends">Create a personalized time management plan based on Rajesh's specific work schedule, showing how 12-16 hours can be realistically...<a class="read-more-btn" onclick="showModal('Opportunities', this.previousElementSibling.dataset.full)">more</a></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coaching Insights -->
+        <div class="coaching-insights">
+            <div class="coaching-insights-header">
+                <span>💼</span>
+                Coaching Insights
+            </div>
+            <div class="insights-grid">
+                <div class="insight-item">
+                    <strong>Objection Handling:</strong> Specificity and Responsiveness. Focus on providing highly specific, relatable, and perhaps even personalized examples or case studies of time management strategies.
+                </div>
+                <div class="insight-item">
+                    <strong>Active Listening (for underlying anxieties):</strong> Probe deeper into the student's specific fears and practical barriers to tailor solutions more effectively.
+                </div>
+                <div class="insight-item">
+                    <strong>Leveraging Social Proof:</strong> Connect the student with current or past program participants who successfully navigated similar time constraints.
+                </div>
+                <div class="insight-item">
+                    <strong>Reframing Challenges:</strong> Help the student visualize success by providing actionable, step-by-step guidance on integrating study time into a busy schedule.
+                </div>
+            </div>
+        </div>
+
+        <!-- Conversation Timeline -->
+        <div class="conversation-timeline">
+            <div class="timeline-header">
+                <span>📊 Conversation Metrics Timeline</span>
+                <div class="timeline-legend">
+                    <div class="legend-item">
+                        <div class="legend-dot green"></div>
+                        <span>Positive Move</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot red"></div>
+                        <span>Negative Move</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot purple"></div>
+                        <span>Strategic Shift</span>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-container">
+                <div class="timeline-track">
+                    <div class="round-node active" onclick="toggleRoundDetails(1)">
+                        <div class="round-number">Round 1</div>
+                        <div class="round-metrics">
+                            <div class="metric-chip positive">+5 Trust</div>
+                            <div class="metric-chip negative">-2 Resist</div>
+                            <div class="metric-chip positive">+8 Close</div>
+                        </div>
+                    </div>
+                    
+                    <div class="round-node" onclick="toggleRoundDetails(2)">
+                        <div class="round-number">Round 2</div>
+                        <div class="round-metrics">
+                            <div class="metric-chip positive">+6 Trust</div>
+                            <div class="metric-chip negative">-2 Resist</div>
+                        </div>
+                    </div>
+                    
+                    <div class="round-node" onclick="toggleRoundDetails(3)">
+                        <div class="round-number">Round 3</div>
+                        <div class="round-metrics">
+                            <div class="metric-chip negative">-2 Resist</div>
+                        </div>
+                    </div>
+                    
+                    <div class="round-node" onclick="toggleRoundDetails(4)">
+                        <div class="round-number">Round 4</div>
+                        <div class="round-metrics">
+                            <div class="metric-chip positive">+5 Trust</div>
+                            <div class="metric-chip negative">-2 Resist</div>
+                        </div>
+                    </div>
+                    
+                    <div class="round-node" onclick="toggleRoundDetails(5)">
+                        <div class="round-number">Round 5</div>
+                        <div class="round-metrics">
+                            <div class="metric-chip positive">+5 Trust</div>
+                            <div class="metric-chip negative">-2 Resist</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Round Details - Shown when clicked -->
+                <div id="round-details-1" class="round-details active">
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Emotional Shift</div>
+                            <div class="detail-value">Calm → Engaged</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Objection Spike</div>
+                            <div class="detail-value">Time Commitment</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Trust Change</div>
+                            <div class="detail-value" style="color: #22C55E;">+5</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Close Probability</div>
+                            <div class="detail-value" style="color: #22C55E;">+8%</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tactical Move</div>
+                            <div class="detail-value">Empathy + Structure Overview</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Resistance</div>
+                            <div class="detail-value" style="color: #22C55E;">-2 (Reduced)</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="round-details-2" class="round-details">
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Emotional Shift</div>
+                            <div class="detail-value">Engaged → Curious</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Trust Change</div>
+                            <div class="detail-value" style="color: #22C55E;">+6</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tactical Move</div>
+                            <div class="detail-value">Detailed Program Info</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="round-details-3" class="round-details">
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Emotional Shift</div>
+                            <div class="detail-value">Curious → Skeptical</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Objection Spike</div>
+                            <div class="detail-value">Needs Concrete Examples</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tactical Move</div>
+                            <div class="detail-value">Generic Time Management Tips</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="round-details-4" class="round-details">
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Emotional Shift</div>
+                            <div class="detail-value">Skeptical → Concerned</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Trust Change</div>
+                            <div class="detail-value" style="color: #22C55E;">+5</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tactical Move</div>
+                            <div class="detail-value">Validation + More Structure</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="round-details-5" class="round-details">
+                    <div class="detail-grid">
+                        <div class="detail-item">
+                            <div class="detail-label">Emotional Shift</div>
+                            <div class="detail-value">Concerned → Cautiously Optimistic</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Trust Change</div>
+                            <div class="detail-value" style="color: #22C55E;">+5</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Tactical Move</div>
+                            <div class="detail-value">Support Resources Offered</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Bar - Sticky at Bottom -->
+        <div class="action-bar">
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="downloadPDF()">
+                    <span>📄</span>
+                    Download Coaching Report (PDF)
+                </button>
+                <button class="btn btn-secondary" onclick="retry()">
+                    <span>🔄</span>
+                    Retry to Improve
+                </button>
+                <button class="btn btn-ghost" onclick="newSimulation()">
+                    <span>✨</span>
+                    Start New Simulation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for expanded content -->
+    <div class="modal-overlay" id="contentModal" onclick="closeModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-title" id="modalTitle">
+                    <span>📄</span>
+                    <span></span>
+                </div>
+                <div class="modal-close" onclick="closeModal()">×</div>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showModal(title, content) {
+            const modal = document.getElementById('contentModal');
+            const modalTitle = document.getElementById('modalTitle').querySelector('span:last-child');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.textContent = title;
+            modalBody.innerHTML = content;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(event) {
+            if (!event || event.target.id === 'contentModal') {
+                const modal = document.getElementById('contentModal');
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        function toggleRoundDetails(roundNumber) {
+            // Hide all round details
+            const allDetails = document.querySelectorAll('.round-details');
+            allDetails.forEach(detail => {
+                detail.classList.remove('active');
+            });
+            
+            // Remove active state from all nodes
+            const allNodes = document.querySelectorAll('.round-node');
+            allNodes.forEach(node => {
+                node.classList.remove('active');
+            });
+            
+            // Show selected round details
+            const selectedDetail = document.getElementById(`round-details-${roundNumber}`);
+            if (selectedDetail) {
+                selectedDetail.classList.add('active');
+            }
+            
+            // Add active state to clicked node
+            event.currentTarget.classList.add('active');
+        }
+
+        function downloadPDF() {
+            alert('Downloading comprehensive coaching report...');
+        }
+
+        function retry() {
+            alert('Starting new simulation with improved strategies...');
+        }
+
+        function newSimulation() {
+            alert('Initializing new simulation with different persona...');
+        }
+
+        // Initialize first round as active
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstRound = document.querySelector('.round-node');
+            const firstDetails = document.querySelector('.round-details');
+            if (firstRound && firstDetails) {
+                firstRound.classList.add('active');
+                firstDetails.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

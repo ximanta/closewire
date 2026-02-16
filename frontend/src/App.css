@@ -846,3 +846,594 @@ body {
     bottom: 8px;
   }
 }
+
+/* Dashboard Refactor Overrides */
+.resultOverlay {
+  background: rgba(4, 7, 18, 0.86);
+  backdrop-filter: blur(7px);
+  padding: 14px;
+  z-index: 30;
+}
+
+.resultCard {
+  width: min(1540px, calc(100vw - 28px));
+  margin: 0 auto;
+  height: calc(100vh - 28px);
+  border-radius: 14px;
+  border: 1px solid rgba(102, 136, 195, 0.35);
+  background: linear-gradient(160deg, rgba(18, 34, 60, 0.95) 0%, rgba(8, 13, 30, 0.96) 100%);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.resultScrollBody {
+  overflow: auto;
+  padding: 14px 14px 22px;
+}
+
+.outcomeSummaryCard {
+  border-radius: 12px;
+  border: 1px solid rgba(86, 122, 190, 0.35);
+  background: linear-gradient(140deg, rgba(22, 44, 78, 0.9), rgba(10, 17, 33, 0.9));
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.resultCard h2 {
+  margin: 0;
+  font-size: clamp(1.15rem, 1.4vw, 1.45rem);
+}
+
+.resultCard h3 {
+  margin: 5px 0 8px;
+  color: #79a8ff;
+  font-size: 1rem;
+}
+
+.resultCard p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.personaTopCard {
+  border-radius: 12px;
+  border: 1px solid rgba(88, 123, 184, 0.32);
+  background: linear-gradient(140deg, rgba(17, 31, 56, 0.92), rgba(8, 15, 30, 0.95));
+  padding: 14px;
+  margin-bottom: 12px;
+}
+
+.personaIdentity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.personaAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #5c8fff, #3db8ff);
+  color: #0d1d3a;
+  font-weight: 800;
+}
+
+.personaIdentity h4 {
+  margin: 0;
+}
+
+.personaIdentity p {
+  margin: 2px 0 0;
+  font-size: 0.85rem;
+}
+
+.personaDetailRow {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(92, 126, 183, 0.24);
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  font-size: 0.84rem;
+}
+
+.primaryObjectionAlert {
+  border-radius: 12px;
+  border: 1px solid rgba(235, 73, 93, 0.75);
+  background: linear-gradient(130deg, rgba(90, 17, 29, 0.65), rgba(43, 10, 20, 0.65));
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+
+.objectionTitle {
+  color: #ff95a4;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.retryPerformanceCard {
+  border: 2px solid rgba(66, 148, 255, 0.84);
+  border-radius: 12px;
+  background: linear-gradient(145deg, rgba(19, 43, 78, 0.95), rgba(8, 14, 29, 0.96));
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 0 4px rgba(66, 148, 255, 0.12);
+}
+
+.retryCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.retryCardHeader h4 {
+  margin: 0;
+}
+
+.retryActiveBadge {
+  font-size: 0.74rem;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(116, 182, 255, 0.66);
+  background: rgba(52, 119, 197, 0.35);
+  color: #d8ecff;
+}
+
+.retryCardBody {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  align-items: stretch;
+}
+
+.runScoreBlocks {
+  display: flex;
+  gap: 10px;
+}
+
+.runScoreBlock {
+  flex: 1;
+  border: 1px solid rgba(109, 148, 214, 0.3);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(8, 18, 36, 0.75);
+  display: grid;
+  gap: 6px;
+}
+
+.runScoreBlock span {
+  font-size: 0.72rem;
+  color: #93a8ce;
+  text-transform: uppercase;
+}
+
+.runScoreBlock strong {
+  font-size: 1.65rem;
+}
+
+.retryDeltaCallout {
+  border-radius: 10px;
+  border: 1px solid rgba(71, 189, 121, 0.6);
+  background: rgba(17, 61, 45, 0.5);
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  padding: 10px;
+}
+
+.retryDeltaCallout.degraded {
+  border-color: rgba(241, 92, 106, 0.65);
+  background: rgba(73, 21, 32, 0.5);
+}
+
+.deltaValue {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #6ff0a8;
+}
+
+.retryDeltaCallout.degraded .deltaValue {
+  color: #ff94a0;
+}
+
+.deltaMeta {
+  display: grid;
+  gap: 4px;
+  font-size: 0.76rem;
+  color: #b1c4e6;
+}
+
+.sparklineWrap {
+  border: 1px solid rgba(113, 148, 208, 0.3);
+  border-radius: 10px;
+  padding: 10px;
+  background: rgba(8, 16, 31, 0.78);
+}
+
+.sparklineHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.72rem;
+  color: #9eb4d8;
+  margin-bottom: 8px;
+}
+
+.bestRunBadge {
+  border-radius: 999px;
+  padding: 2px 7px;
+  background: linear-gradient(145deg, #f4b83f, #eb9226);
+  color: #1d1709;
+  font-weight: 800;
+}
+
+.sparklineBars {
+  height: 78px;
+  display: flex;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.sparklineBar {
+  flex: 1;
+  min-width: 20px;
+  border-radius: 6px 6px 3px 3px;
+  background: linear-gradient(180deg, #53b9ff, #376fe6);
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.sparklineBar:hover {
+  transform: translateY(-2px);
+}
+
+.sparklineBar.best {
+  background: linear-gradient(180deg, #ffd467, #f59c29);
+}
+
+.sparklineBar span {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.66rem;
+  color: #a4b8db;
+}
+
+.pillarsGrid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 12px;
+}
+
+.pillarCard {
+  border-radius: 12px;
+  border: 1px solid rgba(88, 121, 181, 0.45);
+  background: linear-gradient(145deg, rgba(17, 33, 58, 0.9), rgba(7, 13, 27, 0.92));
+  padding: 12px;
+  height: 380px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.pillarCard:hover {
+  border-color: rgba(104, 173, 255, 0.72);
+  transform: translateY(-2px);
+}
+
+.pillarCard h4 {
+  margin: 0 0 10px;
+}
+
+.pillarContent {
+  flex: 1;
+  overflow: hidden;
+}
+
+.pillarContent ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 9px;
+  font-size: 0.84rem;
+  color: #d2def5;
+}
+
+.pillarContent li {
+  line-height: 1.45;
+}
+
+.inlineMoreBtn {
+  margin-left: 5px;
+  border: 0;
+  color: #5aa9ff;
+  background: transparent;
+  padding: 0;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.inlineMoreBtn:hover {
+  color: #83c1ff;
+}
+
+.emptyItem {
+  list-style: none;
+  margin-left: -18px;
+  color: #91a8cf;
+}
+
+.coachingInsightsPanel {
+  border-radius: 12px;
+  border: 1px solid rgba(86, 123, 182, 0.32);
+  background: linear-gradient(140deg, rgba(16, 29, 53, 0.9), rgba(8, 14, 29, 0.92));
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.coachingInsightsPanel h4 {
+  margin: 0 0 9px;
+}
+
+.insightRows {
+  display: grid;
+  gap: 8px;
+}
+
+.insightRow {
+  border: 1px solid rgba(81, 112, 168, 0.36);
+  border-radius: 8px;
+  background: rgba(7, 15, 31, 0.8);
+  padding: 10px;
+  font-size: 0.84rem;
+  color: #c8d8f3;
+}
+
+.resultActions {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.stickyActions {
+  position: sticky;
+  bottom: 0;
+  background: rgba(6, 12, 25, 0.76);
+  border-top: 1px solid rgba(83, 113, 170, 0.32);
+  backdrop-filter: blur(8px);
+  z-index: 4;
+}
+
+.finalMetricChips {
+  margin-top: 10px;
+}
+
+.metricEventsPanel {
+  border-radius: 12px;
+  border: 1px solid rgba(87, 118, 176, 0.36);
+  background: linear-gradient(140deg, rgba(15, 31, 57, 0.92), rgba(8, 14, 28, 0.93));
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.timelineHeaderRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.timelineHeaderRow h4 {
+  margin: 0;
+}
+
+.timelineLegend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.76rem;
+  color: #a7bcdf;
+}
+
+.timelineLegend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.legendDot.positive {
+  background: #49e68c;
+}
+
+.legendDot.negative {
+  background: #ff6f7d;
+}
+
+.legendDot.strategic {
+  background: #a585ff;
+}
+
+.timelineTrack {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(185px, 220px);
+  gap: 9px;
+  overflow-x: auto;
+  padding: 4px 2px 9px;
+}
+
+.timelineNode {
+  min-width: 0;
+  border: 2px solid rgba(98, 130, 188, 0.35);
+  background: rgba(10, 19, 38, 0.86);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.timelineNode:hover {
+  transform: translateY(-2px);
+  border-color: rgba(100, 164, 245, 0.7);
+}
+
+.timelineNode.active {
+  border-color: rgba(88, 168, 255, 0.88);
+  box-shadow: 0 0 16px rgba(88, 168, 255, 0.24);
+}
+
+.roundNode {
+  border-radius: 6px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+}
+
+.roundDelta {
+  font-size: 0.76rem;
+  color: #aecaef;
+}
+
+.roundMetricChips {
+  display: grid;
+  gap: 4px;
+}
+
+.miniMetricChip {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 0.68rem;
+  border: 1px solid transparent;
+}
+
+.miniMetricChip.positive {
+  background: rgba(73, 230, 140, 0.15);
+  color: #8ef2b6;
+  border-color: rgba(73, 230, 140, 0.45);
+}
+
+.miniMetricChip.negative {
+  background: rgba(255, 111, 125, 0.15);
+  color: #ffabb4;
+  border-color: rgba(255, 111, 125, 0.45);
+}
+
+.miniMetricChip.strategic {
+  background: rgba(165, 133, 255, 0.16);
+  color: #ceb6ff;
+  border-color: rgba(165, 133, 255, 0.45);
+}
+
+.timelineDetailCard {
+  border: 1px solid rgba(106, 139, 198, 0.4);
+  background: rgba(9, 20, 40, 0.84);
+  font-size: 0.84rem;
+}
+
+.contentModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: rgba(4, 7, 18, 0.84);
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-content: center;
+  padding: 16px;
+}
+
+.contentModalCard {
+  width: min(760px, 96vw);
+  max-height: min(74vh, 760px);
+  overflow: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(99, 146, 216, 0.6);
+  background: linear-gradient(150deg, rgba(18, 35, 64, 0.97), rgba(9, 15, 30, 0.97));
+  padding: 14px;
+}
+
+.contentModalCard header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(103, 132, 180, 0.36);
+  padding-bottom: 8px;
+}
+
+.contentModalCard h4 {
+  margin: 0;
+}
+
+.contentModalCard button {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(118, 152, 210, 0.42);
+  background: rgba(9, 19, 38, 0.78);
+  color: #d5e5ff;
+  cursor: pointer;
+}
+
+.contentModalCard button:hover {
+  border-color: rgba(255, 114, 129, 0.6);
+  color: #ffb5be;
+}
+
+.contentModalBody p {
+  margin: 0;
+  line-height: 1.7;
+  font-size: 0.92rem;
+  color: #d8e4fb;
+}
+
+@media (max-width: 1280px) {
+  .pillarsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .retryCardBody {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .resultCard {
+    width: calc(100vw - 14px);
+    height: calc(100vh - 14px);
+  }
+  .pillarsGrid {
+    grid-template-columns: 1fr;
+  }
+  .pillarCard {
+    height: auto;
+    min-height: 220px;
+  }
+  .resultActions {
+    flex-wrap: wrap;
+  }
+  .timelineHeaderRow {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
