@@ -2133,6 +2133,36 @@ async def generate_report(payload: ReportRequest) -> StreamingResponse:
     judge = payload.analysis or {}
     winner = str(judge.get("winner", "no-deal"))
     commitment = str(judge.get("commitment_signal", "none"))
+    duration_seconds = 0
+    if isinstance(payload.analysis, dict):
+        try:
+            duration_seconds = int(float(payload.analysis.get("duration_seconds", 0)))
+        except Exception:
+            duration_seconds = 0
+    duration_hms = ""
+    if isinstance(payload.analysis, dict):
+        duration_hms = str(payload.analysis.get("duration_hms", "")).strip()
+
+    if not duration_hms:
+        transcript_with_ts = session_last_run.get("history_for_reporting") or payload.transcript or []
+        timestamps: List[datetime] = []
+        for msg in transcript_with_ts:
+            ts = str((msg or {}).get("timestamp", "")).strip()
+            if not ts:
+                continue
+            try:
+                timestamps.append(datetime.fromisoformat(ts))
+            except Exception:
+                continue
+        if len(timestamps) >= 2:
+            duration_seconds = max(0, int((max(timestamps) - min(timestamps)).total_seconds()))
+
+    if not duration_hms:
+        hours = duration_seconds // 3600
+        minutes = (duration_seconds % 3600) // 60
+        seconds = duration_seconds % 60
+        duration_hms = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+
     commitment_map = {
         "none": "No Commitment",
         "soft_commitment": "Exploring Enrollment",
@@ -2222,6 +2252,7 @@ async def generate_report(payload: ReportRequest) -> StreamingResponse:
 
     summary_rows = [
         ["Outcome", winner],
+        ["Duration", duration_hms],
         ["Final Score", f"{judge.get('negotiation_score', 0)} / 100"],
         ["Commitment Signal", commitment_map.get(commitment, commitment)],
         ["Enrollment Likelihood", f"{judge.get('enrollment_likelihood', 0)}%"],

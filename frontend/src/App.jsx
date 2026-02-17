@@ -119,6 +119,15 @@ const commitmentSignalState = (signal) => {
   return "muted";
 };
 
+const formatDurationHms = (totalSeconds) => {
+  const safe = Math.max(0, Number(totalSeconds || 0));
+  const hours = Math.floor(safe / 3600);
+  const minutes = Math.floor((safe % 3600) / 60);
+  const seconds = Math.floor(safe % 60);
+  const pad = (value) => String(value).padStart(2, "0");
+  return `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+};
+
 function App() {
   const [programUrl, setProgramUrl] = useState("https://www.niit.com/india/building-agentic-ai-systems/");
   const [sessionId, setSessionId] = useState("");
@@ -146,6 +155,7 @@ function App() {
   const [expandedContent, setExpandedContent] = useState(null);
   const [showReportDashboard, setShowReportDashboard] = useState(false);
   const [chipFlash, setChipFlash] = useState({});
+  const [runDurationSeconds, setRunDurationSeconds] = useState(0);
 
   const wsRef = useRef(null);
   const projectionRef = useRef(null);
@@ -154,6 +164,7 @@ function App() {
   const uiToastTimerRef = useRef({});
   const pendingThoughtsRef = useRef({});
   const chipFlashTimerRef = useRef({});
+  const runStartEpochRef = useRef(null);
 
   const orderedDrafts = useMemo(() => Object.values(drafts), [drafts]);
   const allCards = useMemo(
@@ -401,6 +412,8 @@ function App() {
     setShowReportDashboard(false);
     prevMetricsRef.current = null;
     setShowRestartPulse(false);
+    setRunDurationSeconds(0);
+    runStartEpochRef.current = null;
   };
 
   useEffect(
@@ -568,6 +581,7 @@ function App() {
     wsRef.current = ws;
 
     ws.onopen = () => {
+      runStartEpochRef.current = Date.now();
       ws.send(
         JSON.stringify({
           session_id: targetSessionId,
@@ -624,7 +638,12 @@ function App() {
       } else if (payload.type === "state_update") {
         setStateUpdate(payload.data);
       } else if (payload.type === "analysis") {
-        setAnalysis(payload.data);
+        const endedAt = Date.now();
+        const startedAt = runStartEpochRef.current || endedAt;
+        const durationSeconds = Math.max(0, Math.floor((endedAt - startedAt) / 1000));
+        const durationHms = formatDurationHms(durationSeconds);
+        setRunDurationSeconds(durationSeconds);
+        setAnalysis({ ...payload.data, duration_seconds: durationSeconds, duration_hms: durationHms });
         setRunHistory((prev) => [
           ...prev,
           {
@@ -634,6 +653,7 @@ function App() {
         ]);
         setStage("completed");
         setShowReportDashboard(false);
+        pushUiToast(`Conversation Completed\nDuration (mins) ${durationHms}`, "positive", 5200);
       } else if (payload.type === "error") {
         // eslint-disable-next-line no-console
         console.error("Backend negotiation error", payload.data);
@@ -709,7 +729,13 @@ function App() {
         session_id: sessionId,
         auth_token: authToken,
         transcript: messages,
-        analysis: { ...(analysis.judge || {}), metric_events: metricEventHistory, run_history: runHistory },
+        analysis: {
+          ...(analysis.judge || {}),
+          metric_events: metricEventHistory,
+          run_history: runHistory,
+          duration_seconds: analysis?.duration_seconds ?? runDurationSeconds,
+          duration_hms: analysis?.duration_hms || formatDurationHms(analysis?.duration_seconds ?? runDurationSeconds),
+        },
       }),
     });
     if (!res.ok) {
@@ -829,8 +855,8 @@ function App() {
       {(stage === "negotiating" || (stage === "completed" && !showReportDashboard)) && (
         <section className="arenaScene">
           {stage === "completed" && !showReportDashboard && (
-            <div className="arenaTopActions">
-              <button className="downloadBtn viewReportBtn" onClick={() => setShowReportDashboard(true)}>
+            <div className="arenaBottomActions">
+              <button className="ghostBtn viewReportBtn" onClick={() => setShowReportDashboard(true)}>
                 View Report
               </button>
             </div>
@@ -928,6 +954,7 @@ function App() {
                   </span>
                   <span className="metricChip">Enrollment Likelihood {analysis?.judge?.enrollment_likelihood ?? 0}%</span>
                   <span className="metricChip">Trust Delta {analysis?.judge?.trust_delta ?? 0}</span>
+                  <span className="metricChip">Duration {analysis?.duration_hms || formatDurationHms(runDurationSeconds)}</span>
                 </div>
               </header>
 
