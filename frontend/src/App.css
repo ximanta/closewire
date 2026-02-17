@@ -386,9 +386,32 @@ textarea {
   margin-bottom: 8px;
 }
 
+.liveMicHeaderActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .liveMicHeader span {
   color: #a9c0ea;
   font-size: 0.82rem;
+}
+
+.shutdownBtn {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 1px solid rgba(167, 188, 226, 0.45);
+  background: rgba(12, 22, 42, 0.88);
+  color: #d4e4ff;
+  cursor: pointer;
+  line-height: 1;
+  font-size: 1rem;
+}
+
+.shutdownBtn:hover {
+  border-color: rgba(255, 125, 138, 0.62);
+  color: #ffb5be;
 }
 
 .micSignalRow {

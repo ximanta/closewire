@@ -275,6 +275,8 @@ AUTH_TOKENS: Dict[str, float] = {}
 AUTH_FILE = Path(__file__).with_name("auth.json")
 TRACEABILITY_FILE = Path(__file__).with_name("conversation_traceability.json")
 DEBUG_TRACE_FILE = Path(__file__).with_name("negotiation_debug_trace.jsonl")
+HUMAN_DEBUG_TRACE_FILE = Path(__file__).with_name("human_vs_ai_negotiation_debug_trace.jonl")
+HUMAN_TRACEABILITY_FILE = Path(__file__).with_name("human_vs_ai_conversation_traceability.json")
 
 class ClientStreamClosed(Exception):
     """Raised when the websocket client disconnects during streaming."""
@@ -344,13 +346,15 @@ def _looks_truncated_message(text: str) -> bool:
 def _write_debug_trace(event: str, payload: Dict[str, Any]) -> None:
     if not NEGOTIATION_DEBUG_TRACE:
         return
+    mode = str(payload.get("mode", "ai_vs_ai")).strip().lower()
+    target_file = HUMAN_DEBUG_TRACE_FILE if mode == "human_vs_ai" else DEBUG_TRACE_FILE
     entry = {
         "ts": datetime.now().isoformat(),
         "event": event,
         **payload,
     }
     try:
-        with DEBUG_TRACE_FILE.open("a", encoding="utf-8") as handle:
+        with target_file.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(_to_plain_json(entry), ensure_ascii=False) + "\n")
     except Exception:
         logger.exception("Failed to write debug trace event=%s", event)
@@ -378,7 +382,9 @@ def _emit_conversation_traceability(session_id: str, state: NegotiationState, an
         "transcript": state.get("messages", []),
         "history_for_reporting": state.get("history_for_reporting", []),
     }
-    TRACEABILITY_FILE.write_text(json.dumps(trace_payload, indent=2, ensure_ascii=False), encoding="utf-8")
+    mode = str(state.get("mode", "ai_vs_ai")).strip().lower()
+    target_file = HUMAN_TRACEABILITY_FILE if mode == "human_vs_ai" else TRACEABILITY_FILE
+    target_file.write_text(json.dumps(trace_payload, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
 def _validate_auth_token(token: str) -> bool:
@@ -891,6 +897,15 @@ async def _classify_human_input(
     clean_text = str(text or "").strip()
     if not clean_text:
         clean_text = "..."
+    _write_debug_trace(
+        "human_shadow_classify_start",
+        {
+            "mode": "human_vs_ai",
+            "round": round_number,
+            "message_id": message_id,
+            "text_head": _truncate_trace_text(clean_text, 180),
+        },
+    )
 
     fallback = {
         "techniques": [],
@@ -934,6 +949,18 @@ CONTEXT:
     strategic_intent = str(parsed.get("strategic_intent") or fallback["strategic_intent"]).strip()
     confidence_score = _clamp_score(parsed.get("confidence_score"), fallback["confidence_score"])
     emotional_state = str(parsed.get("emotional_state") or fallback["emotional_state"]).strip().lower() or "calm"
+    _write_debug_trace(
+        "human_shadow_classify_complete",
+        {
+            "mode": "human_vs_ai",
+            "round": round_number,
+            "message_id": message_id,
+            "technique_count": len(techniques),
+            "intent_head": _truncate_trace_text(strategic_intent, 140),
+            "confidence_score": confidence_score,
+            "emotional_state": emotional_state,
+        },
+    )
 
     return {
         "id": message_id,
@@ -1298,16 +1325,20 @@ def _build_student_prompt(state: NegotiationState) -> str:
     mode = str(state.get("mode", "ai_vs_ai")).strip().lower()
     vocabulary = ", ".join(persona.get("common_vocabulary", []))
     program_snapshot = _student_program_snapshot(state["program"])
-    language_style = str(persona.get("language_style") or "Indian English")
-    language_instruction = str(config.get("language_instruction") or "Use clear Indian English.")
     if mode == "human_vs_ai":
-        language_style = "Indian English"
+        language_style = "UK English"
         language_instruction = (
-            "Pure English only. No Hinglish or code-mixing. Keep responses natural, conversational, and complete."
+            "Use pure UK English only. No Hinglish, no Hindi words, and no code-mixing."
         )
-    hinglish_note = ""
-    if mode != "human_vs_ai":
-        hinglish_note = "- If archetype is skeptical_shopper, code-mix Hinglish for emphasis."
+        vocabulary = "career progression, return on investment, placement outcomes, programme structure, practical projects"
+        pipeline_language_fragment = (
+            "- Human-vs-AI pipeline rule: respond only in natural UK English.\n"
+            "- Never use colloquial Hindi/Hinglish terms (for example: bhaiya, yaar, kya, paisa, scene)."
+        )
+    else:
+        language_style = str(persona.get("language_style") or "Indian English")
+        language_instruction = str(config.get("language_instruction") or "Use clear Indian English.")
+        pipeline_language_fragment = "- If archetype is skeptical_shopper, code-mix Hinglish for emphasis."
     return f"""
 ROLE: You are {persona.get('name')}, a {persona.get('age')} year old {persona.get('current_role')}.
 ARCHETYPE: {persona.get('archetype_label')}
@@ -1350,7 +1381,7 @@ TRANSCRIPT SO FAR:
 - Speak naturally per LANGUAGE STYLE and vocabulary.
 - Do not reveal hidden secret too early.
 - Repeat unresolved concerns if still unanswered.
-{hinglish_note}
+{pipeline_language_fragment}
 4. Keep MESSAGE complete and not cut mid sentence.
 
 --- OUTPUT FORMAT ---
@@ -1455,6 +1486,7 @@ async def _stream_agent_response(
     message_id: str,
     demo_mode: bool,
     retry_context_prompt: str,
+    mode: str,
     student_inner_state: Optional[Dict[str, int]] = None,
 ) -> Dict[str, Any]:
     full_text = ""
@@ -1465,6 +1497,7 @@ async def _stream_agent_response(
         "turn_start",
         {
             "agent": agent,
+            "mode": mode,
             "round": round_number,
             "message_id": message_id,
             "model": model_name,
@@ -1557,6 +1590,7 @@ async def _stream_agent_response(
                 "stream_timeout",
                 {
                     "agent": agent,
+                    "mode": mode,
                     "round": round_number,
                     "message_id": message_id,
                     "error": _truncate_trace_text(exc),
@@ -1581,6 +1615,7 @@ async def _stream_agent_response(
                 "stream_exception",
                 {
                     "agent": agent,
+                    "mode": mode,
                     "round": round_number,
                     "message_id": message_id,
                     "error_type": type(exc).__name__,
@@ -1600,6 +1635,7 @@ async def _stream_agent_response(
         "stream_complete",
         {
             "agent": agent,
+            "mode": mode,
             "round": round_number,
             "message_id": message_id,
             "chunk_count": stream_chunk_count,
@@ -1630,6 +1666,7 @@ async def _stream_agent_response(
             "nonstream_retry_start",
             {
                 "agent": agent,
+                "mode": mode,
                 "round": round_number,
                 "message_id": message_id,
             },
@@ -1669,6 +1706,7 @@ async def _stream_agent_response(
             "nonstream_retry_complete",
             {
                 "agent": agent,
+                "mode": mode,
                 "round": round_number,
                 "message_id": message_id,
                 "retry_chars": len(full_text),
@@ -1688,6 +1726,7 @@ async def _stream_agent_response(
                 "empty_model_fallback",
                 {
                     "agent": agent,
+                    "mode": mode,
                     "round": round_number,
                     "message_id": message_id,
                     "finish_reasons": finish_reasons,
@@ -1702,6 +1741,7 @@ async def _stream_agent_response(
         "parse_result",
         {
             "agent": agent,
+            "mode": mode,
             "round": round_number,
             "message_id": message_id,
             "message_chars": len(fields.get("message", "")),
@@ -1716,6 +1756,7 @@ async def _stream_agent_response(
             "message_truncated_heuristic",
             {
                 "agent": agent,
+                "mode": mode,
                 "round": round_number,
                 "message_id": message_id,
                 "message_chars": len(fields.get("message", "")),
@@ -1728,6 +1769,7 @@ async def _stream_agent_response(
             "parse_message_fallback",
             {
                 "agent": agent,
+                "mode": mode,
                 "round": round_number,
                 "message_id": message_id,
                 "raw_head": _truncate_trace_text(full_text, 260),
@@ -2024,7 +2066,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 forced_archetype = _pick_live_mode_archetype()
                 persona = _to_plain_json(_generate_persona(program, forced_archetype_id=forced_archetype))
                 session["persona"] = persona
-            persona["language_style"] = "Indian English"
+            persona["language_style"] = "UK English"
 
         financials = _derive_financials(program, persona)
         last_run = session.get("last_run", {})
@@ -2142,6 +2184,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                     counsellor_id,
                     config.demo_mode,
                     _build_retry_context_prompt(state),
+                    mode=mode,
                 )
             state["messages"].append(counsellor_msg)
             state["history_for_reporting"].append(counsellor_msg)
@@ -2157,6 +2200,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 student_id,
                 config.demo_mode,
                 _build_retry_context_prompt(state),
+                mode=mode,
                 student_inner_state=state["student_inner_state"],
             )
             if str(student_msg.get("generation_mode", "stream")) == "stream":
@@ -2166,6 +2210,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 _write_debug_trace(
                     "student_generation_degraded",
                     {
+                        "mode": mode,
                         "round": state["round"],
                         "generation_mode": student_msg.get("generation_mode"),
                         "consecutive_failures": student_generation_failures,
@@ -2255,6 +2300,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
         _write_debug_trace(
             "negotiate_exception",
             {
+                "mode": str(locals().get("mode", "ai_vs_ai")),
                 "error_type": type(exc).__name__,
                 "error": _truncate_trace_text(exc),
             },

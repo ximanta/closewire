@@ -277,6 +277,28 @@ function App() {
     }
   };
 
+  const hardStopAudioAndMic = useCallback(() => {
+    try {
+      stopRecognition();
+    } catch (error) {
+      // noop
+    }
+    try {
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+    } catch (error) {
+      // noop
+    }
+    clearTtsTimers();
+    clearProcessingTicker();
+    isTtsSpeakingRef.current = false;
+    utteranceRef.current = null;
+    window.currentUtterance = null;
+    setMicState("inactive");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const stopWaveform = () => {
     if (waveformRafRef.current) {
       cancelAnimationFrame(waveformRafRef.current);
@@ -587,16 +609,8 @@ function App() {
     setShowRestartPulse(false);
     setRunDurationSeconds(0);
     runStartEpochRef.current = null;
-    stopRecognition();
-    if (window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-    }
-    utteranceRef.current = null;
-    window.currentUtterance = null;
-    isTtsSpeakingRef.current = false;
+    hardStopAudioAndMic();
     clearMicTimers();
-    clearProcessingTicker();
-    clearTtsTimers();
     setMicState("inactive");
     setLiveTranscript("");
     liveTranscriptRef.current = "";
@@ -605,27 +619,35 @@ function App() {
     setWaveformLevel(0);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(
     () => () => {
       Object.values(uiToastTimerRef.current).forEach((timer) => clearTimeout(timer));
       Object.values(toastTimerRef.current).forEach((timer) => clearTimeout(timer));
       Object.values(chipFlashTimerRef.current).forEach((timer) => clearTimeout(timer));
-      stopRecognition();
-      if (window.speechSynthesis) {
-        window.speechSynthesis.cancel();
-      }
-      clearProcessingTicker();
-      clearTtsTimers();
-      window.currentUtterance = null;
+      hardStopAudioAndMic();
+      clearMicTimers();
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [hardStopAudioAndMic]
   );
 
   useEffect(() => {
     liveTranscriptRef.current = liveTranscript;
   }, [liveTranscript]);
+
+  useEffect(() => {
+    const shutdown = () => hardStopAudioAndMic();
+    const onVisibility = () => {
+      if (document.visibilityState === "hidden") shutdown();
+    };
+    window.addEventListener("beforeunload", shutdown);
+    window.addEventListener("pagehide", shutdown);
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      window.removeEventListener("beforeunload", shutdown);
+      window.removeEventListener("pagehide", shutdown);
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, [hardStopAudioAndMic]);
 
   useEffect(() => {
     selectedVoiceRef.current = null;
@@ -784,6 +806,7 @@ function App() {
 
   const sendHumanInput = (rawText) => {
     if (modeRef.current !== "human_vs_ai") return;
+    if (window.speechSynthesis?.speaking) return;
     const socket = wsRef.current;
     if (!socket || socket.readyState !== WebSocket.OPEN) {
       pushUiToast("Connection is not ready for live coaching.");
@@ -814,6 +837,7 @@ function App() {
     if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
     inactivityTimerRef.current = setTimeout(() => {
       if (modeRef.current !== "human_vs_ai" || micStateRef.current !== "listening") return;
+      if (window.speechSynthesis?.speaking || isTtsSpeakingRef.current) return;
       const candidate = String(liveTranscriptRef.current || "").trim();
       if (candidate) {
         sendHumanInput(candidate);
@@ -870,8 +894,15 @@ function App() {
     // Keep a hard reference to avoid Chrome GC ending speech early.
     window.currentUtterance = utterance;
     synth.speak(utterance);
-    const expectedMs = Math.min(22000, Math.max(4500, utterance.text.length * 70));
+    const expectedMs = Math.min(60000, Math.max(12000, utterance.text.length * 110));
     ttsUnlockTimerRef.current = setTimeout(() => {
+      try {
+        if (window.speechSynthesis?.speaking) {
+          window.speechSynthesis.cancel();
+        }
+      } catch (error) {
+        // noop
+      }
       finishSpeech();
     }, expectedMs);
     ttsWatchdogRef.current = setInterval(() => {
@@ -883,7 +914,7 @@ function App() {
 
   const startListening = async () => {
     if (!isHumanMode || stage !== "negotiating") return;
-    if (isTtsSpeakingRef.current || micState === "locked" || micState === "processing") return;
+    if (isTtsSpeakingRef.current || window.speechSynthesis?.speaking || micState === "locked" || micState === "processing") return;
     if (!speechRecognitionCtor || micPermissionStatus === "denied") {
       setMicState("inactive");
       return;
@@ -1424,12 +1455,23 @@ function App() {
                 <div className={`liveMicPanel state-${micState}`}>
                   <div className="liveMicHeader">
                     <strong>Your Turn (Counsellor)</strong>
-                    <span>
-                      {micState === "listening" && "Listening..."}
-                      {micState === "processing" && LIVE_PROCESSING_LABELS[processingLabelIndex]}
-                      {micState === "locked" && "Mic locked while AI speaks"}
-                      {micState === "inactive" && "Ready"}
-                    </span>
+                    <div className="liveMicHeaderActions">
+                      <span>
+                        {micState === "listening" && "Listening..."}
+                        {micState === "processing" && LIVE_PROCESSING_LABELS[processingLabelIndex]}
+                        {micState === "locked" && "Mic locked while AI speaks"}
+                        {micState === "inactive" && "Ready"}
+                      </span>
+                      <button
+                        type="button"
+                        className="shutdownBtn"
+                        onClick={hardStopAudioAndMic}
+                        title="Stop microphone and voice"
+                        aria-label="Stop microphone and voice"
+                      >
+                        ⏻
+                      </button>
+                    </div>
                   </div>
                   <div className="micSignalRow">
                     <span
