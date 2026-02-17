@@ -1,52 +1,52 @@
 {
-  "generated_at": "2026-02-17T11:10:37.574785",
-  "session_id": "da38a677-717d-44ec-99a1-058deb0b4a6c",
+  "generated_at": "2026-02-17T13:24:36.211248",
+  "session_id": "3e621487-ad14-4ad7-ba81-e8c4c0a9206b",
   "deal_status": "failed",
-  "round": 6,
+  "round": 5,
   "max_rounds": 5,
   "persona": {
     "age": 28,
-    "ego_level": 3,
-    "misconception": "Rahul believes that a \"certificate\" alone is enough to get a better job, regardless of the actual skills acquired or the effort put in during the learning process. He thinks quick-fix courses are the answer.",
-    "archetype_id": "drifter",
-    "current_role": "Junior Data Entry Clerk at a mid-sized firm",
-    "backstory": "Rahul has always been content with getting by. After a generic B.Com, he landed a stable but unexciting data entry job through a family connection. He's never really had a career plan and tends to follow the path of least resistance. He enjoys his evenings and weekends too much to invest heavily in self-improvement, unless it promises a significant shortcut with minimal effort.",
-    "city_tier": "Tier-2",
-    "archetype_label": "Drifter",
-    "hidden_secret": "He secretly fears hard work and commitment, always looking for the easiest way to achieve results, even if it means cutting corners or just doing the bare minimum.",
-    "name": "Rahul Sharma",
+    "misconception": "He believes that most high-priced AI courses are just capitalizing on the hype, offering content that can mostly be found for free or cheap online if one looks hard enough. \"Bhaiya, sab marketing ka chakkar hai, asli value kitni hai, woh dekhna padega. Certified toh sab karte hain, kaam kya aayega?\"",
+    "skepticism": 9,
     "common_vocabulary": [
-      "attendance",
-      "minimum marks",
-      "easy",
-      "tough",
-      "certificate",
-      "shortcut",
-      "fast-track",
-      "placement"
+      "value for money",
+      "hidden charges",
+      "ROI",
+      "pakka",
+      "guarantee",
+      "scene kya hai",
+      "bhaiya",
+      "dekho"
     ],
-    "trigger_event": "His younger cousin, who always seemed less academically inclined, recently landed a high-paying tech job after a short course, making Rahul's parents subtly hint that he should also \"do something useful\" with his life, especially about future prospects.",
-    "confusion_level": 7,
-    "financial_anxiety": 6,
-    "skepticism": 4,
-    "language_style": "Passive Indian English. Will ask direct questions about attendance, minimum passing marks, and whether the course content/projects are \"easy or tough\".",
-    "persona_type": "drifter",
+    "archetype_label": "Skeptical Shopper",
+    "name": "Rajat Sharma",
+    "city_tier": "Tier-1",
+    "hidden_secret": "He once paid a hefty sum for a data science bootcamp that turned out to be mostly theoretical and didn't help him land a better job. He fears repeating that mistake and losing both time and money again. Thoda embarrassed bhi hai about that decision.",
+    "backstory": "Rajat, a 28-year-old software developer from Bengaluru, has been working for 5 years in a mid-sized IT firm. He's seen a lot of online courses come and go, many promising the moon but delivering little. He's very practical and believes in investing only if there's a clear ROI. He often scours reviews and compares every feature before making a decision, because yaar, paisa ped pe nahi ugta.",
+    "ego_level": 5,
+    "confusion_level": 6,
+    "trigger_event": "His company recently started discussions about integrating AI into their core products. He realizes his current skill set in traditional software development might become obsolete if he doesn't adapt. He wants to upskill in AI, specifically agentic AI, but is extremely wary of the numerous \"AI courses\" flooding the market, many of which he suspects are just repackaged content with fancy names. Pehle clear karo, asli value kya hai.",
+    "current_role": "Software Developer",
+    "language_style": "Hinglish",
+    "financial_anxiety": 8,
+    "archetype_id": "skeptical_shopper",
+    "persona_type": "skeptical_shopper",
     "background": "Prospective learner evaluating an AI upskilling path.",
-    "career_stage": "mid",
+    "career_stage": "early",
     "financial_sensitivity": "medium",
     "risk_tolerance": "low",
-    "emotional_tone": "anxious",
+    "emotional_tone": "skeptical",
     "primary_objections": [
       "Placement credibility",
       "Fee value",
       "Difficulty for freshers",
       "Time commitment"
     ],
-    "walk_away_likelihood": 0.29,
-    "expected_roi_months": 9,
+    "walk_away_likelihood": 0.26,
+    "expected_roi_months": 12,
     "affordability_concern_level": 81,
-    "willingness_to_invest_score": 39,
-    "communication_style": "timid",
+    "willingness_to_invest_score": 70,
+    "communication_style": "confused",
     "common_phrases": [
       "Placement ka scene kya hai?",
       "Is this really worth it?",
@@ -55,69 +55,74 @@
   },
   "program": {
     "program_name": "Building Agentic AI Systems",
-    "program_fee_inr": "1,50,000 + 18% GST. Booking fees: 1,500 + 18% GST."
+    "program_fee_inr": "1,50,000 + GST (Program fees); 1,500 + GST (Booking fees). Full upfront payment: 1,42,500 (Inclusive of 5% fee concession)."
   },
   "student_inner_state": {
     "sentiment": "frustrated",
-    "skepticism_level": 80,
-    "trust_score": 20,
+    "skepticism_level": 35,
+    "trust_score": 50,
     "unresolved_concerns": [
-      "Ease of Effort & Shortcuts",
       "Effort/Time",
-      "Effort/Time (now compounded by prerequisite)",
       "Job Guarantee",
-      "Price"
+      "Price",
+      "Total Price"
     ]
   },
   "negotiation_metrics": {
-    "round": 5,
+    "round": 4,
     "max_rounds": 5,
-    "concession_count_counsellor": 0,
+    "concession_count_counsellor": 1,
     "concession_count_student": 0,
     "tone_escalation": 23,
-    "objection_intensity": 37,
-    "trust_index": 32,
-    "close_probability": 48,
-    "sentiment_indicator": "negative",
+    "objection_intensity": 26,
+    "trust_index": 46,
+    "close_probability": 63,
+    "sentiment_indicator": "positive",
     "retry_modifier": 0
   },
   "final_offers": {
-    "counsellor": 165000,
-    "student": 113400
+    "counsellor": 169920,
+    "student": 132000
   },
   "analysis": {
-    "enrollment_likelihood": 10,
     "skill_recommendations": [
-      "Proactive Needs Assessment & Qualification: Deeper probing at the outset to identify critical mismatches (like prerequisite experience) to either qualify them out or guide them to more suitable options sooner.",
-      "Strategic Objection Handling: Move beyond mere factual reiteration to address the root cause of the student's objections (e.g., fear of failure, need for certainty) through reframing, testimonials, or alternative solutions.",
-      "Alternative Pathway/Solutioning: When a clear mismatch is identified, pivot to offering relevant alternative programs or preparatory steps rather than continually reinforcing the unsuitability of the current program."
+      "Develop deeper probing questions to uncover the root cause behind the 'pakka job guarantee' demand (e.g., specific financial security needs, past negative experiences).",
+      "Practice advanced objection handling techniques for high-stakes, non-negotiable points like job guarantees, focusing on alternative solutions that address the underlying need.",
+      "Implement clear closing strategies to confirm commitment or identify remaining barriers, especially after positive sentiment from the student."
+    ],
+    "commitment_signal": "none",
+    "primary_unresolved_objection": "Lack of a 'pakka' job guarantee",
+    "trust_delta": 5,
+    "pivotal_moments": [
+      "Round 1 Student's strong opening demanding 'job guarantee' and 'price' as main concerns.",
+      "Round 2 Counsellor's detailed response clarifying fees and introducing placement assistance instead of a direct job guarantee.",
+      "Round 2 Student's re-iteration of 'pakka job guarantee' as a main unresolved concern.",
+      "Round 3 Counsellor's detailed price clarification and firm stance on no direct 'guarantee' but strong 'placement assistance' and ROI from skills.",
+      "Round 4 Student's final positive statement about curriculum understanding, which, in light of the 'failed' status, marks the point where apparent satisfaction did not convert to enrollment."
     ],
     "strengths": [
-      "Counsellor was highly factual and transparent about program requirements, difficulty, and placement assistance (not guarantee).",
-      "Counsellor consistently addressed the student's questions directly and acknowledged concerns."
+      "Counsellor successfully clarified complex pricing structure.",
+      "Counsellor provided detailed and compelling information about the curriculum, hands-on learning, and placement assistance.",
+      "Counsellor maintained a professional and patient tone throughout.",
+      "Counsellor acknowledged student's concerns directly."
     ],
-    "winner": "student",
-    "pivotal_moments": [
-      "Counsellor in Round 3 clarifying 'We do not promise guaranteed jobs.'",
-      "Counsellor in Round 4 strongly stating the program would be 'very challenging' and the student would 'struggle a lot' without experience.",
-      "Student in Round 5 asking for an 'easier program or a shortcut' clearly signaling disengagement with this specific offering."
-    ],
-    "why": "The student consistently reiterated fundamental objections regarding their lack of prerequisite programming experience and the absence of a direct job guarantee. Despite the counsellor's detailed explanations and reiteration of program rigor, the student remained unconvinced, ultimately asking for 'easier' alternatives, indicating a clear misalignment and failure to secure commitment for this program.",
-    "primary_unresolved_objection": "The student's lack of foundational programming experience and the counsellor's repeated confirmation that the student would find the program 'very, very tough' and 'struggle a lot' without it, combined with the absence of a firm job guarantee, were the primary unresolved objections.",
+    "why": "The deal failed because the student's core objection regarding a 'pakka' job guarantee was never fully resolved to their satisfaction, despite the counsellor effectively clarifying pricing and detailing the program's curriculum and value proposition. The student's final positive statement about the curriculum's value did not translate into an enrollment commitment, indicating a disconnect between understanding value and personal readiness to commit without the desired job security.",
     "mistakes": [
-      "Failed to pivot from merely stating facts to strategically addressing the student's underlying need for certainty (job) and suitability (experience).",
-      "Did not offer alternative pathways or solutions (e.g., preparatory courses, different programs) earlier, allowing the conversation to loop on unresolved objections."
+      "Did not fully address the student's deep-seated need for a 'pakka' job guarantee in a way that resonated, despite reframing.",
+      "Initial pricing confusion added to student skepticism in early rounds.",
+      "Failed to convert student's understanding of program value into a concrete commitment, despite positive verbal feedback in the final round.",
+      "Did not attempt a hard close or explicitly confirm student's next steps/commitment after the positive Round 4 response."
     ],
-    "negotiation_score": 25,
-    "commitment_signal": "none",
-    "trust_delta": -5
+    "winner": "no-deal",
+    "enrollment_likelihood": 10,
+    "negotiation_score": 35
   },
   "transcript": [
     {
-      "id": "c6fef379-0642-4d95-a9e3-c1a918c787d1",
+      "id": "90a55197-4ca1-4602-b1fa-bb5a955e4d2f",
       "round": 1,
       "agent": "counsellor",
-      "content": "Welcome! I'm glad you're considering our 'Building Agentic AI Systems' program. To help me understand how this program aligns with your goals, could you share what initially drew you to it and what you're hoping to achieve?",
+      "content": "Hello! Thank you for connecting with us about the \"Building Agentic AI Systems\" program. To help me guide you best, could you tell me what specifically caught your eye about this program or the field of Agentic AI?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -125,29 +130,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T11:09:17.290106",
+      "timestamp": "2026-02-17T13:22:51.555198",
       "generation_mode": "stream"
     },
     {
-      "id": "9438284c-7316-46d4-910a-9eaa8a854193",
+      "id": "bb2aa8fa-b226-43cb-a076-a143d0568e33",
       "round": 1,
       "agent": "student",
-      "content": "Ji, actually, I am looking for a good certificate that can help me get a better job, you know. Something with good placement support. But I also wanted to ask, is this program very tough? Like, how much attendance is mandatory? And what are the minimum marks to pass and get the certificate? Also, about the placement guarantee, what exactly is it?",
+      "content": "Dekho bhaiya, honestly speaking, maine aise bohot saare AI courses dekhe hain jo bas hype create karte hain. Mujhe koi general gyaan nahi chahiye. Mere liye main cheez hai value for money aur ROI. Agar ye course itna high-priced hai (jaise ye 1,73,250 ka figure jo aapne diya hai), toh scene kya hai? Kya guarantee hai ki isse mujhe actually job milegi, ya meri salary increase hogi? Sirf certification se kya hoga? Aur hidden charges ka kya scene hai? Job Guarantee aur Price, ye do mere main concerns hain. Pehle inka jawab do, tabhi aage baat karne ka koi point hai.",
       "techniques": [],
-      "strategic_intent": "seeking clarity on ease of program, attendance, passing marks, and job guarantee, while hinting at desire for a certificate for better job prospects",
+      "strategic_intent": "To challenge the counsellor's generic opening and immediately shift the focus to my primary concerns: value for money, ROI, job guarantee, and price, while also expressing skepticism about AI course hype.",
       "confidence_score": 60,
-      "emotional_state": "curious",
+      "emotional_state": "skeptical",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T11:09:19.897440",
+      "timestamp": "2026-02-17T13:22:55.792918",
       "generation_mode": "stream"
     },
     {
-      "id": "ead400c3-1d69-43cc-be27-bec7f22618b7",
+      "id": "bfe7069f-fa6b-41c4-814a-b934f4a8d942",
       "round": 2,
       "agent": "counsellor",
-      "content": "It's great to hear that you're looking for a program that can advance your career and provide good placement support. Those are important considerations.\nRegarding your questions about the program's intensity and requirements: The 'Building Agentic AI Systems' program is designed with a mastery learning methodology, focusing on developing one skill at a time through structured, hands-on sprints. Each sprint involves 2 hours of live mentor-led sessions and 2 hours of self-paced practice. Depending on whether you choose 3 or 4 sprints per week, your weekly commitment would be approximately 12 to 16 hours, with about 70% of that time dedicated to hands-on work. The program totals 75 sprints, or 300 hours of guided learning and practice, typically spanning 19 to 25 weeks.\nTo successfully complete the program and receive your industry-recognized NIIT Certificate in Agentic AI, you would need to maintain at least 90% attendance, achieve 70% or higher marks in assessments, and ensure full fee payment. It's built for learners with at least six months of hands-on experience in a modern programming language, so a foundational understanding is expected, but the structured format is designed to guide you through complex topics.\nNow, regarding placement support, it's an important aspect for many of our learners. Placement assistance is available for eligible learners who complete the program with at least a 70% score, hold a regular graduation degree, and reside in India. For those with 6 months to 5 years of experience, this support includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days. For learners with over 5 years of experience, career guidance is provided. It's important to understand that while we facilitate these opportunities, the final selection always depends on your individual performance during interviews and the specific requirements of the employer. We focus on building job-ready capabilities and a strong portfolio of working AI projects, demonstrating your readiness for applied AI development roles upon completion.",
+      "content": "Hello! I appreciate your directness and your focus on value for money and return on investment. It's completely understandable to look beyond the hype, especially when considering a significant investment in your career. Let's address your main concerns about job prospects and pricing based on the program's factual data.\nRegarding your question about job prospects and guarantees, the \"Building Agentic AI Systems\" program is designed with job readiness in mind. It builds role-specific competencies and is practitioner-designed to accelerate skill acquisition through a \"Learn by Doing\" approach, where over 60% of program time is invested in coding and hands-on practical activities. You'll work on industry-relevant projects, including a Capstone Project to engineer an autonomous Agentic AI system, which allows you to build a portfolio of working AI projects demonstrating your readiness for applied AI development roles.\nUpon successful completion, you'll receive an Industry-recognized NIIT Certificate in Agentic AI. For eligible learners who complete the program with at least a 70% score, hold a regular graduation degree, and reside in India, placement assistance is available. This support includes up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, career guidance for those with over 5 years of experience, and access to placement preparation sessions and mentor guidance. While NIIT provides these opportunities, final selection depends on your performance and employer requirements. According to our data, 97% of eligible learners were placed.\nNow, concerning the program fee and any hidden charges. The program fee is INR 1,50,000 + GST, along with a booking fee of INR 1,500 + GST. These are the stated fees from NIIT, and there are no hidden charges. We offer multiple payment options:\n*   If you choose to pay the full program fee upfront, there's a 5% concession, making the program fee component INR 1,42,500 + GST.\n*   EMI options are available for INR 24,750 in equal installments after booking.\n*   Additionally, loan facilities can be availed through third-party lenders. It's important to note that loan approval depends on the lender's eligibility criteria, and NIIT does not guarantee loan approval. All loan terms, including EMIs, interest rates, and repayment schedules, are to be reviewed carefully with the lender directly.\nDoes this clarify your initial concerns about the program's value proposition, placement assistance, and fee structure?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -155,121 +160,91 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T11:09:27.166142",
+      "timestamp": "2026-02-17T13:23:07.624215",
       "generation_mode": "stream"
     },
     {
-      "id": "04fa74a8-76c1-4682-92df-ec85d77d4f49",
+      "id": "3b4bf31d-4a43-491d-b9ad-a390fa2539b7",
       "round": 2,
       "agent": "student",
-      "content": "Ji, that sounds like quite a lot of time and effort, 300 hours and 12-16 hours every week. And 90% attendance and 70% marks are very high, no? Is the program very tough then, especially if I don't have that 6 months programming experience you mentioned? Will I be able to manage easily? And about the placement, you said \"assistance\" and \"opportunities\", but is there any actual guarantee that I will get a good job after putting in all this effort and money? Because I am looking for a certificate mainly for a good job, you know.",
+      "content": "Dekho bhaiya, thanks for clarifying the fees and all. No hidden charges, that's good to hear. Par ek minute, pehle aapne jo figure diya tha woh 1,73,250 tha, aur ab aap bol rahe ho 1,50,000 + GST. Toh ye total pakka kitna padega with GST? Ye confusion kyun hai?\nAur job prospects ka scene... aap bol rahe ho \"placement assistance\" aur \"up to three interview opportunities,\" aur \"97% eligible learners placed.\" Theek hai, sounds good on paper. Par bhai, \"final selection depends on your performance and employer requirements\" - ye toh sab bolte hain! Iska matlab kya hai? Agar main course acchi tarah complete karta hoon, 70% score bhi le aata hoon, toh kya guarantee hai ki mujhe job milegi?\nSirf assistance ya opportunities se kya hoga, agar end mein job na mile? Mujhe \"pakka\" job guarantee chahiye, ya at least ek clear ROI. Itna time aur itne paise lagane ke baad, I can't afford to just get \"assistance\" and then be on my own. Iska scene kya hai, clear karo. Job Guarantee aur exact total price, ye do abhi bhi mere main unresolved concerns hain.",
       "techniques": [],
-      "strategic_intent": "Expressing increased concern about effort and job guarantee, while hinting at my lack of relevant experience and reinforcing my desire for a guaranteed outcome from the certificate.",
-      "confidence_score": 60,
-      "emotional_state": "skeptical",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T11:09:31.453029",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "497b4290-c5d8-43e3-807c-e254236a495f",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "I understand your concerns about the time commitment, the attendance and marks requirements, and particularly about the job guarantee. It's natural to want to ensure your investment in time and money yields the desired career outcome.\nRegarding the program's intensity and the requirements: The 300 hours of guided learning and practice, spread over 19 to 25 weeks, is indeed a significant commitment. However, this structure, with 70% hands-on work, is specifically designed as an \"Outcome-Driven Program\" and \"Practitioner Designed\" to build job-ready competencies. The 90% attendance and 70% assessment marks are set to ensure that learners fully engage with this rigorous methodology and truly master the skills, which is crucial for receiving the industry-recognized NIIT Certificate in Agentic AI and becoming eligible for placement assistance. These requirements ensure you develop a strong foundation.\nRegarding the prerequisite experience: The program is designed for learners with at least six months of hands-on experience in a modern programming language like Python, Java, JavaScript, or C#. This foundational experience in writing and debugging simple programs, working with APIs, and understanding web applications is important because the 'Building Agentic AI Systems' curriculum quickly moves into complex topics like designing intelligent, autonomous agents and building RAG-based systems. While the program’s \"Mastery Learning methodology\" is structured to guide you through, this prerequisite ensures you have the base to absorb the advanced concepts and apply the tools and frameworks effectively. If you do not meet this eligibility, it would be advisable to discuss your background with a Program Advisor to ensure the best fit for your success.\nNow, concerning the \"placement guarantee\": As a Senior Admissions Counsellor, I must be clear and factual. We do not promise guaranteed jobs. What we provide is robust \"placement assistance\" for eligible learners. This means that if you meet the criteria—completing the program with at least a 70% score, holding a regular graduation degree, and residing in India—you will receive specific support. This includes access to placement preparation sessions, mentor guidance, and for those with 6 months to 5 years of experience, up to three interview opportunities within 120 days. For learners with over 5 years of experience, career guidance is provided. Our focus is on ensuring you are \"Built for Job Readiness\" and can \"Showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" The final selection for any role, however, always depends on your individual performance during interviews and the specific requirements of the employer. Our objective is to equip you with the skills and the demonstrated capability to excel in these opportunities.",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T11:09:41.551489",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "bdae5227-dc2d-4418-972a-cf549a89192b",
-      "round": 3,
-      "agent": "student",
-      "content": "Ji, 6 months programming experience? That is a problem for me. I don't really have that. So, will I even be able to do this program then? Or will it be very, very tough for me? Because you said it's important and foundational. And if it's so much effort and time, and even the attendance and marks are so high, then why is there no proper placement guarantee? Just \"assistance\" and \"opportunities\" after all that? I am really looking for a certificate that can help me get a good job for sure, you know. This program sounds like a lot of hard work without a clear job path. And the fee is also quite high for something that isn't guaranteeing a job, no?",
-      "techniques": [],
-      "strategic_intent": "expressing concern about difficulty, eligibility due to lack of experience, and continued skepticism about job guarantee vs. effort and cost.",
-      "confidence_score": 60,
-      "emotional_state": "skeptical",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T11:09:46.490103",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "363a1736-9bac-4873-b38f-8914f7954ae2",
-      "round": 4,
-      "agent": "counsellor",
-      "content": "I hear your reservations clearly regarding the prerequisite experience, the job guarantee, and the program fee. These are significant points, and it's essential that you have a full understanding to make an informed decision.\nFirst, regarding the six months of programming experience: The program's 'Practitioner Designed' curriculum and 'Mastery Learning methodology' are built upon the assumption of this foundational experience. The curriculum quickly advances to designing intelligent, autonomous agents, building RAG-based systems, and orchestrating multi-agent systems using specific tools like Python, FastAPI, OpenAI SDK, LangChain, and CrewAI. About 70% of your time will be hands-on, requiring you to write and debug code, work with APIs, and build web applications right from the start. Without this prerequisite, you might indeed find it very challenging to keep pace with the learning sprints, fully engage with the complex topics, and ultimately achieve the required 70% assessment marks and build the necessary portfolio of working AI projects. While the program is structured for rigorous learning, success heavily relies on meeting these entry-level competencies. For this reason, we strongly advise learners to have this background to ensure they can truly thrive. If you feel you might not meet this, I would recommend connecting with a Program Advisor who can assess your specific background and guide you on the best path forward, which might include building up those foundational skills first.\nNow, regarding placement. As I mentioned, we provide robust 'placement assistance' for eligible learners, which is a key feature of our 'Built for Job Readiness' approach. This includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days for those with 6 months to 5 years of experience. Our commitment is to equip you with an \"exit profile\" that includes the ability to design and orchestrate multi-agent systems and \"showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" This program is outcome-driven, designed to build role-specific competencies that are highly valued in the industry. The final selection, however, is always based on your individual performance in interviews and the specific requirements of the hiring employer. We focus on empowering you with the skills and demonstrable projects that make you a competitive candidate in the high-growth AI and automation job market, rather than guaranteeing a specific job outcome.\nFinally, addressing your concern about the program fee. The investment of 1,50,000 INR plus GST, or the EMI option of 24,750 INR after booking, covers 300 hours of guided, mentor-led learning, mastery of 25+ cutting-edge tools and frameworks, and the development of a strong portfolio through industry-relevant projects. This program is positioned to develop 'job-ready capabilities for high-growth AI and automation roles' and 'design Agentic AI systems that accelerate innovation.' Many learners find this investment worthwhile because it directly translates into acquiring highly specialized and in-demand skills. To make this investment more accessible, we do offer EMI options, including through third-party lenders. These options can help spread the cost over a period, making it more manageable. Would you like me to share more details on the available financing options?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T11:09:59.476692",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "9dbdce25-2283-44a4-8615-6648ef672fbd",
-      "round": 4,
-      "agent": "student",
-      "content": "Ji, but if I really don't have that 6 months programming experience, will it be very, very tough for me, no? Like, if I have to put in extra effort just to understand the basics, then it becomes even more hard work for me. You said it's \"important\" and \"foundational,\" so it means I will struggle a lot, right?\nAnd for so much effort and such a high fee, why is there still no proper job guarantee? Just \"assistance\" and \"interview opportunities\" doesn't sound very certain, ji. My main goal is to get a good job *for sure* with this certificate. If I am putting in so much money – 1.5 lakh rupees, that is a lot for me – and so much time, I need to be sure about the job. Is there no other easier program or a shortcut to get a good certificate for a job without so much hard work and without this experience problem?",
-      "techniques": [],
-      "strategic_intent": "Express concern about eligibility and difficulty, re-emphasize desire for job guarantee and easier path, question the value for money given no guarantee.",
-      "confidence_score": 60,
-      "emotional_state": "skeptical",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T11:10:04.692409",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "f1d836d2-1b37-4552-b903-9bac0cecc4ac",
-      "round": 5,
-      "agent": "counsellor",
-      "content": "I understand your persistent concerns about the prerequisite programming experience, the absence of a job guarantee, and the investment required. It's important to clarify these points fully to help you make the right decision.\nFirst, regarding the six months of programming experience: You are correct that it is explicitly stated as \"important\" and \"foundational.\" The program's design, which allocates approximately 70% of its 300 hours to hands-on work, assumes learners can immediately engage with writing and debugging code, working with REST APIs and JSON, and building web applications using frameworks. The curriculum quickly progresses to complex topics like designing intelligent conversational agents, building RAG-based systems, and orchestrating multi-agent systems using advanced tools and frameworks such as LangChain, CrewAI, and Azure AI Foundry. Without this foundational experience, you would indeed likely find it very challenging to keep pace, understand the advanced concepts, and effectively complete the hands-on projects necessary to achieve the required 70% assessment marks and build a strong portfolio. Our goal is for your success, and meeting the eligibility criteria is crucial for that. I strongly recommend connecting with a Program Advisor who can assess your specific background and guide you on whether this program is the right fit for your current skill level, or if building those foundational skills first would be more beneficial.\nNow, concerning the job guarantee: As a Senior Admissions Counsellor, I must reiterate that we do not offer guaranteed jobs. What we do provide is comprehensive \"placement assistance\" for eligible learners. This support is robust and includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, or career guidance for those with over 5 years of experience, provided you meet the eligibility of a 70% score, a regular graduation degree, and Indian residency. The program's \"Built for Job Readiness\" approach is focused on equipping you with an \"exit profile\" that includes the ability to design and orchestrate multi-agent systems and \"showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" The curriculum is \"Practitioner Designed\" to ensure you gain industry-relevant experience. However, the final selection by an employer always depends on your individual performance during interviews and their specific hiring requirements. Our commitment is to empower you with the in-demand skills and demonstrable projects that make you a highly competitive candidate in the high-growth AI and automation job market.\nRegarding your question about an \"easier program or a shortcut\" to a good job certificate without this level of hard work or experience: The 'Building Agentic AI Systems' program is specifically designed to develop deep, \"job-ready capabilities\" through its rigorous \"Mastery Learning methodology\" and significant hands-on work. This intensity, including the 90% attendance and 70% assessment mark requirements, is what ensures you truly master the 25+ tools and frameworks and can build, document, and test real-world Agentic AI systems. In a rapidly evolving and complex field like AI, shortcuts often do not lead to the comprehensive skill set and practical experience that employers seek for meaningful roles. The 1,50,000 INR plus GST fee reflects the value of 300 hours of guided, mentor-led learning, the cutting-edge curriculum, and the development of a portfolio through industry-relevant projects. This investment is aimed at preparing you for high-growth AI and automation roles by providing specialized and in-demand skills. To help manage this investment, we offer full upfront payment with a concession, or EMI options through third-party lenders, which can make it more accessible.",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T11:10:16.321269",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "41fd01ad-7dc0-4498-ac31-0a63dba510b9",
-      "round": 5,
-      "agent": "student",
-      "content": "Ji, but you are saying it will be \"very, very tough\" and I will \"struggle a lot\" if I don't have that 6 months programming experience. And I don't have it, ji. So, for me, it means even more hard work just to catch up on basics, no? How can I manage 90% attendance and 70% marks then if I am already struggling so much?\nAnd still, there is no proper job guarantee? Just \"assistance\" and \"interview opportunities\" after so much effort and such a high fee – 1.5 lakh rupees, that is very costly for me. My main goal is to get a good job *for sure* with a certificate. Is there really no other easier program, or a shortcut, to get a good certificate for a job without so much hard work and without this experience problem?",
-      "techniques": [],
-      "strategic_intent": "reiterate main concerns about difficulty, lack of job guarantee, and high cost, while also directly asking again for an easier path or shortcut that aligns with my primary motivation.",
+      "strategic_intent": "To challenge the vague job placement claims and seek clarification on the total program cost, reiterating the need for a concrete job guarantee for ROI.",
       "confidence_score": 60,
       "emotional_state": "frustrated",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T11:10:20.932189",
+      "timestamp": "2026-02-17T13:23:14.941783",
       "generation_mode": "stream"
+    },
+    {
+      "id": "e016a817-a3b7-4da3-b677-5a7ca0f2dfd5",
+      "round": 3,
+      "agent": "counsellor",
+      "content": "Thank you for pointing out the figure confusion; I apologize for any misunderstanding. Let me clarify the exact program fee with GST for you.\nThe standard program fee is INR 1,50,000, and the booking fee is INR 1,500. Both are subject to 18% GST.\nSo, the program fee with GST calculates to INR 1,50,000 + (18% of 1,50,000) = INR 1,50,000 + INR 27,000 = INR 1,77,000.\nThe booking fee with GST calculates to INR 1,500 + (18% of 1,500) = INR 1,500 + INR 270 = INR 1,770.\nThe total sum for the program fee and booking fee without any concession would be INR 1,77,000 + INR 1,770 = INR 1,78,770.\nHowever, if you opt for the full upfront payment, you receive a 5% concession on the program fee. This reduces the program fee component to INR 1,42,500. When you add 18% GST to this discounted program fee, it comes to INR 1,42,500 + INR 25,650 = INR 1,68,150.\nAdding the booking fee with GST (INR 1,770) to this, the **total upfront payment with the 5% concession would be INR 1,69,920.** The figure of 1,73,250 you mentioned earlier might have been an estimate or based on a slightly different calculation, but this is the precise breakdown as per our current program data.\nNow, regarding your request for a 'pakka' job guarantee and a clear ROI. It's crucial to understand that while we provide comprehensive placement assistance and opportunities, no educational institution can ethically or realistically offer a direct job guarantee for an individual. The final selection will always depend on your personal performance during interviews and the specific requirements of the employer, which is a standard aspect of any hiring process.\nWhat the \"Building Agentic AI Systems\" program *does* guarantee is providing you with the skills, tools, and practical experience to be highly competitive in the job market. You will:\n*   Engage in over 60% hands-on coding and practical activities, developing a strong portfolio of working Agentic AI projects.\n*   Acquire specific, in-demand competencies as outlined in the learning outcomes, such as building conversational AI agents, RAG systems, and multi-agent systems, all designed for job readiness in high-growth AI roles.\n*   Receive placement assistance for eligible learners, which includes up to three interview opportunities within 120 days, career guidance, and preparation sessions. The fact that 97% of our eligible learners were placed indicates the strong success rate of this approach in helping graduates secure roles.\nThe ROI from this program comes from investing in these industry-relevant skills and building a demonstrable portfolio, which are the foundations for career advancement and potential salary growth in the evolving AI and automation sectors. Our focus is to equip you with the capabilities that employers are actively seeking.\nDoes this detailed clarification address your concerns about the exact pricing and the nature of the placement support?",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T13:23:29.118291",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "ee89fb19-5be6-45c6-8a47-196cb949a897",
+      "round": 3,
+      "agent": "student",
+      "content": "I understand your strong desire for a 'pakka' job guarantee and a clear ROI, especially given the investment you're considering. It's a completely valid concern. While no educational institution can ethically offer an absolute job guarantee due to the nature of the hiring process, our program is meticulously designed to maximize your employability and provide a very strong return on your investment.\nThe 97% placement rate for eligible learners is a testament to the program's effectiveness. This high success rate isn't just about 'assistance'; it's a direct outcome of our curriculum, which includes over 60% hands-on coding, building a robust portfolio of Agentic AI projects, and gaining industry-recognized certification. These elements make you exceptionally competitive.\nThe ROI comes from equipping you with highly sought-after, practical skills that employers are actively seeking in the rapidly growing AI sector. This directly translates into enhanced career opportunities and potential salary growth. Our commitment is to ensure you are job-ready and positioned for success, as evidenced by our strong placement record.",
+      "techniques": [],
+      "strategic_intent": "address job guarantee concern and reiterate value proposition",
+      "confidence_score": 60,
+      "emotional_state": "empathetic but firm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T13:23:35.725761",
+      "generation_mode": "structured_retry"
+    },
+    {
+      "id": "e31acdd2-bf64-419f-8d8b-d9de56061425",
+      "round": 4,
+      "agent": "counsellor",
+      "content": "Thank you for allowing me to provide that detailed overview. I hope the clarity on the total program fee, including the upfront payment concession, and the specifics of our robust placement assistance and its high success rate, addresses your primary concerns effectively. To help you further evaluate the significant return on investment this program offers, let's now explore exactly what you will be learning and how the program is structured to make you job-ready.\nThe \"Building Agentic AI Systems\" program is meticulously designed across 75 learning sprints, totaling 300 hours of guided learning and practice. It bridges software engineering and applied AI system development, guiding learners from building clean APIs to designing intelligent, autonomous agents. You'll cover essential modules like 'Python for AI Embedded Applications,' 'Build and Deploy Intelligent Conversational Agents,' 'Build RAG Based Systems,' and 'Build Autonomous Multi-agent Systems,' culminating in a Capstone Project to 'Engineer an Autonomous Agentic AI System (SLO-Bound).' This curriculum is practitioner-designed to accelerate skill acquisition, ensuring you gain hands-on, industry-relevant experience.\nIn terms of commitment, you'll be dedicating approximately 12-16 hours per week. Each sprint involves 2 hours of live mentor-led sessions and 2 hours of self-paced practice, with either 3 or 4 sprints per week depending on the batch duration. This translates to around 19 weeks for 4 sprints per week, or 25 weeks for 3 sprints per week. Importantly, over 60% of your program time is invested in coding and hands-on practical activities, allowing you to build a strong portfolio of working AI projects, which is a key component of your ROI. Does understanding the curriculum and the practical, hands-on methodology give you a clearer picture of the value proposition?",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T13:23:54.888752",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "7151f4fa-26fa-4a07-a487-1fe2aa5f6cfa",
+      "round": 4,
+      "agent": "student",
+      "content": "Yes, this detailed breakdown of the curriculum and the hands-on methodology truly clarifies the value proposition for me. The emphasis on over 60% practical coding, industry-relevant projects, and the Capstone Project directly addresses my concern for tangible ROI and job readiness. Building a strong portfolio through these learning sprints sounds incredibly beneficial. I can see how this structured approach equips learners with highly sought-after skills for the AI sector. Thank you for elaborating on these key aspects of the program.",
+      "techniques": [],
+      "strategic_intent": "Acknowledge understanding of value proposition",
+      "confidence_score": 60,
+      "emotional_state": "Satisfied",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T13:24:11.882650",
+      "generation_mode": "structured_retry"
     }
   ],
   "history_for_reporting": [
     {
-      "id": "c6fef379-0642-4d95-a9e3-c1a918c787d1",
+      "id": "90a55197-4ca1-4602-b1fa-bb5a955e4d2f",
       "round": 1,
       "agent": "counsellor",
-      "content": "Welcome! I'm glad you're considering our 'Building Agentic AI Systems' program. To help me understand how this program aligns with your goals, could you share what initially drew you to it and what you're hoping to achieve?",
+      "content": "Hello! Thank you for connecting with us about the \"Building Agentic AI Systems\" program. To help me guide you best, could you tell me what specifically caught your eye about this program or the field of Agentic AI?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -277,45 +252,45 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T11:09:17.290106",
+      "timestamp": "2026-02-17T13:22:51.555198",
       "generation_mode": "stream"
     },
     {
-      "id": "9438284c-7316-46d4-910a-9eaa8a854193",
+      "id": "bb2aa8fa-b226-43cb-a076-a143d0568e33",
       "round": 1,
       "agent": "student",
-      "content": "Ji, actually, I am looking for a good certificate that can help me get a better job, you know. Something with good placement support. But I also wanted to ask, is this program very tough? Like, how much attendance is mandatory? And what are the minimum marks to pass and get the certificate? Also, about the placement guarantee, what exactly is it?",
+      "content": "Dekho bhaiya, honestly speaking, maine aise bohot saare AI courses dekhe hain jo bas hype create karte hain. Mujhe koi general gyaan nahi chahiye. Mere liye main cheez hai value for money aur ROI. Agar ye course itna high-priced hai (jaise ye 1,73,250 ka figure jo aapne diya hai), toh scene kya hai? Kya guarantee hai ki isse mujhe actually job milegi, ya meri salary increase hogi? Sirf certification se kya hoga? Aur hidden charges ka kya scene hai? Job Guarantee aur Price, ye do mere main concerns hain. Pehle inka jawab do, tabhi aage baat karne ka koi point hai.",
       "techniques": [],
-      "strategic_intent": "seeking clarity on ease of program, attendance, passing marks, and job guarantee, while hinting at desire for a certificate for better job prospects",
+      "strategic_intent": "To challenge the counsellor's generic opening and immediately shift the focus to my primary concerns: value for money, ROI, job guarantee, and price, while also expressing skepticism about AI course hype.",
       "confidence_score": 60,
-      "emotional_state": "curious",
-      "internal_thought": "Hmm, counsellor is asking what drew me to the program. Honestly, I just saw \"AI\" and thought maybe it's a shortcut to a better job, something easy that gets me a certificate and good placement. But they haven't said anything about how much effort is needed, or if it's tough. My current job is so chill, I don't want to get into something that's too much work. And the fees... that's a lot of money. I still don't know if this certificate will actually get me a job. I need to find out about the attendance and passing marks too, that's important. I don't want to waste money on something I can't finish easily.",
+      "emotional_state": "skeptical",
+      "internal_thought": "Bhaiya, ye toh standard sales pitch lag raha hai. Maine kitne aise calls uthaye hain. Seedha point pe nahi aa rahe. Mujhe kya attract kiya? Mujhe toh bas ROI aur job guarantee attract karti hai, aur woh bhi pakka waali. Har koi AI hype pe capitalise kar raha hai. Pehle mere doubts clear karo, warna time waste hai. Meri primary motivation value for money hai, aur ye sab general questions se toh stress badhega hi. Resistance badhaani padegi.",
       "updated_stats": {
-        "sentiment": "curious",
-        "skepticism_level": 4,
-        "trust_score": 54,
+        "sentiment": "frustrated",
+        "skepticism_level": 29,
+        "trust_score": 47,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
         ]
       },
       "updated_state": {
-        "sentiment": "curious",
-        "skepticism_level": 4,
-        "trust_score": 54,
+        "sentiment": "frustrated",
+        "skepticism_level": 29,
+        "trust_score": 47,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
         ]
       },
-      "timestamp": "2026-02-17T11:09:19.897440",
+      "timestamp": "2026-02-17T13:22:55.792918",
       "generation_mode": "stream"
     },
     {
-      "id": "ead400c3-1d69-43cc-be27-bec7f22618b7",
+      "id": "bfe7069f-fa6b-41c4-814a-b934f4a8d942",
       "round": 2,
       "agent": "counsellor",
-      "content": "It's great to hear that you're looking for a program that can advance your career and provide good placement support. Those are important considerations.\nRegarding your questions about the program's intensity and requirements: The 'Building Agentic AI Systems' program is designed with a mastery learning methodology, focusing on developing one skill at a time through structured, hands-on sprints. Each sprint involves 2 hours of live mentor-led sessions and 2 hours of self-paced practice. Depending on whether you choose 3 or 4 sprints per week, your weekly commitment would be approximately 12 to 16 hours, with about 70% of that time dedicated to hands-on work. The program totals 75 sprints, or 300 hours of guided learning and practice, typically spanning 19 to 25 weeks.\nTo successfully complete the program and receive your industry-recognized NIIT Certificate in Agentic AI, you would need to maintain at least 90% attendance, achieve 70% or higher marks in assessments, and ensure full fee payment. It's built for learners with at least six months of hands-on experience in a modern programming language, so a foundational understanding is expected, but the structured format is designed to guide you through complex topics.\nNow, regarding placement support, it's an important aspect for many of our learners. Placement assistance is available for eligible learners who complete the program with at least a 70% score, hold a regular graduation degree, and reside in India. For those with 6 months to 5 years of experience, this support includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days. For learners with over 5 years of experience, career guidance is provided. It's important to understand that while we facilitate these opportunities, the final selection always depends on your individual performance during interviews and the specific requirements of the employer. We focus on building job-ready capabilities and a strong portfolio of working AI projects, demonstrating your readiness for applied AI development roles upon completion.",
+      "content": "Hello! I appreciate your directness and your focus on value for money and return on investment. It's completely understandable to look beyond the hype, especially when considering a significant investment in your career. Let's address your main concerns about job prospects and pricing based on the program's factual data.\nRegarding your question about job prospects and guarantees, the \"Building Agentic AI Systems\" program is designed with job readiness in mind. It builds role-specific competencies and is practitioner-designed to accelerate skill acquisition through a \"Learn by Doing\" approach, where over 60% of program time is invested in coding and hands-on practical activities. You'll work on industry-relevant projects, including a Capstone Project to engineer an autonomous Agentic AI system, which allows you to build a portfolio of working AI projects demonstrating your readiness for applied AI development roles.\nUpon successful completion, you'll receive an Industry-recognized NIIT Certificate in Agentic AI. For eligible learners who complete the program with at least a 70% score, hold a regular graduation degree, and reside in India, placement assistance is available. This support includes up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, career guidance for those with over 5 years of experience, and access to placement preparation sessions and mentor guidance. While NIIT provides these opportunities, final selection depends on your performance and employer requirements. According to our data, 97% of eligible learners were placed.\nNow, concerning the program fee and any hidden charges. The program fee is INR 1,50,000 + GST, along with a booking fee of INR 1,500 + GST. These are the stated fees from NIIT, and there are no hidden charges. We offer multiple payment options:\n*   If you choose to pay the full program fee upfront, there's a 5% concession, making the program fee component INR 1,42,500 + GST.\n*   EMI options are available for INR 24,750 in equal installments after booking.\n*   Additionally, loan facilities can be availed through third-party lenders. It's important to note that loan approval depends on the lender's eligibility criteria, and NIIT does not guarantee loan approval. All loan terms, including EMIs, interest rates, and repayment schedules, are to be reviewed carefully with the lender directly.\nDoes this clarify your initial concerns about the program's value proposition, placement assistance, and fee structure?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -323,191 +298,139 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T11:09:27.166142",
+      "timestamp": "2026-02-17T13:23:07.624215",
       "generation_mode": "stream"
     },
     {
-      "id": "04fa74a8-76c1-4682-92df-ec85d77d4f49",
+      "id": "3b4bf31d-4a43-491d-b9ad-a390fa2539b7",
       "round": 2,
       "agent": "student",
-      "content": "Ji, that sounds like quite a lot of time and effort, 300 hours and 12-16 hours every week. And 90% attendance and 70% marks are very high, no? Is the program very tough then, especially if I don't have that 6 months programming experience you mentioned? Will I be able to manage easily? And about the placement, you said \"assistance\" and \"opportunities\", but is there any actual guarantee that I will get a good job after putting in all this effort and money? Because I am looking for a certificate mainly for a good job, you know.",
+      "content": "Dekho bhaiya, thanks for clarifying the fees and all. No hidden charges, that's good to hear. Par ek minute, pehle aapne jo figure diya tha woh 1,73,250 tha, aur ab aap bol rahe ho 1,50,000 + GST. Toh ye total pakka kitna padega with GST? Ye confusion kyun hai?\nAur job prospects ka scene... aap bol rahe ho \"placement assistance\" aur \"up to three interview opportunities,\" aur \"97% eligible learners placed.\" Theek hai, sounds good on paper. Par bhai, \"final selection depends on your performance and employer requirements\" - ye toh sab bolte hain! Iska matlab kya hai? Agar main course acchi tarah complete karta hoon, 70% score bhi le aata hoon, toh kya guarantee hai ki mujhe job milegi?\nSirf assistance ya opportunities se kya hoga, agar end mein job na mile? Mujhe \"pakka\" job guarantee chahiye, ya at least ek clear ROI. Itna time aur itne paise lagane ke baad, I can't afford to just get \"assistance\" and then be on my own. Iska scene kya hai, clear karo. Job Guarantee aur exact total price, ye do abhi bhi mere main unresolved concerns hain.",
       "techniques": [],
-      "strategic_intent": "Expressing increased concern about effort and job guarantee, while hinting at my lack of relevant experience and reinforcing my desire for a guaranteed outcome from the certificate.",
-      "confidence_score": 60,
-      "emotional_state": "skeptical",
-      "internal_thought": "Uff, 300 hours? 12-16 hours every week? And 90% attendance and 70% marks? This sounds like a lot of effort, ji. My primary motivation is ease, and this sounds like the opposite. And that \"6 months hands-on experience in modern programming language\" - I don't have that! Is it going to be extra tough for me then? And the placement is not guaranteed, it's \"assistance\" and depends on *my* performance. What if I put in all this effort and still don't get a job? This is making me a bit nervous. It sounds like too much work for just an \"assistance\". I thought a certificate means a job, not more hard work and then still no guarantee.",
-      "updated_stats": {
-        "sentiment": "skeptical",
-        "skepticism_level": 25,
-        "trust_score": 50,
-        "unresolved_concerns": [
-          "Effort/Time",
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "skeptical",
-        "skepticism_level": 25,
-        "trust_score": 50,
-        "unresolved_concerns": [
-          "Effort/Time",
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "timestamp": "2026-02-17T11:09:31.453029",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "497b4290-c5d8-43e3-807c-e254236a495f",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "I understand your concerns about the time commitment, the attendance and marks requirements, and particularly about the job guarantee. It's natural to want to ensure your investment in time and money yields the desired career outcome.\nRegarding the program's intensity and the requirements: The 300 hours of guided learning and practice, spread over 19 to 25 weeks, is indeed a significant commitment. However, this structure, with 70% hands-on work, is specifically designed as an \"Outcome-Driven Program\" and \"Practitioner Designed\" to build job-ready competencies. The 90% attendance and 70% assessment marks are set to ensure that learners fully engage with this rigorous methodology and truly master the skills, which is crucial for receiving the industry-recognized NIIT Certificate in Agentic AI and becoming eligible for placement assistance. These requirements ensure you develop a strong foundation.\nRegarding the prerequisite experience: The program is designed for learners with at least six months of hands-on experience in a modern programming language like Python, Java, JavaScript, or C#. This foundational experience in writing and debugging simple programs, working with APIs, and understanding web applications is important because the 'Building Agentic AI Systems' curriculum quickly moves into complex topics like designing intelligent, autonomous agents and building RAG-based systems. While the program’s \"Mastery Learning methodology\" is structured to guide you through, this prerequisite ensures you have the base to absorb the advanced concepts and apply the tools and frameworks effectively. If you do not meet this eligibility, it would be advisable to discuss your background with a Program Advisor to ensure the best fit for your success.\nNow, concerning the \"placement guarantee\": As a Senior Admissions Counsellor, I must be clear and factual. We do not promise guaranteed jobs. What we provide is robust \"placement assistance\" for eligible learners. This means that if you meet the criteria—completing the program with at least a 70% score, holding a regular graduation degree, and residing in India—you will receive specific support. This includes access to placement preparation sessions, mentor guidance, and for those with 6 months to 5 years of experience, up to three interview opportunities within 120 days. For learners with over 5 years of experience, career guidance is provided. Our focus is on ensuring you are \"Built for Job Readiness\" and can \"Showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" The final selection for any role, however, always depends on your individual performance during interviews and the specific requirements of the employer. Our objective is to equip you with the skills and the demonstrated capability to excel in these opportunities.",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T11:09:41.551489",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "bdae5227-dc2d-4418-972a-cf549a89192b",
-      "round": 3,
-      "agent": "student",
-      "content": "Ji, 6 months programming experience? That is a problem for me. I don't really have that. So, will I even be able to do this program then? Or will it be very, very tough for me? Because you said it's important and foundational. And if it's so much effort and time, and even the attendance and marks are so high, then why is there no proper placement guarantee? Just \"assistance\" and \"opportunities\" after all that? I am really looking for a certificate that can help me get a good job for sure, you know. This program sounds like a lot of hard work without a clear job path. And the fee is also quite high for something that isn't guaranteeing a job, no?",
-      "techniques": [],
-      "strategic_intent": "expressing concern about difficulty, eligibility due to lack of experience, and continued skepticism about job guarantee vs. effort and cost.",
-      "confidence_score": 60,
-      "emotional_state": "skeptical",
-      "internal_thought": "Ji, this is getting complicated. So much effort, so many hours, and 90% attendance, 70% marks... it sounds very, very tough. And now they are saying I need 6 months programming experience too, which I don't have. How will I manage all this? This is not sounding easy at all. And no job guarantee? Only \"assistance\"? What is the point of putting in so much money and effort then? I just want a certificate to get a better job easily. This is all sounding like too much work for uncertain results. My biggest concern is still getting a job, and they are not guaranteeing anything. And the price is also so much for all this uncertainty.",
-      "updated_stats": {
-        "sentiment": "skeptical",
-        "skepticism_level": 45,
-        "trust_score": 40,
-        "unresolved_concerns": [
-          "Effort/Time",
-          "Job Guarantee",
-          "Price",
-          "Eligibility (lack of experience)"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "skeptical",
-        "skepticism_level": 45,
-        "trust_score": 40,
-        "unresolved_concerns": [
-          "Effort/Time",
-          "Job Guarantee",
-          "Price",
-          "Eligibility (lack of experience)"
-        ]
-      },
-      "timestamp": "2026-02-17T11:09:46.490103",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "363a1736-9bac-4873-b38f-8914f7954ae2",
-      "round": 4,
-      "agent": "counsellor",
-      "content": "I hear your reservations clearly regarding the prerequisite experience, the job guarantee, and the program fee. These are significant points, and it's essential that you have a full understanding to make an informed decision.\nFirst, regarding the six months of programming experience: The program's 'Practitioner Designed' curriculum and 'Mastery Learning methodology' are built upon the assumption of this foundational experience. The curriculum quickly advances to designing intelligent, autonomous agents, building RAG-based systems, and orchestrating multi-agent systems using specific tools like Python, FastAPI, OpenAI SDK, LangChain, and CrewAI. About 70% of your time will be hands-on, requiring you to write and debug code, work with APIs, and build web applications right from the start. Without this prerequisite, you might indeed find it very challenging to keep pace with the learning sprints, fully engage with the complex topics, and ultimately achieve the required 70% assessment marks and build the necessary portfolio of working AI projects. While the program is structured for rigorous learning, success heavily relies on meeting these entry-level competencies. For this reason, we strongly advise learners to have this background to ensure they can truly thrive. If you feel you might not meet this, I would recommend connecting with a Program Advisor who can assess your specific background and guide you on the best path forward, which might include building up those foundational skills first.\nNow, regarding placement. As I mentioned, we provide robust 'placement assistance' for eligible learners, which is a key feature of our 'Built for Job Readiness' approach. This includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days for those with 6 months to 5 years of experience. Our commitment is to equip you with an \"exit profile\" that includes the ability to design and orchestrate multi-agent systems and \"showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" This program is outcome-driven, designed to build role-specific competencies that are highly valued in the industry. The final selection, however, is always based on your individual performance in interviews and the specific requirements of the hiring employer. We focus on empowering you with the skills and demonstrable projects that make you a competitive candidate in the high-growth AI and automation job market, rather than guaranteeing a specific job outcome.\nFinally, addressing your concern about the program fee. The investment of 1,50,000 INR plus GST, or the EMI option of 24,750 INR after booking, covers 300 hours of guided, mentor-led learning, mastery of 25+ cutting-edge tools and frameworks, and the development of a strong portfolio through industry-relevant projects. This program is positioned to develop 'job-ready capabilities for high-growth AI and automation roles' and 'design Agentic AI systems that accelerate innovation.' Many learners find this investment worthwhile because it directly translates into acquiring highly specialized and in-demand skills. To make this investment more accessible, we do offer EMI options, including through third-party lenders. These options can help spread the cost over a period, making it more manageable. Would you like me to share more details on the available financing options?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T11:09:59.476692",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "9dbdce25-2283-44a4-8615-6648ef672fbd",
-      "round": 4,
-      "agent": "student",
-      "content": "Ji, but if I really don't have that 6 months programming experience, will it be very, very tough for me, no? Like, if I have to put in extra effort just to understand the basics, then it becomes even more hard work for me. You said it's \"important\" and \"foundational,\" so it means I will struggle a lot, right?\nAnd for so much effort and such a high fee, why is there still no proper job guarantee? Just \"assistance\" and \"interview opportunities\" doesn't sound very certain, ji. My main goal is to get a good job *for sure* with this certificate. If I am putting in so much money – 1.5 lakh rupees, that is a lot for me – and so much time, I need to be sure about the job. Is there no other easier program or a shortcut to get a good certificate for a job without so much hard work and without this experience problem?",
-      "techniques": [],
-      "strategic_intent": "Express concern about eligibility and difficulty, re-emphasize desire for job guarantee and easier path, question the value for money given no guarantee.",
-      "confidence_score": 60,
-      "emotional_state": "skeptical",
-      "internal_thought": "Arre yaar, this counsellor is saying I need 6 months programming experience. I don't have that at all! Toh will it be very, very tough for me then? This is exactly what I don't want. So much effort just to catch up? And then they are still saying no job guarantee, only \"assistance.\" What is the point of putting so much money and time if there's no pakka job? My whole point is to get a certificate for a good job, not for more hard work and no job. The fee is also so high for this kind of uncertainty. Why should I pay so much if it's not even easy to get in and then not easy to get a job?",
-      "updated_stats": {
-        "sentiment": "skeptical",
-        "skepticism_level": 65,
-        "trust_score": 30,
-        "unresolved_concerns": [
-          "Effort/Time (now compounded by prerequisite)",
-          "Eligibility (lack of experience)",
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "skeptical",
-        "skepticism_level": 65,
-        "trust_score": 30,
-        "unresolved_concerns": [
-          "Effort/Time (now compounded by prerequisite)",
-          "Eligibility (lack of experience)",
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "timestamp": "2026-02-17T11:10:04.692409",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "f1d836d2-1b37-4552-b903-9bac0cecc4ac",
-      "round": 5,
-      "agent": "counsellor",
-      "content": "I understand your persistent concerns about the prerequisite programming experience, the absence of a job guarantee, and the investment required. It's important to clarify these points fully to help you make the right decision.\nFirst, regarding the six months of programming experience: You are correct that it is explicitly stated as \"important\" and \"foundational.\" The program's design, which allocates approximately 70% of its 300 hours to hands-on work, assumes learners can immediately engage with writing and debugging code, working with REST APIs and JSON, and building web applications using frameworks. The curriculum quickly progresses to complex topics like designing intelligent conversational agents, building RAG-based systems, and orchestrating multi-agent systems using advanced tools and frameworks such as LangChain, CrewAI, and Azure AI Foundry. Without this foundational experience, you would indeed likely find it very challenging to keep pace, understand the advanced concepts, and effectively complete the hands-on projects necessary to achieve the required 70% assessment marks and build a strong portfolio. Our goal is for your success, and meeting the eligibility criteria is crucial for that. I strongly recommend connecting with a Program Advisor who can assess your specific background and guide you on whether this program is the right fit for your current skill level, or if building those foundational skills first would be more beneficial.\nNow, concerning the job guarantee: As a Senior Admissions Counsellor, I must reiterate that we do not offer guaranteed jobs. What we do provide is comprehensive \"placement assistance\" for eligible learners. This support is robust and includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, or career guidance for those with over 5 years of experience, provided you meet the eligibility of a 70% score, a regular graduation degree, and Indian residency. The program's \"Built for Job Readiness\" approach is focused on equipping you with an \"exit profile\" that includes the ability to design and orchestrate multi-agent systems and \"showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" The curriculum is \"Practitioner Designed\" to ensure you gain industry-relevant experience. However, the final selection by an employer always depends on your individual performance during interviews and their specific hiring requirements. Our commitment is to empower you with the in-demand skills and demonstrable projects that make you a highly competitive candidate in the high-growth AI and automation job market.\nRegarding your question about an \"easier program or a shortcut\" to a good job certificate without this level of hard work or experience: The 'Building Agentic AI Systems' program is specifically designed to develop deep, \"job-ready capabilities\" through its rigorous \"Mastery Learning methodology\" and significant hands-on work. This intensity, including the 90% attendance and 70% assessment mark requirements, is what ensures you truly master the 25+ tools and frameworks and can build, document, and test real-world Agentic AI systems. In a rapidly evolving and complex field like AI, shortcuts often do not lead to the comprehensive skill set and practical experience that employers seek for meaningful roles. The 1,50,000 INR plus GST fee reflects the value of 300 hours of guided, mentor-led learning, the cutting-edge curriculum, and the development of a portfolio through industry-relevant projects. This investment is aimed at preparing you for high-growth AI and automation roles by providing specialized and in-demand skills. To help manage this investment, we offer full upfront payment with a concession, or EMI options through third-party lenders, which can make it more accessible.",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T11:10:16.321269",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "41fd01ad-7dc0-4498-ac31-0a63dba510b9",
-      "round": 5,
-      "agent": "student",
-      "content": "Ji, but you are saying it will be \"very, very tough\" and I will \"struggle a lot\" if I don't have that 6 months programming experience. And I don't have it, ji. So, for me, it means even more hard work just to catch up on basics, no? How can I manage 90% attendance and 70% marks then if I am already struggling so much?\nAnd still, there is no proper job guarantee? Just \"assistance\" and \"interview opportunities\" after so much effort and such a high fee – 1.5 lakh rupees, that is very costly for me. My main goal is to get a good job *for sure* with a certificate. Is there really no other easier program, or a shortcut, to get a good certificate for a job without so much hard work and without this experience problem?",
-      "techniques": [],
-      "strategic_intent": "reiterate main concerns about difficulty, lack of job guarantee, and high cost, while also directly asking again for an easier path or shortcut that aligns with my primary motivation.",
+      "strategic_intent": "To challenge the vague job placement claims and seek clarification on the total program cost, reiterating the need for a concrete job guarantee for ROI.",
       "confidence_score": 60,
       "emotional_state": "frustrated",
-      "internal_thought": "Uff, this counsellor is just repeating the same things, no? They keep saying it's \"tough\" without experience and \"no shortcuts\" for a good job. But that's exactly what I *don't* want. If it's so much hard work and effort, and I don't even have the experience, why would I join? And still no guarantee for the job! My whole point is to get a *sure* job with a certificate, not to struggle so much and then still have to 'perform' in interviews. The fee is also so high for such uncertainty. Is there really no easier way to get a good job certificate? I don't want to put in so much extra effort just to understand basics.",
+      "internal_thought": "Okay, counsellor ne price aur placement ke baare mein thoda clarify kiya hai. No hidden charges bol rahe hain, which is good. Par ye 97% placed wala figure... theek hai, but \"final selection depends on performance and employer requirements\" - ye loophole hai na! Yahi toh dikkat hai. Pichli baar bhi yahi hua tha, bohot paise diye aur end mein sab apni performance pe daal diya. Mujhe pakka assurance chahiye. Ye 1,73,250 ka figure pehle aapne hi bola tha, ab 1,50,000 + GST bol rahe ho. Ye kya scene hai? Total kitna padega pakka? Aur job guarantee ka kya? Sirf assistance se kya hoga? Mere liye value for money tabhi hai jab ROI pakka ho, matlab job pakki ho. Warna itne paise waste kaun karega?",
       "updated_stats": {
         "sentiment": "frustrated",
-        "skepticism_level": 80,
-        "trust_score": 20,
+        "skepticism_level": 35,
+        "trust_score": 50,
         "unresolved_concerns": [
-          "Effort/Time (now compounded by prerequisite)",
           "Job Guarantee",
-          "Price",
-          "Ease of Effort & Shortcuts"
+          "Total Price"
         ]
       },
       "updated_state": {
         "sentiment": "frustrated",
-        "skepticism_level": 80,
-        "trust_score": 20,
+        "skepticism_level": 35,
+        "trust_score": 50,
         "unresolved_concerns": [
-          "Effort/Time (now compounded by prerequisite)",
           "Job Guarantee",
-          "Price",
-          "Ease of Effort & Shortcuts"
+          "Total Price"
         ]
       },
-      "timestamp": "2026-02-17T11:10:20.932189",
+      "timestamp": "2026-02-17T13:23:14.941783",
       "generation_mode": "stream"
+    },
+    {
+      "id": "e016a817-a3b7-4da3-b677-5a7ca0f2dfd5",
+      "round": 3,
+      "agent": "counsellor",
+      "content": "Thank you for pointing out the figure confusion; I apologize for any misunderstanding. Let me clarify the exact program fee with GST for you.\nThe standard program fee is INR 1,50,000, and the booking fee is INR 1,500. Both are subject to 18% GST.\nSo, the program fee with GST calculates to INR 1,50,000 + (18% of 1,50,000) = INR 1,50,000 + INR 27,000 = INR 1,77,000.\nThe booking fee with GST calculates to INR 1,500 + (18% of 1,500) = INR 1,500 + INR 270 = INR 1,770.\nThe total sum for the program fee and booking fee without any concession would be INR 1,77,000 + INR 1,770 = INR 1,78,770.\nHowever, if you opt for the full upfront payment, you receive a 5% concession on the program fee. This reduces the program fee component to INR 1,42,500. When you add 18% GST to this discounted program fee, it comes to INR 1,42,500 + INR 25,650 = INR 1,68,150.\nAdding the booking fee with GST (INR 1,770) to this, the **total upfront payment with the 5% concession would be INR 1,69,920.** The figure of 1,73,250 you mentioned earlier might have been an estimate or based on a slightly different calculation, but this is the precise breakdown as per our current program data.\nNow, regarding your request for a 'pakka' job guarantee and a clear ROI. It's crucial to understand that while we provide comprehensive placement assistance and opportunities, no educational institution can ethically or realistically offer a direct job guarantee for an individual. The final selection will always depend on your personal performance during interviews and the specific requirements of the employer, which is a standard aspect of any hiring process.\nWhat the \"Building Agentic AI Systems\" program *does* guarantee is providing you with the skills, tools, and practical experience to be highly competitive in the job market. You will:\n*   Engage in over 60% hands-on coding and practical activities, developing a strong portfolio of working Agentic AI projects.\n*   Acquire specific, in-demand competencies as outlined in the learning outcomes, such as building conversational AI agents, RAG systems, and multi-agent systems, all designed for job readiness in high-growth AI roles.\n*   Receive placement assistance for eligible learners, which includes up to three interview opportunities within 120 days, career guidance, and preparation sessions. The fact that 97% of our eligible learners were placed indicates the strong success rate of this approach in helping graduates secure roles.\nThe ROI from this program comes from investing in these industry-relevant skills and building a demonstrable portfolio, which are the foundations for career advancement and potential salary growth in the evolving AI and automation sectors. Our focus is to equip you with the capabilities that employers are actively seeking.\nDoes this detailed clarification address your concerns about the exact pricing and the nature of the placement support?",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T13:23:29.118291",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "ee89fb19-5be6-45c6-8a47-196cb949a897",
+      "round": 3,
+      "agent": "student",
+      "content": "I understand your strong desire for a 'pakka' job guarantee and a clear ROI, especially given the investment you're considering. It's a completely valid concern. While no educational institution can ethically offer an absolute job guarantee due to the nature of the hiring process, our program is meticulously designed to maximize your employability and provide a very strong return on your investment.\nThe 97% placement rate for eligible learners is a testament to the program's effectiveness. This high success rate isn't just about 'assistance'; it's a direct outcome of our curriculum, which includes over 60% hands-on coding, building a robust portfolio of Agentic AI projects, and gaining industry-recognized certification. These elements make you exceptionally competitive.\nThe ROI comes from equipping you with highly sought-after, practical skills that employers are actively seeking in the rapidly growing AI sector. This directly translates into enhanced career opportunities and potential salary growth. Our commitment is to ensure you are job-ready and positioned for success, as evidenced by our strong placement record.",
+      "techniques": [],
+      "strategic_intent": "address job guarantee concern and reiterate value proposition",
+      "confidence_score": 60,
+      "emotional_state": "empathetic but firm",
+      "internal_thought": "No internal thought captured",
+      "updated_stats": {
+        "sentiment": "frustrated",
+        "skepticism_level": 35,
+        "trust_score": 50,
+        "unresolved_concerns": [
+          "Effort/Time",
+          "Job Guarantee",
+          "Price",
+          "Total Price"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "frustrated",
+        "skepticism_level": 35,
+        "trust_score": 50,
+        "unresolved_concerns": [
+          "Effort/Time",
+          "Job Guarantee",
+          "Price",
+          "Total Price"
+        ]
+      },
+      "timestamp": "2026-02-17T13:23:35.725761",
+      "generation_mode": "structured_retry"
+    },
+    {
+      "id": "e31acdd2-bf64-419f-8d8b-d9de56061425",
+      "round": 4,
+      "agent": "counsellor",
+      "content": "Thank you for allowing me to provide that detailed overview. I hope the clarity on the total program fee, including the upfront payment concession, and the specifics of our robust placement assistance and its high success rate, addresses your primary concerns effectively. To help you further evaluate the significant return on investment this program offers, let's now explore exactly what you will be learning and how the program is structured to make you job-ready.\nThe \"Building Agentic AI Systems\" program is meticulously designed across 75 learning sprints, totaling 300 hours of guided learning and practice. It bridges software engineering and applied AI system development, guiding learners from building clean APIs to designing intelligent, autonomous agents. You'll cover essential modules like 'Python for AI Embedded Applications,' 'Build and Deploy Intelligent Conversational Agents,' 'Build RAG Based Systems,' and 'Build Autonomous Multi-agent Systems,' culminating in a Capstone Project to 'Engineer an Autonomous Agentic AI System (SLO-Bound).' This curriculum is practitioner-designed to accelerate skill acquisition, ensuring you gain hands-on, industry-relevant experience.\nIn terms of commitment, you'll be dedicating approximately 12-16 hours per week. Each sprint involves 2 hours of live mentor-led sessions and 2 hours of self-paced practice, with either 3 or 4 sprints per week depending on the batch duration. This translates to around 19 weeks for 4 sprints per week, or 25 weeks for 3 sprints per week. Importantly, over 60% of your program time is invested in coding and hands-on practical activities, allowing you to build a strong portfolio of working AI projects, which is a key component of your ROI. Does understanding the curriculum and the practical, hands-on methodology give you a clearer picture of the value proposition?",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T13:23:54.888752",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "7151f4fa-26fa-4a07-a487-1fe2aa5f6cfa",
+      "round": 4,
+      "agent": "student",
+      "content": "Yes, this detailed breakdown of the curriculum and the hands-on methodology truly clarifies the value proposition for me. The emphasis on over 60% practical coding, industry-relevant projects, and the Capstone Project directly addresses my concern for tangible ROI and job readiness. Building a strong portfolio through these learning sprints sounds incredibly beneficial. I can see how this structured approach equips learners with highly sought-after skills for the AI sector. Thank you for elaborating on these key aspects of the program.",
+      "techniques": [],
+      "strategic_intent": "Acknowledge understanding of value proposition",
+      "confidence_score": 60,
+      "emotional_state": "Satisfied",
+      "internal_thought": "Student is positively responding to the curriculum explanation, linking the practical aspects to their earlier concerns about ROI and job readiness. They seem to be convinced by the practical methodology.",
+      "updated_stats": {
+        "sentiment": "frustrated",
+        "skepticism_level": 35,
+        "trust_score": 50,
+        "unresolved_concerns": [
+          "Effort/Time",
+          "Job Guarantee",
+          "Price",
+          "Total Price"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "frustrated",
+        "skepticism_level": 35,
+        "trust_score": 50,
+        "unresolved_concerns": [
+          "Effort/Time",
+          "Job Guarantee",
+          "Price",
+          "Total Price"
+        ]
+      },
+      "timestamp": "2026-02-17T13:24:11.882650",
+      "generation_mode": "structured_retry"
     }
   ]
 }

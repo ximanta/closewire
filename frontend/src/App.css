@@ -64,10 +64,20 @@ textarea {
   height: 100vh;
   overflow: hidden;
   background-color: #112233;
-  background-repeat: no-repeat;
-  background-position: center bottom;
-  background-size: cover;
   padding: 18px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+  transform: scale(1.01);
+  animation: slowDrift 20s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
 }
 
 .app.stage-completed {
@@ -93,7 +103,7 @@ textarea {
   box-shadow: inset 0 0 180px rgba(0, 0, 0, 0.5);
 }
 
-.app > * {
+.app> :not(.hero-bg) {
   position: relative;
   z-index: 1;
 }
@@ -163,36 +173,97 @@ textarea {
   border: 1px solid rgba(173, 196, 248, 0.4);
 }
 
-.activationOverlay {
-  min-height: 82vh;
-  display: grid;
-  place-content: center;
+.app>.activationOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
   gap: var(--space-3);
   text-align: center;
-  padding: var(--space-4);
+  padding-bottom: 26vh;
+  z-index: 1;
+}
+
+.activationContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  position: relative;
+  z-index: 2;
+}
+
+.activationReflection {
+  position: absolute;
+  left: 50%;
+  bottom: 4vh;
+  transform: translateX(-50%) scaleY(-1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  filter: blur(1.5px);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 1;
+  -webkit-mask-image: linear-gradient(to top, white 10%, transparent 80%);
+  mask-image: linear-gradient(to top, white 10%, transparent 80%);
+}
+
+.activationOverlay::after {
+  content: "";
+  position: absolute;
+  bottom: 22vh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 680px;
+  height: 80px;
+  background: radial-gradient(ellipse at center,
+      rgba(110, 214, 255, 0.30),
+      rgba(110, 214, 255, 0.12),
+      transparent 70%);
+  filter: blur(24px);
+  pointer-events: none;
 }
 
 .activationOverlay h2 {
   margin: 0 0 8px;
-  letter-spacing: 0.05em;
+  font-size: clamp(1.6rem, 2.4vw, 1.8rem);
+  letter-spacing: 0.04em;
+  text-shadow:
+    0 0 6px rgba(110, 214, 255, 0.6),
+    0 0 18px rgba(110, 214, 255, 0.25);
 }
 
 .activationSteps p {
   margin: 6px 0;
   color: #8ea2c9;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
   opacity: 0.35;
   transition: opacity 0.35s ease, transform 0.35s ease;
+  text-shadow:
+    0 0 8px rgba(110, 214, 255, 0.28),
+    0 0 16px rgba(110, 214, 255, 0.14);
 }
 
 .activationSteps p.active {
   opacity: 1;
   color: #d7e3ff;
   transform: translateY(-1px);
+  text-shadow:
+    0 0 6px rgba(255, 157, 59, 0.6),
+    0 0 16px rgba(255, 157, 59, 0.3);
 }
 
 .activationLine {
   width: min(620px, 84vw);
   height: 4px;
+  margin-top: 12px;
+  margin-bottom: 2vh;
+  opacity: 0.85;
   border-radius: 999px;
   overflow: hidden;
   background: rgba(110, 146, 215, 0.22);
@@ -951,6 +1022,7 @@ textarea {
   0% {
     transform: translateX(-120%);
   }
+
   100% {
     transform: translateX(320%);
   }
@@ -961,6 +1033,7 @@ textarea {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -971,9 +1044,11 @@ textarea {
   0% {
     box-shadow: 0 0 8px rgba(137, 167, 220, 0.22);
   }
+
   50% {
     box-shadow: 0 0 18px rgba(137, 167, 220, 0.46);
   }
+
   100% {
     box-shadow: 0 0 8px rgba(137, 167, 220, 0.22);
   }
@@ -984,13 +1059,16 @@ textarea {
     opacity: 0;
     transform: translateY(16px);
   }
+
   15% {
     opacity: 1;
     transform: translateY(0);
   }
+
   85% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
     transform: translateY(-20px);
@@ -1002,6 +1080,7 @@ textarea {
     transform: scale(0.7);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
@@ -1009,12 +1088,24 @@ textarea {
 }
 
 @keyframes pulse {
+
   0%,
   100% {
     box-shadow: 0 0 0 0 rgba(136, 179, 255, 0.45);
   }
+
   50% {
     box-shadow: 0 0 0 9px rgba(136, 179, 255, 0);
+  }
+}
+
+@keyframes slowDrift {
+  from {
+    transform: scale(1.01);
+  }
+
+  to {
+    transform: scale(1.03);
   }
 }
 
@@ -1022,9 +1113,11 @@ textarea {
   0% {
     box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
   }
+
   70% {
     box-shadow: 0 0 0 6px rgba(52, 211, 153, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
   }
@@ -1034,9 +1127,11 @@ textarea {
   0% {
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.65);
   }
+
   70% {
     box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
   }
+
   100% {
     box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
   }
@@ -1046,6 +1141,7 @@ textarea {
   0% {
     transform: translateY(0) rotate(0deg);
   }
+
   100% {
     transform: translateY(-20px) rotate(10deg);
   }
@@ -1056,6 +1152,7 @@ textarea {
     border-color: #ffffff;
     box-shadow: 0 0 20px #ffffff;
   }
+
   100% {
     box-shadow: inherit;
   }
@@ -1066,6 +1163,7 @@ textarea {
     opacity: 0;
     transform: translateY(-6px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1076,6 +1174,7 @@ textarea {
   .projectionCard {
     width: min(88%, 860px);
   }
+
   .resultGrid {
     grid-template-columns: 1fr;
   }
@@ -1086,14 +1185,17 @@ textarea {
     flex-direction: column;
     gap: 9px;
   }
+
   .agentIdentity {
     width: 100%;
     max-width: none;
   }
+
   .projectionCard {
     width: 100%;
     transform: none !important;
   }
+
   .metricsRibbon {
     border-radius: 12px;
     bottom: 8px;
@@ -1679,6 +1781,7 @@ textarea {
   .pillarsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
   .retryCardBody {
     grid-template-columns: 1fr;
   }
@@ -1689,19 +1792,24 @@ textarea {
     width: 100vw;
     height: 100vh;
   }
+
   .resultScrollBody {
     padding: 14px 12px 50px;
   }
+
   .pillarsGrid {
     grid-template-columns: 1fr;
   }
+
   .pillarCard {
     height: auto;
     min-height: 220px;
   }
+
   .resultActions {
     flex-wrap: wrap;
   }
+
   .timelineHeaderRow {
     flex-direction: column;
     align-items: flex-start;
@@ -1713,28 +1821,35 @@ textarea {
   body {
     font-size: 16px;
   }
+
   .hero h1 {
     font-size: clamp(3rem, 5.2vw, 4.4rem);
   }
+
   .subtitle {
     font-size: 1.05rem;
   }
+
   .inputRow input {
     min-height: 64px;
     font-size: 1.06rem;
   }
+
   .inputRow button,
   .downloadBtn,
   .ghostBtn {
     min-height: 60px;
     font-size: 0.98rem;
   }
+
   .resultScrollBody {
     padding: 24px 24px 28px;
   }
+
   .pillarCard {
     height: 392px;
   }
+
   .metricChip {
     font-size: 0.92rem;
   }
@@ -1744,26 +1859,32 @@ textarea {
   body {
     font-size: 14px;
   }
+
   .app {
     padding: 12px;
   }
+
   .hero {
     min-height: 82vh;
     gap: 10px;
     padding: 10px;
   }
+
   .subtitle {
     font-size: 0.9rem;
   }
+
   .inputRow {
     gap: 10px;
   }
+
   .inputRow input {
     min-height: 54px;
     padding: 12px 14px;
     font-size: 0.95rem;
     border-radius: 10px;
   }
+
   .inputRow button,
   .downloadBtn,
   .ghostBtn {
@@ -1772,17 +1893,21 @@ textarea {
     font-size: 0.86rem;
     border-radius: 10px;
   }
+
   .metricsRibbon {
     padding: 8px 10px;
     gap: 8px;
   }
+
   .metricChip {
     padding: 6px 9px;
     font-size: 0.78rem;
   }
+
   .resultScrollBody {
     padding: 12px 10px 46px;
   }
+
   .outcomeSummaryCard,
   .personaTopCard,
   .primaryObjectionAlert,
@@ -1792,24 +1917,41 @@ textarea {
     padding: 11px;
     margin-bottom: 10px;
   }
+
   .resultCard h2 {
     font-size: 1.03rem;
   }
+
   .resultCard h3 {
     font-size: 0.9rem;
     margin: 4px 0 7px;
   }
+
   .resultActions {
     gap: 5px;
     padding: 3px 6px;
   }
+
   .stickyActions .downloadBtn,
   .stickyActions .ghostBtn {
     min-height: 34px;
     padding: 5px 8px;
     font-size: 0.74rem;
   }
+
   .timelineTrack {
     grid-auto-columns: minmax(165px, 190px);
+  }
+
+  .app>.activationOverlay {
+    padding-bottom: 22vh;
+  }
+
+  .activationOverlay h2 {
+    font-size: 1.45rem;
+  }
+
+  .activationSteps p {
+    font-size: 0.92rem;
   }
 }

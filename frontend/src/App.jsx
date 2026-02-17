@@ -779,7 +779,8 @@ function App() {
   );
 
   return (
-    <main className={`app stage-${stage}`} style={{ backgroundImage: `url(${bgUrl})` }}>
+    <main className={`app stage-${stage}`}>
+      <img className="hero-bg" src={bgUrl} alt="" aria-hidden="true" />
       <div className="sceneOverlay" />
 
       {stage === "idle" && (
@@ -838,16 +839,28 @@ function App() {
 
       {stage === "analyzing" && (
         <section className="activationOverlay">
-          <h2>Arena Activation</h2>
-          <div className="activationSteps">
-            {ACTIVATION_STEPS.map((step, index) => (
-              <p key={step} className={index <= activationIndex ? "active" : ""}>
-                {step}
-              </p>
-            ))}
+          <div className="activationContent">
+            <h2>Arena Activation</h2>
+            <div className="activationSteps">
+              {ACTIVATION_STEPS.map((step, index) => (
+                <p key={step} className={index <= activationIndex ? "active" : ""}>
+                  {step}
+                </p>
+              ))}
+            </div>
+            <div className="activationLine">
+              <div className="activationFill" />
+            </div>
           </div>
-          <div className="activationLine">
-            <div className="activationFill" />
+          <div className="activationReflection" aria-hidden="true">
+            <h2>Arena Activation</h2>
+            <div className="activationSteps">
+              {ACTIVATION_STEPS.map((step, index) => (
+                <p key={`ref-${step}`} className={index <= activationIndex ? "active" : ""}>
+                  {step}
+                </p>
+              ))}
+            </div>
           </div>
         </section>
       )}
