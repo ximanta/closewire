@@ -141,7 +141,7 @@ textarea {
 .inputRow button,
 .downloadBtn,
 .ghostBtn {
-  min-height: 58px;
+  min-height: 48px;
   padding: 14px 20px;
   border-radius: var(--radius-md);
   border: 0;
@@ -528,12 +528,12 @@ textarea {
 }
 
 .viewReportBtn {
-  min-height: 32px;
-  padding: 6px 10px;
+  min-height: 10px;
+  padding: 3px 5px;
   font-size: 0.78rem;
   border-radius: 9px;
   border: 1px solid rgba(150, 181, 236, 0.42);
-  background: rgba(13, 25, 44, 0.85);
+  background: rgba(63, 163, 33, 0.85);
   color: #dce9ff;
 }
 

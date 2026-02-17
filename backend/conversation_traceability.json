@@ -1,51 +1,51 @@
 {
-  "generated_at": "2026-02-17T10:46:50.022960",
-  "session_id": "858dadbd-5010-4ef5-abb4-4434afbd84f5",
+  "generated_at": "2026-02-17T11:10:37.574785",
+  "session_id": "da38a677-717d-44ec-99a1-058deb0b4a6c",
   "deal_status": "failed",
   "round": 6,
   "max_rounds": 5,
   "persona": {
-    "language_style": "Buzzword-heavy, always using terms like \"ChatGPT,\" \"Prompt Engineering,\" \"Trending,\" \"Viral,\" \"scalable,\" \"disruptive,\" \"cutting-edge,\" \"paradigm shift.\"",
-    "name": "Aakash Mehra",
-    "city_tier": "Tier-1",
-    "ego_level": 6,
-    "misconception": "He believes that mastering a few trending AI tools and frameworks, like \"LangChain\" or \"Streamlit,\" and learning to write \"effective prompts\" will be sufficient to become a top \"AI Engineer\" and achieve rapid career growth, without needing to delve into the underlying mathematical or theoretical complexities. He thinks \"GenAI\" is just about knowing the right \"buzzwords\" and \"APIs.\"",
-    "confusion_level": 5,
-    "trigger_event": "He recently saw many peers and juniors excelling in \"Prompt Engineering\" and \"GenAI projects,\" landing lucrative roles or starting viral side projects, sparking an intense fear of being left behind in the AI revolution. A trending post about \"ChatGPT replacing developers\" amplified his anxiety.",
-    "archetype_label": "FOMO Victim",
-    "skepticism": 3,
-    "hidden_secret": "Despite his outward confidence as a tech-savvy individual, Aakash secretly struggles with foundational computer science concepts like advanced data structures, algorithms, and complex SQL, often glossing over them in his pursuit of \"shiny new things.\" He frequently copies and pastes code without full comprehension.",
-    "backstory": "Aakash is a bright young developer from a Tier-1 city, always quick to pick up new frameworks but often prioritizing breadth over depth. He prides himself on staying \"up-to-date\" and spends significant time on social media following tech influencers.",
+    "age": 28,
+    "ego_level": 3,
+    "misconception": "Rahul believes that a \"certificate\" alone is enough to get a better job, regardless of the actual skills acquired or the effort put in during the learning process. He thinks quick-fix courses are the answer.",
+    "archetype_id": "drifter",
+    "current_role": "Junior Data Entry Clerk at a mid-sized firm",
+    "backstory": "Rahul has always been content with getting by. After a generic B.Com, he landed a stable but unexciting data entry job through a family connection. He's never really had a career plan and tends to follow the path of least resistance. He enjoys his evenings and weekends too much to invest heavily in self-improvement, unless it promises a significant shortcut with minimal effort.",
+    "city_tier": "Tier-2",
+    "archetype_label": "Drifter",
+    "hidden_secret": "He secretly fears hard work and commitment, always looking for the easiest way to achieve results, even if it means cutting corners or just doing the bare minimum.",
+    "name": "Rahul Sharma",
     "common_vocabulary": [
-      "ChatGPT",
-      "Prompt Engineering",
-      "Trending",
-      "Viral",
-      "GenAI",
-      "AI revolution",
-      "scalable",
-      "disruptive"
+      "attendance",
+      "minimum marks",
+      "easy",
+      "tough",
+      "certificate",
+      "shortcut",
+      "fast-track",
+      "placement"
     ],
-    "age": 26,
-    "archetype_id": "fomo_victim",
+    "trigger_event": "His younger cousin, who always seemed less academically inclined, recently landed a high-paying tech job after a short course, making Rahul's parents subtly hint that he should also \"do something useful\" with his life, especially about future prospects.",
+    "confusion_level": 7,
     "financial_anxiety": 6,
-    "current_role": "Full Stack Developer",
-    "persona_type": "fomo_victim",
+    "skepticism": 4,
+    "language_style": "Passive Indian English. Will ask direct questions about attendance, minimum passing marks, and whether the course content/projects are \"easy or tough\".",
+    "persona_type": "drifter",
     "background": "Prospective learner evaluating an AI upskilling path.",
-    "career_stage": "early",
+    "career_stage": "mid",
     "financial_sensitivity": "medium",
     "risk_tolerance": "low",
-    "emotional_tone": "skeptical",
+    "emotional_tone": "anxious",
     "primary_objections": [
       "Placement credibility",
       "Fee value",
       "Difficulty for freshers",
       "Time commitment"
     ],
-    "walk_away_likelihood": 0.62,
-    "expected_roi_months": 17,
-    "affordability_concern_level": 53,
-    "willingness_to_invest_score": 60,
+    "walk_away_likelihood": 0.29,
+    "expected_roi_months": 9,
+    "affordability_concern_level": 81,
+    "willingness_to_invest_score": 39,
     "communication_style": "timid",
     "common_phrases": [
       "Placement ka scene kya hai?",
@@ -55,13 +55,16 @@
   },
   "program": {
     "program_name": "Building Agentic AI Systems",
-    "program_fee_inr": "INR 1,50,000 + 18% GST (Booking fees: INR 1,500 + 18% GST). Upfront payment option: INR 1,42,500 + 18% GST (includes a 5% concession)."
+    "program_fee_inr": "1,50,000 + 18% GST. Booking fees: 1,500 + 18% GST."
   },
   "student_inner_state": {
     "sentiment": "frustrated",
-    "skepticism_level": 28,
-    "trust_score": 40,
+    "skepticism_level": 80,
+    "trust_score": 20,
     "unresolved_concerns": [
+      "Ease of Effort & Shortcuts",
+      "Effort/Time",
+      "Effort/Time (now compounded by prerequisite)",
       "Job Guarantee",
       "Price"
     ]
@@ -69,55 +72,52 @@
   "negotiation_metrics": {
     "round": 5,
     "max_rounds": 5,
-    "concession_count_counsellor": 1,
-    "concession_count_student": 1,
+    "concession_count_counsellor": 0,
+    "concession_count_student": 0,
     "tone_escalation": 23,
-    "objection_intensity": 16,
-    "trust_index": 43,
-    "close_probability": 62,
+    "objection_intensity": 37,
+    "trust_index": 32,
+    "close_probability": 48,
     "sentiment_indicator": "negative",
     "retry_modifier": 0
   },
   "final_offers": {
-    "counsellor": 142500,
-    "student": 24750
+    "counsellor": 165000,
+    "student": 113400
   },
   "analysis": {
+    "enrollment_likelihood": 10,
     "skill_recommendations": [
-      "Develop advanced objection handling techniques to explore underlying student concerns and reframe value when direct guarantees cannot be offered.",
-      "Improve financial transparency by being able to provide a comprehensive EMI breakdown upfront or a more compelling explanation for why it's deferred, without causing frustration.",
-      "Enhance empathy and active listening skills to better acknowledge and validate the student's emotional needs regarding career security and investment ROI.",
-      "Explore creative ways to address the 'job guarantee' concern, such as emphasizing alumni success stories, specific industry connections, or strengthening the focus on the portfolio as a primary asset for job acquisition."
+      "Proactive Needs Assessment & Qualification: Deeper probing at the outset to identify critical mismatches (like prerequisite experience) to either qualify them out or guide them to more suitable options sooner.",
+      "Strategic Objection Handling: Move beyond mere factual reiteration to address the root cause of the student's objections (e.g., fear of failure, need for certainty) through reframing, testimonials, or alternative solutions.",
+      "Alternative Pathway/Solutioning: When a clear mismatch is identified, pivot to offering relevant alternative programs or preparatory steps rather than continually reinforcing the unsuitability of the current program."
     ],
-    "negotiation_score": 55,
     "strengths": [
-      "The counsellor clearly explained the program's curriculum, structure, and benefits, aligning them with the student's stated goals.",
-      "The counsellor patiently reiterated information across multiple rounds and addressed specific tools mentioned by the student.",
-      "The counsellor was transparent about the limitations of placement assistance and that NIIT does not guarantee jobs."
+      "Counsellor was highly factual and transparent about program requirements, difficulty, and placement assistance (not guarantee).",
+      "Counsellor consistently addressed the student's questions directly and acknowledged concerns."
     ],
-    "enrollment_likelihood": 62,
-    "commitment_signal": "none",
-    "trust_delta": -10,
-    "why": "The student's primary objections regarding job guarantees and a full EMI breakdown remained unresolved despite multiple rounds. The counsellor's responses led to increased frustration and a 'pretty big red flag' from the student, indicating a lack of conviction.",
-    "primary_unresolved_objection": "The primary unresolved objection is the lack of a concrete job guarantee or assurance of landing a top-tier GenAI role, despite the counsellor's repeated explanations of the program's placement assistance limitations. The secondary unresolved objection is the lack of a full, clear breakdown of the total EMI cost and number of installments, which the counsellor consistently stated would be detailed at enrollment.",
     "winner": "student",
-    "mistakes": [
-      "The counsellor failed to adequately address the student's deep-seated need for a job guarantee beyond repeatedly stating the program's limitations.",
-      "The counsellor did not provide a full and transparent breakdown of the EMI options, continually deferring it to the enrollment process, which caused significant student frustration.",
-      "The counsellor did not adapt their strategy when objections persisted and intensified, leading to a breakdown in progressing the negotiation."
-    ],
     "pivotal_moments": [
-      "Round 1: Student first raises critical questions about job guarantee/placement support and full price breakdown.",
-      "Round 4: Counsellor explicitly states 'NIIT does not promise guaranteed jobs or assure a specific role or outcome.' Student responds that this is 'a pretty big red flag,' clearly indicating a major barrier.",
-      "Round 5: Student reiterates both key objections with increased intensity, stating 'that's still not giving me the full picture' and demanding exact EMI figures for ROI calculation."
-    ]
+      "Counsellor in Round 3 clarifying 'We do not promise guaranteed jobs.'",
+      "Counsellor in Round 4 strongly stating the program would be 'very challenging' and the student would 'struggle a lot' without experience.",
+      "Student in Round 5 asking for an 'easier program or a shortcut' clearly signaling disengagement with this specific offering."
+    ],
+    "why": "The student consistently reiterated fundamental objections regarding their lack of prerequisite programming experience and the absence of a direct job guarantee. Despite the counsellor's detailed explanations and reiteration of program rigor, the student remained unconvinced, ultimately asking for 'easier' alternatives, indicating a clear misalignment and failure to secure commitment for this program.",
+    "primary_unresolved_objection": "The student's lack of foundational programming experience and the counsellor's repeated confirmation that the student would find the program 'very, very tough' and 'struggle a lot' without it, combined with the absence of a firm job guarantee, were the primary unresolved objections.",
+    "mistakes": [
+      "Failed to pivot from merely stating facts to strategically addressing the student's underlying need for certainty (job) and suitability (experience).",
+      "Did not offer alternative pathways or solutions (e.g., preparatory courses, different programs) earlier, allowing the conversation to loop on unresolved objections."
+    ],
+    "negotiation_score": 25,
+    "commitment_signal": "none",
+    "trust_delta": -5
   },
   "transcript": [
     {
-      "id": "a5fb7b5d-feba-45d4-a27b-9659f92c1d5c",
+      "id": "c6fef379-0642-4d95-a9e3-c1a918c787d1",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello! Thank you for reaching out to us about the 'Building Agentic AI Systems' program. To help me provide the most relevant information, could you tell me a bit about your current professional background and what you're hoping to achieve by joining this program?",
+      "content": "Welcome! I'm glad you're considering our 'Building Agentic AI Systems' program. To help me understand how this program aligns with your goals, could you share what initially drew you to it and what you're hoping to achieve?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -125,29 +125,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T10:45:17.256110",
+      "timestamp": "2026-02-17T11:09:17.290106",
       "generation_mode": "stream"
     },
     {
-      "id": "c8f13ef3-b651-4b39-bbe7-719574833f3f",
+      "id": "9438284c-7316-46d4-910a-9eaa8a854193",
       "round": 1,
       "agent": "student",
-      "content": "Hey there! Thanks for getting back to me. So, currently, I'm a Full Stack Developer, pretty deep into the ecosystem, you know? Always building, always learning. I'm really quick to pick up new frameworks, always staying ahead of the curve, especially with all the new stuff trending on social media. What I'm hoping to achieve with this program is really to dive deep into the AI revolution, specifically with GenAI and agentic systems. I've been seeing a lot of buzz around \"Prompt Engineering\" and how \"LangChain\" and \"Streamlit\" are completely disruptive. I want to be at the forefront of this paradigm shift, building scalable and cutting-edge solutions. Basically, I want to supercharge my skills to become a top \"AI architect,\" if you will, and really leverage these trending tools to build something viral. Also, I'm still keen to understand the full breakdown of the price and, critically, what kind of job guarantee or placement support is on offer. That's super important.",
+      "content": "Ji, actually, I am looking for a good certificate that can help me get a better job, you know. Something with good placement support. But I also wanted to ask, is this program very tough? Like, how much attendance is mandatory? And what are the minimum marks to pass and get the certificate? Also, about the placement guarantee, what exactly is it?",
       "techniques": [],
-      "strategic_intent": "To convey my existing tech savviness and interest in trending AI topics, while also re-iterating my key unresolved concerns about price and job guarantee.",
+      "strategic_intent": "seeking clarity on ease of program, attendance, passing marks, and job guarantee, while hinting at desire for a certificate for better job prospects",
       "confidence_score": 60,
       "emotional_state": "curious",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T10:45:21.111106",
+      "timestamp": "2026-02-17T11:09:19.897440",
       "generation_mode": "stream"
     },
     {
-      "id": "46b7f3ff-4662-4867-a158-678bc00c644e",
+      "id": "ead400c3-1d69-43cc-be27-bec7f22618b7",
       "round": 2,
       "agent": "counsellor",
-      "content": "That's excellent to hear, as a Full Stack Developer with a drive to stay ahead and build scalable solutions, you're perfectly aligned with what the 'Building Agentic AI Systems' program aims to achieve. It's designed to bridge your strong software engineering background with the cutting-edge of applied AI system development, specifically focusing on GenAI and agentic systems.\nYou mentioned \"LangChain\" and \"Streamlit\"—these are indeed key tools covered within the curriculum. You'll work with `LangChain`, `Streamlit`, and over 25 other tools and frameworks to build real-world AI projects.\nThe program guides you from building clean APIs to designing intelligent, autonomous agents. The curriculum includes core modules like:\n*   `Python for AI-Embedded Applications`\n*   `Build and Deploy Intelligent Conversational Agents`\n*   `Build RAG-Based Systems`\n*   `Build Autonomous Multi-Agent Systems`\n*   Culminating in a `Capstone Project: Engineer an Autonomous Agentic AI System (SLO-Bound)`.\nThrough these, you'll gain the capabilities to write clean, modular Python code, develop intelligent conversational AI agents, build RAG systems using organizational data, and design multi-agent systems that plan, act, and collaborate. The capstone project, for instance, involves designing and building a production-grade autonomous AI system, allowing you to showcase a portfolio of working AI projects.\nRegarding the program structure, it comprises 300 hours of guided learning and practice, typically spanning 19 to 25 weeks, depending on whether you opt for 4 or 3 sprints per week. Each sprint involves 2 hours of live mentor-led sessions and 2 hours of self-paced practice, with approximately 70% of the total time dedicated to hands-on work. This means you'd be looking at a weekly time commitment of around 12-16 hours.\nNow, concerning your crucial question about placement support and pricing:\nFor eligible learners who achieve at least a 70% score, hold a regular graduation degree, and reside in India, placement assistance is available. This support includes up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, along with access to placement preparation sessions and mentor guidance. For learners with over 5 years of experience, career guidance is provided. It's important to note that while we facilitate these opportunities, final selection always depends on your performance and the specific requirements of the employer.\nRegarding the program fee, it is `INR 1,50,000 + 18% GST`. If you opt for full upfront payment, there's a 5% concession, making the fee `INR 1,42,500 + 18% GST`. We also offer flexible payment options. You can pay through easy installments, or you can explore loan facilities through third-party lenders. Please remember that loan approval is subject to the lender's eligibility criteria, and NIIT does not guarantee loan approval.\nDoes this breakdown clarify the program structure, curriculum, placement support, and pricing for you?",
+      "content": "It's great to hear that you're looking for a program that can advance your career and provide good placement support. Those are important considerations.\nRegarding your questions about the program's intensity and requirements: The 'Building Agentic AI Systems' program is designed with a mastery learning methodology, focusing on developing one skill at a time through structured, hands-on sprints. Each sprint involves 2 hours of live mentor-led sessions and 2 hours of self-paced practice. Depending on whether you choose 3 or 4 sprints per week, your weekly commitment would be approximately 12 to 16 hours, with about 70% of that time dedicated to hands-on work. The program totals 75 sprints, or 300 hours of guided learning and practice, typically spanning 19 to 25 weeks.\nTo successfully complete the program and receive your industry-recognized NIIT Certificate in Agentic AI, you would need to maintain at least 90% attendance, achieve 70% or higher marks in assessments, and ensure full fee payment. It's built for learners with at least six months of hands-on experience in a modern programming language, so a foundational understanding is expected, but the structured format is designed to guide you through complex topics.\nNow, regarding placement support, it's an important aspect for many of our learners. Placement assistance is available for eligible learners who complete the program with at least a 70% score, hold a regular graduation degree, and reside in India. For those with 6 months to 5 years of experience, this support includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days. For learners with over 5 years of experience, career guidance is provided. It's important to understand that while we facilitate these opportunities, the final selection always depends on your individual performance during interviews and the specific requirements of the employer. We focus on building job-ready capabilities and a strong portfolio of working AI projects, demonstrating your readiness for applied AI development roles upon completion.",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -155,89 +155,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T10:45:30.300371",
+      "timestamp": "2026-02-17T11:09:27.166142",
       "generation_mode": "stream"
     },
     {
-      "id": "d6bb0721-2245-400d-8304-5baa0781cb21",
+      "id": "04fa74a8-76c1-4682-92df-ec85d77d4f49",
       "round": 2,
       "agent": "student",
-      "content": "Thank you for your patience following our last interaction. To recap, we discussed how the 'Building Agentic AI Systems' program aligns with your goals as a Full Stack Developer, focusing on GenAI, LangChain, and Streamlit. We also covered the curriculum, including modules like 'Build RAG-Based Systems' and the Capstone Project. For your crucial questions on placement support and pricing: placement assistance is available for eligible learners (70% score, graduation degree, India residency), offering interview opportunities and career guidance. The program fee is INR 1,50,000 + 18% GST, with a 5% concession for upfront payment (INR 1,42,500 + 18% GST). EMI and third-party loan options are also available. Did this detailed breakdown fully clarify your queries?",
+      "content": "Ji, that sounds like quite a lot of time and effort, 300 hours and 12-16 hours every week. And 90% attendance and 70% marks are very high, no? Is the program very tough then, especially if I don't have that 6 months programming experience you mentioned? Will I be able to manage easily? And about the placement, you said \"assistance\" and \"opportunities\", but is there any actual guarantee that I will get a good job after putting in all this effort and money? Because I am looking for a certificate mainly for a good job, you know.",
       "techniques": [],
-      "strategic_intent": "clarify_and_confirm_understanding",
-      "confidence_score": 60,
-      "emotional_state": "informative",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T10:45:39.787716",
-      "generation_mode": "structured_retry"
-    },
-    {
-      "id": "0d0f115f-af97-4b2f-8274-4cc3dfccb9c9",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "Yes, that's a comprehensive summary, and I'm glad to hear that the detailed breakdown has clarified your queries regarding the program structure, curriculum, placement support, and financial options.\nAs we discussed, your strong Full Stack Developer background is an excellent foundation for this program, which is specifically designed to transition professionals like you into high-growth AI and automation roles. You'll gain practical, hands-on experience with tools like LangChain and Streamlit, learning to design and build intelligent, autonomous agentic AI systems that accelerate innovation, and culminating in a portfolio of real-world projects.\nThe admission process is straightforward once you meet the eligibility criteria: you can apply online, submit a self-declaration, accept the terms, and pay the program fee to confirm your spot.\nAre there any other specific aspects of the program or the next steps that you'd like to discuss further?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T10:45:49.272621",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "b6a9917c-3b13-48df-ab9c-ea93c1b5257f",
-      "round": 3,
-      "agent": "student",
-      "content": "That's great! I appreciate the clarity on the program structure and how it aligns with building these cutting-edge agentic AI systems. And the straightforward admission process is definitely a plus, nobody wants a lengthy application when there's an AI revolution to join, right?\nI'm super keen on leveraging these trending tools like LangChain and Streamlit to truly become a top \"AI architect.\" But, just to double-check on a couple of points that are still critical for me:\n1.  Regarding the placement support, when you say \"up to three interview opportunities,\" how does that really translate into a *guarantee* of landing a disruptive AI role? I'm looking for something that assures me I'll be at the forefront, building scalable solutions immediately. I don't want to just *get* interviews; I want to *get the job*.\n2.  And for the payment, you mentioned the EMI option of `INR 24,750` per installment. Could you break down the total number of installments and the overall cost if I choose the EMI route? I just want to ensure I have the full picture on the investment for this paradigm shift.\nIt's all about making sure this program delivers that viral career boost, you know?",
-      "techniques": [],
-      "strategic_intent": "seeking further clarification on job placement specifics and full EMI breakdown, while maintaining enthusiasm for the tech aspects",
-      "confidence_score": 60,
-      "emotional_state": "curious",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T10:45:55.895006",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "0d247ed9-190e-43cd-b1aa-930ee50e3fb7",
-      "round": 4,
-      "agent": "counsellor",
-      "content": "That's excellent to hear that you're so eager to dive into the AI revolution and become an \"AI architect.\" The program is definitely designed to equip you with the skills and tools like LangChain and Streamlit to build innovative agentic AI systems.\nRegarding your questions:\n1.  **Placement Support and Job Roles:** Our placement assistance is designed to support eligible learners in finding opportunities in applied AI development roles. This includes providing up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, and career guidance for those with over 5 years of experience. You'll also have access to placement preparation sessions and mentor guidance, which are crucial for refining your interview skills and portfolio. However, it's important to understand that final selection always depends on your individual performance during interviews and the specific requirements of the employer. While we facilitate connections and opportunities, NIIT does not promise guaranteed jobs or assure a specific role or outcome. The program's strength lies in building a robust portfolio of working AI projects and developing job-ready capabilities that position you for success in these high-growth roles.\n2.  **EMI Breakdown and Overall Cost:** The total program fee, including 18% GST, is INR 1,77,000. If you choose the full upfront payment option, with the 5% concession, the total fee including GST is INR 1,68,150. For the EMI option, we offer easy installments, with one option being INR 24,750 per equal installment after the booking fee. The exact number of installments and the total cost for your chosen EMI plan would be detailed at the time of enrollment. This can vary based on the specific installment plan you select directly through us, or the terms provided by third-party lenders, if you opt for a loan through them. It is important to review all loan terms carefully, including interest rates, processing fees, and repayment schedules, as NIIT does not guarantee loan approval and has no role in the loan facilitation process beyond connecting you with potential lenders.\nDoes this further clarify the placement support structure and the financial options for you?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T10:46:12.153459",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "1bf23e02-19bc-483d-81df-2169f60fb74b",
-      "round": 4,
-      "agent": "student",
-      "content": "Okay, I get it. Thanks for breaking that down. It's cool that the program is tailored to build those cutting-edge agentic AI systems and I'm still super hyped about leveraging tools like LangChain and Streamlit to drive that AI revolution.\nBut, let's be real here. When I'm looking to make a paradigm shift into an \"AI architect\" role, \"up to three interview opportunities\" isn't really a *job guarantee*. I'm investing in this program to *get* a disruptive role, to be building scalable solutions, not just to *try* and get one. How do you ensure that after these 19-25 weeks, I'm actually *landing* a top-tier GenAI role and not just going through interviews? I need more assurance that this program will deliver that viral career boost straight into a job.\nAnd on the EMI, you mentioned `INR 24,750` per installment, but I still don't have the full picture. What's the *total number* of installments if I choose *your* EMI option, and what does the *overall cost* look like then? I need the exact figures, not just a per-installment amount or a link to third-party lenders. It's crucial for me to have complete clarity on the investment for this cutting-edge journey, you know? It's all about making sure this is a truly disruptive investment with a clear ROI.",
-      "techniques": [],
-      "strategic_intent": "seeking stronger assurances on job outcome and full transparency on EMI total cost, reiterating previous concerns",
+      "strategic_intent": "Expressing increased concern about effort and job guarantee, while hinting at my lack of relevant experience and reinforcing my desire for a guaranteed outcome from the certificate.",
       "confidence_score": 60,
       "emotional_state": "skeptical",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T10:46:18.675344",
+      "timestamp": "2026-02-17T11:09:31.453029",
       "generation_mode": "stream"
     },
     {
-      "id": "3e3662b0-7e3c-4b4a-b190-053d54877ad7",
-      "round": 5,
+      "id": "497b4290-c5d8-43e3-807c-e254236a495f",
+      "round": 3,
       "agent": "counsellor",
-      "content": "I understand your desire for a clear path to a disruptive \"AI architect\" role and a precise financial breakdown. Let me address these points directly, drawing only from the program's factual data.\n1.  **Placement Assurance and Job Roles:** The 'Building Agentic AI Systems' program is explicitly designed to develop job-ready capabilities for high-growth AI and automation roles, allowing you to build real-world skills and a portfolio of working AI projects. Our placement assistance is available for eligible learners (those with at least a 70% score, a regular graduation degree, and residing in India). This support includes providing up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, along with access to placement preparation sessions and mentor guidance. For those with over 5 years of experience, career guidance is provided. While NIIT facilitates these connections and opportunities, it is crucial to understand that **NIIT does not promise guaranteed jobs or assure a specific role or outcome.** Final selection always depends on your individual performance during interviews and the specific requirements of the employer. The program's strength lies in equipping you with the practical skills, hands-on experience, and a robust project portfolio, which are your primary assets for securing top-tier roles.\n2.  **EMI Breakdown and Overall Cost:** The total program fee, including 18% GST, is INR 1,77,000. We do offer an EMI option with installments of INR 24,750 after the booking fee. The precise number of installments and the total cost for the full program under your chosen EMI plan are detailed during the enrollment process. This is because specific payment plans can vary, and we ensure complete transparency by providing you with the exact figures for your selected payment schedule at that stage.\nDoes this clarify the nature of the placement support and the details regarding the EMI options for you?",
+      "content": "I understand your concerns about the time commitment, the attendance and marks requirements, and particularly about the job guarantee. It's natural to want to ensure your investment in time and money yields the desired career outcome.\nRegarding the program's intensity and the requirements: The 300 hours of guided learning and practice, spread over 19 to 25 weeks, is indeed a significant commitment. However, this structure, with 70% hands-on work, is specifically designed as an \"Outcome-Driven Program\" and \"Practitioner Designed\" to build job-ready competencies. The 90% attendance and 70% assessment marks are set to ensure that learners fully engage with this rigorous methodology and truly master the skills, which is crucial for receiving the industry-recognized NIIT Certificate in Agentic AI and becoming eligible for placement assistance. These requirements ensure you develop a strong foundation.\nRegarding the prerequisite experience: The program is designed for learners with at least six months of hands-on experience in a modern programming language like Python, Java, JavaScript, or C#. This foundational experience in writing and debugging simple programs, working with APIs, and understanding web applications is important because the 'Building Agentic AI Systems' curriculum quickly moves into complex topics like designing intelligent, autonomous agents and building RAG-based systems. While the program’s \"Mastery Learning methodology\" is structured to guide you through, this prerequisite ensures you have the base to absorb the advanced concepts and apply the tools and frameworks effectively. If you do not meet this eligibility, it would be advisable to discuss your background with a Program Advisor to ensure the best fit for your success.\nNow, concerning the \"placement guarantee\": As a Senior Admissions Counsellor, I must be clear and factual. We do not promise guaranteed jobs. What we provide is robust \"placement assistance\" for eligible learners. This means that if you meet the criteria—completing the program with at least a 70% score, holding a regular graduation degree, and residing in India—you will receive specific support. This includes access to placement preparation sessions, mentor guidance, and for those with 6 months to 5 years of experience, up to three interview opportunities within 120 days. For learners with over 5 years of experience, career guidance is provided. Our focus is on ensuring you are \"Built for Job Readiness\" and can \"Showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" The final selection for any role, however, always depends on your individual performance during interviews and the specific requirements of the employer. Our objective is to equip you with the skills and the demonstrated capability to excel in these opportunities.",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -245,31 +185,91 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T10:46:31.865483",
+      "timestamp": "2026-02-17T11:09:41.551489",
       "generation_mode": "stream"
     },
     {
-      "id": "6b8aa7a8-37b3-4e79-acc2-79c47c6c58fb",
+      "id": "bdae5227-dc2d-4418-972a-cf549a89192b",
+      "round": 3,
+      "agent": "student",
+      "content": "Ji, 6 months programming experience? That is a problem for me. I don't really have that. So, will I even be able to do this program then? Or will it be very, very tough for me? Because you said it's important and foundational. And if it's so much effort and time, and even the attendance and marks are so high, then why is there no proper placement guarantee? Just \"assistance\" and \"opportunities\" after all that? I am really looking for a certificate that can help me get a good job for sure, you know. This program sounds like a lot of hard work without a clear job path. And the fee is also quite high for something that isn't guaranteeing a job, no?",
+      "techniques": [],
+      "strategic_intent": "expressing concern about difficulty, eligibility due to lack of experience, and continued skepticism about job guarantee vs. effort and cost.",
+      "confidence_score": 60,
+      "emotional_state": "skeptical",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T11:09:46.490103",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "363a1736-9bac-4873-b38f-8914f7954ae2",
+      "round": 4,
+      "agent": "counsellor",
+      "content": "I hear your reservations clearly regarding the prerequisite experience, the job guarantee, and the program fee. These are significant points, and it's essential that you have a full understanding to make an informed decision.\nFirst, regarding the six months of programming experience: The program's 'Practitioner Designed' curriculum and 'Mastery Learning methodology' are built upon the assumption of this foundational experience. The curriculum quickly advances to designing intelligent, autonomous agents, building RAG-based systems, and orchestrating multi-agent systems using specific tools like Python, FastAPI, OpenAI SDK, LangChain, and CrewAI. About 70% of your time will be hands-on, requiring you to write and debug code, work with APIs, and build web applications right from the start. Without this prerequisite, you might indeed find it very challenging to keep pace with the learning sprints, fully engage with the complex topics, and ultimately achieve the required 70% assessment marks and build the necessary portfolio of working AI projects. While the program is structured for rigorous learning, success heavily relies on meeting these entry-level competencies. For this reason, we strongly advise learners to have this background to ensure they can truly thrive. If you feel you might not meet this, I would recommend connecting with a Program Advisor who can assess your specific background and guide you on the best path forward, which might include building up those foundational skills first.\nNow, regarding placement. As I mentioned, we provide robust 'placement assistance' for eligible learners, which is a key feature of our 'Built for Job Readiness' approach. This includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days for those with 6 months to 5 years of experience. Our commitment is to equip you with an \"exit profile\" that includes the ability to design and orchestrate multi-agent systems and \"showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" This program is outcome-driven, designed to build role-specific competencies that are highly valued in the industry. The final selection, however, is always based on your individual performance in interviews and the specific requirements of the hiring employer. We focus on empowering you with the skills and demonstrable projects that make you a competitive candidate in the high-growth AI and automation job market, rather than guaranteeing a specific job outcome.\nFinally, addressing your concern about the program fee. The investment of 1,50,000 INR plus GST, or the EMI option of 24,750 INR after booking, covers 300 hours of guided, mentor-led learning, mastery of 25+ cutting-edge tools and frameworks, and the development of a strong portfolio through industry-relevant projects. This program is positioned to develop 'job-ready capabilities for high-growth AI and automation roles' and 'design Agentic AI systems that accelerate innovation.' Many learners find this investment worthwhile because it directly translates into acquiring highly specialized and in-demand skills. To make this investment more accessible, we do offer EMI options, including through third-party lenders. These options can help spread the cost over a period, making it more manageable. Would you like me to share more details on the available financing options?",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T11:09:59.476692",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "9dbdce25-2283-44a4-8615-6648ef672fbd",
+      "round": 4,
+      "agent": "student",
+      "content": "Ji, but if I really don't have that 6 months programming experience, will it be very, very tough for me, no? Like, if I have to put in extra effort just to understand the basics, then it becomes even more hard work for me. You said it's \"important\" and \"foundational,\" so it means I will struggle a lot, right?\nAnd for so much effort and such a high fee, why is there still no proper job guarantee? Just \"assistance\" and \"interview opportunities\" doesn't sound very certain, ji. My main goal is to get a good job *for sure* with this certificate. If I am putting in so much money – 1.5 lakh rupees, that is a lot for me – and so much time, I need to be sure about the job. Is there no other easier program or a shortcut to get a good certificate for a job without so much hard work and without this experience problem?",
+      "techniques": [],
+      "strategic_intent": "Express concern about eligibility and difficulty, re-emphasize desire for job guarantee and easier path, question the value for money given no guarantee.",
+      "confidence_score": 60,
+      "emotional_state": "skeptical",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T11:10:04.692409",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "f1d836d2-1b37-4552-b903-9bac0cecc4ac",
+      "round": 5,
+      "agent": "counsellor",
+      "content": "I understand your persistent concerns about the prerequisite programming experience, the absence of a job guarantee, and the investment required. It's important to clarify these points fully to help you make the right decision.\nFirst, regarding the six months of programming experience: You are correct that it is explicitly stated as \"important\" and \"foundational.\" The program's design, which allocates approximately 70% of its 300 hours to hands-on work, assumes learners can immediately engage with writing and debugging code, working with REST APIs and JSON, and building web applications using frameworks. The curriculum quickly progresses to complex topics like designing intelligent conversational agents, building RAG-based systems, and orchestrating multi-agent systems using advanced tools and frameworks such as LangChain, CrewAI, and Azure AI Foundry. Without this foundational experience, you would indeed likely find it very challenging to keep pace, understand the advanced concepts, and effectively complete the hands-on projects necessary to achieve the required 70% assessment marks and build a strong portfolio. Our goal is for your success, and meeting the eligibility criteria is crucial for that. I strongly recommend connecting with a Program Advisor who can assess your specific background and guide you on whether this program is the right fit for your current skill level, or if building those foundational skills first would be more beneficial.\nNow, concerning the job guarantee: As a Senior Admissions Counsellor, I must reiterate that we do not offer guaranteed jobs. What we do provide is comprehensive \"placement assistance\" for eligible learners. This support is robust and includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, or career guidance for those with over 5 years of experience, provided you meet the eligibility of a 70% score, a regular graduation degree, and Indian residency. The program's \"Built for Job Readiness\" approach is focused on equipping you with an \"exit profile\" that includes the ability to design and orchestrate multi-agent systems and \"showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" The curriculum is \"Practitioner Designed\" to ensure you gain industry-relevant experience. However, the final selection by an employer always depends on your individual performance during interviews and their specific hiring requirements. Our commitment is to empower you with the in-demand skills and demonstrable projects that make you a highly competitive candidate in the high-growth AI and automation job market.\nRegarding your question about an \"easier program or a shortcut\" to a good job certificate without this level of hard work or experience: The 'Building Agentic AI Systems' program is specifically designed to develop deep, \"job-ready capabilities\" through its rigorous \"Mastery Learning methodology\" and significant hands-on work. This intensity, including the 90% attendance and 70% assessment mark requirements, is what ensures you truly master the 25+ tools and frameworks and can build, document, and test real-world Agentic AI systems. In a rapidly evolving and complex field like AI, shortcuts often do not lead to the comprehensive skill set and practical experience that employers seek for meaningful roles. The 1,50,000 INR plus GST fee reflects the value of 300 hours of guided, mentor-led learning, the cutting-edge curriculum, and the development of a portfolio through industry-relevant projects. This investment is aimed at preparing you for high-growth AI and automation roles by providing specialized and in-demand skills. To help manage this investment, we offer full upfront payment with a concession, or EMI options through third-party lenders, which can make it more accessible.",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T11:10:16.321269",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "41fd01ad-7dc0-4498-ac31-0a63dba510b9",
       "round": 5,
       "agent": "student",
-      "content": "Okay, I hear you, but honestly, that's still not giving me the full picture, especially on the \"viral career boost\" part. I'm looking to make a true \"paradigm shift\" into a top \"AI architect\" role, leveraging these \"trending\" tools like LangChain and Streamlit.\n1.  When you say \"NIIT does not promise guaranteed jobs or assure a specific role or outcome,\" that's a pretty big red flag for someone investing in a program to *land* a \"disruptive\" AI role. How can I be confident that after 19-25 weeks, and building all these \"agentic AI systems,\" I'm actually going to secure a high-growth GenAI position? I need more than just \"up to three interview opportunities.\" I need something that truly assures me I'll be *landing* a job, not just interviewing. What concrete steps or success metrics can you share that guarantee a direct path to employment in these \"cutting-edge\" roles?\n2.  And for the EMI, I'm still asking for the exact numbers. If I choose *your* EMI option with `INR 24,750` per installment, what is the *total number of installments* and what is the *overall cost* of the program then? \"Detailed during the enrollment process\" isn't enough. I need to understand the full investment upfront for this \"disruptive\" journey. It's crucial for my ROI calculation, you know?",
+      "content": "Ji, but you are saying it will be \"very, very tough\" and I will \"struggle a lot\" if I don't have that 6 months programming experience. And I don't have it, ji. So, for me, it means even more hard work just to catch up on basics, no? How can I manage 90% attendance and 70% marks then if I am already struggling so much?\nAnd still, there is no proper job guarantee? Just \"assistance\" and \"interview opportunities\" after so much effort and such a high fee – 1.5 lakh rupees, that is very costly for me. My main goal is to get a good job *for sure* with a certificate. Is there really no other easier program, or a shortcut, to get a good certificate for a job without so much hard work and without this experience problem?",
       "techniques": [],
-      "strategic_intent": "reiterate unresolved concerns with increased emphasis, pushing for direct and specific answers on job guarantee and full EMI breakdown, reflecting skepticism and frustration with vague responses",
+      "strategic_intent": "reiterate main concerns about difficulty, lack of job guarantee, and high cost, while also directly asking again for an easier path or shortcut that aligns with my primary motivation.",
       "confidence_score": 60,
       "emotional_state": "frustrated",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T10:46:37.677148",
+      "timestamp": "2026-02-17T11:10:20.932189",
       "generation_mode": "stream"
     }
   ],
   "history_for_reporting": [
     {
-      "id": "a5fb7b5d-feba-45d4-a27b-9659f92c1d5c",
+      "id": "c6fef379-0642-4d95-a9e3-c1a918c787d1",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello! Thank you for reaching out to us about the 'Building Agentic AI Systems' program. To help me provide the most relevant information, could you tell me a bit about your current professional background and what you're hoping to achieve by joining this program?",
+      "content": "Welcome! I'm glad you're considering our 'Building Agentic AI Systems' program. To help me understand how this program aligns with your goals, could you share what initially drew you to it and what you're hoping to achieve?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -277,22 +277,22 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T10:45:17.256110",
+      "timestamp": "2026-02-17T11:09:17.290106",
       "generation_mode": "stream"
     },
     {
-      "id": "c8f13ef3-b651-4b39-bbe7-719574833f3f",
+      "id": "9438284c-7316-46d4-910a-9eaa8a854193",
       "round": 1,
       "agent": "student",
-      "content": "Hey there! Thanks for getting back to me. So, currently, I'm a Full Stack Developer, pretty deep into the ecosystem, you know? Always building, always learning. I'm really quick to pick up new frameworks, always staying ahead of the curve, especially with all the new stuff trending on social media. What I'm hoping to achieve with this program is really to dive deep into the AI revolution, specifically with GenAI and agentic systems. I've been seeing a lot of buzz around \"Prompt Engineering\" and how \"LangChain\" and \"Streamlit\" are completely disruptive. I want to be at the forefront of this paradigm shift, building scalable and cutting-edge solutions. Basically, I want to supercharge my skills to become a top \"AI architect,\" if you will, and really leverage these trending tools to build something viral. Also, I'm still keen to understand the full breakdown of the price and, critically, what kind of job guarantee or placement support is on offer. That's super important.",
+      "content": "Ji, actually, I am looking for a good certificate that can help me get a better job, you know. Something with good placement support. But I also wanted to ask, is this program very tough? Like, how much attendance is mandatory? And what are the minimum marks to pass and get the certificate? Also, about the placement guarantee, what exactly is it?",
       "techniques": [],
-      "strategic_intent": "To convey my existing tech savviness and interest in trending AI topics, while also re-iterating my key unresolved concerns about price and job guarantee.",
+      "strategic_intent": "seeking clarity on ease of program, attendance, passing marks, and job guarantee, while hinting at desire for a certificate for better job prospects",
       "confidence_score": 60,
       "emotional_state": "curious",
-      "internal_thought": "Okay, a standard opening. Not super exciting, but not stressful either. They haven't really hit on the \"AI revolution\" or \"GenAI\" buzz yet, which is what I'm really looking for. I need to make sure I steer them towards the cutting-edge stuff, not just generic \"professional background.\" I want to talk about how I'm already in the game, you know? And definitely can't forget about the price and job guarantee, those are huge for me. I need to make sure they know I'm already pretty tech-savvy and always on the lookout for the next big thing.",
+      "internal_thought": "Hmm, counsellor is asking what drew me to the program. Honestly, I just saw \"AI\" and thought maybe it's a shortcut to a better job, something easy that gets me a certificate and good placement. But they haven't said anything about how much effort is needed, or if it's tough. My current job is so chill, I don't want to get into something that's too much work. And the fees... that's a lot of money. I still don't know if this certificate will actually get me a job. I need to find out about the attendance and passing marks too, that's important. I don't want to waste money on something I can't finish easily.",
       "updated_stats": {
         "sentiment": "curious",
-        "skepticism_level": 3,
+        "skepticism_level": 4,
         "trust_score": 54,
         "unresolved_concerns": [
           "Price",
@@ -301,21 +301,21 @@
       },
       "updated_state": {
         "sentiment": "curious",
-        "skepticism_level": 3,
+        "skepticism_level": 4,
         "trust_score": 54,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
         ]
       },
-      "timestamp": "2026-02-17T10:45:21.111106",
+      "timestamp": "2026-02-17T11:09:19.897440",
       "generation_mode": "stream"
     },
     {
-      "id": "46b7f3ff-4662-4867-a158-678bc00c644e",
+      "id": "ead400c3-1d69-43cc-be27-bec7f22618b7",
       "round": 2,
       "agent": "counsellor",
-      "content": "That's excellent to hear, as a Full Stack Developer with a drive to stay ahead and build scalable solutions, you're perfectly aligned with what the 'Building Agentic AI Systems' program aims to achieve. It's designed to bridge your strong software engineering background with the cutting-edge of applied AI system development, specifically focusing on GenAI and agentic systems.\nYou mentioned \"LangChain\" and \"Streamlit\"—these are indeed key tools covered within the curriculum. You'll work with `LangChain`, `Streamlit`, and over 25 other tools and frameworks to build real-world AI projects.\nThe program guides you from building clean APIs to designing intelligent, autonomous agents. The curriculum includes core modules like:\n*   `Python for AI-Embedded Applications`\n*   `Build and Deploy Intelligent Conversational Agents`\n*   `Build RAG-Based Systems`\n*   `Build Autonomous Multi-Agent Systems`\n*   Culminating in a `Capstone Project: Engineer an Autonomous Agentic AI System (SLO-Bound)`.\nThrough these, you'll gain the capabilities to write clean, modular Python code, develop intelligent conversational AI agents, build RAG systems using organizational data, and design multi-agent systems that plan, act, and collaborate. The capstone project, for instance, involves designing and building a production-grade autonomous AI system, allowing you to showcase a portfolio of working AI projects.\nRegarding the program structure, it comprises 300 hours of guided learning and practice, typically spanning 19 to 25 weeks, depending on whether you opt for 4 or 3 sprints per week. Each sprint involves 2 hours of live mentor-led sessions and 2 hours of self-paced practice, with approximately 70% of the total time dedicated to hands-on work. This means you'd be looking at a weekly time commitment of around 12-16 hours.\nNow, concerning your crucial question about placement support and pricing:\nFor eligible learners who achieve at least a 70% score, hold a regular graduation degree, and reside in India, placement assistance is available. This support includes up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, along with access to placement preparation sessions and mentor guidance. For learners with over 5 years of experience, career guidance is provided. It's important to note that while we facilitate these opportunities, final selection always depends on your performance and the specific requirements of the employer.\nRegarding the program fee, it is `INR 1,50,000 + 18% GST`. If you opt for full upfront payment, there's a 5% concession, making the fee `INR 1,42,500 + 18% GST`. We also offer flexible payment options. You can pay through easy installments, or you can explore loan facilities through third-party lenders. Please remember that loan approval is subject to the lender's eligibility criteria, and NIIT does not guarantee loan approval.\nDoes this breakdown clarify the program structure, curriculum, placement support, and pricing for you?",
+      "content": "It's great to hear that you're looking for a program that can advance your career and provide good placement support. Those are important considerations.\nRegarding your questions about the program's intensity and requirements: The 'Building Agentic AI Systems' program is designed with a mastery learning methodology, focusing on developing one skill at a time through structured, hands-on sprints. Each sprint involves 2 hours of live mentor-led sessions and 2 hours of self-paced practice. Depending on whether you choose 3 or 4 sprints per week, your weekly commitment would be approximately 12 to 16 hours, with about 70% of that time dedicated to hands-on work. The program totals 75 sprints, or 300 hours of guided learning and practice, typically spanning 19 to 25 weeks.\nTo successfully complete the program and receive your industry-recognized NIIT Certificate in Agentic AI, you would need to maintain at least 90% attendance, achieve 70% or higher marks in assessments, and ensure full fee payment. It's built for learners with at least six months of hands-on experience in a modern programming language, so a foundational understanding is expected, but the structured format is designed to guide you through complex topics.\nNow, regarding placement support, it's an important aspect for many of our learners. Placement assistance is available for eligible learners who complete the program with at least a 70% score, hold a regular graduation degree, and reside in India. For those with 6 months to 5 years of experience, this support includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days. For learners with over 5 years of experience, career guidance is provided. It's important to understand that while we facilitate these opportunities, the final selection always depends on your individual performance during interviews and the specific requirements of the employer. We focus on building job-ready capabilities and a strong portfolio of working AI projects, demonstrating your readiness for applied AI development roles upon completion.",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -323,137 +323,47 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T10:45:30.300371",
+      "timestamp": "2026-02-17T11:09:27.166142",
       "generation_mode": "stream"
     },
     {
-      "id": "d6bb0721-2245-400d-8304-5baa0781cb21",
+      "id": "04fa74a8-76c1-4682-92df-ec85d77d4f49",
       "round": 2,
       "agent": "student",
-      "content": "Thank you for your patience following our last interaction. To recap, we discussed how the 'Building Agentic AI Systems' program aligns with your goals as a Full Stack Developer, focusing on GenAI, LangChain, and Streamlit. We also covered the curriculum, including modules like 'Build RAG-Based Systems' and the Capstone Project. For your crucial questions on placement support and pricing: placement assistance is available for eligible learners (70% score, graduation degree, India residency), offering interview opportunities and career guidance. The program fee is INR 1,50,000 + 18% GST, with a 5% concession for upfront payment (INR 1,42,500 + 18% GST). EMI and third-party loan options are also available. Did this detailed breakdown fully clarify your queries?",
+      "content": "Ji, that sounds like quite a lot of time and effort, 300 hours and 12-16 hours every week. And 90% attendance and 70% marks are very high, no? Is the program very tough then, especially if I don't have that 6 months programming experience you mentioned? Will I be able to manage easily? And about the placement, you said \"assistance\" and \"opportunities\", but is there any actual guarantee that I will get a good job after putting in all this effort and money? Because I am looking for a certificate mainly for a good job, you know.",
       "techniques": [],
-      "strategic_intent": "clarify_and_confirm_understanding",
-      "confidence_score": 60,
-      "emotional_state": "informative",
-      "internal_thought": "The previous turn failed, so I need to re-transmit the key information about pricing and placement support that the student explicitly asked for, summarizing the counsellor's last comprehensive response. Then, I should confirm if their questions have been addressed.",
-      "updated_stats": {
-        "sentiment": "curious",
-        "skepticism_level": 3,
-        "trust_score": 54,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "curious",
-        "skepticism_level": 3,
-        "trust_score": 54,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "timestamp": "2026-02-17T10:45:39.787716",
-      "generation_mode": "structured_retry"
-    },
-    {
-      "id": "0d0f115f-af97-4b2f-8274-4cc3dfccb9c9",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "Yes, that's a comprehensive summary, and I'm glad to hear that the detailed breakdown has clarified your queries regarding the program structure, curriculum, placement support, and financial options.\nAs we discussed, your strong Full Stack Developer background is an excellent foundation for this program, which is specifically designed to transition professionals like you into high-growth AI and automation roles. You'll gain practical, hands-on experience with tools like LangChain and Streamlit, learning to design and build intelligent, autonomous agentic AI systems that accelerate innovation, and culminating in a portfolio of real-world projects.\nThe admission process is straightforward once you meet the eligibility criteria: you can apply online, submit a self-declaration, accept the terms, and pay the program fee to confirm your spot.\nAre there any other specific aspects of the program or the next steps that you'd like to discuss further?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T10:45:49.272621",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "b6a9917c-3b13-48df-ab9c-ea93c1b5257f",
-      "round": 3,
-      "agent": "student",
-      "content": "That's great! I appreciate the clarity on the program structure and how it aligns with building these cutting-edge agentic AI systems. And the straightforward admission process is definitely a plus, nobody wants a lengthy application when there's an AI revolution to join, right?\nI'm super keen on leveraging these trending tools like LangChain and Streamlit to truly become a top \"AI architect.\" But, just to double-check on a couple of points that are still critical for me:\n1.  Regarding the placement support, when you say \"up to three interview opportunities,\" how does that really translate into a *guarantee* of landing a disruptive AI role? I'm looking for something that assures me I'll be at the forefront, building scalable solutions immediately. I don't want to just *get* interviews; I want to *get the job*.\n2.  And for the payment, you mentioned the EMI option of `INR 24,750` per installment. Could you break down the total number of installments and the overall cost if I choose the EMI route? I just want to ensure I have the full picture on the investment for this paradigm shift.\nIt's all about making sure this program delivers that viral career boost, you know?",
-      "techniques": [],
-      "strategic_intent": "seeking further clarification on job placement specifics and full EMI breakdown, while maintaining enthusiasm for the tech aspects",
-      "confidence_score": 60,
-      "emotional_state": "curious",
-      "internal_thought": "Okay, so the counsellor summarized everything perfectly, which is cool. They're still hitting those key buzzwords like LangChain, Streamlit, autonomous agents – that's what I'm looking for. The admission process sounds super straightforward, which is a relief, I hate dealing with complex applications, total waste of time. But honestly, I'm still a bit hung up on the *actual* job outcome and the money side. \"Up to three interviews\" doesn't exactly scream \"guaranteed top AI architect role,\" you know? And the EMI, they mentioned the installment amount but not the total number of payments, or the overall cost if I go that route. I need to make sure this investment is truly disruptive and will give me that viral career boost, not just another certificate. I'm excited about the tech, but the practicalities need to be crystal clear. I don't want to miss out on this AI revolution because of vague details.",
-      "updated_stats": {
-        "sentiment": "curious",
-        "skepticism_level": 3,
-        "trust_score": 55,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "curious",
-        "skepticism_level": 3,
-        "trust_score": 55,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "timestamp": "2026-02-17T10:45:55.895006",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "0d247ed9-190e-43cd-b1aa-930ee50e3fb7",
-      "round": 4,
-      "agent": "counsellor",
-      "content": "That's excellent to hear that you're so eager to dive into the AI revolution and become an \"AI architect.\" The program is definitely designed to equip you with the skills and tools like LangChain and Streamlit to build innovative agentic AI systems.\nRegarding your questions:\n1.  **Placement Support and Job Roles:** Our placement assistance is designed to support eligible learners in finding opportunities in applied AI development roles. This includes providing up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, and career guidance for those with over 5 years of experience. You'll also have access to placement preparation sessions and mentor guidance, which are crucial for refining your interview skills and portfolio. However, it's important to understand that final selection always depends on your individual performance during interviews and the specific requirements of the employer. While we facilitate connections and opportunities, NIIT does not promise guaranteed jobs or assure a specific role or outcome. The program's strength lies in building a robust portfolio of working AI projects and developing job-ready capabilities that position you for success in these high-growth roles.\n2.  **EMI Breakdown and Overall Cost:** The total program fee, including 18% GST, is INR 1,77,000. If you choose the full upfront payment option, with the 5% concession, the total fee including GST is INR 1,68,150. For the EMI option, we offer easy installments, with one option being INR 24,750 per equal installment after the booking fee. The exact number of installments and the total cost for your chosen EMI plan would be detailed at the time of enrollment. This can vary based on the specific installment plan you select directly through us, or the terms provided by third-party lenders, if you opt for a loan through them. It is important to review all loan terms carefully, including interest rates, processing fees, and repayment schedules, as NIIT does not guarantee loan approval and has no role in the loan facilitation process beyond connecting you with potential lenders.\nDoes this further clarify the placement support structure and the financial options for you?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T10:46:12.153459",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "1bf23e02-19bc-483d-81df-2169f60fb74b",
-      "round": 4,
-      "agent": "student",
-      "content": "Okay, I get it. Thanks for breaking that down. It's cool that the program is tailored to build those cutting-edge agentic AI systems and I'm still super hyped about leveraging tools like LangChain and Streamlit to drive that AI revolution.\nBut, let's be real here. When I'm looking to make a paradigm shift into an \"AI architect\" role, \"up to three interview opportunities\" isn't really a *job guarantee*. I'm investing in this program to *get* a disruptive role, to be building scalable solutions, not just to *try* and get one. How do you ensure that after these 19-25 weeks, I'm actually *landing* a top-tier GenAI role and not just going through interviews? I need more assurance that this program will deliver that viral career boost straight into a job.\nAnd on the EMI, you mentioned `INR 24,750` per installment, but I still don't have the full picture. What's the *total number* of installments if I choose *your* EMI option, and what does the *overall cost* look like then? I need the exact figures, not just a per-installment amount or a link to third-party lenders. It's crucial for me to have complete clarity on the investment for this cutting-edge journey, you know? It's all about making sure this is a truly disruptive investment with a clear ROI.",
-      "techniques": [],
-      "strategic_intent": "seeking stronger assurances on job outcome and full transparency on EMI total cost, reiterating previous concerns",
+      "strategic_intent": "Expressing increased concern about effort and job guarantee, while hinting at my lack of relevant experience and reinforcing my desire for a guaranteed outcome from the certificate.",
       "confidence_score": 60,
       "emotional_state": "skeptical",
-      "internal_thought": "Ugh, okay, so they're saying there's no *guarantee* for a disruptive AI role? \"Up to three interview opportunities\" is not the same as *landing* a job. That's a bit of a letdown. I'm investing in this to be at the forefront, not just get a few interviews. It's like, I want the full package, the viral career boost, not just a chance. And the EMI breakdown? Still vague. \"At the time of enrollment\" or \"third-party lenders\" isn't the concrete number I need. I need to know the *total* cost if I go the EMI route with *them*. This isn't the kind of clarity a top AI architect needs for a paradigm shift investment. It's stressing me out, honestly. I need to push back on this. My FOMO is kicking in, what if I invest all this time and money and don't get that cutting-edge role immediately? What if I'm not really at the forefront after all this?",
+      "internal_thought": "Uff, 300 hours? 12-16 hours every week? And 90% attendance and 70% marks? This sounds like a lot of effort, ji. My primary motivation is ease, and this sounds like the opposite. And that \"6 months hands-on experience in modern programming language\" - I don't have that! Is it going to be extra tough for me then? And the placement is not guaranteed, it's \"assistance\" and depends on *my* performance. What if I put in all this effort and still don't get a job? This is making me a bit nervous. It sounds like too much work for just an \"assistance\". I thought a certificate means a job, not more hard work and then still no guarantee.",
       "updated_stats": {
         "sentiment": "skeptical",
-        "skepticism_level": 18,
+        "skepticism_level": 25,
         "trust_score": 50,
         "unresolved_concerns": [
+          "Effort/Time",
           "Job Guarantee",
           "Price"
         ]
       },
       "updated_state": {
         "sentiment": "skeptical",
-        "skepticism_level": 18,
+        "skepticism_level": 25,
         "trust_score": 50,
         "unresolved_concerns": [
+          "Effort/Time",
           "Job Guarantee",
           "Price"
         ]
       },
-      "timestamp": "2026-02-17T10:46:18.675344",
+      "timestamp": "2026-02-17T11:09:31.453029",
       "generation_mode": "stream"
     },
     {
-      "id": "3e3662b0-7e3c-4b4a-b190-053d54877ad7",
-      "round": 5,
+      "id": "497b4290-c5d8-43e3-807c-e254236a495f",
+      "round": 3,
       "agent": "counsellor",
-      "content": "I understand your desire for a clear path to a disruptive \"AI architect\" role and a precise financial breakdown. Let me address these points directly, drawing only from the program's factual data.\n1.  **Placement Assurance and Job Roles:** The 'Building Agentic AI Systems' program is explicitly designed to develop job-ready capabilities for high-growth AI and automation roles, allowing you to build real-world skills and a portfolio of working AI projects. Our placement assistance is available for eligible learners (those with at least a 70% score, a regular graduation degree, and residing in India). This support includes providing up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, along with access to placement preparation sessions and mentor guidance. For those with over 5 years of experience, career guidance is provided. While NIIT facilitates these connections and opportunities, it is crucial to understand that **NIIT does not promise guaranteed jobs or assure a specific role or outcome.** Final selection always depends on your individual performance during interviews and the specific requirements of the employer. The program's strength lies in equipping you with the practical skills, hands-on experience, and a robust project portfolio, which are your primary assets for securing top-tier roles.\n2.  **EMI Breakdown and Overall Cost:** The total program fee, including 18% GST, is INR 1,77,000. We do offer an EMI option with installments of INR 24,750 after the booking fee. The precise number of installments and the total cost for the full program under your chosen EMI plan are detailed during the enrollment process. This is because specific payment plans can vary, and we ensure complete transparency by providing you with the exact figures for your selected payment schedule at that stage.\nDoes this clarify the nature of the placement support and the details regarding the EMI options for you?",
+      "content": "I understand your concerns about the time commitment, the attendance and marks requirements, and particularly about the job guarantee. It's natural to want to ensure your investment in time and money yields the desired career outcome.\nRegarding the program's intensity and the requirements: The 300 hours of guided learning and practice, spread over 19 to 25 weeks, is indeed a significant commitment. However, this structure, with 70% hands-on work, is specifically designed as an \"Outcome-Driven Program\" and \"Practitioner Designed\" to build job-ready competencies. The 90% attendance and 70% assessment marks are set to ensure that learners fully engage with this rigorous methodology and truly master the skills, which is crucial for receiving the industry-recognized NIIT Certificate in Agentic AI and becoming eligible for placement assistance. These requirements ensure you develop a strong foundation.\nRegarding the prerequisite experience: The program is designed for learners with at least six months of hands-on experience in a modern programming language like Python, Java, JavaScript, or C#. This foundational experience in writing and debugging simple programs, working with APIs, and understanding web applications is important because the 'Building Agentic AI Systems' curriculum quickly moves into complex topics like designing intelligent, autonomous agents and building RAG-based systems. While the program’s \"Mastery Learning methodology\" is structured to guide you through, this prerequisite ensures you have the base to absorb the advanced concepts and apply the tools and frameworks effectively. If you do not meet this eligibility, it would be advisable to discuss your background with a Program Advisor to ensure the best fit for your success.\nNow, concerning the \"placement guarantee\": As a Senior Admissions Counsellor, I must be clear and factual. We do not promise guaranteed jobs. What we provide is robust \"placement assistance\" for eligible learners. This means that if you meet the criteria—completing the program with at least a 70% score, holding a regular graduation degree, and residing in India—you will receive specific support. This includes access to placement preparation sessions, mentor guidance, and for those with 6 months to 5 years of experience, up to three interview opportunities within 120 days. For learners with over 5 years of experience, career guidance is provided. Our focus is on ensuring you are \"Built for Job Readiness\" and can \"Showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" The final selection for any role, however, always depends on your individual performance during interviews and the specific requirements of the employer. Our objective is to equip you with the skills and the demonstrated capability to excel in these opportunities.",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -461,38 +371,142 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T10:46:31.865483",
+      "timestamp": "2026-02-17T11:09:41.551489",
       "generation_mode": "stream"
     },
     {
-      "id": "6b8aa7a8-37b3-4e79-acc2-79c47c6c58fb",
-      "round": 5,
+      "id": "bdae5227-dc2d-4418-972a-cf549a89192b",
+      "round": 3,
       "agent": "student",
-      "content": "Okay, I hear you, but honestly, that's still not giving me the full picture, especially on the \"viral career boost\" part. I'm looking to make a true \"paradigm shift\" into a top \"AI architect\" role, leveraging these \"trending\" tools like LangChain and Streamlit.\n1.  When you say \"NIIT does not promise guaranteed jobs or assure a specific role or outcome,\" that's a pretty big red flag for someone investing in a program to *land* a \"disruptive\" AI role. How can I be confident that after 19-25 weeks, and building all these \"agentic AI systems,\" I'm actually going to secure a high-growth GenAI position? I need more than just \"up to three interview opportunities.\" I need something that truly assures me I'll be *landing* a job, not just interviewing. What concrete steps or success metrics can you share that guarantee a direct path to employment in these \"cutting-edge\" roles?\n2.  And for the EMI, I'm still asking for the exact numbers. If I choose *your* EMI option with `INR 24,750` per installment, what is the *total number of installments* and what is the *overall cost* of the program then? \"Detailed during the enrollment process\" isn't enough. I need to understand the full investment upfront for this \"disruptive\" journey. It's crucial for my ROI calculation, you know?",
+      "content": "Ji, 6 months programming experience? That is a problem for me. I don't really have that. So, will I even be able to do this program then? Or will it be very, very tough for me? Because you said it's important and foundational. And if it's so much effort and time, and even the attendance and marks are so high, then why is there no proper placement guarantee? Just \"assistance\" and \"opportunities\" after all that? I am really looking for a certificate that can help me get a good job for sure, you know. This program sounds like a lot of hard work without a clear job path. And the fee is also quite high for something that isn't guaranteeing a job, no?",
       "techniques": [],
-      "strategic_intent": "reiterate unresolved concerns with increased emphasis, pushing for direct and specific answers on job guarantee and full EMI breakdown, reflecting skepticism and frustration with vague responses",
+      "strategic_intent": "expressing concern about difficulty, eligibility due to lack of experience, and continued skepticism about job guarantee vs. effort and cost.",
       "confidence_score": 60,
-      "emotional_state": "frustrated",
-      "internal_thought": "Ugh, seriously? \"NIIT does not promise guaranteed jobs or assure a specific role or outcome.\" That's literally the *opposite* of what I need to hear if I'm going to make this huge \"paradigm shift\" into an \"AI architect.\" They keep talking about \"facilitating connections\" and \"interview opportunities\" but never about *landing* the job. What's the point of learning all these \"cutting-edge\" tools like LangChain and Streamlit if it doesn't guarantee a \"disruptive role\"? It feels like they're just pushing the responsibility onto me, even after I invest all this money and time. This FOMO is real, but so is the fear of not getting a job.\n\nAnd the EMI again! \"Detailed during the enrollment process.\" Why can't they just tell me the total number of installments and the final cost *now* if I choose *their* EMI option? It's not rocket science. It's like they want me to commit without knowing the full financial picture. That's not how a \"disruptive investment\" works. This is stressing me out. I need clarity, not more vague answers. My trust is definitely dipping with these evasions. I'm getting bored with the runaround on these two key points.",
+      "emotional_state": "skeptical",
+      "internal_thought": "Ji, this is getting complicated. So much effort, so many hours, and 90% attendance, 70% marks... it sounds very, very tough. And now they are saying I need 6 months programming experience too, which I don't have. How will I manage all this? This is not sounding easy at all. And no job guarantee? Only \"assistance\"? What is the point of putting in so much money and effort then? I just want a certificate to get a better job easily. This is all sounding like too much work for uncertain results. My biggest concern is still getting a job, and they are not guaranteeing anything. And the price is also so much for all this uncertainty.",
       "updated_stats": {
         "sentiment": "skeptical",
-        "skepticism_level": 28,
+        "skepticism_level": 45,
         "trust_score": 40,
         "unresolved_concerns": [
+          "Effort/Time",
+          "Job Guarantee",
+          "Price",
+          "Eligibility (lack of experience)"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "skeptical",
+        "skepticism_level": 45,
+        "trust_score": 40,
+        "unresolved_concerns": [
+          "Effort/Time",
+          "Job Guarantee",
+          "Price",
+          "Eligibility (lack of experience)"
+        ]
+      },
+      "timestamp": "2026-02-17T11:09:46.490103",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "363a1736-9bac-4873-b38f-8914f7954ae2",
+      "round": 4,
+      "agent": "counsellor",
+      "content": "I hear your reservations clearly regarding the prerequisite experience, the job guarantee, and the program fee. These are significant points, and it's essential that you have a full understanding to make an informed decision.\nFirst, regarding the six months of programming experience: The program's 'Practitioner Designed' curriculum and 'Mastery Learning methodology' are built upon the assumption of this foundational experience. The curriculum quickly advances to designing intelligent, autonomous agents, building RAG-based systems, and orchestrating multi-agent systems using specific tools like Python, FastAPI, OpenAI SDK, LangChain, and CrewAI. About 70% of your time will be hands-on, requiring you to write and debug code, work with APIs, and build web applications right from the start. Without this prerequisite, you might indeed find it very challenging to keep pace with the learning sprints, fully engage with the complex topics, and ultimately achieve the required 70% assessment marks and build the necessary portfolio of working AI projects. While the program is structured for rigorous learning, success heavily relies on meeting these entry-level competencies. For this reason, we strongly advise learners to have this background to ensure they can truly thrive. If you feel you might not meet this, I would recommend connecting with a Program Advisor who can assess your specific background and guide you on the best path forward, which might include building up those foundational skills first.\nNow, regarding placement. As I mentioned, we provide robust 'placement assistance' for eligible learners, which is a key feature of our 'Built for Job Readiness' approach. This includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days for those with 6 months to 5 years of experience. Our commitment is to equip you with an \"exit profile\" that includes the ability to design and orchestrate multi-agent systems and \"showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" This program is outcome-driven, designed to build role-specific competencies that are highly valued in the industry. The final selection, however, is always based on your individual performance in interviews and the specific requirements of the hiring employer. We focus on empowering you with the skills and demonstrable projects that make you a competitive candidate in the high-growth AI and automation job market, rather than guaranteeing a specific job outcome.\nFinally, addressing your concern about the program fee. The investment of 1,50,000 INR plus GST, or the EMI option of 24,750 INR after booking, covers 300 hours of guided, mentor-led learning, mastery of 25+ cutting-edge tools and frameworks, and the development of a strong portfolio through industry-relevant projects. This program is positioned to develop 'job-ready capabilities for high-growth AI and automation roles' and 'design Agentic AI systems that accelerate innovation.' Many learners find this investment worthwhile because it directly translates into acquiring highly specialized and in-demand skills. To make this investment more accessible, we do offer EMI options, including through third-party lenders. These options can help spread the cost over a period, making it more manageable. Would you like me to share more details on the available financing options?",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T11:09:59.476692",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "9dbdce25-2283-44a4-8615-6648ef672fbd",
+      "round": 4,
+      "agent": "student",
+      "content": "Ji, but if I really don't have that 6 months programming experience, will it be very, very tough for me, no? Like, if I have to put in extra effort just to understand the basics, then it becomes even more hard work for me. You said it's \"important\" and \"foundational,\" so it means I will struggle a lot, right?\nAnd for so much effort and such a high fee, why is there still no proper job guarantee? Just \"assistance\" and \"interview opportunities\" doesn't sound very certain, ji. My main goal is to get a good job *for sure* with this certificate. If I am putting in so much money – 1.5 lakh rupees, that is a lot for me – and so much time, I need to be sure about the job. Is there no other easier program or a shortcut to get a good certificate for a job without so much hard work and without this experience problem?",
+      "techniques": [],
+      "strategic_intent": "Express concern about eligibility and difficulty, re-emphasize desire for job guarantee and easier path, question the value for money given no guarantee.",
+      "confidence_score": 60,
+      "emotional_state": "skeptical",
+      "internal_thought": "Arre yaar, this counsellor is saying I need 6 months programming experience. I don't have that at all! Toh will it be very, very tough for me then? This is exactly what I don't want. So much effort just to catch up? And then they are still saying no job guarantee, only \"assistance.\" What is the point of putting so much money and time if there's no pakka job? My whole point is to get a certificate for a good job, not for more hard work and no job. The fee is also so high for this kind of uncertainty. Why should I pay so much if it's not even easy to get in and then not easy to get a job?",
+      "updated_stats": {
+        "sentiment": "skeptical",
+        "skepticism_level": 65,
+        "trust_score": 30,
+        "unresolved_concerns": [
+          "Effort/Time (now compounded by prerequisite)",
+          "Eligibility (lack of experience)",
           "Job Guarantee",
           "Price"
         ]
       },
       "updated_state": {
         "sentiment": "skeptical",
-        "skepticism_level": 28,
-        "trust_score": 40,
+        "skepticism_level": 65,
+        "trust_score": 30,
         "unresolved_concerns": [
+          "Effort/Time (now compounded by prerequisite)",
+          "Eligibility (lack of experience)",
           "Job Guarantee",
           "Price"
         ]
       },
-      "timestamp": "2026-02-17T10:46:37.677148",
+      "timestamp": "2026-02-17T11:10:04.692409",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "f1d836d2-1b37-4552-b903-9bac0cecc4ac",
+      "round": 5,
+      "agent": "counsellor",
+      "content": "I understand your persistent concerns about the prerequisite programming experience, the absence of a job guarantee, and the investment required. It's important to clarify these points fully to help you make the right decision.\nFirst, regarding the six months of programming experience: You are correct that it is explicitly stated as \"important\" and \"foundational.\" The program's design, which allocates approximately 70% of its 300 hours to hands-on work, assumes learners can immediately engage with writing and debugging code, working with REST APIs and JSON, and building web applications using frameworks. The curriculum quickly progresses to complex topics like designing intelligent conversational agents, building RAG-based systems, and orchestrating multi-agent systems using advanced tools and frameworks such as LangChain, CrewAI, and Azure AI Foundry. Without this foundational experience, you would indeed likely find it very challenging to keep pace, understand the advanced concepts, and effectively complete the hands-on projects necessary to achieve the required 70% assessment marks and build a strong portfolio. Our goal is for your success, and meeting the eligibility criteria is crucial for that. I strongly recommend connecting with a Program Advisor who can assess your specific background and guide you on whether this program is the right fit for your current skill level, or if building those foundational skills first would be more beneficial.\nNow, concerning the job guarantee: As a Senior Admissions Counsellor, I must reiterate that we do not offer guaranteed jobs. What we do provide is comprehensive \"placement assistance\" for eligible learners. This support is robust and includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, or career guidance for those with over 5 years of experience, provided you meet the eligibility of a 70% score, a regular graduation degree, and Indian residency. The program's \"Built for Job Readiness\" approach is focused on equipping you with an \"exit profile\" that includes the ability to design and orchestrate multi-agent systems and \"showcase a portfolio of working AI projects demonstrating readiness for applied AI development roles.\" The curriculum is \"Practitioner Designed\" to ensure you gain industry-relevant experience. However, the final selection by an employer always depends on your individual performance during interviews and their specific hiring requirements. Our commitment is to empower you with the in-demand skills and demonstrable projects that make you a highly competitive candidate in the high-growth AI and automation job market.\nRegarding your question about an \"easier program or a shortcut\" to a good job certificate without this level of hard work or experience: The 'Building Agentic AI Systems' program is specifically designed to develop deep, \"job-ready capabilities\" through its rigorous \"Mastery Learning methodology\" and significant hands-on work. This intensity, including the 90% attendance and 70% assessment mark requirements, is what ensures you truly master the 25+ tools and frameworks and can build, document, and test real-world Agentic AI systems. In a rapidly evolving and complex field like AI, shortcuts often do not lead to the comprehensive skill set and practical experience that employers seek for meaningful roles. The 1,50,000 INR plus GST fee reflects the value of 300 hours of guided, mentor-led learning, the cutting-edge curriculum, and the development of a portfolio through industry-relevant projects. This investment is aimed at preparing you for high-growth AI and automation roles by providing specialized and in-demand skills. To help manage this investment, we offer full upfront payment with a concession, or EMI options through third-party lenders, which can make it more accessible.",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T11:10:16.321269",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "41fd01ad-7dc0-4498-ac31-0a63dba510b9",
+      "round": 5,
+      "agent": "student",
+      "content": "Ji, but you are saying it will be \"very, very tough\" and I will \"struggle a lot\" if I don't have that 6 months programming experience. And I don't have it, ji. So, for me, it means even more hard work just to catch up on basics, no? How can I manage 90% attendance and 70% marks then if I am already struggling so much?\nAnd still, there is no proper job guarantee? Just \"assistance\" and \"interview opportunities\" after so much effort and such a high fee – 1.5 lakh rupees, that is very costly for me. My main goal is to get a good job *for sure* with a certificate. Is there really no other easier program, or a shortcut, to get a good certificate for a job without so much hard work and without this experience problem?",
+      "techniques": [],
+      "strategic_intent": "reiterate main concerns about difficulty, lack of job guarantee, and high cost, while also directly asking again for an easier path or shortcut that aligns with my primary motivation.",
+      "confidence_score": 60,
+      "emotional_state": "frustrated",
+      "internal_thought": "Uff, this counsellor is just repeating the same things, no? They keep saying it's \"tough\" without experience and \"no shortcuts\" for a good job. But that's exactly what I *don't* want. If it's so much hard work and effort, and I don't even have the experience, why would I join? And still no guarantee for the job! My whole point is to get a *sure* job with a certificate, not to struggle so much and then still have to 'perform' in interviews. The fee is also so high for such uncertainty. Is there really no easier way to get a good job certificate? I don't want to put in so much extra effort just to understand basics.",
+      "updated_stats": {
+        "sentiment": "frustrated",
+        "skepticism_level": 80,
+        "trust_score": 20,
+        "unresolved_concerns": [
+          "Effort/Time (now compounded by prerequisite)",
+          "Job Guarantee",
+          "Price",
+          "Ease of Effort & Shortcuts"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "frustrated",
+        "skepticism_level": 80,
+        "trust_score": 20,
+        "unresolved_concerns": [
+          "Effort/Time (now compounded by prerequisite)",
+          "Job Guarantee",
+          "Price",
+          "Ease of Effort & Shortcuts"
+        ]
+      },
+      "timestamp": "2026-02-17T11:10:20.932189",
       "generation_mode": "stream"
     }
   ]
