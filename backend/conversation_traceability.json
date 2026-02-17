@@ -1,40 +1,40 @@
 {
-  "generated_at": "2026-02-17T13:24:36.211248",
-  "session_id": "3e621487-ad14-4ad7-ba81-e8c4c0a9206b",
+  "generated_at": "2026-02-17T15:04:33.403213",
+  "session_id": "8f09dec3-f0fb-4451-a612-8205f0213ea6",
   "deal_status": "failed",
-  "round": 5,
+  "round": 4,
   "max_rounds": 5,
   "persona": {
-    "age": 28,
-    "misconception": "He believes that most high-priced AI courses are just capitalizing on the hype, offering content that can mostly be found for free or cheap online if one looks hard enough. \"Bhaiya, sab marketing ka chakkar hai, asli value kitni hai, woh dekhna padega. Certified toh sab karte hain, kaam kya aayega?\"",
-    "skepticism": 9,
+    "hidden_secret": "He secretly fears he's not smart enough to grasp advanced AI concepts, especially mathematics, and worries about wasting his limited savings on another program that might not yield results, further burdening his family.",
+    "archetype_label": "Desperate Switcher",
+    "misconception": "He believes that a 'job guarantee' means he will definitely get a job offer with a specific high salary immediately after the program, irrespective of his own effort or market conditions. He might overlook the 'assistance' part.",
+    "skepticism": 7,
+    "city_tier": "Tier-2",
+    "financial_anxiety": 9,
+    "archetype_id": "desperate_switcher",
+    "ego_level": 4,
+    "confusion_level": 8,
+    "language_style": "Indian Academic English. Use 'Sir/Ma'am' often and terms like Batch, Passing out, Gap, Scope.",
+    "current_role": "Junior Software Developer (Maintenance)",
+    "name": "Rahul Sharma",
+    "trigger_event": "Witnessed a close friend, who was in a similar stagnant role, successfully transition into an AI/ML engineer role with a significant salary jump after completing an upskilling program. This fueled his intense desire to switch, coupled with the realization that his current job offers no real growth.",
     "common_vocabulary": [
-      "value for money",
-      "hidden charges",
-      "ROI",
-      "pakka",
-      "guarantee",
-      "scene kya hai",
-      "bhaiya",
-      "dekho"
+      "Sir",
+      "Ma'am",
+      "Batch",
+      "Passing out",
+      "Gap",
+      "Scope",
+      "Placement",
+      "Package"
     ],
-    "archetype_label": "Skeptical Shopper",
-    "name": "Rajat Sharma",
-    "city_tier": "Tier-1",
-    "hidden_secret": "He once paid a hefty sum for a data science bootcamp that turned out to be mostly theoretical and didn't help him land a better job. He fears repeating that mistake and losing both time and money again. Thoda embarrassed bhi hai about that decision.",
-    "backstory": "Rajat, a 28-year-old software developer from Bengaluru, has been working for 5 years in a mid-sized IT firm. He's seen a lot of online courses come and go, many promising the moon but delivering little. He's very practical and believes in investing only if there's a clear ROI. He often scours reviews and compares every feature before making a decision, because yaar, paisa ped pe nahi ugta.",
-    "ego_level": 5,
-    "confusion_level": 6,
-    "trigger_event": "His company recently started discussions about integrating AI into their core products. He realizes his current skill set in traditional software development might become obsolete if he doesn't adapt. He wants to upskill in AI, specifically agentic AI, but is extremely wary of the numerous \"AI courses\" flooding the market, many of which he suspects are just repackaged content with fancy names. Pehle clear karo, asli value kya hai.",
-    "current_role": "Software Developer",
-    "language_style": "Hinglish",
-    "financial_anxiety": 8,
-    "archetype_id": "skeptical_shopper",
-    "persona_type": "skeptical_shopper",
+    "age": 28,
+    "backstory": "Rahul completed his B.Tech in Computer Science from a Tier-2 college 5 years ago. He immediately joined a service-based IT company, working on legacy system maintenance. While he's grateful for the job, he feels stuck, sees his peers from other colleges getting into high-growth tech roles, and fears his skills are becoming obsolete. He supports his elderly parents and has younger siblings whose education he contributes to.",
+    "persona_type": "desperate_switcher",
     "background": "Prospective learner evaluating an AI upskilling path.",
-    "career_stage": "early",
+    "career_stage": "mid",
     "financial_sensitivity": "medium",
-    "risk_tolerance": "low",
+    "risk_tolerance": "medium",
     "emotional_tone": "skeptical",
     "primary_objections": [
       "Placement credibility",
@@ -42,11 +42,11 @@
       "Difficulty for freshers",
       "Time commitment"
     ],
-    "walk_away_likelihood": 0.26,
-    "expected_roi_months": 12,
-    "affordability_concern_level": 81,
-    "willingness_to_invest_score": 70,
-    "communication_style": "confused",
+    "walk_away_likelihood": 0.3,
+    "expected_roi_months": 15,
+    "affordability_concern_level": 74,
+    "willingness_to_invest_score": 65,
+    "communication_style": "challenging",
     "common_phrases": [
       "Placement ka scene kya hai?",
       "Is this really worth it?",
@@ -55,74 +55,73 @@
   },
   "program": {
     "program_name": "Building Agentic AI Systems",
-    "program_fee_inr": "1,50,000 + GST (Program fees); 1,500 + GST (Booking fees). Full upfront payment: 1,42,500 (Inclusive of 5% fee concession)."
+    "program_fee_inr": "INR 1,50,000 + GST. Booking fees: INR 1,500 + GST. All fees are exclusive of 18% GST."
   },
   "student_inner_state": {
-    "sentiment": "frustrated",
-    "skepticism_level": 35,
+    "sentiment": "anxious",
+    "skepticism_level": 17,
     "trust_score": 50,
     "unresolved_concerns": [
       "Effort/Time",
       "Job Guarantee",
-      "Price",
-      "Total Price"
+      "Price"
     ]
   },
   "negotiation_metrics": {
-    "round": 4,
+    "round": 3,
     "max_rounds": 5,
-    "concession_count_counsellor": 1,
+    "concession_count_counsellor": 0,
     "concession_count_student": 0,
-    "tone_escalation": 23,
-    "objection_intensity": 26,
-    "trust_index": 46,
-    "close_probability": 63,
+    "tone_escalation": 15,
+    "objection_intensity": 23,
+    "trust_index": 50,
+    "close_probability": 65,
     "sentiment_indicator": "positive",
     "retry_modifier": 0
   },
   "final_offers": {
-    "counsellor": 169920,
-    "student": 132000
+    "counsellor": 169312,
+    "student": 129000
   },
   "analysis": {
-    "skill_recommendations": [
-      "Develop deeper probing questions to uncover the root cause behind the 'pakka job guarantee' demand (e.g., specific financial security needs, past negative experiences).",
-      "Practice advanced objection handling techniques for high-stakes, non-negotiable points like job guarantees, focusing on alternative solutions that address the underlying need.",
-      "Implement clear closing strategies to confirm commitment or identify remaining barriers, especially after positive sentiment from the student."
-    ],
-    "commitment_signal": "none",
-    "primary_unresolved_objection": "Lack of a 'pakka' job guarantee",
-    "trust_delta": 5,
-    "pivotal_moments": [
-      "Round 1 Student's strong opening demanding 'job guarantee' and 'price' as main concerns.",
-      "Round 2 Counsellor's detailed response clarifying fees and introducing placement assistance instead of a direct job guarantee.",
-      "Round 2 Student's re-iteration of 'pakka job guarantee' as a main unresolved concern.",
-      "Round 3 Counsellor's detailed price clarification and firm stance on no direct 'guarantee' but strong 'placement assistance' and ROI from skills.",
-      "Round 4 Student's final positive statement about curriculum understanding, which, in light of the 'failed' status, marks the point where apparent satisfaction did not convert to enrollment."
-    ],
     "strengths": [
-      "Counsellor successfully clarified complex pricing structure.",
-      "Counsellor provided detailed and compelling information about the curriculum, hands-on learning, and placement assistance.",
-      "Counsellor maintained a professional and patient tone throughout.",
-      "Counsellor acknowledged student's concerns directly."
+      "Acknowledged and empathized with student's concerns (career shift, peer pressure).",
+      "Provided detailed and reassuring information on placement assistance, including statistics.",
+      "Offered various payment options (upfront discount, EMI, loans).",
+      "Maintained a polite, professional, and informative tone throughout.",
+      "Transparent about the job guarantee policy and third-party loan arrangements."
     ],
-    "why": "The deal failed because the student's core objection regarding a 'pakka' job guarantee was never fully resolved to their satisfaction, despite the counsellor effectively clarifying pricing and detailing the program's curriculum and value proposition. The student's final positive statement about the curriculum's value did not translate into an enrollment commitment, indicating a disconnect between understanding value and personal readiness to commit without the desired job security.",
+    "why": "The student's primary financial objection regarding the program fee and the ambiguity of third-party EMI options remained unresolved, preventing a commitment despite reassurance on placement. The student shifted focus without concluding on the financial discussion.",
+    "skill_recommendations": [
+      "Develop a clearer, more simplified way to explain third-party financing options, perhaps with typical examples or a direct connection path during the call.",
+      "Employ active listening and probing questions to uncover the depth of financial concerns and specific budget limitations.",
+      "Practice objection handling techniques for financial hurdles, even when direct solutions aren't available, by focusing on value proposition or next steps for resolution.",
+      "Improve techniques for guiding the conversation back to unresolved objections before moving to new topics."
+    ],
+    "winner": "student",
+    "negotiation_score": 55,
+    "primary_unresolved_objection": "Program fee clarity and manageable EMI options from third-party lenders.",
+    "pivotal_moments": [
+      "Student's initial strong interest in job prospects and deep concern about program fee (Round 1).",
+      "Counsellor's detailed explanation of placement assistance, which reassured the student (Round 2).",
+      "Counsellor's clarification that EMI plans are through third-party lenders, introducing ambiguity on total cost (Round 3).",
+      "Student's pivot to asking about program workload without resolving the financial details, indicating a stalled negotiation on the primary objection (Round 3)."
+    ],
     "mistakes": [
-      "Did not fully address the student's deep-seated need for a 'pakka' job guarantee in a way that resonated, despite reframing.",
-      "Initial pricing confusion added to student skepticism in early rounds.",
-      "Failed to convert student's understanding of program value into a concrete commitment, despite positive verbal feedback in the final round.",
-      "Did not attempt a hard close or explicitly confirm student's next steps/commitment after the positive Round 4 response."
+      "Did not proactively probe deeper into the student's specific financial constraints or budget.",
+      "The initial explanation of the EMI option (INR 24,750 as an example) was vague and created further confusion when elaborated upon in Round 3.",
+      "Did not effectively manage the transition when the student shifted focus from the unresolved financial objection to workload."
     ],
-    "winner": "no-deal",
-    "enrollment_likelihood": 10,
-    "negotiation_score": 35
+    "commitment_signal": "conditional_commitment",
+    "enrollment_likelihood": 45,
+    "trust_delta": 3
   },
   "transcript": [
     {
-      "id": "90a55197-4ca1-4602-b1fa-bb5a955e4d2f",
+      "id": "d3ac4b1e-a126-4640-9a6b-4b2b258e5488",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello! Thank you for connecting with us about the \"Building Agentic AI Systems\" program. To help me guide you best, could you tell me what specifically caught your eye about this program or the field of Agentic AI?",
+      "content": "Hello! Welcome to NIIT. I'm here to help you explore our 'Building Agentic AI Systems' program. To start, could you share a bit about what interests you most in this program or what you're hoping to achieve by enrolling?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -130,29 +129,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T13:22:51.555198",
+      "timestamp": "2026-02-17T15:03:27.850416",
       "generation_mode": "stream"
     },
     {
-      "id": "bb2aa8fa-b226-43cb-a076-a143d0568e33",
+      "id": "30c8a7ae-dd7d-4334-90a4-9c153334beed",
       "round": 1,
       "agent": "student",
-      "content": "Dekho bhaiya, honestly speaking, maine aise bohot saare AI courses dekhe hain jo bas hype create karte hain. Mujhe koi general gyaan nahi chahiye. Mere liye main cheez hai value for money aur ROI. Agar ye course itna high-priced hai (jaise ye 1,73,250 ka figure jo aapne diya hai), toh scene kya hai? Kya guarantee hai ki isse mujhe actually job milegi, ya meri salary increase hogi? Sirf certification se kya hoga? Aur hidden charges ka kya scene hai? Job Guarantee aur Price, ye do mere main concerns hain. Pehle inka jawab do, tabhi aage baat karne ka koi point hai.",
+      "content": "Good morning, Sir. Thank you for asking. My main interest, Sir, is to switch my domain from legacy system maintenance to a high-growth field like AI. Many of my batchmates from other colleges are already in good product companies, earning very well. I am feeling quite stuck, Sir. So, I am hoping this program will give me the skills for a good job, with a good package. I wanted to know more about the placement support, Sir, and if there is a job guarantee after completing the program successfully. Also, the program fee, Sir, is a major concern for me.",
       "techniques": [],
-      "strategic_intent": "To challenge the counsellor's generic opening and immediately shift the focus to my primary concerns: value for money, ROI, job guarantee, and price, while also expressing skepticism about AI course hype.",
+      "strategic_intent": "To express my core motivation and immediately bring up my two main unresolved concerns: job guarantee and price, as the counsellor's initial question was too vague for my primary need for security.",
       "confidence_score": 60,
-      "emotional_state": "skeptical",
+      "emotional_state": "anxious",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T13:22:55.792918",
+      "timestamp": "2026-02-17T15:03:31.026667",
       "generation_mode": "stream"
     },
     {
-      "id": "bfe7069f-fa6b-41c4-814a-b934f4a8d942",
+      "id": "5d0ffb35-a699-463f-8417-cf41c079a53f",
       "round": 2,
       "agent": "counsellor",
-      "content": "Hello! I appreciate your directness and your focus on value for money and return on investment. It's completely understandable to look beyond the hype, especially when considering a significant investment in your career. Let's address your main concerns about job prospects and pricing based on the program's factual data.\nRegarding your question about job prospects and guarantees, the \"Building Agentic AI Systems\" program is designed with job readiness in mind. It builds role-specific competencies and is practitioner-designed to accelerate skill acquisition through a \"Learn by Doing\" approach, where over 60% of program time is invested in coding and hands-on practical activities. You'll work on industry-relevant projects, including a Capstone Project to engineer an autonomous Agentic AI system, which allows you to build a portfolio of working AI projects demonstrating your readiness for applied AI development roles.\nUpon successful completion, you'll receive an Industry-recognized NIIT Certificate in Agentic AI. For eligible learners who complete the program with at least a 70% score, hold a regular graduation degree, and reside in India, placement assistance is available. This support includes up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, career guidance for those with over 5 years of experience, and access to placement preparation sessions and mentor guidance. While NIIT provides these opportunities, final selection depends on your performance and employer requirements. According to our data, 97% of eligible learners were placed.\nNow, concerning the program fee and any hidden charges. The program fee is INR 1,50,000 + GST, along with a booking fee of INR 1,500 + GST. These are the stated fees from NIIT, and there are no hidden charges. We offer multiple payment options:\n*   If you choose to pay the full program fee upfront, there's a 5% concession, making the program fee component INR 1,42,500 + GST.\n*   EMI options are available for INR 24,750 in equal installments after booking.\n*   Additionally, loan facilities can be availed through third-party lenders. It's important to note that loan approval depends on the lender's eligibility criteria, and NIIT does not guarantee loan approval. All loan terms, including EMIs, interest rates, and repayment schedules, are to be reviewed carefully with the lender directly.\nDoes this clarify your initial concerns about the program's value proposition, placement assistance, and fee structure?",
+      "content": "Good morning! I understand exactly why you're looking to make this shift and how important it is to find a program that truly prepares you for the high-growth AI sector. It's completely natural to feel that way when seeing your peers progress, and our 'Building Agentic AI Systems' program is specifically designed for job-readiness in these roles.\nRegarding your question about a job guarantee, it's important to clarify that while NIIT does not offer a job guarantee, we provide comprehensive placement assistance to eligible learners. This support includes access to NIIT's trusted recruiter network and our 800+ hiring partners. For learners with 6 months to 5 years of experience, we facilitate up to three interview opportunities within 120 days of program completion. We also offer career guidance for those with over 5 years of experience, along with placement preparation sessions and mentor guidance. Final selection, of course, depends on your performance and the employer's requirements. We're proud to share that 97% of our eligible learners are placed.\nNow, coming to the program fee, which you mentioned is a concern, the total program fee is INR 1,50,000 + GST, with a booking fee of INR 1,500 + GST. However, we have several options to make it more manageable. If you opt for a full upfront payment, you receive a 5% concession, bringing the fee to INR 1,42,500 inclusive of the concession. Alternatively, an EMI option is available, with payments such as INR 24,750 in equal installments after booking. We also facilitate loan facilities through third-party lenders, offering easy financing without moratorium, though approval depends on the lender's eligibility criteria, and NIIT does not guarantee loan approval. We can discuss these financing options in more detail if you'd like.\nDoes this initial information address your primary concerns about placement support and the program fee, or would you like to explore any of these points further?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -160,59 +159,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T13:23:07.624215",
+      "timestamp": "2026-02-17T15:03:41.947415",
       "generation_mode": "stream"
     },
     {
-      "id": "3b4bf31d-4a43-491d-b9ad-a390fa2539b7",
+      "id": "81c19eaa-57e8-44b4-be6b-d36e34a3c372",
       "round": 2,
       "agent": "student",
-      "content": "Dekho bhaiya, thanks for clarifying the fees and all. No hidden charges, that's good to hear. Par ek minute, pehle aapne jo figure diya tha woh 1,73,250 tha, aur ab aap bol rahe ho 1,50,000 + GST. Toh ye total pakka kitna padega with GST? Ye confusion kyun hai?\nAur job prospects ka scene... aap bol rahe ho \"placement assistance\" aur \"up to three interview opportunities,\" aur \"97% eligible learners placed.\" Theek hai, sounds good on paper. Par bhai, \"final selection depends on your performance and employer requirements\" - ye toh sab bolte hain! Iska matlab kya hai? Agar main course acchi tarah complete karta hoon, 70% score bhi le aata hoon, toh kya guarantee hai ki mujhe job milegi?\nSirf assistance ya opportunities se kya hoga, agar end mein job na mile? Mujhe \"pakka\" job guarantee chahiye, ya at least ek clear ROI. Itna time aur itne paise lagane ke baad, I can't afford to just get \"assistance\" and then be on my own. Iska scene kya hai, clear karo. Job Guarantee aur exact total price, ye do abhi bhi mere main unresolved concerns hain.",
+      "content": "Yes, Sir, this information is very helpful, thank you. The placement assistance details, especially the 97% placement rate for eligible learners, are reassuring. I understand there's no job guarantee, but the support sounds robust. Regarding the program fee, I'm still weighing the options. Could you elaborate a bit more on the EMI plan? What would be the total number of installments and the total cost under that option?",
       "techniques": [],
-      "strategic_intent": "To challenge the vague job placement claims and seek clarification on the total program cost, reiterating the need for a concrete job guarantee for ROI.",
+      "strategic_intent": "Seek clarification on financing options",
       "confidence_score": 60,
-      "emotional_state": "frustrated",
+      "emotional_state": "Curious",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T13:23:14.941783",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "e016a817-a3b7-4da3-b677-5a7ca0f2dfd5",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "Thank you for pointing out the figure confusion; I apologize for any misunderstanding. Let me clarify the exact program fee with GST for you.\nThe standard program fee is INR 1,50,000, and the booking fee is INR 1,500. Both are subject to 18% GST.\nSo, the program fee with GST calculates to INR 1,50,000 + (18% of 1,50,000) = INR 1,50,000 + INR 27,000 = INR 1,77,000.\nThe booking fee with GST calculates to INR 1,500 + (18% of 1,500) = INR 1,500 + INR 270 = INR 1,770.\nThe total sum for the program fee and booking fee without any concession would be INR 1,77,000 + INR 1,770 = INR 1,78,770.\nHowever, if you opt for the full upfront payment, you receive a 5% concession on the program fee. This reduces the program fee component to INR 1,42,500. When you add 18% GST to this discounted program fee, it comes to INR 1,42,500 + INR 25,650 = INR 1,68,150.\nAdding the booking fee with GST (INR 1,770) to this, the **total upfront payment with the 5% concession would be INR 1,69,920.** The figure of 1,73,250 you mentioned earlier might have been an estimate or based on a slightly different calculation, but this is the precise breakdown as per our current program data.\nNow, regarding your request for a 'pakka' job guarantee and a clear ROI. It's crucial to understand that while we provide comprehensive placement assistance and opportunities, no educational institution can ethically or realistically offer a direct job guarantee for an individual. The final selection will always depend on your personal performance during interviews and the specific requirements of the employer, which is a standard aspect of any hiring process.\nWhat the \"Building Agentic AI Systems\" program *does* guarantee is providing you with the skills, tools, and practical experience to be highly competitive in the job market. You will:\n*   Engage in over 60% hands-on coding and practical activities, developing a strong portfolio of working Agentic AI projects.\n*   Acquire specific, in-demand competencies as outlined in the learning outcomes, such as building conversational AI agents, RAG systems, and multi-agent systems, all designed for job readiness in high-growth AI roles.\n*   Receive placement assistance for eligible learners, which includes up to three interview opportunities within 120 days, career guidance, and preparation sessions. The fact that 97% of our eligible learners were placed indicates the strong success rate of this approach in helping graduates secure roles.\nThe ROI from this program comes from investing in these industry-relevant skills and building a demonstrable portfolio, which are the foundations for career advancement and potential salary growth in the evolving AI and automation sectors. Our focus is to equip you with the capabilities that employers are actively seeking.\nDoes this detailed clarification address your concerns about the exact pricing and the nature of the placement support?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T13:23:29.118291",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "ee89fb19-5be6-45c6-8a47-196cb949a897",
-      "round": 3,
-      "agent": "student",
-      "content": "I understand your strong desire for a 'pakka' job guarantee and a clear ROI, especially given the investment you're considering. It's a completely valid concern. While no educational institution can ethically offer an absolute job guarantee due to the nature of the hiring process, our program is meticulously designed to maximize your employability and provide a very strong return on your investment.\nThe 97% placement rate for eligible learners is a testament to the program's effectiveness. This high success rate isn't just about 'assistance'; it's a direct outcome of our curriculum, which includes over 60% hands-on coding, building a robust portfolio of Agentic AI projects, and gaining industry-recognized certification. These elements make you exceptionally competitive.\nThe ROI comes from equipping you with highly sought-after, practical skills that employers are actively seeking in the rapidly growing AI sector. This directly translates into enhanced career opportunities and potential salary growth. Our commitment is to ensure you are job-ready and positioned for success, as evidenced by our strong placement record.",
-      "techniques": [],
-      "strategic_intent": "address job guarantee concern and reiterate value proposition",
-      "confidence_score": 60,
-      "emotional_state": "empathetic but firm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T13:23:35.725761",
+      "timestamp": "2026-02-17T15:03:52.707617",
       "generation_mode": "structured_retry"
     },
     {
-      "id": "e31acdd2-bf64-419f-8d8b-d9de56061425",
-      "round": 4,
+      "id": "4cb21948-cb56-48d9-88f5-7bb9c08e1a71",
+      "round": 3,
       "agent": "counsellor",
-      "content": "Thank you for allowing me to provide that detailed overview. I hope the clarity on the total program fee, including the upfront payment concession, and the specifics of our robust placement assistance and its high success rate, addresses your primary concerns effectively. To help you further evaluate the significant return on investment this program offers, let's now explore exactly what you will be learning and how the program is structured to make you job-ready.\nThe \"Building Agentic AI Systems\" program is meticulously designed across 75 learning sprints, totaling 300 hours of guided learning and practice. It bridges software engineering and applied AI system development, guiding learners from building clean APIs to designing intelligent, autonomous agents. You'll cover essential modules like 'Python for AI Embedded Applications,' 'Build and Deploy Intelligent Conversational Agents,' 'Build RAG Based Systems,' and 'Build Autonomous Multi-agent Systems,' culminating in a Capstone Project to 'Engineer an Autonomous Agentic AI System (SLO-Bound).' This curriculum is practitioner-designed to accelerate skill acquisition, ensuring you gain hands-on, industry-relevant experience.\nIn terms of commitment, you'll be dedicating approximately 12-16 hours per week. Each sprint involves 2 hours of live mentor-led sessions and 2 hours of self-paced practice, with either 3 or 4 sprints per week depending on the batch duration. This translates to around 19 weeks for 4 sprints per week, or 25 weeks for 3 sprints per week. Importantly, over 60% of your program time is invested in coding and hands-on practical activities, allowing you to build a strong portfolio of working AI projects, which is a key component of your ROI. Does understanding the curriculum and the practical, hands-on methodology give you a clearer picture of the value proposition?",
+      "content": "That's a very practical question, and it's good to understand all the financial aspects clearly.\nThe total program fee, as we discussed, is INR 1,50,000 + 18% GST, which amounts to INR 1,77,000. There's also a booking fee of INR 1,500 + 18% GST, making it INR 1,770. The EMI option is facilitated through third-party lenders that NIIT partners with, offering easy financing without moratorium.\nThe figure of INR 24,750 was provided as an example of what an installment could be. However, the exact number of installments, the total cost inclusive of any interest, and the specific repayment schedule would depend on the individual loan plan you choose from our third-party lenders. NIIT does not directly provide these loans or set their terms, but we can connect you with these lenders so you can explore their specific offerings and find a plan that best suits your needs. Would you be interested in learning more about how to connect with these lenders for detailed EMI structures?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -220,31 +189,31 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T13:23:54.888752",
+      "timestamp": "2026-02-17T15:04:07.548991",
       "generation_mode": "stream"
     },
     {
-      "id": "7151f4fa-26fa-4a07-a487-1fe2aa5f6cfa",
-      "round": 4,
+      "id": "62970eb5-ebe6-4560-9dfb-3fe04dec018e",
+      "round": 3,
       "agent": "student",
-      "content": "Yes, this detailed breakdown of the curriculum and the hands-on methodology truly clarifies the value proposition for me. The emphasis on over 60% practical coding, industry-relevant projects, and the Capstone Project directly addresses my concern for tangible ROI and job readiness. Building a strong portfolio through these learning sprints sounds incredibly beneficial. I can see how this structured approach equips learners with highly sought-after skills for the AI sector. Thank you for elaborating on these key aspects of the program.",
+      "content": "Understood, Sir. I appreciate the clarification regarding the EMI plans relying on third-party lenders and that NIIT doesn't directly set the terms or total costs. While the information on placement assistance was very reassuring, the program fee, and now the process of exploring third-party loan options, still presents a considerable challenge for me. It makes planning difficult without a clear total cost and installment breakdown. I will have to look into those external financing details. In the meantime, could you perhaps tell me more about the program's weekly time commitment and how it balances synchronous and asynchronous learning? I want to ensure I can manage the workload.",
       "techniques": [],
-      "strategic_intent": "Acknowledge understanding of value proposition",
+      "strategic_intent": "seek information; express ongoing financial concern",
       "confidence_score": 60,
-      "emotional_state": "Satisfied",
+      "emotional_state": "concerned",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T13:24:11.882650",
+      "timestamp": "2026-02-17T15:04:18.141109",
       "generation_mode": "structured_retry"
     }
   ],
   "history_for_reporting": [
     {
-      "id": "90a55197-4ca1-4602-b1fa-bb5a955e4d2f",
+      "id": "d3ac4b1e-a126-4640-9a6b-4b2b258e5488",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello! Thank you for connecting with us about the \"Building Agentic AI Systems\" program. To help me guide you best, could you tell me what specifically caught your eye about this program or the field of Agentic AI?",
+      "content": "Hello! Welcome to NIIT. I'm here to help you explore our 'Building Agentic AI Systems' program. To start, could you share a bit about what interests you most in this program or what you're hoping to achieve by enrolling?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -252,45 +221,45 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T13:22:51.555198",
+      "timestamp": "2026-02-17T15:03:27.850416",
       "generation_mode": "stream"
     },
     {
-      "id": "bb2aa8fa-b226-43cb-a076-a143d0568e33",
+      "id": "30c8a7ae-dd7d-4334-90a4-9c153334beed",
       "round": 1,
       "agent": "student",
-      "content": "Dekho bhaiya, honestly speaking, maine aise bohot saare AI courses dekhe hain jo bas hype create karte hain. Mujhe koi general gyaan nahi chahiye. Mere liye main cheez hai value for money aur ROI. Agar ye course itna high-priced hai (jaise ye 1,73,250 ka figure jo aapne diya hai), toh scene kya hai? Kya guarantee hai ki isse mujhe actually job milegi, ya meri salary increase hogi? Sirf certification se kya hoga? Aur hidden charges ka kya scene hai? Job Guarantee aur Price, ye do mere main concerns hain. Pehle inka jawab do, tabhi aage baat karne ka koi point hai.",
+      "content": "Good morning, Sir. Thank you for asking. My main interest, Sir, is to switch my domain from legacy system maintenance to a high-growth field like AI. Many of my batchmates from other colleges are already in good product companies, earning very well. I am feeling quite stuck, Sir. So, I am hoping this program will give me the skills for a good job, with a good package. I wanted to know more about the placement support, Sir, and if there is a job guarantee after completing the program successfully. Also, the program fee, Sir, is a major concern for me.",
       "techniques": [],
-      "strategic_intent": "To challenge the counsellor's generic opening and immediately shift the focus to my primary concerns: value for money, ROI, job guarantee, and price, while also expressing skepticism about AI course hype.",
+      "strategic_intent": "To express my core motivation and immediately bring up my two main unresolved concerns: job guarantee and price, as the counsellor's initial question was too vague for my primary need for security.",
       "confidence_score": 60,
-      "emotional_state": "skeptical",
-      "internal_thought": "Bhaiya, ye toh standard sales pitch lag raha hai. Maine kitne aise calls uthaye hain. Seedha point pe nahi aa rahe. Mujhe kya attract kiya? Mujhe toh bas ROI aur job guarantee attract karti hai, aur woh bhi pakka waali. Har koi AI hype pe capitalise kar raha hai. Pehle mere doubts clear karo, warna time waste hai. Meri primary motivation value for money hai, aur ye sab general questions se toh stress badhega hi. Resistance badhaani padegi.",
+      "emotional_state": "anxious",
+      "internal_thought": "Sir is asking very general questions, not directly about job guarantee or salary. This is making me anxious. I need to know if this program will actually get me a good job, not just what I 'hope' for. I'm already stuck in maintenance, I can't afford another risk. My peers are doing so well. I need concrete answers, not vague talk. My savings are limited. What about the fees, and what about placement? Will I truly get a job? This is stressing me out. I need reassurance.",
       "updated_stats": {
-        "sentiment": "frustrated",
-        "skepticism_level": 29,
-        "trust_score": 47,
+        "sentiment": "anxious",
+        "skepticism_level": 17,
+        "trust_score": 50,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
         ]
       },
       "updated_state": {
-        "sentiment": "frustrated",
-        "skepticism_level": 29,
-        "trust_score": 47,
+        "sentiment": "anxious",
+        "skepticism_level": 17,
+        "trust_score": 50,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
         ]
       },
-      "timestamp": "2026-02-17T13:22:55.792918",
+      "timestamp": "2026-02-17T15:03:31.026667",
       "generation_mode": "stream"
     },
     {
-      "id": "bfe7069f-fa6b-41c4-814a-b934f4a8d942",
+      "id": "5d0ffb35-a699-463f-8417-cf41c079a53f",
       "round": 2,
       "agent": "counsellor",
-      "content": "Hello! I appreciate your directness and your focus on value for money and return on investment. It's completely understandable to look beyond the hype, especially when considering a significant investment in your career. Let's address your main concerns about job prospects and pricing based on the program's factual data.\nRegarding your question about job prospects and guarantees, the \"Building Agentic AI Systems\" program is designed with job readiness in mind. It builds role-specific competencies and is practitioner-designed to accelerate skill acquisition through a \"Learn by Doing\" approach, where over 60% of program time is invested in coding and hands-on practical activities. You'll work on industry-relevant projects, including a Capstone Project to engineer an autonomous Agentic AI system, which allows you to build a portfolio of working AI projects demonstrating your readiness for applied AI development roles.\nUpon successful completion, you'll receive an Industry-recognized NIIT Certificate in Agentic AI. For eligible learners who complete the program with at least a 70% score, hold a regular graduation degree, and reside in India, placement assistance is available. This support includes up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, career guidance for those with over 5 years of experience, and access to placement preparation sessions and mentor guidance. While NIIT provides these opportunities, final selection depends on your performance and employer requirements. According to our data, 97% of eligible learners were placed.\nNow, concerning the program fee and any hidden charges. The program fee is INR 1,50,000 + GST, along with a booking fee of INR 1,500 + GST. These are the stated fees from NIIT, and there are no hidden charges. We offer multiple payment options:\n*   If you choose to pay the full program fee upfront, there's a 5% concession, making the program fee component INR 1,42,500 + GST.\n*   EMI options are available for INR 24,750 in equal installments after booking.\n*   Additionally, loan facilities can be availed through third-party lenders. It's important to note that loan approval depends on the lender's eligibility criteria, and NIIT does not guarantee loan approval. All loan terms, including EMIs, interest rates, and repayment schedules, are to be reviewed carefully with the lender directly.\nDoes this clarify your initial concerns about the program's value proposition, placement assistance, and fee structure?",
+      "content": "Good morning! I understand exactly why you're looking to make this shift and how important it is to find a program that truly prepares you for the high-growth AI sector. It's completely natural to feel that way when seeing your peers progress, and our 'Building Agentic AI Systems' program is specifically designed for job-readiness in these roles.\nRegarding your question about a job guarantee, it's important to clarify that while NIIT does not offer a job guarantee, we provide comprehensive placement assistance to eligible learners. This support includes access to NIIT's trusted recruiter network and our 800+ hiring partners. For learners with 6 months to 5 years of experience, we facilitate up to three interview opportunities within 120 days of program completion. We also offer career guidance for those with over 5 years of experience, along with placement preparation sessions and mentor guidance. Final selection, of course, depends on your performance and the employer's requirements. We're proud to share that 97% of our eligible learners are placed.\nNow, coming to the program fee, which you mentioned is a concern, the total program fee is INR 1,50,000 + GST, with a booking fee of INR 1,500 + GST. However, we have several options to make it more manageable. If you opt for a full upfront payment, you receive a 5% concession, bringing the fee to INR 1,42,500 inclusive of the concession. Alternatively, an EMI option is available, with payments such as INR 24,750 in equal installments after booking. We also facilitate loan facilities through third-party lenders, offering easy financing without moratorium, though approval depends on the lender's eligibility criteria, and NIIT does not guarantee loan approval. We can discuss these financing options in more detail if you'd like.\nDoes this initial information address your primary concerns about placement support and the program fee, or would you like to explore any of these points further?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -298,95 +267,45 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T13:23:07.624215",
+      "timestamp": "2026-02-17T15:03:41.947415",
       "generation_mode": "stream"
     },
     {
-      "id": "3b4bf31d-4a43-491d-b9ad-a390fa2539b7",
+      "id": "81c19eaa-57e8-44b4-be6b-d36e34a3c372",
       "round": 2,
       "agent": "student",
-      "content": "Dekho bhaiya, thanks for clarifying the fees and all. No hidden charges, that's good to hear. Par ek minute, pehle aapne jo figure diya tha woh 1,73,250 tha, aur ab aap bol rahe ho 1,50,000 + GST. Toh ye total pakka kitna padega with GST? Ye confusion kyun hai?\nAur job prospects ka scene... aap bol rahe ho \"placement assistance\" aur \"up to three interview opportunities,\" aur \"97% eligible learners placed.\" Theek hai, sounds good on paper. Par bhai, \"final selection depends on your performance and employer requirements\" - ye toh sab bolte hain! Iska matlab kya hai? Agar main course acchi tarah complete karta hoon, 70% score bhi le aata hoon, toh kya guarantee hai ki mujhe job milegi?\nSirf assistance ya opportunities se kya hoga, agar end mein job na mile? Mujhe \"pakka\" job guarantee chahiye, ya at least ek clear ROI. Itna time aur itne paise lagane ke baad, I can't afford to just get \"assistance\" and then be on my own. Iska scene kya hai, clear karo. Job Guarantee aur exact total price, ye do abhi bhi mere main unresolved concerns hain.",
+      "content": "Yes, Sir, this information is very helpful, thank you. The placement assistance details, especially the 97% placement rate for eligible learners, are reassuring. I understand there's no job guarantee, but the support sounds robust. Regarding the program fee, I'm still weighing the options. Could you elaborate a bit more on the EMI plan? What would be the total number of installments and the total cost under that option?",
       "techniques": [],
-      "strategic_intent": "To challenge the vague job placement claims and seek clarification on the total program cost, reiterating the need for a concrete job guarantee for ROI.",
+      "strategic_intent": "Seek clarification on financing options",
       "confidence_score": 60,
-      "emotional_state": "frustrated",
-      "internal_thought": "Okay, counsellor ne price aur placement ke baare mein thoda clarify kiya hai. No hidden charges bol rahe hain, which is good. Par ye 97% placed wala figure... theek hai, but \"final selection depends on performance and employer requirements\" - ye loophole hai na! Yahi toh dikkat hai. Pichli baar bhi yahi hua tha, bohot paise diye aur end mein sab apni performance pe daal diya. Mujhe pakka assurance chahiye. Ye 1,73,250 ka figure pehle aapne hi bola tha, ab 1,50,000 + GST bol rahe ho. Ye kya scene hai? Total kitna padega pakka? Aur job guarantee ka kya? Sirf assistance se kya hoga? Mere liye value for money tabhi hai jab ROI pakka ho, matlab job pakki ho. Warna itne paise waste kaun karega?",
+      "emotional_state": "Curious",
+      "internal_thought": "The student is processing the details of the placement support and is reassured by the statistics, but the program fee remains a primary concern and they need more specifics on the EMI option to assess affordability.",
       "updated_stats": {
-        "sentiment": "frustrated",
-        "skepticism_level": 35,
+        "sentiment": "anxious",
+        "skepticism_level": 17,
         "trust_score": 50,
         "unresolved_concerns": [
           "Job Guarantee",
-          "Total Price"
+          "Price"
         ]
       },
       "updated_state": {
-        "sentiment": "frustrated",
-        "skepticism_level": 35,
+        "sentiment": "anxious",
+        "skepticism_level": 17,
         "trust_score": 50,
         "unresolved_concerns": [
           "Job Guarantee",
-          "Total Price"
+          "Price"
         ]
       },
-      "timestamp": "2026-02-17T13:23:14.941783",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "e016a817-a3b7-4da3-b677-5a7ca0f2dfd5",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "Thank you for pointing out the figure confusion; I apologize for any misunderstanding. Let me clarify the exact program fee with GST for you.\nThe standard program fee is INR 1,50,000, and the booking fee is INR 1,500. Both are subject to 18% GST.\nSo, the program fee with GST calculates to INR 1,50,000 + (18% of 1,50,000) = INR 1,50,000 + INR 27,000 = INR 1,77,000.\nThe booking fee with GST calculates to INR 1,500 + (18% of 1,500) = INR 1,500 + INR 270 = INR 1,770.\nThe total sum for the program fee and booking fee without any concession would be INR 1,77,000 + INR 1,770 = INR 1,78,770.\nHowever, if you opt for the full upfront payment, you receive a 5% concession on the program fee. This reduces the program fee component to INR 1,42,500. When you add 18% GST to this discounted program fee, it comes to INR 1,42,500 + INR 25,650 = INR 1,68,150.\nAdding the booking fee with GST (INR 1,770) to this, the **total upfront payment with the 5% concession would be INR 1,69,920.** The figure of 1,73,250 you mentioned earlier might have been an estimate or based on a slightly different calculation, but this is the precise breakdown as per our current program data.\nNow, regarding your request for a 'pakka' job guarantee and a clear ROI. It's crucial to understand that while we provide comprehensive placement assistance and opportunities, no educational institution can ethically or realistically offer a direct job guarantee for an individual. The final selection will always depend on your personal performance during interviews and the specific requirements of the employer, which is a standard aspect of any hiring process.\nWhat the \"Building Agentic AI Systems\" program *does* guarantee is providing you with the skills, tools, and practical experience to be highly competitive in the job market. You will:\n*   Engage in over 60% hands-on coding and practical activities, developing a strong portfolio of working Agentic AI projects.\n*   Acquire specific, in-demand competencies as outlined in the learning outcomes, such as building conversational AI agents, RAG systems, and multi-agent systems, all designed for job readiness in high-growth AI roles.\n*   Receive placement assistance for eligible learners, which includes up to three interview opportunities within 120 days, career guidance, and preparation sessions. The fact that 97% of our eligible learners were placed indicates the strong success rate of this approach in helping graduates secure roles.\nThe ROI from this program comes from investing in these industry-relevant skills and building a demonstrable portfolio, which are the foundations for career advancement and potential salary growth in the evolving AI and automation sectors. Our focus is to equip you with the capabilities that employers are actively seeking.\nDoes this detailed clarification address your concerns about the exact pricing and the nature of the placement support?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T13:23:29.118291",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "ee89fb19-5be6-45c6-8a47-196cb949a897",
-      "round": 3,
-      "agent": "student",
-      "content": "I understand your strong desire for a 'pakka' job guarantee and a clear ROI, especially given the investment you're considering. It's a completely valid concern. While no educational institution can ethically offer an absolute job guarantee due to the nature of the hiring process, our program is meticulously designed to maximize your employability and provide a very strong return on your investment.\nThe 97% placement rate for eligible learners is a testament to the program's effectiveness. This high success rate isn't just about 'assistance'; it's a direct outcome of our curriculum, which includes over 60% hands-on coding, building a robust portfolio of Agentic AI projects, and gaining industry-recognized certification. These elements make you exceptionally competitive.\nThe ROI comes from equipping you with highly sought-after, practical skills that employers are actively seeking in the rapidly growing AI sector. This directly translates into enhanced career opportunities and potential salary growth. Our commitment is to ensure you are job-ready and positioned for success, as evidenced by our strong placement record.",
-      "techniques": [],
-      "strategic_intent": "address job guarantee concern and reiterate value proposition",
-      "confidence_score": 60,
-      "emotional_state": "empathetic but firm",
-      "internal_thought": "No internal thought captured",
-      "updated_stats": {
-        "sentiment": "frustrated",
-        "skepticism_level": 35,
-        "trust_score": 50,
-        "unresolved_concerns": [
-          "Effort/Time",
-          "Job Guarantee",
-          "Price",
-          "Total Price"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "frustrated",
-        "skepticism_level": 35,
-        "trust_score": 50,
-        "unresolved_concerns": [
-          "Effort/Time",
-          "Job Guarantee",
-          "Price",
-          "Total Price"
-        ]
-      },
-      "timestamp": "2026-02-17T13:23:35.725761",
+      "timestamp": "2026-02-17T15:03:52.707617",
       "generation_mode": "structured_retry"
     },
     {
-      "id": "e31acdd2-bf64-419f-8d8b-d9de56061425",
-      "round": 4,
+      "id": "4cb21948-cb56-48d9-88f5-7bb9c08e1a71",
+      "round": 3,
       "agent": "counsellor",
-      "content": "Thank you for allowing me to provide that detailed overview. I hope the clarity on the total program fee, including the upfront payment concession, and the specifics of our robust placement assistance and its high success rate, addresses your primary concerns effectively. To help you further evaluate the significant return on investment this program offers, let's now explore exactly what you will be learning and how the program is structured to make you job-ready.\nThe \"Building Agentic AI Systems\" program is meticulously designed across 75 learning sprints, totaling 300 hours of guided learning and practice. It bridges software engineering and applied AI system development, guiding learners from building clean APIs to designing intelligent, autonomous agents. You'll cover essential modules like 'Python for AI Embedded Applications,' 'Build and Deploy Intelligent Conversational Agents,' 'Build RAG Based Systems,' and 'Build Autonomous Multi-agent Systems,' culminating in a Capstone Project to 'Engineer an Autonomous Agentic AI System (SLO-Bound).' This curriculum is practitioner-designed to accelerate skill acquisition, ensuring you gain hands-on, industry-relevant experience.\nIn terms of commitment, you'll be dedicating approximately 12-16 hours per week. Each sprint involves 2 hours of live mentor-led sessions and 2 hours of self-paced practice, with either 3 or 4 sprints per week depending on the batch duration. This translates to around 19 weeks for 4 sprints per week, or 25 weeks for 3 sprints per week. Importantly, over 60% of your program time is invested in coding and hands-on practical activities, allowing you to build a strong portfolio of working AI projects, which is a key component of your ROI. Does understanding the curriculum and the practical, hands-on methodology give you a clearer picture of the value proposition?",
+      "content": "That's a very practical question, and it's good to understand all the financial aspects clearly.\nThe total program fee, as we discussed, is INR 1,50,000 + 18% GST, which amounts to INR 1,77,000. There's also a booking fee of INR 1,500 + 18% GST, making it INR 1,770. The EMI option is facilitated through third-party lenders that NIIT partners with, offering easy financing without moratorium.\nThe figure of INR 24,750 was provided as an example of what an installment could be. However, the exact number of installments, the total cost inclusive of any interest, and the specific repayment schedule would depend on the individual loan plan you choose from our third-party lenders. NIIT does not directly provide these loans or set their terms, but we can connect you with these lenders so you can explore their specific offerings and find a plan that best suits your needs. Would you be interested in learning more about how to connect with these lenders for detailed EMI structures?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -394,42 +313,38 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T13:23:54.888752",
+      "timestamp": "2026-02-17T15:04:07.548991",
       "generation_mode": "stream"
     },
     {
-      "id": "7151f4fa-26fa-4a07-a487-1fe2aa5f6cfa",
-      "round": 4,
+      "id": "62970eb5-ebe6-4560-9dfb-3fe04dec018e",
+      "round": 3,
       "agent": "student",
-      "content": "Yes, this detailed breakdown of the curriculum and the hands-on methodology truly clarifies the value proposition for me. The emphasis on over 60% practical coding, industry-relevant projects, and the Capstone Project directly addresses my concern for tangible ROI and job readiness. Building a strong portfolio through these learning sprints sounds incredibly beneficial. I can see how this structured approach equips learners with highly sought-after skills for the AI sector. Thank you for elaborating on these key aspects of the program.",
+      "content": "Understood, Sir. I appreciate the clarification regarding the EMI plans relying on third-party lenders and that NIIT doesn't directly set the terms or total costs. While the information on placement assistance was very reassuring, the program fee, and now the process of exploring third-party loan options, still presents a considerable challenge for me. It makes planning difficult without a clear total cost and installment breakdown. I will have to look into those external financing details. In the meantime, could you perhaps tell me more about the program's weekly time commitment and how it balances synchronous and asynchronous learning? I want to ensure I can manage the workload.",
       "techniques": [],
-      "strategic_intent": "Acknowledge understanding of value proposition",
+      "strategic_intent": "seek information; express ongoing financial concern",
       "confidence_score": 60,
-      "emotional_state": "Satisfied",
-      "internal_thought": "Student is positively responding to the curriculum explanation, linking the practical aspects to their earlier concerns about ROI and job readiness. They seem to be convinced by the practical methodology.",
+      "emotional_state": "concerned",
+      "internal_thought": "The student acknowledges the clarification about third-party lenders for EMIs but still feels the fee is a significant barrier due to the lack of direct, clear installment and total cost information. They are shifting focus to another practical aspect of the program (time commitment) to ensure it's manageable while they process the financial details.",
       "updated_stats": {
-        "sentiment": "frustrated",
-        "skepticism_level": 35,
+        "sentiment": "anxious",
+        "skepticism_level": 17,
         "trust_score": 50,
         "unresolved_concerns": [
-          "Effort/Time",
           "Job Guarantee",
-          "Price",
-          "Total Price"
+          "Price"
         ]
       },
       "updated_state": {
-        "sentiment": "frustrated",
-        "skepticism_level": 35,
+        "sentiment": "anxious",
+        "skepticism_level": 17,
         "trust_score": 50,
         "unresolved_concerns": [
-          "Effort/Time",
           "Job Guarantee",
-          "Price",
-          "Total Price"
+          "Price"
         ]
       },
-      "timestamp": "2026-02-17T13:24:11.882650",
+      "timestamp": "2026-02-17T15:04:18.141109",
       "generation_mode": "structured_retry"
     }
   ]

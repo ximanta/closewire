@@ -16,6 +16,9 @@ const COMMITMENT_LABELS = {
   conditional_commitment: "Conditional Yes",
   strong_commitment: "Confirmed Enrollment",
 };
+const LIVE_PROCESSING_LABELS = ["Analyzing Tone...", "Calculating Trust..."];
+const SILENCE_AUTO_SEND_MS = 2500;
+const SILENCE_PROMPT_MS = 10000;
 
 const PILLAR_ITEM_TRUNCATE = 120;
 const STUDENT_CONTROL_PREFIXES = [
@@ -152,10 +155,18 @@ function App() {
   const [passwordInput, setPasswordInput] = useState("");
   const [authError, setAuthError] = useState("");
   const [pendingStart, setPendingStart] = useState(false);
+  const [pendingMode, setPendingMode] = useState("ai_vs_ai");
   const [expandedContent, setExpandedContent] = useState(null);
   const [showReportDashboard, setShowReportDashboard] = useState(false);
   const [chipFlash, setChipFlash] = useState({});
   const [runDurationSeconds, setRunDurationSeconds] = useState(0);
+  const [negotiationMode, setNegotiationMode] = useState("ai_vs_ai");
+  const [micState, setMicState] = useState("inactive");
+  const [liveTranscript, setLiveTranscript] = useState("");
+  const [micPermissionStatus, setMicPermissionStatus] = useState("prompt");
+  const [humanInputText, setHumanInputText] = useState("");
+  const [processingLabelIndex, setProcessingLabelIndex] = useState(0);
+  const [waveformLevel, setWaveformLevel] = useState(0);
 
   const wsRef = useRef(null);
   const projectionRef = useRef(null);
@@ -165,6 +176,93 @@ function App() {
   const pendingThoughtsRef = useRef({});
   const chipFlashTimerRef = useRef({});
   const runStartEpochRef = useRef(null);
+  const recognitionRef = useRef(null);
+  const silenceTimerRef = useRef(null);
+  const silencePromptTimerRef = useRef(null);
+  const processingLabelTimerRef = useRef(null);
+  const liveTranscriptRef = useRef("");
+  const audioContextRef = useRef(null);
+  const analyserRef = useRef(null);
+  const waveformRafRef = useRef(null);
+  const isTtsSpeakingRef = useRef(false);
+  const utteranceRef = useRef(null);
+  const selectedVoiceRef = useRef(null);
+  const speechRecognitionCtor = typeof window !== "undefined"
+    ? (window.SpeechRecognition || window.webkitSpeechRecognition || null)
+    : null;
+  const isHumanMode = negotiationMode === "human_vs_ai";
+
+  const clearSpeechTimers = () => {
+    if (silenceTimerRef.current) {
+      clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = null;
+    }
+    if (silencePromptTimerRef.current) {
+      clearTimeout(silencePromptTimerRef.current);
+      silencePromptTimerRef.current = null;
+    }
+    if (processingLabelTimerRef.current) {
+      clearInterval(processingLabelTimerRef.current);
+      processingLabelTimerRef.current = null;
+    }
+  };
+
+  const stopWaveform = () => {
+    if (waveformRafRef.current) {
+      cancelAnimationFrame(waveformRafRef.current);
+      waveformRafRef.current = null;
+    }
+    if (audioContextRef.current) {
+      audioContextRef.current.close().catch(() => {});
+      audioContextRef.current = null;
+    }
+    analyserRef.current = null;
+    setWaveformLevel(0);
+  };
+
+  const stopRecognition = () => {
+    const recognition = recognitionRef.current;
+    if (!recognition) return;
+    try {
+      recognition.onend = null;
+      recognition.onresult = null;
+      recognition.onerror = null;
+      recognition.onspeechend = null;
+      recognition.stop();
+    } catch (error) {
+      try {
+        recognition.abort();
+      } catch (abortError) {
+        // noop
+      }
+    }
+    recognitionRef.current = null;
+    stopWaveform();
+    clearSpeechTimers();
+  };
+
+  const selectSpeechVoice = () => {
+    if (selectedVoiceRef.current) return selectedVoiceRef.current;
+    const synth = window.speechSynthesis;
+    if (!synth) return null;
+    const voices = synth.getVoices() || [];
+    if (!voices.length) return null;
+    const preferred = [
+      /Google US English/i,
+      /Microsoft Zira/i,
+      /Google UK English Male/i,
+    ];
+    for (const pattern of preferred) {
+      const matched = voices.find((voice) => pattern.test(voice.name));
+      if (matched) {
+        selectedVoiceRef.current = matched;
+        return matched;
+      }
+    }
+    const english = voices.find((voice) => /^en/i.test(voice.lang));
+    selectedVoiceRef.current = english || voices[0];
+    return selectedVoiceRef.current;
+  };
 
   const orderedDrafts = useMemo(() => Object.values(drafts), [drafts]);
   const allCards = useMemo(
@@ -318,6 +416,7 @@ function App() {
     if (liveTrustDelta < 0) return "danger";
     return "neutral";
   }, [liveTrustDelta]);
+  const liveModeNeedsTextFallback = isHumanMode && (!speechRecognitionCtor || micPermissionStatus === "denied");
   const sentimentChipState = useMemo(() => {
     const sentiment = String(metrics?.sentiment_indicator || "").toLowerCase();
     if (sentiment.includes("positive") || sentiment.includes("excited")) return "success";
@@ -414,16 +513,41 @@ function App() {
     setShowRestartPulse(false);
     setRunDurationSeconds(0);
     runStartEpochRef.current = null;
+    stopRecognition();
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+    utteranceRef.current = null;
+    window.currentUtterance = null;
+    isTtsSpeakingRef.current = false;
+    clearSpeechTimers();
+    setMicState("inactive");
+    setLiveTranscript("");
+    liveTranscriptRef.current = "";
+    setHumanInputText("");
+    setProcessingLabelIndex(0);
+    setWaveformLevel(0);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(
     () => () => {
       Object.values(uiToastTimerRef.current).forEach((timer) => clearTimeout(timer));
       Object.values(toastTimerRef.current).forEach((timer) => clearTimeout(timer));
       Object.values(chipFlashTimerRef.current).forEach((timer) => clearTimeout(timer));
+      stopRecognition();
+      if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+      }
+      window.currentUtterance = null;
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
+
+  useEffect(() => {
+    liveTranscriptRef.current = liveTranscript;
+  }, [liveTranscript]);
 
   useEffect(() => {
     if (stage !== "analyzing") return undefined;
@@ -528,21 +652,266 @@ function App() {
     });
   }, [allCards, stage]);
 
-  const startNegotiation = async () => {
+  const startProcessingTicker = () => {
+    if (processingLabelTimerRef.current) clearInterval(processingLabelTimerRef.current);
+    setProcessingLabelIndex(0);
+    processingLabelTimerRef.current = setInterval(() => {
+      setProcessingLabelIndex((current) => (current + 1) % LIVE_PROCESSING_LABELS.length);
+    }, 900);
+  };
+
+  const armSilencePromptTimer = () => {
+    if (silencePromptTimerRef.current) clearTimeout(silencePromptTimerRef.current);
+    silencePromptTimerRef.current = setTimeout(() => {
+      if (isHumanMode && stage === "negotiating" && micState === "listening") {
+        pushUiToast("Are you there? Please press Send manually.", "strategic", 3600);
+      }
+    }, SILENCE_PROMPT_MS);
+  };
+
+  const sendHumanInput = (rawText) => {
+    if (!isHumanMode) return;
+    const socket = wsRef.current;
+    if (!socket || socket.readyState !== WebSocket.OPEN) {
+      pushUiToast("Connection is not ready for live coaching.");
+      return;
+    }
+    const text = String(rawText ?? liveTranscriptRef.current ?? humanInputText).trim();
+    if (!text) {
+      pushUiToast("Speak or type a message before sending.", "strategic");
+      return;
+    }
+    if (isTtsSpeakingRef.current) {
+      pushUiToast("Please wait for student voice to finish.", "strategic");
+      return;
+    }
+    if (silenceTimerRef.current) {
+      clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = null;
+    }
+    if (silencePromptTimerRef.current) {
+      clearTimeout(silencePromptTimerRef.current);
+      silencePromptTimerRef.current = null;
+    }
+    setMicState("processing");
+    startProcessingTicker();
+    socket.send(JSON.stringify({ type: "human_input", text }));
+    setLiveTranscript("");
+    liveTranscriptRef.current = "";
+    setHumanInputText("");
+    stopRecognition();
+  };
+
+  const speakStudentTurn = (text, emotionalState = "calm") => {
+    const synth = window.speechSynthesis;
+    if (!synth || !String(text || "").trim()) {
+      setMicState("inactive");
+      return;
+    }
+    synth.cancel();
+    const utterance = new SpeechSynthesisUtterance(String(text).trim());
+    const voice = selectSpeechVoice();
+    if (voice) utterance.voice = voice;
+    const emotion = String(emotionalState || "calm").toLowerCase();
+    if (emotion === "frustrated") {
+      utterance.rate = 1.1;
+      utterance.pitch = 0.9;
+    } else if (emotion === "excited") {
+      utterance.rate = 1.1;
+      utterance.pitch = 1.1;
+    } else {
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
+    }
+    utterance.onstart = () => {
+      isTtsSpeakingRef.current = true;
+      setMicState("locked");
+      stopRecognition();
+    };
+    const finishSpeech = () => {
+      isTtsSpeakingRef.current = false;
+      utteranceRef.current = null;
+      window.currentUtterance = null;
+      if (stage === "negotiating" && isHumanMode) {
+        setMicState("inactive");
+      }
+    };
+    utterance.onend = finishSpeech;
+    utterance.onerror = finishSpeech;
+    utteranceRef.current = utterance;
+    // Keep a hard reference to avoid Chrome GC ending speech early.
+    window.currentUtterance = utterance;
+    synth.speak(utterance);
+  };
+
+  const startListening = async () => {
+    if (!isHumanMode || stage !== "negotiating") return;
+    if (isTtsSpeakingRef.current || micState === "locked" || micState === "processing") return;
+    if (!speechRecognitionCtor || micPermissionStatus === "denied") {
+      setMicState("inactive");
+      return;
+    }
+    stopRecognition();
+    let stream;
+    try {
+      const AudioContextCtor = window.AudioContext || window.webkitAudioContext;
+      if (AudioContextCtor && navigator.mediaDevices?.getUserMedia) {
+        stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const context = new AudioContextCtor();
+        const source = context.createMediaStreamSource(stream);
+        const analyser = context.createAnalyser();
+        analyser.fftSize = 256;
+        source.connect(analyser);
+        audioContextRef.current = context;
+        analyserRef.current = analyser;
+        const data = new Uint8Array(analyser.frequencyBinCount);
+        const tick = () => {
+          if (!analyserRef.current) return;
+          analyserRef.current.getByteFrequencyData(data);
+          const avg = data.reduce((sum, value) => sum + value, 0) / data.length;
+          setWaveformLevel(Math.max(0, Math.min(1, avg / 140)));
+          waveformRafRef.current = requestAnimationFrame(tick);
+        };
+        waveformRafRef.current = requestAnimationFrame(tick);
+      }
+    } catch (error) {
+      // Continue without waveform if audio analyser setup fails.
+      stopWaveform();
+    } finally {
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    }
+
+    const recognition = new speechRecognitionCtor();
+    recognition.continuous = false;
+    recognition.interimResults = true;
+    recognition.lang = "en-IN";
+    recognition.onstart = () => {
+      setMicPermissionStatus("granted");
+      setMicState("listening");
+      armSilencePromptTimer();
+    };
+    recognition.onresult = (event) => {
+      let interim = "";
+      let finalText = "";
+      for (let i = event.resultIndex; i < event.results.length; i += 1) {
+        const result = event.results[i];
+        const transcript = result?.[0]?.transcript || "";
+        if (result.isFinal) {
+          finalText += `${transcript} `;
+        } else {
+          interim += transcript;
+        }
+      }
+      const merged = `${finalText} ${interim}`.trim();
+      setLiveTranscript(merged);
+      liveTranscriptRef.current = merged;
+      setHumanInputText(merged);
+      armSilencePromptTimer();
+    };
+    recognition.onspeechend = () => {
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+      silenceTimerRef.current = setTimeout(() => {
+        const candidate = String(liveTranscriptRef.current || "").trim();
+        if (candidate) sendHumanInput(candidate);
+      }, SILENCE_AUTO_SEND_MS);
+    };
+    recognition.onerror = (event) => {
+      const code = String(event?.error || "").toLowerCase();
+      if (code === "not-allowed" || code === "service-not-allowed" || code === "permission-denied") {
+        setMicPermissionStatus("denied");
+        setMicState("inactive");
+        pushUiToast("Microphone permission denied. Switched to text input mode.", "strategic", 3600);
+      } else {
+        setMicState("inactive");
+      }
+      stopRecognition();
+    };
+    recognition.onend = () => {
+      setMicState((current) => (current === "processing" || current === "locked" ? current : "inactive"));
+      stopWaveform();
+    };
+    recognitionRef.current = recognition;
+    try {
+      recognition.start();
+    } catch (error) {
+      setMicState("inactive");
+      stopRecognition();
+    }
+  };
+
+  const ensureMicPermission = async () => {
+    if (!isHumanMode) return "granted";
+    if (!navigator.mediaDevices?.getUserMedia) return "prompt";
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach((track) => track.stop());
+      setMicPermissionStatus("granted");
+      return "granted";
+    } catch (error) {
+      const name = String(error?.name || "").toLowerCase();
+      if (name.includes("notallowed") || name.includes("permissiondenied")) {
+        setMicPermissionStatus("denied");
+        return "denied";
+      }
+      return "prompt";
+    }
+  };
+
+  useEffect(() => {
+    if (!window.speechSynthesis) return undefined;
+    const bindVoices = () => {
+      if (!selectedVoiceRef.current) {
+        selectSpeechVoice();
+      }
+    };
+    bindVoices();
+    window.speechSynthesis.addEventListener("voiceschanged", bindVoices);
+    return () => window.speechSynthesis.removeEventListener("voiceschanged", bindVoices);
+  }, []);
+
+  useEffect(() => {
+    if (micState !== "processing" && processingLabelTimerRef.current) {
+      clearInterval(processingLabelTimerRef.current);
+      processingLabelTimerRef.current = null;
+      setProcessingLabelIndex(0);
+    }
+  }, [micState]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    if (!isHumanMode || stage !== "negotiating") return undefined;
+    if (micState === "inactive" && !isTtsSpeakingRef.current) {
+      startListening();
+    }
+    return undefined;
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isHumanMode, stage, micState]);
+
+  const startNegotiation = async (requestedMode = negotiationMode) => {
+    setNegotiationMode(requestedMode);
     if (!authToken) {
       setShowAuthModal(true);
       setAuthError("");
       setPendingStart(true);
+      setPendingMode(requestedMode);
       return;
     }
-    await beginNegotiation(authToken);
+    await beginNegotiation(authToken, requestedMode);
   };
 
-  const beginNegotiation = async (tokenOverride) => {
+  const beginNegotiation = async (tokenOverride, requestedMode = negotiationMode) => {
     const token = tokenOverride || authToken;
     if (!programUrl.trim()) {
       pushUiToast("Enter a valid program URL to continue.", "strategic");
       return;
+    }
+    if (requestedMode === "human_vs_ai") {
+      const permission = await ensureMicPermission();
+      if (permission === "denied") {
+        pushUiToast("Microphone unavailable. Live coaching will use text input fallback.", "strategic", 3800);
+      }
     }
     setRunHistory([]);
     resetRun();
@@ -569,14 +938,14 @@ function App() {
       setPersona(analyzeData.persona);
       setCounsellorName(generateCounsellorName());
       setStage("negotiating");
-      startWebsocketNegotiation(analyzeData.session_id, token, false);
+      startWebsocketNegotiation(analyzeData.session_id, token, false, requestedMode);
     } catch (error) {
       pushUiToast(error.message || "Failed to start negotiation");
       setStage("idle");
     }
   };
 
-  const startWebsocketNegotiation = (targetSessionId, token, retryMode = false) => {
+  const startWebsocketNegotiation = (targetSessionId, token, retryMode = false, mode = negotiationMode) => {
     const ws = new WebSocket(WS_URL);
     wsRef.current = ws;
 
@@ -588,6 +957,7 @@ function App() {
           auth_token: token,
           demo_mode: true,
           retry_mode: retryMode,
+          mode,
         })
       );
     };
@@ -603,7 +973,11 @@ function App() {
         pushUiToast("Malformed server event received.");
         return;
       }
-      if (payload.type === "stream_chunk") {
+      if (payload.type === "session_ready") {
+        if (payload.data?.persona) setPersona(payload.data.persona);
+        if (payload.data?.program) setProgram(payload.data.program);
+        if (payload.data?.mode) setNegotiationMode(payload.data.mode);
+      } else if (payload.type === "stream_chunk") {
         const data = payload.data;
         setDrafts((prev) => {
           const current = prev[data.message_id] || { id: data.message_id, agent: data.agent, text: "" };
@@ -633,6 +1007,10 @@ function App() {
           delete next[msg.id];
           pendingThoughtsRef.current = next;
         }
+        if (mode === "human_vs_ai" && normalized.agent === "student") {
+          setMicState("locked");
+          speakStudentTurn(normalized.content, normalized.emotional_state);
+        }
       } else if (payload.type === "metrics_update") {
         setMetrics(payload.data);
       } else if (payload.type === "state_update") {
@@ -652,8 +1030,12 @@ function App() {
           },
         ]);
         setStage("completed");
+        setMicState("inactive");
+        stopRecognition();
         setShowReportDashboard(false);
         pushUiToast(`Conversation Completed\nDuration (mins) ${durationHms}`, "positive", 5200);
+      } else if (payload.type === "warning") {
+        pushUiToast(payload.data?.message || "Warning from server", "strategic", 3400);
       } else if (payload.type === "error") {
         // eslint-disable-next-line no-console
         console.error("Backend negotiation error", payload.data);
@@ -672,6 +1054,8 @@ function App() {
       // eslint-disable-next-line no-console
       console.warn("WebSocket closed", { code: event.code, reason: event.reason, wasClean: event.wasClean });
       setDrafts({});
+      setMicState("inactive");
+      stopRecognition();
       pushUiToast("Connection closed.", "strategic", 1800);
     };
   };
@@ -694,7 +1078,7 @@ function App() {
       setPasswordInput("");
       if (pendingStart) {
         setPendingStart(false);
-        await beginNegotiation(data.token);
+        await beginNegotiation(data.token, pendingMode);
       }
     } catch (error) {
       setAuthError(error.message || "Authentication failed");
@@ -717,7 +1101,7 @@ function App() {
     resetRun();
     setStage("negotiating");
     setShowReportDashboard(false);
-    startWebsocketNegotiation(sessionId, authToken, true);
+    startWebsocketNegotiation(sessionId, authToken, true, negotiationMode);
   };
 
   const downloadReport = async () => {
@@ -794,7 +1178,10 @@ function App() {
               onChange={(e) => setProgramUrl(e.target.value)}
               placeholder="Enter Program URL here..."
             />
-            <button onClick={startNegotiation}>Agent vs Agent</button>
+            <button onClick={() => startNegotiation("ai_vs_ai")}>Agent vs Agent</button>
+            <button className="ghostBtn" onClick={() => startNegotiation("human_vs_ai")}>
+              Start Live Coaching Mode
+            </button>
           </div>
         </section>
       )}
@@ -828,6 +1215,7 @@ function App() {
                 onClick={() => {
                   setShowAuthModal(false);
                   setPendingStart(false);
+                  setPendingMode("ai_vs_ai");
                 }}
               >
                 Cancel
@@ -895,6 +1283,65 @@ function App() {
               <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
             </article>
           </div>
+
+          {isHumanMode && stage === "negotiating" && (
+            <section className="liveCoachPanel">
+              <div className={`liveMicPanel state-${micState}`}>
+                <div className="liveMicHeader">
+                  <strong>Your Turn (Counsellor)</strong>
+                  <span>
+                    {micState === "listening" && "Listening..."}
+                    {micState === "processing" && LIVE_PROCESSING_LABELS[processingLabelIndex]}
+                    {micState === "locked" && "Mic locked while AI speaks"}
+                    {micState === "inactive" && "Ready"}
+                  </span>
+                </div>
+                <div className="waveWrap" aria-hidden="true">
+                  {Array.from({ length: 12 }).map((_, index) => {
+                    const variance = ((index % 4) + 1) / 4;
+                    const height = Math.max(8, Math.round(8 + waveformLevel * 34 * variance));
+                    return <i key={`wave-${index}`} style={{ height: `${height}px` }} />;
+                  })}
+                </div>
+                <textarea
+                  value={liveModeNeedsTextFallback ? humanInputText : liveTranscript}
+                  onChange={(event) => {
+                    setHumanInputText(event.target.value);
+                    setLiveTranscript(event.target.value);
+                    liveTranscriptRef.current = event.target.value;
+                  }}
+                  placeholder={liveModeNeedsTextFallback
+                    ? "Type your counsellor response here..."
+                    : "Live transcript appears here..."}
+                  disabled={micState === "locked"}
+                />
+                <div className="liveMicActions">
+                  {!liveModeNeedsTextFallback && (
+                    <button
+                      type="button"
+                      className="ghostBtn"
+                      onClick={startListening}
+                      disabled={micState === "processing" || micState === "locked"}
+                    >
+                      Start Mic
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="downloadBtn"
+                    onClick={() => sendHumanInput(liveModeNeedsTextFallback ? humanInputText : liveTranscriptRef.current)}
+                    disabled={micState === "locked" || micState === "processing"}
+                  >
+                    Send
+                  </button>
+                </div>
+              </div>
+              <div className={`liveAiPanel ${micState === "locked" ? "speaking" : ""}`}>
+                <strong>Student Voice</strong>
+                <p>{micState === "locked" ? "Responding with voice..." : "Waiting for your input."}</p>
+              </div>
+            </section>
+          )}
 
           <div className="projectionLane" ref={projectionRef}>
             {allCards.map((msg, idx) => (

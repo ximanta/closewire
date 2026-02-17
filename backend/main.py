@@ -78,7 +78,9 @@ def _configure_models() -> Tuple[genai.Client, str, str]:
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
         raise RuntimeError("GEMINI_API_KEY is not set")
-    negotiation_model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    negotiation_model_name = os.getenv("GEMINI_MODEL", "").strip()
+    if not negotiation_model_name:
+        raise RuntimeError("GEMINI_MODEL is not set")
     judge_model_name = os.getenv("GEMINI_JUDGE_MODEL", negotiation_model_name)
     client = genai.Client(api_key=api_key)
     return client, negotiation_model_name, judge_model_name
@@ -242,6 +244,7 @@ class NegotiationConfig(BaseModel):
     auth_token: str
     demo_mode: bool = True
     retry_mode: bool = False
+    mode: str = "ai_vs_ai"
 
 
 class ReportRequest(BaseModel):
@@ -872,6 +875,82 @@ def _build_retry_context_prompt(state: NegotiationState) -> str:
     )
 
 
+def _pick_live_mode_archetype() -> str:
+    return random.choice(["desperate_switcher", "skeptical_shopper"])
+
+
+async def _classify_human_input(
+    client: genai.Client,
+    model_name: str,
+    text: str,
+    state: NegotiationState,
+    round_number: int,
+    message_id: str,
+) -> Dict[str, Any]:
+    clean_text = str(text or "").strip()
+    if not clean_text:
+        clean_text = "..."
+
+    fallback = {
+        "techniques": [],
+        "strategic_intent": "Human counsellor message",
+        "confidence_score": 60,
+        "emotional_state": "calm",
+    }
+    prompt = f"""
+Analyze this counsellor statement and return structured metadata only.
+
+STATEMENT:
+{clean_text}
+
+ROUND:
+{round_number}
+
+CONTEXT:
+{json.dumps(_trim_messages(state.get("messages", []), 6), ensure_ascii=False)}
+"""
+    parsed = await asyncio.to_thread(
+        _call_function_json,
+        client,
+        model_name,
+        prompt,
+        "set_human_shadow_observer",
+        "Extract techniques, strategic intent, confidence score, and emotional state for a human counsellor turn.",
+        {
+            "type": "object",
+            "properties": {
+                "techniques": {"type": "array", "items": {"type": "string"}},
+                "strategic_intent": {"type": "string"},
+                "confidence_score": {"type": "number"},
+                "emotional_state": {"type": "string"},
+            },
+            "required": ["techniques", "strategic_intent", "confidence_score", "emotional_state"],
+        },
+        fallback,
+    )
+    parsed = _to_plain_json(parsed)
+    techniques = [str(item).strip() for item in (parsed.get("techniques") or []) if str(item).strip()][:8]
+    strategic_intent = str(parsed.get("strategic_intent") or fallback["strategic_intent"]).strip()
+    confidence_score = _clamp_score(parsed.get("confidence_score"), fallback["confidence_score"])
+    emotional_state = str(parsed.get("emotional_state") or fallback["emotional_state"]).strip().lower() or "calm"
+
+    return {
+        "id": message_id,
+        "round": round_number,
+        "agent": "counsellor",
+        "content": clean_text,
+        "techniques": techniques,
+        "strategic_intent": strategic_intent,
+        "confidence_score": confidence_score,
+        "emotional_state": emotional_state,
+        "internal_thought": "",
+        "updated_stats": {},
+        "updated_state": {},
+        "timestamp": datetime.now().isoformat(),
+        "generation_mode": "human_shadow",
+    }
+
+
 def _analyze_program(url: str) -> Tuple[ProgramSummary, str]:
     client, negotiation_model_name, _ = get_client_and_models()
     source = "url_content"
@@ -961,13 +1040,16 @@ PAGE_TEXT:
     return _to_plain_json(parsed), source
 
 
-def _generate_persona(program: ProgramSummary) -> StudentPersona:
+def _generate_persona(program: ProgramSummary, forced_archetype_id: Optional[str] = None) -> StudentPersona:
     client, negotiation_model_name, _ = get_client_and_models()
-    archetype_id = random.choices(
-        [item[0] for item in ARCHETYPE_WEIGHTS],
-        weights=[item[1] for item in ARCHETYPE_WEIGHTS],
-        k=1,
-    )[0]
+    if forced_archetype_id and forced_archetype_id in ARCHETYPE_CONFIGS:
+        archetype_id = forced_archetype_id
+    else:
+        archetype_id = random.choices(
+            [item[0] for item in ARCHETYPE_WEIGHTS],
+            weights=[item[1] for item in ARCHETYPE_WEIGHTS],
+            k=1,
+        )[0]
     archetype = ARCHETYPE_CONFIGS.get(archetype_id, ARCHETYPE_CONFIGS["desperate_switcher"])
     language_style = "Hinglish" if archetype_id == "skeptical_shopper" else random.choice(
         ["Indian Academic English", "Corporate Indian English", "Formal Indian English", "Passive Indian English"]
@@ -1902,6 +1984,16 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             logger.warning("Session %s had legacy persona schema. Regenerating StudentPersona.", config.session_id)
             persona = _to_plain_json(_generate_persona(program))
             session["persona"] = persona
+        mode = str(config.mode or "ai_vs_ai").strip().lower()
+        if mode not in {"ai_vs_ai", "human_vs_ai"}:
+            mode = "ai_vs_ai"
+        if mode == "human_vs_ai":
+            allowed = {"desperate_switcher", "skeptical_shopper"}
+            current_archetype = str(persona.get("archetype_id", "")).strip()
+            if current_archetype not in allowed:
+                forced_archetype = _pick_live_mode_archetype()
+                persona = _to_plain_json(_generate_persona(program, forced_archetype_id=forced_archetype))
+                session["persona"] = persona
 
         financials = _derive_financials(program, persona)
         last_run = session.get("last_run", {})
@@ -1960,6 +2052,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 "data": {
                     "program": state["program"],
                     "persona": state["persona"],
+                    "mode": mode,
                     "student_inner_state": state["student_inner_state"],
                     "retry_context": state["retry_context"],
                     "initial_offers": {
@@ -1975,18 +2068,49 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
         student_generation_failures = 0
 
         while state["round"] <= state["max_rounds"] and state["deal_status"] == "ongoing":
-            counsellor_id = str(uuid.uuid4())
-            counsellor_msg = await _stream_agent_response(
-                websocket,
-                client,
-                negotiation_model_name,
-                _build_counsellor_prompt(state),
-                "counsellor",
-                state["round"],
-                counsellor_id,
-                config.demo_mode,
-                _build_retry_context_prompt(state),
-            )
+            if mode == "human_vs_ai":
+                inbound = await websocket.receive_json()
+                inbound_type = str(inbound.get("type", "")).strip().lower()
+                if inbound_type != "human_input":
+                    await _ws_send_json(
+                        websocket,
+                        {"type": "error", "data": {"message": "Expected human_input payload in human_vs_ai mode"}},
+                    )
+                    continue
+                human_text = str(inbound.get("text", "")).strip()
+                if not human_text:
+                    await _ws_send_json(
+                        websocket,
+                        {"type": "warning", "data": {"message": "Empty human input ignored. Please speak or type a message."}},
+                    )
+                    continue
+                counsellor_id = str(uuid.uuid4())
+                counsellor_msg = await _classify_human_input(
+                    client=client,
+                    model_name=negotiation_model_name,
+                    text=human_text,
+                    state=state,
+                    round_number=state["round"],
+                    message_id=counsellor_id,
+                )
+                await _ws_send_json(
+                    websocket,
+                    {"type": "intent_update", "data": {"agent": "counsellor", "intent": counsellor_msg["strategic_intent"]}},
+                )
+                await _ws_send_json(websocket, {"type": "message_complete", "data": counsellor_msg})
+            else:
+                counsellor_id = str(uuid.uuid4())
+                counsellor_msg = await _stream_agent_response(
+                    websocket,
+                    client,
+                    negotiation_model_name,
+                    _build_counsellor_prompt(state),
+                    "counsellor",
+                    state["round"],
+                    counsellor_id,
+                    config.demo_mode,
+                    _build_retry_context_prompt(state),
+                )
             state["messages"].append(counsellor_msg)
             state["history_for_reporting"].append(counsellor_msg)
 
