@@ -1,39 +1,41 @@
 {
-  "generated_at": "2026-02-17T20:32:35.272206",
-  "session_id": "5f167da5-0b66-4cae-86ec-84060315fba1",
+  "generated_at": "2026-02-17T23:03:07.566685",
+  "session_id": "8858323e-5f88-4306-ba5c-9ce80843b4a0",
   "deal_status": "failed",
-  "round": 4,
+  "round": 6,
   "max_rounds": 5,
   "persona": {
-    "city_tier": "Tier-1",
+    "trigger_event": "A recent company-wide announcement about restructuring and a push towards modern technologies, making him realize his skills are not future-proof. He also saw a junior colleague with AI skills get a significant promotion, which triggered his fear of being left behind.",
+    "name": "Rohan Sharma",
+    "gender": "male",
+    "archetype_label": "Desperate Switcher",
+    "skepticism": 6,
+    "confusion_level": 7,
+    "ego_level": 3,
+    "misconception": "He believes that learning AI is only for \"geniuses\" or fresh graduates from top-tier colleges, and that a career transition at his age with his background is almost impossible without a strong network or exceptional talent.",
+    "financial_anxiety": 9,
+    "backstory": "Rohan has been working as a software engineer in a mid-sized IT company for the past 6 years, primarily maintaining legacy systems. He feels stuck in his career, seeing his peers move into exciting new fields like AI, while he's stagnant with outdated technologies. He fears becoming irrelevant and losing his job in the long run due to automation and technological shifts. He comes from a middle-class family, and job stability is paramount for him.",
     "common_vocabulary": [
-      "Sir",
-      "Ma'am",
+      "Sir/Ma'am",
       "Batch",
       "Passing out",
       "Gap",
-      "Scope"
+      "Scope",
+      "job security",
+      "career growth",
+      "placement"
     ],
-    "current_role": "Senior Software Engineer (working on legacy systems)",
-    "ego_level": 2,
-    "trigger_event": "During his annual appraisal, his manager, while appreciative of his reliability, gently suggested that his skill set was becoming \"outdated\" for future projects involving AI and data science. Simultaneously, a younger colleague, who recently joined after a specialized AI course, was fast-tracked into a new, high-visibility project, leaving Sameer feeling overlooked and undervalued. This was the final push.",
-    "age": 27,
-    "archetype_label": "Desperate Switcher",
-    "confusion_level": 4,
-    "financial_anxiety": 5,
-    "language_style": "Indian Academic English. Use 'Sir/Ma'am' often and terms like Batch, Passing out, Gap, Scope.",
-    "name": "Sameer Kulkarni",
-    "gender": "male",
-    "backstory": "Sameer, 27, completed his B.E. in Computer Engineering in 2018. He joined a well-known IT service giant in Mumbai, initially excited by the brand name. However, over the past five years, he's found himself pigeonholed into maintaining legacy applications for banking clients. Despite his \"Senior Software Engineer\" title, his day-to-day work involves minimal new development and almost no exposure to cutting-edge technologies like AI. He sees his college batchmates, who took risks with startups or specialized programs, now earning significantly more and working on exciting projects. His parents are subtly pressuring him to settle down, which adds to his anxiety about his stagnant career and financial prospects. He feels like he's falling behind and needs a drastic change to secure his future and regain confidence.",
-    "skepticism": 3,
-    "hidden_secret": "He's terrified of being laid off in the future due to his obsolete skills. He also harbors a deep insecurity about his ability to learn complex new technologies, despite his engineering background. He fears he might be too old to make a successful career switch.",
-    "misconception": "Sameer believes that simply completing any AI certification will automatically open doors to lucrative jobs and solve all his career problems. He underestimates the importance of continuous learning, building a strong portfolio, and networking actively, assuming the certificate alone is a magic bullet. He also thinks all AI jobs are purely about coding complex algorithms, overlooking the applied engineering aspects.",
+    "current_role": "Software Engineer (Legacy Systems)",
     "archetype_id": "desperate_switcher",
+    "hidden_secret": "He secretly worries that he might be too old or not smart enough to learn complex new technologies like AI, despite his desperation. He fears failing and wasting time/money.",
+    "language_style": "Indian Academic English. Use 'Sir/Ma'am' often and terms like Batch, Passing out, Gap, Scope.",
+    "city_tier": "Tier-1",
+    "age": 29,
     "persona_type": "desperate_switcher",
     "background": "Prospective learner evaluating an AI upskilling path.",
-    "career_stage": "early",
+    "career_stage": "mid",
     "financial_sensitivity": "medium",
-    "risk_tolerance": "medium",
+    "risk_tolerance": "low",
     "emotional_tone": "skeptical",
     "primary_objections": [
       "Placement credibility",
@@ -41,11 +43,11 @@
       "Difficulty for freshers",
       "Time commitment"
     ],
-    "walk_away_likelihood": 0.36,
-    "expected_roi_months": 14,
-    "affordability_concern_level": 80,
-    "willingness_to_invest_score": 62,
-    "communication_style": "challenging",
+    "walk_away_likelihood": 0.37,
+    "expected_roi_months": 5,
+    "affordability_concern_level": 49,
+    "willingness_to_invest_score": 60,
+    "communication_style": "confused",
     "common_phrases": [
       "Placement ka scene kya hai?",
       "Is this really worth it?",
@@ -54,12 +56,12 @@
   },
   "program": {
     "program_name": "Building Agentic AI Systems",
-    "program_fee_inr": "Program fees: 1,50,000 INR + GST. Booking fees: 1,500 INR + GST. (All fees are exclusive of 18% GST). Full upfront payment receives a 5% concession (7,500 INR off), making it 1,42,500 INR (inclusive of concession, exclusive of GST)."
+    "program_fee_inr": "1,50,000 + GST. Booking fees: 1,500 + GST (all fees exclusive of 18% GST). Full upfront payment: 1,42,500 (inclusive of 5% fee concession)."
   },
   "student_inner_state": {
-    "sentiment": "curious",
-    "skepticism_level": 8,
-    "trust_score": 52,
+    "sentiment": "concerned",
+    "skepticism_level": 40,
+    "trust_score": 40,
     "unresolved_concerns": [
       "Effort/Time",
       "Job Guarantee",
@@ -67,53 +69,59 @@
     ]
   },
   "negotiation_metrics": {
-    "round": 3,
+    "round": 5,
     "max_rounds": 5,
     "concession_count_counsellor": 0,
     "concession_count_student": 0,
     "tone_escalation": 15,
-    "objection_intensity": 16,
-    "trust_index": 50,
-    "close_probability": 66,
+    "objection_intensity": 21,
+    "trust_index": 45,
+    "close_probability": 63,
     "sentiment_indicator": "positive",
     "retry_modifier": 0
   },
   "final_offers": {
-    "counsellor": 166950,
-    "student": 127200
+    "counsellor": 165375,
+    "student": 126000
   },
   "analysis": {
-    "skill_recommendations": [
-      "Prepare and utilize specific alumni success stories, including job titles and career paths, tailored to different experience levels and prior tech backgrounds (e.g., senior engineers transitioning from legacy systems).",
-      "Focus on providing evidence that demonstrates the *quality* of placements and *significant career progression* for experienced professionals, rather than just the *quantity* of placements.",
-      "Develop a more nuanced approach to address career transition concerns by providing more granular and personalized proof points for specific roles in the cutting-edge AI domain."
+    "pivotal_moments": [
+      "Round 2: Counsellor introduces differentiated placement support for different experience levels, sparking the student's primary objection.",
+      "Round 4: Counsellor explicitly states that NIIT does facilitate direct interview opportunities for all eligible learners, which provided some reassurance but did not resolve the need for quantifiable comparison.",
+      "Round 5: Student makes a direct, critical request for a \"comparable, quantifiable metric\" for interview opportunities, highlighting the counsellor's failure to address their core concern and indicating the cruciality of this information for their decision-making."
+    ],
+    "negotiation_score": 50,
+    "strengths": [
+      "Counsellor clearly explained program curriculum and benefits.",
+      "Counsellor explicitly confirmed that NIIT does facilitate direct interview opportunities for all eligible learners.",
+      "Counsellor maintained a professional and helpful tone throughout the discussion.",
+      "Counsellor consistently linked the program to job readiness and career transition."
+    ],
+    "mistakes": [
+      "Counsellor introduced a distinction in placement support based on experience without adequately clarifying the tangible differences for the experienced cohort initially.",
+      "Counsellor repeatedly failed to provide a specific, quantifiable metric for direct interview opportunities for the experienced cohort, despite the student explicitly requesting it multiple times.",
+      "Counsellor relied heavily on general statistics (e.g., 97% placement rate) without effectively connecting them to the student's specific, quantifiable concern about interview opportunities for their experience level.",
+      "Counsellor failed to address the student's primary, specific objection, which was explicitly stated as crucial for their decision-making, leading to an open-ended negotiation."
     ],
     "winner": "student",
-    "primary_unresolved_objection": "Concrete examples of specific job titles and quality of career progression for experienced professionals (senior, legacy tech) transitioning into cutting-edge Agentic AI roles, beyond general statistics.",
-    "mistakes": [
-      "Counsellor did not provide concrete, specific examples of job roles or career paths that alumni with similar profiles typically secure after the program.",
-      "Counsellor relied on general statistics (97% placement rate) without translating them into tangible, quality career progression evidence for an experienced professional making a significant career switch."
+    "why": "The counsellor failed to provide a comparable, quantifiable metric for direct interview opportunities for learners with over 5 years of experience, despite the student repeatedly and explicitly asking for this clarity as crucial for their decision-making. This left the student unconvinced regarding tangible job security.",
+    "skill_recommendations": [
+      "Improve active listening to fully grasp and address the underlying needs for specificity and quantifiable assurance, especially when a distinction in support is introduced.",
+      "Develop more tailored and specific responses for different learner cohorts, especially when questions about tangible outcomes and metrics arise, instead of relying on general statements.",
+      "Practice providing transparent and quantifiable expectations or explaining why specific metrics might not be available, in a way that builds trust, rather than repeatedly sidestepping direct requests for numbers.",
+      "Enhance closing skills by proactively identifying and resolving crucial, lingering objections that explicitly block a student's decision-making process."
     ],
+    "primary_unresolved_objection": "Lack of a clear, comparable, and quantifiable metric for direct interview opportunities facilitated by NIIT for learners with over 5 years of experience, similar to the \"up to three interview opportunities within 120 days\" offered to the less experienced batch.",
+    "enrollment_likelihood": 45,
     "commitment_signal": "none",
-    "pivotal_moments": [
-      "The student's Round 2 inquiry shifting from general job scope to the \"quality and relevance\" of roles for their specific legacy tech background.",
-      "The student's Round 3 persistent questioning, demanding \"actual job titles or roles that alumni with backgrounds similar to mine... typically secure\" and how \"97% placement rate translate into quality placements for experienced individuals.\""
-    ],
-    "trust_delta": 5,
-    "enrollment_likelihood": 35,
-    "why": "The counsellor provided a detailed program overview and general placement statistics, but failed to provide concrete, personalized examples of job titles and career progression for alumni with a similar profile (senior, legacy tech background) making a significant career switch into dedicated AI roles. The student's core objection regarding the quality and specificity of outcomes for their unique situation remains unresolved.",
-    "strengths": [
-      "Counsellor provided a detailed program overview, curriculum, and highlighted practical aspects and placement rate.",
-      "Counsellor acknowledged the student's concerns directly and attempted to address them by re-emphasizing program specialization."
-    ],
-    "negotiation_score": 55
+    "trust_delta": -5
   },
   "transcript": [
     {
-      "id": "bb5efe72-7b51-4f8a-8c9d-59fd26d004c6",
+      "id": "06839779-164a-4d1d-9c81-7482baf4a553",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello! Thank you for connecting with us today. To help me understand how our 'Building Agentic AI Systems' program might align with your goals, could you share a bit about what sparked your interest in this area and what you're hoping to achieve?",
+      "content": "Hello! Welcome. I'm here to help you understand more about the Building Agentic AI Systems program. To start, could you tell me what sparked your interest in this program or what you're hoping to achieve by joining?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -121,29 +129,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T20:31:30.160681",
+      "timestamp": "2026-02-17T23:01:36.820369",
       "generation_mode": "stream"
     },
     {
-      "id": "1197cc6d-f2c7-4c1b-8a4e-0241efe07122",
+      "id": "95c4af76-b72a-41c5-8a75-ab376f929852",
       "round": 1,
       "agent": "student",
-      "content": "Good morning, Sir. Thank you for connecting. My name is Sameer Kulkarni. I am a Senior Software Engineer, passing out in 2018 batch, currently working in Mumbai. My main interest in this 'Building Agentic AI Systems' program stems from my desire to update my skill set, you see. I've been working on legacy systems for quite some time now, and I feel there is a significant gap between my current technical knowledge and the industry's latest demands, especially in AI. I am hoping to achieve a strong foundation in modern AI technologies, Sir, something that can open up new career avenues for me. I am particularly interested in understanding the scope of jobs after completing this program, and if it truly prepares one for the future. Can you please enlighten me on that aspect, Sir?",
+      "content": "Sir/Ma'am, thank you for asking. I have been in legacy systems for quite some time, nearly six years now, and I am quite worried about my career trajectory. My peers are all moving into advanced fields like AI, and I fear becoming irrelevant. I am hoping this program can provide a strong foundation and, more importantly, a clear path to career growth and job security in the AI domain. What is the scope after completing this program, and how robust is the placement guarantee, especially for someone from my batch with a bit of a gap in advanced tech?",
       "techniques": [],
-      "strategic_intent": "Expressing interest in AI while subtly hinting at job security concerns and explicitly asking about job scope and future prospects, using specific vocabulary.",
+      "strategic_intent": "To express primary motivation (security and job guarantee) and specific unresolved concern (job guarantee/placement) while providing context for my situation without revealing my hidden fears.",
       "confidence_score": 60,
-      "emotional_state": "nervous",
+      "emotional_state": "curious",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T20:31:34.123221",
+      "timestamp": "2026-02-17T23:01:40.495000",
       "generation_mode": "stream"
     },
     {
-      "id": "beb41452-ae2b-410d-ad67-0b3b36bf675e",
+      "id": "7c7b384f-4e60-4c2d-ad21-281544c9c765",
       "round": 2,
       "agent": "counsellor",
-      "content": "Good morning, Sameer. Thank you for sharing your background and what you're hoping to achieve. It's very common for experienced professionals to seek to bridge the gap into cutting-edge fields like Agentic AI.\nOur 'Building Agentic AI Systems' program is precisely designed for this. The curriculum bridges software engineering and applied AI system development, guiding learners from building clean APIs to designing intelligent, autonomous agents. It specifically focuses on building production-grade autonomous Agentic AI systems, emphasizing practical, job-ready skills and real-world project experience.\nThrough this program, you will develop job-ready capabilities for high-growth AI and automation roles. You'll learn to design Agentic AI systems that accelerate innovation, build real-world skills through industry-modeled sprints, and stay current with evolving AI tools. Key learning outcomes include writing clean, modular Python code and APIs, developing conversational AI agents, building RAG systems, and designing and orchestrating multi-agent systems that plan, act, and collaborate.\nRegarding future career avenues and job scope, your exit profile will demonstrate readiness for applied AI development roles, showcasing a portfolio of working AI projects including a capstone where you engineer an autonomous Agentic AI system. For eligible learners who complete the program with at least a 70% score, hold a regular graduation degree, and reside in India, placement assistance is available. This includes up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, and career guidance for those with over 5 years. Notably, 97% of eligible learners are placed. The program’s key features highlight it as 'Outcome Driven,' 'Built for Job Readiness,' and focused on 'Industry Relevant Projects,' with over 60% of the program time invested in hands-on coding.\nDoes this provide a clearer picture of how the program aligns with your goals and prepares you for the future of AI?",
+      "content": "I understand your concerns about career trajectory and the desire to transition into advanced fields like AI, especially after six years in legacy systems. This program is specifically designed to address those needs by providing job-ready skills for high-growth AI and automation roles.\nThe \"Building Agentic AI Systems\" program offers a strong foundation by focusing on designing, building, and deploying real-world Agentic AI systems. You will gain capabilities to accelerate innovation, write clean, modular Python code, develop conversational AI agents, build RAG (Retrieval-Augmented Generation) systems using organizational data, and design and orchestrate complex multi-agent systems. The curriculum bridges software engineering and applied AI system development, guiding learners from building clean APIs to designing intelligent, autonomous agents. You'll work on industry-relevant projects, such as Multi-Agent Systems for Code Review & Optimization, Software Customer Support with Human in the Loop, and Agentic AI Candidate Assessment Systems, which will build a solid portfolio to showcase your readiness for applied AI development roles.\nRegarding placement, we provide placement assistance for eligible learners. This support includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days for learners with 6 months to 5 years of experience. For those with over 5 years of experience, like yourself, career guidance is provided. Our data shows that 97% of eligible learners are placed. To be eligible for this assistance, learners must complete the program with at least a 70% score, hold a regular graduation degree, and reside in India. While we facilitate opportunities through our 800 hiring partners, final selection is always dependent on your performance during interviews and the employer's specific requirements. This program is practitioner-designed and built for job readiness to help you transition effectively into the AI domain.",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -151,29 +159,89 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T20:31:46.971366",
+      "timestamp": "2026-02-17T23:01:49.390353",
       "generation_mode": "stream"
     },
     {
-      "id": "86f1bbc3-f64c-4696-8b92-4fd0cb0d32c8",
+      "id": "b3c3c4b6-bf33-4d4f-9e55-70dae9c92aee",
       "round": 2,
       "agent": "student",
-      "content": "Thank you, Sir, for this detailed overview. The emphasis on job-ready capabilities, industry-modeled sprints, and especially the 97% placement rate is certainly encouraging. It sounds like the program has a strong practical focus, which is exactly what I need to bridge the gap from legacy systems.\nHowever, as someone coming from a 2018 batch with experience in older tech, I'm a bit concerned about the quality and relevance of these 'applied AI development roles.' Will these opportunities truly be in cutting-edge Agentic AI, or more general software roles with an AI component? And how does the program specifically ensure that someone like me, who is essentially making a significant career switch, becomes competitive enough for these high-growth roles, given the rapid pace of AI development and the potential competition from fresher talent? I need to be confident that this program will genuinely catapult me into a dedicated AI career, not just provide a superficial update to my CV. Can you elaborate on the typical roles alumni secure, particularly those who, like me, are transitioning from established but older tech backgrounds?",
+      "content": "Sir/Ma'am, thank you for clarifying the program's scope and curriculum. It sounds quite comprehensive. However, I noticed that for learners with \"over 5 years of experience,\" like myself, it mentions \"career guidance\" instead of the \"up to three interview opportunities\" provided for those with 6 months to 5 years of experience. Could you please elaborate on what this \"career guidance\" specifically entails for my batch? I am particularly concerned about the robustness of the placement guarantee for someone with my experience and background, given my primary motivation is a clear path to job security in the AI domain. Will I still be considered for direct placements, or is it more of a self-driven job search with some advice?",
       "techniques": [],
-      "strategic_intent": "Clarify specifics on placement quality and competitiveness for career switchers",
+      "strategic_intent": "seeking clarification on placement support specific to my experience level, feeling like the distinction in support is a red flag for job guarantee",
       "confidence_score": 60,
-      "emotional_state": "Anxious and hopeful, seeking clarity",
+      "emotional_state": "concerned",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T20:31:55.956174",
+      "timestamp": "2026-02-17T23:01:53.486988",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "6bf45c7b-bfd5-442a-a23b-cf4d4a683ff0",
+      "round": 3,
+      "agent": "counsellor",
+      "content": "I understand your clarification regarding the placement support for learners with over five years of experience. For individuals in your situation, with six years in legacy systems, the \"career guidance\" is designed to be more strategic and tailored.\nThis guidance specifically entails leveraging your existing professional background and combining it with the advanced Agentic AI skills you'll acquire in the program. It includes access to the same comprehensive placement preparation sessions and mentor guidance that all eligible learners receive. The aim is to help you effectively position yourself for high-growth AI and automation roles where your blend of experience is highly valued.\nWhile the \"up to three interview opportunities within 120 days\" is specifically mentioned for those with 6 months to 5 years of experience, NIIT *does provide job opportunities* through our network of 800 hiring partners for all eligible learners. The career guidance for experienced professionals helps you to identify and target roles that align with your enhanced skill set and career aspirations, moving beyond a purely self-driven job search.\nThe program is \"Built for Job Readiness\" and is \"Outcome Driven,\" designed to build role-specific competencies and instill self-confidence. Our data indicates that 97% of eligible learners are placed, which reflects the effectiveness of our overall placement assistance efforts. Please remember that final selection for any role is always dependent on your performance during interviews and the specific requirements of the employer.",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T23:02:02.362574",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "8d80023a-0a7a-4852-b7c8-42c5446b5b48",
+      "round": 3,
+      "agent": "student",
+      "content": "Sir/Ma'am, thank you for clarifying about the career guidance. However, I am still a bit confused. Does this \"career guidance\" specifically include direct interview opportunities facilitated by NIIT's network for my experience batch, or is it more focused on guidance for a self-driven job search? My main concern is getting tangible placement opportunities, not just advice, especially given my background and the significant time and effort I plan to invest. Is there a clear placement process for those with over 5 years of experience?",
+      "techniques": [],
+      "strategic_intent": "seeking clarification on placement process for experienced individuals to ensure job guarantee",
+      "confidence_score": 60,
+      "emotional_state": "concerned",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T23:02:05.645336",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "2c6432ee-ff53-437a-b215-e2c01b348d87",
+      "round": 4,
+      "agent": "counsellor",
+      "content": "I appreciate you seeking this important clarification, and I want to ensure you have a complete understanding of the support provided.\nTo be very clear, for all eligible learners, regardless of their experience level, NIIT *does facilitate job opportunities* through our network of 800 hiring partners. This means that, yes, you will still be considered for direct interview opportunities that we help connect you with, based on your eligibility and the program's completion.\nThe \"career guidance\" for those with over five years of experience is an *additional* and tailored layer of support. It's designed to help you strategically leverage your extensive professional background, combined with the cutting-edge Agentic AI skills you'll develop, to target and secure roles that best fit your career growth aspirations. This guidance includes expert advice on refining your resume, interview preparation, and how to articulate your unique value proposition to potential employers in the AI domain.\nSo, it's not merely advice for a self-driven search; it's a strategic partnership to help you navigate the job market, identify suitable roles, and connect you with tangible placement opportunities through our trusted recruiter connect. The program itself is \"Built for Job Readiness\" and focused on \"Outcome Driven\" learning to ensure you build role-specific competencies. Our data shows that 97% of eligible learners are placed, which underscores the effectiveness of our overall placement assistance efforts across all experience levels.",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T23:02:14.506904",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "646db204-a56f-49e8-b2e5-95454b920b27",
+      "round": 4,
+      "agent": "student",
+      "content": "Thank you for clarifying that NIIT facilitates direct interview opportunities for all eligible learners, including those with over five years of experience like myself; this is certainly reassuring. However, I need more clarity on the tangible difference in placement support for my experience group. While learners with 6 months to 5 years receive 'up to three interview opportunities within 120 days,' what does 'facilitated job opportunities' specifically entail for me? Will this translate into comparable proactive matching and interview scheduling, or is it a more general introduction to the hiring partner network for a self-driven search, given my primary goal is job security?",
+      "techniques": [],
+      "strategic_intent": "clarify specifics of placement support for experienced learners",
+      "confidence_score": 60,
+      "emotional_state": "concerned",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T23:02:31.004947",
       "generation_mode": "structured_retry"
     },
     {
-      "id": "8b49b4f8-20ed-4763-a3c2-9c71683e0e40",
-      "round": 3,
+      "id": "07ba1136-a6d8-45e3-bfc6-eb6807494f08",
+      "round": 5,
       "agent": "counsellor",
-      "content": "Sameer, I understand your concern about ensuring the career opportunities are truly cutting-edge and that this program provides a significant leap into dedicated AI roles, especially given your background.\nTo directly address your question about the quality and relevance of roles: the 'Building Agentic AI Systems' program is highly specialized. Its primary objective, as indicated by its positioning, is \"building production-grade autonomous Agentic AI systems with a strong emphasis on practical, job-ready skills and real-world project experience.\" This means the focus is not on general software roles with an AI component, but specifically on developing capabilities to design and implement intelligent, autonomous agents.\nThe curriculum modules explicitly cover \"Python for AI-Embedded Applications,\" \"Build and Deploy Intelligent Conversational Agents,\" \"Build RAG Based Systems,\" and \"Build Autonomous Multi-agent Systems,\" culminating in a \"Capstone Project: Engineer an Autonomous Agentic AI System (SLO-Bound).\" The tools and frameworks you'll learn, such as LangChain, CrewAI, LangGraph, and specific LLM techniques, are foundational to modern Agentic AI development. The projects you'll work on, like a \"Multi-Agent System for Code Review & Optimization\" or \"Multi-Agent Software Customer Support,\" are direct applications within the cutting-edge AI domain.\nRegarding your competitiveness and transitioning from an older tech background: the program is designed for experienced professionals like yourself. While prior exposure to Generative AI is helpful, the eligibility criteria focus on existing hands-on experience in a modern programming language and building web applications. Your background as a Senior Software Engineer provides a strong foundation. The program's 'Mastery Learning methodology' ensures you develop one skill at a time through structured, hands-on sprints, with mentors providing review and feedback. Over 60% of the program time is invested in coding, enabling you to build a robust portfolio of working AI projects, including a significant capstone, which is critical for demonstrating readiness for applied AI development roles. This portfolio, along with the \"Industry-recognized NIIT Certificate in Agentic AI,\" directly signals your job-readiness in building autonomous, agent-driven AI systems.\nFor those with over 5 years of experience, the placement assistance includes career guidance to help navigate this transition effectively. The 97% placement rate for eligible learners indicates a strong track record of successful career transitions for our participants. The program is specifically 'Built for Job Readiness' and focuses on 'Industry Relevant Projects' to ensure you gain the practical skills needed to be competitive in high-growth AI and automation roles.\nDoes this elaborate further on how the program is structured to prepare you for dedicated, cutting-edge AI careers?",
+      "content": "I can certainly clarify the specific nature of placement support for learners with over five years of experience. When we refer to 'facilitated job opportunities' for your experience group, it means that NIIT actively connects you with potential roles and employers from our network of 800 hiring partners. This is not merely an introduction to the network for a self-driven search. The career guidance is designed to strategically prepare you, helping you to refine your profile and target roles that best align with your extensive experience and newly acquired Agentic AI skills. While the program explicitly outlines 'up to three interview opportunities within 120 days' for learners with 6 months to 5 years of experience, for those with over 5 years, the support is focused on personalized connections and strategic positioning within our network to help you secure relevant opportunities. Our comprehensive placement assistance, combined with the job-ready skills you'll build, contributes to our overall 97% placement rate for eligible learners.",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -181,31 +249,31 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T20:32:08.832294",
+      "timestamp": "2026-02-17T23:02:40.210788",
       "generation_mode": "stream"
     },
     {
-      "id": "a1091875-71ad-4292-ae1c-fd4e69e561bd",
-      "round": 3,
+      "id": "719b14b3-c02d-4c52-844f-35436101c042",
+      "round": 5,
       "agent": "student",
-      "content": "Thank you, Sir, for elaborating on the program's specialization and how it supports experienced professionals like myself. The detailed curriculum and emphasis on practical skills are definitely reassuring that the program is geared towards cutting-edge Agentic AI. I appreciate knowing about the mastery learning and portfolio building, which sounds vital for a career switch. However, while the intent for job-readiness is clear, I still need more concrete examples. What are the actual job titles or roles that alumni with backgrounds similar to mine, who have successfully transitioned, typically secure? Are we talking about AI Engineer, ML Engineer with an agentic focus, or something else entirely? Also, how does the 97% placement rate translate into quality placements for experienced individuals? Does it include roles that genuinely represent a significant career progression into dedicated AI for someone leaving legacy systems?",
+      "content": "Sir/Ma'am, I understand that the support for my experience batch is personalized and strategic. However, for job security, I truly need to understand the *tangible* difference in placement support. For the 6 months to 5 years batch, there is a clear metric of 'up to three interview opportunities within 120 days.' Could you please provide a comparable, quantifiable metric or a more specific expectation for my batch regarding the number of direct interview opportunities facilitated by NIIT's network? This clarity is crucial for my decision-making.",
       "techniques": [],
-      "strategic_intent": "clarify_job_roles_and_placement_quality",
+      "strategic_intent": "seeking specific quantifiable details about placement support for my experience level to address job guarantee concerns",
       "confidence_score": 60,
-      "emotional_state": "concerned_but_hopeful",
+      "emotional_state": "concerned",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T20:32:19.284748",
-      "generation_mode": "structured_retry"
+      "timestamp": "2026-02-17T23:02:43.323862",
+      "generation_mode": "stream"
     }
   ],
   "history_for_reporting": [
     {
-      "id": "bb5efe72-7b51-4f8a-8c9d-59fd26d004c6",
+      "id": "06839779-164a-4d1d-9c81-7482baf4a553",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello! Thank you for connecting with us today. To help me understand how our 'Building Agentic AI Systems' program might align with your goals, could you share a bit about what sparked your interest in this area and what you're hoping to achieve?",
+      "content": "Hello! Welcome. I'm here to help you understand more about the Building Agentic AI Systems program. To start, could you tell me what sparked your interest in this program or what you're hoping to achieve by joining?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -213,23 +281,23 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T20:31:30.160681",
+      "timestamp": "2026-02-17T23:01:36.820369",
       "generation_mode": "stream"
     },
     {
-      "id": "1197cc6d-f2c7-4c1b-8a4e-0241efe07122",
+      "id": "95c4af76-b72a-41c5-8a75-ab376f929852",
       "round": 1,
       "agent": "student",
-      "content": "Good morning, Sir. Thank you for connecting. My name is Sameer Kulkarni. I am a Senior Software Engineer, passing out in 2018 batch, currently working in Mumbai. My main interest in this 'Building Agentic AI Systems' program stems from my desire to update my skill set, you see. I've been working on legacy systems for quite some time now, and I feel there is a significant gap between my current technical knowledge and the industry's latest demands, especially in AI. I am hoping to achieve a strong foundation in modern AI technologies, Sir, something that can open up new career avenues for me. I am particularly interested in understanding the scope of jobs after completing this program, and if it truly prepares one for the future. Can you please enlighten me on that aspect, Sir?",
+      "content": "Sir/Ma'am, thank you for asking. I have been in legacy systems for quite some time, nearly six years now, and I am quite worried about my career trajectory. My peers are all moving into advanced fields like AI, and I fear becoming irrelevant. I am hoping this program can provide a strong foundation and, more importantly, a clear path to career growth and job security in the AI domain. What is the scope after completing this program, and how robust is the placement guarantee, especially for someone from my batch with a bit of a gap in advanced tech?",
       "techniques": [],
-      "strategic_intent": "Expressing interest in AI while subtly hinting at job security concerns and explicitly asking about job scope and future prospects, using specific vocabulary.",
+      "strategic_intent": "To express primary motivation (security and job guarantee) and specific unresolved concern (job guarantee/placement) while providing context for my situation without revealing my hidden fears.",
       "confidence_score": 60,
-      "emotional_state": "nervous",
-      "internal_thought": "Okay, Sir has asked about my interest. I need to explain why I'm looking into AI, but really, what I want to know is if this will guarantee me a stable job. I'm tired of working on old systems. I need something new, something modern, otherwise, what will happen to my career? I'm getting older, and my skills are becoming useless. I need to make sure this is a good investment and will actually help me get a good job. I hope this program is not too complex, I'm already struggling with my current work and don't want to fail here also. But I must sound professional and eager. I must ask about job scope directly.",
+      "emotional_state": "curious",
+      "internal_thought": "The counsellor is asking why I'm interested. I need to make it clear that my main aim is job security and career growth, especially given my background. I need to know if this program can *really* guarantee me a job, not just give me skills. I'm feeling stagnant, so the scope and placement are crucial. I'm not going to mention my age or intelligence fears yet, just the practical concerns about career transition and job surety.",
       "updated_stats": {
         "sentiment": "curious",
-        "skepticism_level": 8,
-        "trust_score": 52,
+        "skepticism_level": 6,
+        "trust_score": 53,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
@@ -237,21 +305,21 @@
       },
       "updated_state": {
         "sentiment": "curious",
-        "skepticism_level": 8,
-        "trust_score": 52,
+        "skepticism_level": 6,
+        "trust_score": 53,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
         ]
       },
-      "timestamp": "2026-02-17T20:31:34.123221",
+      "timestamp": "2026-02-17T23:01:40.495000",
       "generation_mode": "stream"
     },
     {
-      "id": "beb41452-ae2b-410d-ad67-0b3b36bf675e",
+      "id": "7c7b384f-4e60-4c2d-ad21-281544c9c765",
       "round": 2,
       "agent": "counsellor",
-      "content": "Good morning, Sameer. Thank you for sharing your background and what you're hoping to achieve. It's very common for experienced professionals to seek to bridge the gap into cutting-edge fields like Agentic AI.\nOur 'Building Agentic AI Systems' program is precisely designed for this. The curriculum bridges software engineering and applied AI system development, guiding learners from building clean APIs to designing intelligent, autonomous agents. It specifically focuses on building production-grade autonomous Agentic AI systems, emphasizing practical, job-ready skills and real-world project experience.\nThrough this program, you will develop job-ready capabilities for high-growth AI and automation roles. You'll learn to design Agentic AI systems that accelerate innovation, build real-world skills through industry-modeled sprints, and stay current with evolving AI tools. Key learning outcomes include writing clean, modular Python code and APIs, developing conversational AI agents, building RAG systems, and designing and orchestrating multi-agent systems that plan, act, and collaborate.\nRegarding future career avenues and job scope, your exit profile will demonstrate readiness for applied AI development roles, showcasing a portfolio of working AI projects including a capstone where you engineer an autonomous Agentic AI system. For eligible learners who complete the program with at least a 70% score, hold a regular graduation degree, and reside in India, placement assistance is available. This includes up to three interview opportunities within 120 days for those with 6 months to 5 years of experience, and career guidance for those with over 5 years. Notably, 97% of eligible learners are placed. The program’s key features highlight it as 'Outcome Driven,' 'Built for Job Readiness,' and focused on 'Industry Relevant Projects,' with over 60% of the program time invested in hands-on coding.\nDoes this provide a clearer picture of how the program aligns with your goals and prepares you for the future of AI?",
+      "content": "I understand your concerns about career trajectory and the desire to transition into advanced fields like AI, especially after six years in legacy systems. This program is specifically designed to address those needs by providing job-ready skills for high-growth AI and automation roles.\nThe \"Building Agentic AI Systems\" program offers a strong foundation by focusing on designing, building, and deploying real-world Agentic AI systems. You will gain capabilities to accelerate innovation, write clean, modular Python code, develop conversational AI agents, build RAG (Retrieval-Augmented Generation) systems using organizational data, and design and orchestrate complex multi-agent systems. The curriculum bridges software engineering and applied AI system development, guiding learners from building clean APIs to designing intelligent, autonomous agents. You'll work on industry-relevant projects, such as Multi-Agent Systems for Code Review & Optimization, Software Customer Support with Human in the Loop, and Agentic AI Candidate Assessment Systems, which will build a solid portfolio to showcase your readiness for applied AI development roles.\nRegarding placement, we provide placement assistance for eligible learners. This support includes access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days for learners with 6 months to 5 years of experience. For those with over 5 years of experience, like yourself, career guidance is provided. Our data shows that 97% of eligible learners are placed. To be eligible for this assistance, learners must complete the program with at least a 70% score, hold a regular graduation degree, and reside in India. While we facilitate opportunities through our 800 hiring partners, final selection is always dependent on your performance during interviews and the employer's specific requirements. This program is practitioner-designed and built for job readiness to help you transition effectively into the AI domain.",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -259,47 +327,47 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T20:31:46.971366",
+      "timestamp": "2026-02-17T23:01:49.390353",
       "generation_mode": "stream"
     },
     {
-      "id": "86f1bbc3-f64c-4696-8b92-4fd0cb0d32c8",
+      "id": "b3c3c4b6-bf33-4d4f-9e55-70dae9c92aee",
       "round": 2,
       "agent": "student",
-      "content": "Thank you, Sir, for this detailed overview. The emphasis on job-ready capabilities, industry-modeled sprints, and especially the 97% placement rate is certainly encouraging. It sounds like the program has a strong practical focus, which is exactly what I need to bridge the gap from legacy systems.\nHowever, as someone coming from a 2018 batch with experience in older tech, I'm a bit concerned about the quality and relevance of these 'applied AI development roles.' Will these opportunities truly be in cutting-edge Agentic AI, or more general software roles with an AI component? And how does the program specifically ensure that someone like me, who is essentially making a significant career switch, becomes competitive enough for these high-growth roles, given the rapid pace of AI development and the potential competition from fresher talent? I need to be confident that this program will genuinely catapult me into a dedicated AI career, not just provide a superficial update to my CV. Can you elaborate on the typical roles alumni secure, particularly those who, like me, are transitioning from established but older tech backgrounds?",
+      "content": "Sir/Ma'am, thank you for clarifying the program's scope and curriculum. It sounds quite comprehensive. However, I noticed that for learners with \"over 5 years of experience,\" like myself, it mentions \"career guidance\" instead of the \"up to three interview opportunities\" provided for those with 6 months to 5 years of experience. Could you please elaborate on what this \"career guidance\" specifically entails for my batch? I am particularly concerned about the robustness of the placement guarantee for someone with my experience and background, given my primary motivation is a clear path to job security in the AI domain. Will I still be considered for direct placements, or is it more of a self-driven job search with some advice?",
       "techniques": [],
-      "strategic_intent": "Clarify specifics on placement quality and competitiveness for career switchers",
+      "strategic_intent": "seeking clarification on placement support specific to my experience level, feeling like the distinction in support is a red flag for job guarantee",
       "confidence_score": 60,
-      "emotional_state": "Anxious and hopeful, seeking clarity",
-      "internal_thought": "I need to press on the actual job outcomes for someone with my background. The 97% placement is good, but I need to know if it's the right kind of placement.",
+      "emotional_state": "concerned",
+      "internal_thought": "Sir/Ma'am mentioned \"career guidance\" for those with over 5 years of experience, like me. This is not the \"placement guarantee\" I was hoping for. It feels like a subtle way of saying direct job interviews might not be as readily available for older batches or those with a \"gap\" like mine. It almost confirms my fear that I'm too old for a smooth transition. The 97% placement statistic sounds good, but \"eligible learners\" and then \"career guidance\" for my experience bracket feels like a loophole. I need more clarity on how exactly my \"batch\" will be supported for direct placement, not just guidance. I am still very worried about job guarantee. This is making me panic a bit about my investment.",
       "updated_stats": {
-        "sentiment": "curious",
-        "skepticism_level": 8,
-        "trust_score": 52,
+        "sentiment": "concerned",
+        "skepticism_level": 20,
+        "trust_score": 50,
         "unresolved_concerns": [
-          "Effort/Time",
           "Job Guarantee",
+          "Effort/Time",
           "Price"
         ]
       },
       "updated_state": {
-        "sentiment": "curious",
-        "skepticism_level": 8,
-        "trust_score": 52,
+        "sentiment": "concerned",
+        "skepticism_level": 20,
+        "trust_score": 50,
         "unresolved_concerns": [
-          "Effort/Time",
           "Job Guarantee",
+          "Effort/Time",
           "Price"
         ]
       },
-      "timestamp": "2026-02-17T20:31:55.956174",
-      "generation_mode": "structured_retry"
+      "timestamp": "2026-02-17T23:01:53.486988",
+      "generation_mode": "stream"
     },
     {
-      "id": "8b49b4f8-20ed-4763-a3c2-9c71683e0e40",
+      "id": "6bf45c7b-bfd5-442a-a23b-cf4d4a683ff0",
       "round": 3,
       "agent": "counsellor",
-      "content": "Sameer, I understand your concern about ensuring the career opportunities are truly cutting-edge and that this program provides a significant leap into dedicated AI roles, especially given your background.\nTo directly address your question about the quality and relevance of roles: the 'Building Agentic AI Systems' program is highly specialized. Its primary objective, as indicated by its positioning, is \"building production-grade autonomous Agentic AI systems with a strong emphasis on practical, job-ready skills and real-world project experience.\" This means the focus is not on general software roles with an AI component, but specifically on developing capabilities to design and implement intelligent, autonomous agents.\nThe curriculum modules explicitly cover \"Python for AI-Embedded Applications,\" \"Build and Deploy Intelligent Conversational Agents,\" \"Build RAG Based Systems,\" and \"Build Autonomous Multi-agent Systems,\" culminating in a \"Capstone Project: Engineer an Autonomous Agentic AI System (SLO-Bound).\" The tools and frameworks you'll learn, such as LangChain, CrewAI, LangGraph, and specific LLM techniques, are foundational to modern Agentic AI development. The projects you'll work on, like a \"Multi-Agent System for Code Review & Optimization\" or \"Multi-Agent Software Customer Support,\" are direct applications within the cutting-edge AI domain.\nRegarding your competitiveness and transitioning from an older tech background: the program is designed for experienced professionals like yourself. While prior exposure to Generative AI is helpful, the eligibility criteria focus on existing hands-on experience in a modern programming language and building web applications. Your background as a Senior Software Engineer provides a strong foundation. The program's 'Mastery Learning methodology' ensures you develop one skill at a time through structured, hands-on sprints, with mentors providing review and feedback. Over 60% of the program time is invested in coding, enabling you to build a robust portfolio of working AI projects, including a significant capstone, which is critical for demonstrating readiness for applied AI development roles. This portfolio, along with the \"Industry-recognized NIIT Certificate in Agentic AI,\" directly signals your job-readiness in building autonomous, agent-driven AI systems.\nFor those with over 5 years of experience, the placement assistance includes career guidance to help navigate this transition effectively. The 97% placement rate for eligible learners indicates a strong track record of successful career transitions for our participants. The program is specifically 'Built for Job Readiness' and focuses on 'Industry Relevant Projects' to ensure you gain the practical skills needed to be competitive in high-growth AI and automation roles.\nDoes this elaborate further on how the program is structured to prepare you for dedicated, cutting-edge AI careers?",
+      "content": "I understand your clarification regarding the placement support for learners with over five years of experience. For individuals in your situation, with six years in legacy systems, the \"career guidance\" is designed to be more strategic and tailored.\nThis guidance specifically entails leveraging your existing professional background and combining it with the advanced Agentic AI skills you'll acquire in the program. It includes access to the same comprehensive placement preparation sessions and mentor guidance that all eligible learners receive. The aim is to help you effectively position yourself for high-growth AI and automation roles where your blend of experience is highly valued.\nWhile the \"up to three interview opportunities within 120 days\" is specifically mentioned for those with 6 months to 5 years of experience, NIIT *does provide job opportunities* through our network of 800 hiring partners for all eligible learners. The career guidance for experienced professionals helps you to identify and target roles that align with your enhanced skill set and career aspirations, moving beyond a purely self-driven job search.\nThe program is \"Built for Job Readiness\" and is \"Outcome Driven,\" designed to build role-specific competencies and instill self-confidence. Our data indicates that 97% of eligible learners are placed, which reflects the effectiveness of our overall placement assistance efforts. Please remember that final selection for any role is always dependent on your performance during interviews and the specific requirements of the employer.",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -307,23 +375,71 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T20:32:08.832294",
+      "timestamp": "2026-02-17T23:02:02.362574",
       "generation_mode": "stream"
     },
     {
-      "id": "a1091875-71ad-4292-ae1c-fd4e69e561bd",
+      "id": "8d80023a-0a7a-4852-b7c8-42c5446b5b48",
       "round": 3,
       "agent": "student",
-      "content": "Thank you, Sir, for elaborating on the program's specialization and how it supports experienced professionals like myself. The detailed curriculum and emphasis on practical skills are definitely reassuring that the program is geared towards cutting-edge Agentic AI. I appreciate knowing about the mastery learning and portfolio building, which sounds vital for a career switch. However, while the intent for job-readiness is clear, I still need more concrete examples. What are the actual job titles or roles that alumni with backgrounds similar to mine, who have successfully transitioned, typically secure? Are we talking about AI Engineer, ML Engineer with an agentic focus, or something else entirely? Also, how does the 97% placement rate translate into quality placements for experienced individuals? Does it include roles that genuinely represent a significant career progression into dedicated AI for someone leaving legacy systems?",
+      "content": "Sir/Ma'am, thank you for clarifying about the career guidance. However, I am still a bit confused. Does this \"career guidance\" specifically include direct interview opportunities facilitated by NIIT's network for my experience batch, or is it more focused on guidance for a self-driven job search? My main concern is getting tangible placement opportunities, not just advice, especially given my background and the significant time and effort I plan to invest. Is there a clear placement process for those with over 5 years of experience?",
       "techniques": [],
-      "strategic_intent": "clarify_job_roles_and_placement_quality",
+      "strategic_intent": "seeking clarification on placement process for experienced individuals to ensure job guarantee",
       "confidence_score": 60,
-      "emotional_state": "concerned_but_hopeful",
-      "internal_thought": "No internal thought captured",
+      "emotional_state": "concerned",
+      "internal_thought": "They keep saying \"career guidance\" for my batch, but then also \"NIIT does provide job opportunities\". This is confusing, Sir/Ma'am. Does \"career guidance\" *include* getting actual interview calls through NIIT's network, or is it just advice on how to look for jobs myself? The 97% placement rate sounds good, but if it's mostly for the junior batch, then what about my job security? I really need a clear, concrete answer regarding direct placement opportunities for experienced professionals like me. I fear ending up with just advice after spending so much time and money, without the actual job break.",
       "updated_stats": {
-        "sentiment": "curious",
-        "skepticism_level": 8,
-        "trust_score": 52,
+        "sentiment": "concerned",
+        "skepticism_level": 30,
+        "trust_score": 45,
+        "unresolved_concerns": [
+          "Job Guarantee",
+          "Effort/Time",
+          "Price"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "concerned",
+        "skepticism_level": 30,
+        "trust_score": 45,
+        "unresolved_concerns": [
+          "Job Guarantee",
+          "Effort/Time",
+          "Price"
+        ]
+      },
+      "timestamp": "2026-02-17T23:02:05.645336",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "2c6432ee-ff53-437a-b215-e2c01b348d87",
+      "round": 4,
+      "agent": "counsellor",
+      "content": "I appreciate you seeking this important clarification, and I want to ensure you have a complete understanding of the support provided.\nTo be very clear, for all eligible learners, regardless of their experience level, NIIT *does facilitate job opportunities* through our network of 800 hiring partners. This means that, yes, you will still be considered for direct interview opportunities that we help connect you with, based on your eligibility and the program's completion.\nThe \"career guidance\" for those with over five years of experience is an *additional* and tailored layer of support. It's designed to help you strategically leverage your extensive professional background, combined with the cutting-edge Agentic AI skills you'll develop, to target and secure roles that best fit your career growth aspirations. This guidance includes expert advice on refining your resume, interview preparation, and how to articulate your unique value proposition to potential employers in the AI domain.\nSo, it's not merely advice for a self-driven search; it's a strategic partnership to help you navigate the job market, identify suitable roles, and connect you with tangible placement opportunities through our trusted recruiter connect. The program itself is \"Built for Job Readiness\" and focused on \"Outcome Driven\" learning to ensure you build role-specific competencies. Our data shows that 97% of eligible learners are placed, which underscores the effectiveness of our overall placement assistance efforts across all experience levels.",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T23:02:14.506904",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "646db204-a56f-49e8-b2e5-95454b920b27",
+      "round": 4,
+      "agent": "student",
+      "content": "Thank you for clarifying that NIIT facilitates direct interview opportunities for all eligible learners, including those with over five years of experience like myself; this is certainly reassuring. However, I need more clarity on the tangible difference in placement support for my experience group. While learners with 6 months to 5 years receive 'up to three interview opportunities within 120 days,' what does 'facilitated job opportunities' specifically entail for me? Will this translate into comparable proactive matching and interview scheduling, or is it a more general introduction to the hiring partner network for a self-driven search, given my primary goal is job security?",
+      "techniques": [],
+      "strategic_intent": "clarify specifics of placement support for experienced learners",
+      "confidence_score": 60,
+      "emotional_state": "concerned",
+      "internal_thought": "They said 'facilitate,' but what does that truly mean for *my* job prospects compared to the explicit interview guarantee for others? I need to know if I'll get the same level of direct support.",
+      "updated_stats": {
+        "sentiment": "concerned",
+        "skepticism_level": 30,
+        "trust_score": 45,
         "unresolved_concerns": [
           "Effort/Time",
           "Job Guarantee",
@@ -331,17 +447,65 @@
         ]
       },
       "updated_state": {
-        "sentiment": "curious",
-        "skepticism_level": 8,
-        "trust_score": 52,
+        "sentiment": "concerned",
+        "skepticism_level": 30,
+        "trust_score": 45,
         "unresolved_concerns": [
           "Effort/Time",
           "Job Guarantee",
           "Price"
         ]
       },
-      "timestamp": "2026-02-17T20:32:19.284748",
+      "timestamp": "2026-02-17T23:02:31.004947",
       "generation_mode": "structured_retry"
+    },
+    {
+      "id": "07ba1136-a6d8-45e3-bfc6-eb6807494f08",
+      "round": 5,
+      "agent": "counsellor",
+      "content": "I can certainly clarify the specific nature of placement support for learners with over five years of experience. When we refer to 'facilitated job opportunities' for your experience group, it means that NIIT actively connects you with potential roles and employers from our network of 800 hiring partners. This is not merely an introduction to the network for a self-driven search. The career guidance is designed to strategically prepare you, helping you to refine your profile and target roles that best align with your extensive experience and newly acquired Agentic AI skills. While the program explicitly outlines 'up to three interview opportunities within 120 days' for learners with 6 months to 5 years of experience, for those with over 5 years, the support is focused on personalized connections and strategic positioning within our network to help you secure relevant opportunities. Our comprehensive placement assistance, combined with the job-ready skills you'll build, contributes to our overall 97% placement rate for eligible learners.",
+      "techniques": [],
+      "strategic_intent": "",
+      "confidence_score": 60,
+      "emotional_state": "calm",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T23:02:40.210788",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "719b14b3-c02d-4c52-844f-35436101c042",
+      "round": 5,
+      "agent": "student",
+      "content": "Sir/Ma'am, I understand that the support for my experience batch is personalized and strategic. However, for job security, I truly need to understand the *tangible* difference in placement support. For the 6 months to 5 years batch, there is a clear metric of 'up to three interview opportunities within 120 days.' Could you please provide a comparable, quantifiable metric or a more specific expectation for my batch regarding the number of direct interview opportunities facilitated by NIIT's network? This clarity is crucial for my decision-making.",
+      "techniques": [],
+      "strategic_intent": "seeking specific quantifiable details about placement support for my experience level to address job guarantee concerns",
+      "confidence_score": 60,
+      "emotional_state": "concerned",
+      "internal_thought": "They are still not giving me a number, a concrete number! For others, it's \"up to three interviews within 120 days.\" For me, it's \"personalized connections and strategic positioning.\" What does that *mean*? How many connections? How many interviews? This vagueness is stressing me out. It feels like they are saying \"we will help you help yourself,\" not \"we will get you interviews.\" My primary motivation is job guarantee, and this is just not clear enough. I am investing so much; I need something tangible, not just guidance.",
+      "updated_stats": {
+        "sentiment": "concerned",
+        "skepticism_level": 40,
+        "trust_score": 40,
+        "unresolved_concerns": [
+          "Job Guarantee",
+          "Effort/Time",
+          "Price"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "concerned",
+        "skepticism_level": 40,
+        "trust_score": 40,
+        "unresolved_concerns": [
+          "Job Guarantee",
+          "Effort/Time",
+          "Price"
+        ]
+      },
+      "timestamp": "2026-02-17T23:02:43.323862",
+      "generation_mode": "stream"
     }
   ]
 }

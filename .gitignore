@@ -35,6 +35,10 @@ build/
 *.log
 *.tmp
 *.swp
+backend/*traceability*.json
+backend/*debug_trace*.json
+backend/*debug_trace*.jsonl
+backend/*debug_trace*.jonl
 
 # IDE / OS
 .idea/

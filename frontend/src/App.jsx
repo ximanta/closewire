@@ -1,14 +1,16 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import "./App.css";
 
 const BACKEND_URL = "http://localhost:8000";
 const WS_URL = "ws://localhost:8000/negotiate";
 
 const ACTIVATION_STEPS = [
-  "Preparing AI Counselling Arena...",
-  "Analyzing Program Structure...",
-  "Generating Student Persona...",
-  "Configuring Negotiation Table...",
+  "Preparing Duel Arena...",
+  "Calibrating Negotiation Reflexes...",
+  "Injecting Persona DNA...",
+  "Loading Psychological Profile...",
+  "Entering the CloseWire...",
 ];
 const COMMITMENT_LABELS = {
   none: "No Commitment",
@@ -19,6 +21,19 @@ const COMMITMENT_LABELS = {
 const LIVE_PROCESSING_LABELS = ["Analyzing Tone...", "Calculating Trust..."];
 const SILENCE_AUTO_SEND_MS = 5000;
 const SILENCE_PROMPT_MS = 10000;
+const PIPELINE_OPTIONS = [
+  { id: "ai_vs_ai", title: "Agent vs Agent", subtitle: "Autonomous counsellor and student simulation.", status: "active" },
+  { id: "human_vs_ai", title: "Human vs Agent", subtitle: "You speak as counsellor, AI responds as learner.", status: "active" },
+  { id: "agent_powered_human_vs_ai", title: "Agent Powered Human vs Agent", subtitle: "Human co-pilot with assistive prompts.", status: "coming_soon" },
+];
+const ARCHETYPE_CARDS = [
+  { id: "desperate_switcher", icon: "SW", title: "Desperate Switcher", profile: "Urgent career pivot, seeks fast outcomes.", accent: "#ff8f5c" },
+  { id: "skeptical_shopper", icon: "SK", title: "Skeptical Shopper", profile: "Needs proof, questions value and claims.", accent: "#f4c15d" },
+  { id: "stagnant_pro", icon: "SP", title: "Stagnant Pro", profile: "Plateaued growth, wants clear progression.", accent: "#5ec7ff" },
+  { id: "credential_hunter", icon: "CH", title: "Credential Hunter", profile: "Status-driven, prioritizes recognition signals.", accent: "#c38dff" },
+  { id: "fomo_victim", icon: "FV", title: "FOMO Victim", profile: "Fear-driven urgency, reacts to momentum.", accent: "#ff6f95" },
+  { id: "drifter", icon: "DR", title: "Drifter", profile: "Low clarity, needs structure and direction.", accent: "#74d9a4" },
+];
 const DEFAULT_VOICE_PROFILE_MAPPING = {
   voice_preferences: {
     male: ["Google UK English Male", "Microsoft David", "David", "Male"],
@@ -143,6 +158,13 @@ const commitmentSignalState = (signal) => {
   return "muted";
 };
 
+const commitmentReportState = (signal) => {
+  const normalized = String(signal || "").toLowerCase();
+  if (normalized === "none") return "danger";
+  if (normalized === "soft_commitment") return "warning";
+  return "success";
+};
+
 const formatDurationHms = (totalSeconds) => {
   const safe = Math.max(0, Number(totalSeconds || 0));
   const hours = Math.floor(safe / 3600);
@@ -177,6 +199,7 @@ function App() {
   const [authError, setAuthError] = useState("");
   const [pendingStart, setPendingStart] = useState(false);
   const [pendingMode, setPendingMode] = useState("ai_vs_ai");
+  const [pendingArchetype, setPendingArchetype] = useState("desperate_switcher");
   const [expandedContent, setExpandedContent] = useState(null);
   const [showReportDashboard, setShowReportDashboard] = useState(false);
   const [chipFlash, setChipFlash] = useState({});
@@ -190,6 +213,9 @@ function App() {
   const [waveformLevel, setWaveformLevel] = useState(0);
   const [studentImageSrc, setStudentImageSrc] = useState("");
   const [voiceProfileMapping, setVoiceProfileMapping] = useState(DEFAULT_VOICE_PROFILE_MAPPING);
+  const [selectedPipeline, setSelectedPipeline] = useState("ai_vs_ai");
+  const [selectedArchetype, setSelectedArchetype] = useState("desperate_switcher");
+  const [showControlModal, setShowControlModal] = useState(false);
 
   const wsRef = useRef(null);
   const projectionRef = useRef(null);
@@ -248,6 +274,21 @@ function App() {
   useEffect(() => {
     micStateRef.current = micState;
   }, [micState]);
+
+  useEffect(() => {
+    const cachedToken = sessionStorage.getItem("negotiator_auth_token");
+    if (cachedToken) {
+      setAuthToken(cachedToken);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (authToken) {
+      sessionStorage.setItem("negotiator_auth_token", authToken);
+    } else {
+      sessionStorage.removeItem("negotiator_auth_token");
+    }
+  }, [authToken]);
 
   const clearMicTimers = () => {
     if (silenceTimerRef.current) {
@@ -548,6 +589,11 @@ function App() {
     if (sentiment.includes("negative") || sentiment.includes("frustrated")) return "danger";
     return "warning";
   }, [metrics?.sentiment_indicator]);
+  const activationTitle = useMemo(() => {
+    if (negotiationMode === "human_vs_ai") return "Human vs Agent Duel Activated";
+    if (negotiationMode === "agent_powered_human_vs_ai") return "Agent Assisted Human vs Agent Duel Activated";
+    return "Agent vs Agent Duel Activated";
+  }, [negotiationMode]);
 
   const pulseChip = (key) => {
     setChipFlash((current) => ({ ...current, [key]: true }));
@@ -1153,19 +1199,26 @@ function App() {
     return () => clearInterval(watchdog);
   }, [isHumanMode, stage, liveModeNeedsTextFallback]);
 
-  const startNegotiation = async (requestedMode = negotiationMode) => {
+  const startNegotiation = async () => {
+    const requestedMode = selectedPipeline;
+    const requestedArchetype = selectedArchetype;
+    if (requestedMode === "agent_powered_human_vs_ai") {
+      pushUiToast("Agent Powered Human vs Agent is coming soon.", "strategic", 3200);
+      return;
+    }
     setNegotiationMode(requestedMode);
     if (!authToken) {
       setShowAuthModal(true);
       setAuthError("");
       setPendingStart(true);
       setPendingMode(requestedMode);
+      setPendingArchetype(requestedArchetype);
       return;
     }
-    await beginNegotiation(authToken, requestedMode);
+    await beginNegotiation(authToken, requestedMode, requestedArchetype);
   };
 
-  const beginNegotiation = async (tokenOverride, requestedMode = negotiationMode) => {
+  const beginNegotiation = async (tokenOverride, requestedMode = negotiationMode, requestedArchetype = selectedArchetype) => {
     const token = tokenOverride || authToken;
     if (!programUrl.trim()) {
       pushUiToast("Enter a valid program URL to continue.", "strategic");
@@ -1185,7 +1238,7 @@ function App() {
       const analyzeRes = await fetch(`${BACKEND_URL}/analyze-url`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: programUrl.trim(), auth_token: token }),
+        body: JSON.stringify({ url: programUrl.trim(), auth_token: token, archetype_id: requestedArchetype }),
       });
       if (analyzeRes.status === 401) {
         setAuthToken("");
@@ -1202,14 +1255,20 @@ function App() {
       setPersona(analyzeData.persona);
       setCounsellorName(generateCounsellorName());
       setStage("negotiating");
-      startWebsocketNegotiation(analyzeData.session_id, token, false, requestedMode);
+      startWebsocketNegotiation(analyzeData.session_id, token, false, requestedMode, requestedArchetype);
     } catch (error) {
       pushUiToast(error.message || "Failed to start negotiation");
       setStage("idle");
     }
   };
 
-  const startWebsocketNegotiation = (targetSessionId, token, retryMode = false, mode = negotiationMode) => {
+  const startWebsocketNegotiation = (
+    targetSessionId,
+    token,
+    retryMode = false,
+    mode = negotiationMode,
+    archetypeId = selectedArchetype
+  ) => {
     const ws = new WebSocket(WS_URL);
     wsRef.current = ws;
 
@@ -1222,6 +1281,7 @@ function App() {
           demo_mode: true,
           retry_mode: retryMode,
           mode,
+          archetype_id: archetypeId,
         })
       );
     };
@@ -1352,7 +1412,7 @@ function App() {
       setPasswordInput("");
       if (pendingStart) {
         setPendingStart(false);
-        await beginNegotiation(data.token, pendingMode);
+        await beginNegotiation(data.token, pendingMode, pendingArchetype);
       }
     } catch (error) {
       setAuthError(error.message || "Authentication failed");
@@ -1367,6 +1427,14 @@ function App() {
     setShowReportDashboard(false);
   };
 
+  const closeArena = () => {
+    setShowControlModal(false);
+    setShowAuthModal(false);
+    setPendingStart(false);
+    setExpandedContent(null);
+    startNewSimulation();
+  };
+
   const retrySimulation = () => {
     if (!sessionId || !authToken) {
       pushUiToast("Session missing. Start a new simulation.", "strategic");
@@ -1375,7 +1443,7 @@ function App() {
     resetRun();
     setStage("negotiating");
     setShowReportDashboard(false);
-    startWebsocketNegotiation(sessionId, authToken, true, negotiationMode);
+    startWebsocketNegotiation(sessionId, authToken, true, negotiationMode, selectedArchetype);
   };
 
   const downloadReport = async () => {
@@ -1442,22 +1510,36 @@ function App() {
       <div className="sceneOverlay" />
 
       {stage === "idle" && (
-        <section className="hero">
-          <h1>Negotia</h1>
-          <p className="subtitle">AI Bout Arena: Program Counselling</p>
-          <div className="inputRow">
+        <section className="hero launchHero">
+          <button type="button" className="brandWordmarkBtn" onClick={closeArena} title="Close Arena">
+            <h1 className="brandWordmark">
+              <span className="brandClose">CLOSE</span>
+              <span className="brandWire">WIRE</span>
+            </h1>
+          </button>
+          <p className="subtitle">Simulate | Compete | Evolve</p>
+          <div className="inputRow launchRow">
             <input
               type="url"
               value={programUrl}
               onChange={(e) => setProgramUrl(e.target.value)}
               placeholder="Enter Program URL here..."
             />
-            <button onClick={() => startNegotiation("ai_vs_ai")}>Agent vs Agent</button>
-            <button className="ghostBtn" onClick={() => startNegotiation("human_vs_ai")}>
-              Start Live Coaching Mode
-            </button>
+            <button className="launchBtn" onClick={startNegotiation}>Launch</button>
           </div>
         </section>
+      )}
+
+      {stage === "idle" && (
+        <button
+          type="button"
+          className="commandDockBtn"
+          style={{ position: "fixed", left: "12px", top: "12px", bottom: "auto", zIndex: 220 }}
+          onClick={() => setShowControlModal((prev) => !prev)}
+          title="Open pipeline and archetype selector"
+        >
+          &gt;_
+        </button>
       )}
 
       <div className="uiToastStack">
@@ -1468,11 +1550,25 @@ function App() {
         ))}
       </div>
 
-      {showAuthModal && (
+      {showAuthModal && createPortal(
         <div className="authModalBackdrop">
           <form className="authModal" onSubmit={handlePasswordSubmit}>
-            <h3>Authentication Required</h3>
-            <p>Enter password to start negotiation.</p>
+            <button
+              type="button"
+              className="authCloseBtn"
+              onClick={() => {
+                setShowAuthModal(false);
+                setPendingStart(false);
+                setPendingMode("ai_vs_ai");
+                setPendingArchetype("desperate_switcher");
+              }}
+              aria-label="Close authentication modal"
+              title="Close"
+            >
+              X
+            </button>
+            <h3>Classified Access</h3>
+            <p>Authenticate to unlock this arena.</p>
             <input
               type="password"
               value={passwordInput}
@@ -1482,27 +1578,107 @@ function App() {
             />
             {authError && <div className="authError">{authError}</div>}
             <div className="authActions">
-              <button type="submit" className="downloadBtn">Unlock</button>
-              <button
-                type="button"
-                className="ghostBtn"
-                onClick={() => {
-                  setShowAuthModal(false);
-                  setPendingStart(false);
-                  setPendingMode("ai_vs_ai");
-                }}
-              >
-                Cancel
-              </button>
+              <button type="submit" className="authUnlockBtn">Unlock</button>
             </div>
           </form>
+        </div>,
+        document.body
+      )}
+
+      {showControlModal && stage === "idle" && (
+        <div
+          className="controlModalBackdrop"
+          style={{ position: "fixed", inset: 0, zIndex: 218 }}
+          onClick={() => setShowControlModal(false)}
+        >
+          <section
+            className="controlModalCard"
+            style={{ position: "fixed", left: 0, top: 0, bottom: 0, zIndex: 219 }}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <header>
+              <h3>Arenas</h3>
+              <button type="button" onClick={() => setShowControlModal(false)} aria-label="Close control panel">X</button>
+            </header>
+            <section className="controlSection pipelineSection">
+              <h4 className="controlSectionTitle">
+                <span className="sectionIcon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" focusable="false" aria-hidden="true">
+                    <rect x="2" y="3" width="12" height="3" rx="1.5" />
+                    <rect x="2" y="10" width="12" height="3" rx="1.5" />
+                  </svg>
+                </span>
+                Pipeline
+              </h4>
+              <div className="pipelineSegments">
+                {PIPELINE_OPTIONS.map((pipeline) => {
+                  const isComingSoon = pipeline.status === "coming_soon";
+                  return (
+                    <button
+                      key={pipeline.id}
+                      type="button"
+                      className={`pipelineSegment ${selectedPipeline === pipeline.id ? "selected" : ""} ${isComingSoon ? "comingSoon" : ""}`}
+                      onClick={() => {
+                        if (!isComingSoon) setSelectedPipeline(pipeline.id);
+                      }}
+                      disabled={isComingSoon}
+                    >
+                      <strong>{pipeline.title}</strong>
+                      <span>{pipeline.subtitle}</span>
+                      {isComingSoon && (
+                        <em className="pipelineLock" aria-hidden="true">
+                          <svg viewBox="0 0 16 16" focusable="false">
+                            <path d="M4 7V5a4 4 0 1 1 8 0v2h1a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1Zm2 0h4V5a2 2 0 1 0-4 0v2Z" />
+                          </svg>
+                        </em>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+            <div className="controlSplitBar" />
+            <section className="controlSection archetypeSection">
+              <h4 className="controlSectionTitle">
+                <span className="sectionIcon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" focusable="false" aria-hidden="true">
+                    <circle cx="8" cy="5" r="3" />
+                    <path d="M2 14a6 6 0 1 1 12 0H2Z" />
+                  </svg>
+                </span>
+                Prospect Archetype
+              </h4>
+              <div className="archetypeGrid">
+                {ARCHETYPE_CARDS.map((card) => (
+                  <button
+                    key={card.id}
+                    type="button"
+                    className={`archetypeCard ${selectedArchetype === card.id ? "selected" : ""}`}
+                    style={{ "--archetype-accent": card.accent }}
+                    onClick={() => setSelectedArchetype(card.id)}
+                  >
+                    <span className="archetypeIcon">{card.icon}</span>
+                    <strong>{card.title}</strong>
+                    <p>{card.profile}</p>
+                  </button>
+                ))}
+              </div>
+            </section>
+          </section>
         </div>
       )}
 
       {stage === "analyzing" && (
         <section className="activationOverlay">
           <div className="activationContent">
-            <h2>Arena Activation</h2>
+            <button type="button" className="brandWordmarkBtn" onClick={closeArena} title="Close Arena">
+              <h1 className="brandWordmark">
+                <span className="brandClose">CLOSE</span>
+                <span className="brandWire">WIRE</span>
+              </h1>
+            </button>
+            <p className="subtitle">Simulate | Compete | Evolve</p>
+            <h2>{activationTitle}</h2>
             <div className="activationSteps">
               {ACTIVATION_STEPS.map((step, index) => (
                 <p key={step} className={index <= activationIndex ? "active" : ""}>
@@ -1515,7 +1691,7 @@ function App() {
             </div>
           </div>
           <div className="activationReflection" aria-hidden="true">
-            <h2>Arena Activation</h2>
+            <h2>{activationTitle}</h2>
             <div className="activationSteps">
               {ACTIVATION_STEPS.map((step, index) => (
                 <p key={`ref-${step}`} className={index <= activationIndex ? "active" : ""}>
@@ -1529,6 +1705,16 @@ function App() {
 
       {(stage === "negotiating" || (stage === "completed" && !showReportDashboard)) && (
         <section className="arenaScene">
+          {isHumanMode && (
+            <div className="arenaBrandMark">
+              <button type="button" className="brandWordmarkBtn brandWordmarkBtnSm" onClick={closeArena} title="Close Arena">
+                <span className="brandWordmark brandWordmarkSm">
+                  <span className="brandClose">CLOSE</span>
+                  <span className="brandWire">WIRE</span>
+                </span>
+              </button>
+            </div>
+          )}
           {stage === "completed" && !showReportDashboard && (
             <div className="arenaBottomActions">
               <button className="ghostBtn viewReportBtn" onClick={() => setShowReportDashboard(true)}>
@@ -1536,7 +1722,7 @@ function App() {
               </button>
             </div>
           )}
-          <div className="arenaTopZone">
+          <div className={`arenaTopZone ${isHumanMode ? "human-mode" : ""}`}>
             <div className={`momentumBar ${momentumValue > 80 ? "hot" : ""}`}>
               <div className="momentumTrack">
                 <div className="momentumLeft" style={{ width: `${momentumValue}%` }} />
@@ -1577,8 +1763,7 @@ function App() {
                         title="Stop microphone and voice"
                         aria-label="Stop microphone and voice"
                       >
-                        ⏻
-                      </button>
+                        Stop</button>
                     </div>
                   </div>
                   <div className="micSignalRow">
@@ -1713,7 +1898,7 @@ function App() {
                 <h3>Final Score: {analysis?.judge?.negotiation_score ?? 0} / 100</h3>
                 <p>{analysis?.judge?.why || "Simulation completed."}</p>
                 <div className="finalMetricChips">
-                  <span className={`metricChip commitmentChip ${chipStateClass(commitmentSignalState(analysis?.judge?.commitment_signal))}`}>
+                  <span className={`metricChip commitmentChip ${chipStateClass(commitmentReportState(analysis?.judge?.commitment_signal))}`}>
                     <span className="statusDot" />
                     {COMMITMENT_LABELS[analysis?.judge?.commitment_signal] || COMMITMENT_LABELS.none}
                   </span>
@@ -1762,7 +1947,7 @@ function App() {
                     </div>
                     <div className={`retryDeltaCallout ${retryPerformance.latest.deltaFromPrevious >= 0 ? "improved" : "degraded"}`}>
                       <div className="deltaValue">
-                        {retryPerformance.latest.deltaFromPrevious >= 0 ? "↗" : "↘"} {retryPerformance.latest.deltaFromPrevious >= 0 ? "+" : ""}
+                        {retryPerformance.latest.deltaFromPrevious >= 0 ? "â†—" : "â†˜"} {retryPerformance.latest.deltaFromPrevious >= 0 ? "+" : ""}
                         {retryPerformance.latest.deltaFromPrevious}
                       </div>
                       <div className="deltaMeta">
@@ -1877,12 +2062,12 @@ function App() {
             </div>
             <div className="resultActions stickyActions">
               <button className="downloadBtn" onClick={downloadReport}>
-                Download Coaching Report (PDF)
+                Download Report
               </button>
-              <button className="downloadBtn" onClick={retrySimulation}>
-                Retry to Improve
+              <button className={`ghostBtn ${showRestartPulse ? "pulse" : ""}`} onClick={retrySimulation}>
+                Rematch. Self-Corrected.
               </button>
-              <button className={`ghostBtn ${showRestartPulse ? "pulse" : ""}`} onClick={startNewSimulation}>
+              <button className="ghostBtn" onClick={startNewSimulation}>
                 Start New Simulation
               </button>
             </div>

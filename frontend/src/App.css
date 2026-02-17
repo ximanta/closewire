@@ -112,9 +112,260 @@ textarea {
   min-height: 86vh;
   display: grid;
   place-content: center;
+  justify-items: center;
   text-align: center;
   gap: var(--space-3);
   padding: var(--space-4);
+}
+
+.launchHero {
+  gap: 14px;
+}
+
+.launchRow {
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.launchBtn {
+  min-width: 220px;
+  min-height: 52px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  border: 1px solid rgba(146, 194, 255, 0.55);
+  background: linear-gradient(100deg, #74dbff, #85a9ff);
+  color: #04162f;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 0 18px rgba(116, 219, 255, 0.36);
+  animation: launchPulse 1.8s ease-in-out infinite;
+}
+
+.commandDockBtn {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  bottom: auto;
+  z-index: 120;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  border: 1px solid rgba(130, 168, 234, 0.55);
+  background: rgba(8, 17, 33, 0.9);
+  color: #d9e8ff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(89, 141, 227, 0.25);
+}
+
+.commandDockBtn:hover {
+  border-color: rgba(142, 212, 255, 0.72);
+  box-shadow: 0 0 16px rgba(110, 188, 255, 0.36);
+}
+
+.controlModalBackdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 119;
+  background: rgba(4, 9, 20, 0.56);
+  backdrop-filter: blur(6px);
+}
+
+.controlModalCard {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: min(460px, 92vw);
+  height: auto;
+  max-height: 100vh;
+  border-radius: 0;
+  border-right: 1px solid rgba(108, 151, 225, 0.5);
+  background: linear-gradient(150deg, rgba(13, 26, 49, 0.96), rgba(7, 14, 30, 0.96));
+  padding: 16px 14px;
+  display: grid;
+  grid-template-rows: auto auto auto auto 1fr;
+  gap: 10px;
+  overflow-y: auto;
+  box-shadow: 18px 0 36px rgba(0, 0, 0, 0.45);
+  animation: controlPaneIn 0.22s ease-out;
+}
+
+.controlModalCard header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.controlModalCard header h3 {
+  margin: 0;
+}
+
+.controlSectionTitle {
+  margin: 0 0 8px;
+  font-size: 0.76rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #9eb8e2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sectionIcon {
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #87addf;
+}
+
+.sectionIcon svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.controlModalCard header button {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid rgba(112, 148, 215, 0.45);
+  background: rgba(9, 18, 36, 0.86);
+  color: #d4e4ff;
+  cursor: pointer;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.controlSection {
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.pipelineSection {
+  background: linear-gradient(160deg, rgba(13, 27, 49, 0.86), rgba(8, 16, 33, 0.84));
+  border: 1px solid rgba(94, 140, 206, 0.32);
+}
+
+.pipelineSegments {
+  display: grid;
+  gap: 8px;
+}
+
+.pipelineSegment {
+  border-radius: 10px;
+  border: 1px solid rgba(94, 130, 194, 0.46);
+  background: rgba(10, 21, 40, 0.8);
+  color: #dbe8ff;
+  text-align: left;
+  padding: 9px 10px;
+  display: grid;
+  gap: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.pipelineSegment strong {
+  font-size: 0.83rem;
+}
+
+.pipelineSegment span {
+  color: #99b2da;
+  font-size: 0.76rem;
+}
+
+.pipelineSegment.selected {
+  border-color: rgba(112, 220, 255, 0.95);
+  background: linear-gradient(100deg, rgba(48, 132, 212, 0.72), rgba(56, 194, 194, 0.68));
+  box-shadow: 0 0 12px rgba(90, 196, 255, 0.24);
+  color: #edf7ff;
+}
+
+.pipelineSegment.comingSoon {
+  opacity: 0.62;
+  cursor: not-allowed;
+}
+
+.pipelineLock {
+  width: 16px;
+  height: 16px;
+  color: #d4def0;
+}
+
+.pipelineLock svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.controlSplitBar {
+  height: 1px;
+  margin: 6px 0;
+  background: linear-gradient(90deg, rgba(95, 128, 186, 0), rgba(95, 128, 186, 0.88), rgba(95, 128, 186, 0));
+}
+
+.archetypeSection {
+  background: linear-gradient(160deg, rgba(38, 22, 35, 0.46), rgba(20, 17, 29, 0.54));
+  border: 1px solid rgba(169, 118, 148, 0.24);
+}
+
+.archetypeGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.archetypeCard {
+  --archetype-accent: #74d9a4;
+  border-radius: 10px;
+  border: 1px solid rgba(91, 123, 181, 0.4);
+  border-left: 3px solid var(--archetype-accent);
+  background: rgba(16, 17, 31, 0.82);
+  color: #dce9ff;
+  text-align: left;
+  padding: 9px;
+  display: grid;
+  gap: 4px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.archetypeCard.selected {
+  border-color: color-mix(in srgb, var(--archetype-accent) 72%, white 28%);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--archetype-accent) 34%, transparent);
+  transform: translateY(-1px);
+}
+
+.archetypeIcon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--archetype-accent) 60%, #7d98c4 40%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #e9f4ff;
+  background: linear-gradient(140deg, color-mix(in srgb, var(--archetype-accent) 45%, #19233d 55%), rgba(10, 18, 34, 0.85));
+}
+
+.archetypeCard strong {
+  font-size: 0.84rem;
+  color: #f0f5ff;
+}
+
+.archetypeCard p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #b8c8e4;
+  line-height: 1.35;
 }
 
 .hero h1 {
@@ -122,6 +373,53 @@ textarea {
   font-size: clamp(2rem, 6vw, 4rem);
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.brandWordmark {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+  gap: 0;
+  line-height: 0.96;
+  font-size: clamp(2rem, 6vw, 4rem);
+  text-transform: uppercase;
+}
+
+.brandWordmarkBtn {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.brandWordmarkBtnSm {
+  display: inline-flex;
+}
+
+.brandWordmarkSm {
+  width: auto;
+  justify-content: flex-start;
+  font-size: clamp(1rem, 2.2vw, 1.45rem);
+}
+
+.brandClose {
+  font-family: "Arial Narrow", Impact, Haettenschweiler, sans-serif;
+  font-weight: 900;
+  font-stretch: condensed;
+  letter-spacing: 0.035em;
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.brandWire {
+  margin-left: 0.06em;
+  font-family: "Bahnschrift", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #d42b2b;
+  text-shadow: none;
 }
 
 .subtitle {
@@ -282,21 +580,34 @@ textarea {
   display: flex;
   flex-direction: column;
   min-height: 0;
+  padding-top: 8px;
+}
+
+.arenaBrandMark {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  z-index: 32;
+  pointer-events: auto;
 }
 
 .arenaTopZone {
-  flex: 0 0 min(25vh, 240px);
-  min-height: 168px;
-  max-height: 25vh;
+  flex: 0 0 auto;
+  min-height: 0;
+  max-height: none;
   display: grid;
   gap: 6px;
   position: relative;
   z-index: 6;
-  overflow: visible;
+  overflow: hidden;
+}
+
+.arenaTopZone.human-mode {
+  gap: 4px;
 }
 
 .momentumBar {
-  width: min(58vw, 900px);
+  width: min(44vw, 740px);
   margin: 0 auto 6px;
 }
 
@@ -358,7 +669,7 @@ textarea {
   border-radius: 12px;
   border: 1px solid rgba(124, 154, 211, 0.38);
   background: rgba(8, 18, 36, 0.82);
-  padding: 10px;
+  padding: 8px;
   position: relative;
   z-index: 8;
   pointer-events: auto;
@@ -398,7 +709,7 @@ textarea {
 }
 
 .shutdownBtn {
-  width: 28px;
+  min-width: 44px;
   height: 28px;
   border-radius: 8px;
   border: 1px solid rgba(167, 188, 226, 0.45);
@@ -406,7 +717,9 @@ textarea {
   color: #d4e4ff;
   cursor: pointer;
   line-height: 1;
-  font-size: 1rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
 .shutdownBtn:hover {
@@ -452,7 +765,7 @@ textarea {
 
 .liveMicPanel textarea {
   width: 100%;
-  min-height: 68px;
+  min-height: 56px;
   resize: none;
   border-radius: 8px;
   border: 1px solid rgba(129, 160, 218, 0.34);
@@ -467,6 +780,18 @@ textarea {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
+}
+
+.liveDebugChip {
+  margin-top: 7px;
+  display: grid;
+  gap: 2px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(122, 151, 205, 0.35);
+  background: rgba(9, 18, 34, 0.8);
+  font-size: 0.71rem;
+  color: #9db3d8;
 }
 
 .liveAiPanel {
@@ -574,7 +899,7 @@ textarea {
 }
 
 .projectionLane {
-  margin-top: 6px;
+  margin-top: 8px;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -1111,25 +1436,33 @@ textarea {
 .authModalBackdrop {
   position: fixed;
   inset: 0;
-  z-index: 40;
-  background: rgba(8, 12, 20, 0.72);
-  display: grid;
-  place-content: center;
+  z-index: 130;
+  background: radial-gradient(circle at 50% 45%, rgba(34, 51, 86, 0.38), rgba(3, 6, 14, 0.84));
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 16px;
+  backdrop-filter: blur(8px);
 }
 
 .authModal {
   width: min(420px, 94vw);
-  background: rgba(14, 25, 44, 0.95);
-  border: 1px solid rgba(166, 193, 242, 0.42);
-  border-radius: 14px;
-  padding: 14px;
+  background: linear-gradient(145deg, rgba(17, 31, 57, 0.88), rgba(8, 14, 28, 0.9));
+  border: 1px solid rgba(154, 188, 249, 0.48);
+  border-radius: 16px;
+  padding: 16px;
   display: grid;
   gap: 10px;
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(186, 213, 255, 0.12);
+  animation: authModalIn 0.26s ease-out;
+  margin: 0;
+  transform: none;
+  position: relative;
 }
 
 .authModal h3 {
   margin: 0;
+  padding-left: 32px;
 }
 
 .authModal p {
@@ -1144,6 +1477,7 @@ textarea {
   border: 1px solid rgba(156, 183, 240, 0.38);
   background: rgba(10, 17, 32, 0.82);
   color: var(--text);
+  animation: authFieldPulse 2.2s ease-in-out infinite;
 }
 
 .authError {
@@ -1153,7 +1487,41 @@ textarea {
 
 .authActions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
+}
+
+.authCloseBtn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  border: 1px solid rgba(116, 152, 217, 0.52);
+  background: rgba(8, 17, 34, 0.88);
+  color: #d5e5ff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.authCloseBtn:hover {
+  border-color: rgba(255, 121, 139, 0.66);
+  color: #ffb7c0;
+}
+
+.authUnlockBtn {
+  min-height: 34px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(142, 190, 255, 0.5);
+  background: linear-gradient(100deg, #76d8ff, #7ea6ff);
+  color: #06162e;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  cursor: pointer;
 }
 
 .uiToastStack {
@@ -1360,6 +1728,52 @@ textarea {
   }
 }
 
+@keyframes launchPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 14px rgba(116, 219, 255, 0.32);
+  }
+
+  50% {
+    box-shadow: 0 0 28px rgba(116, 219, 255, 0.52);
+  }
+}
+
+@keyframes authModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes authFieldPulse {
+  0%,
+  100% {
+    border-color: rgba(156, 183, 240, 0.34);
+  }
+
+  50% {
+    border-color: rgba(122, 209, 255, 0.78);
+  }
+}
+
+@keyframes controlPaneIn {
+  from {
+    opacity: 0;
+    transform: translateX(-26px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes studentSpeakPulse {
   0%,
   100% {
@@ -1417,6 +1831,14 @@ textarea {
     transform: none !important;
   }
 
+  .arenaTopZone.human-mode {
+    overflow: visible;
+  }
+
+  .liveCoachPanel {
+    grid-template-columns: 1fr;
+  }
+
   .metricsRibbon {
     border-radius: 12px;
     bottom: 8px;
@@ -1429,12 +1851,14 @@ textarea {
   backdrop-filter: blur(7px);
   padding: 0;
   z-index: 30;
+  height: 100dvh;
 }
 
 .resultCard {
   width: 100vw;
   margin: 0;
-  height: 100vh;
+  height: 100dvh;
+  min-height: 100dvh;
   border-radius: 0;
   border: 0;
   background: linear-gradient(160deg, rgba(18, 34, 60, 0.95) 0%, rgba(8, 13, 30, 0.96) 100%);
@@ -1444,8 +1868,10 @@ textarea {
 }
 
 .resultScrollBody {
+  flex: 1;
+  min-height: 0;
   overflow: auto;
-  padding: 18px 20px 52px;
+  padding: 18px 20px 12px;
 }
 
 .outcomeSummaryCard {
@@ -1782,20 +2208,21 @@ textarea {
   display: flex;
   justify-content: center;
   gap: 6px;
-  padding: 4px 8px;
+  padding: 2px 6px;
 }
 
 .stickyActions {
-  position: fixed;
-  left: 0;
-  right: 0;
+  position: sticky;
+  left: auto;
+  right: auto;
   bottom: 0;
   width: 100%;
   margin: 0;
+  padding: 3px 6px calc(3px + env(safe-area-inset-bottom, 0px));
   background: rgba(6, 12, 25, 0.9);
   border-top: 1px solid rgba(83, 113, 170, 0.4);
   backdrop-filter: blur(6px);
-  z-index: 4;
+  z-index: 10;
 }
 
 .stickyActions .downloadBtn,
@@ -2034,6 +2461,11 @@ textarea {
   .timelineHeaderRow {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .pipelineSegments,
+  .archetypeGrid {
+    grid-template-columns: 1fr;
   }
 }
 

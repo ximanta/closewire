@@ -222,6 +222,7 @@ class StudentInnerState(TypedDict):
 class AnalyzeUrlRequest(BaseModel):
     url: HttpUrl
     auth_token: str
+    archetype_id: Optional[str] = None
 
 
 class LoginRequest(BaseModel):
@@ -246,6 +247,7 @@ class NegotiationConfig(BaseModel):
     demo_mode: bool = True
     retry_mode: bool = False
     mode: str = "ai_vs_ai"
+    archetype_id: Optional[str] = None
 
 
 class ReportRequest(BaseModel):
@@ -1410,7 +1412,12 @@ TRANSCRIPT SO FAR:
 - Do not reveal hidden secret too early.
 - Repeat unresolved concerns if still unanswered.
 {pipeline_language_fragment}
-4. Keep MESSAGE complete and not cut mid sentence.
+4. Keep MESSAGE natural and concise:
+- 1 to 4 sentences.
+- Target 80 to 120 words (hard cap 120 words).
+- Focus on one primary concern in this turn.
+- Include a slight emotional undertone without becoming theatrical.
+- Keep MESSAGE complete and do not cut mid sentence.
 
 --- OUTPUT FORMAT ---
 <thought>raw inner monologue</thought>
@@ -1444,12 +1451,13 @@ def _retry_with_structured_json(
         retry_prompt = f"""
 You are recovering from a failed stream for a learner turn.
 Return a complete structured response in one function call.
-Keep MESSAGE under 180 words.
+Keep MESSAGE concise: 1 to 4 sentences, 80 to 120 words (hard cap 120 words).
 Use only this context and do not invent details outside it.
 ROLE LOCK (MANDATORY):
 - You are the prospective learner named {persona_name} ({persona_archetype}), not the counsellor.
 - Never explain the programme as if you represent the institute.
 - Ask, challenge, or clarify as a learner. Do not sell.
+- Focus on one primary concern in this turn.
 - End MESSAGE with a complete sentence, ideally with at least one question if concerns remain.
 {retry_context_prompt}
 """
@@ -1481,7 +1489,8 @@ ROLE LOCK (MANDATORY):
             rewrite_prompt = f"""
 Rewrite the learner MESSAGE below so it is strictly from the learner perspective.
 Do not provide counsellor advice and do not represent the institute.
-Keep under 180 words and end with a complete sentence.
+Keep it to 1 to 4 sentences, 80 to 120 words (hard cap 120 words), and end with a complete sentence.
+Focus on one primary concern in this turn.
 
 LEARNER PROFILE:
 - Name: {persona_name}
@@ -2114,7 +2123,10 @@ async def analyze_url(payload: AnalyzeUrlRequest) -> AnalyzeUrlResponse:
     url = str(payload.url)
     program, source = _analyze_program(url)
     program = _to_plain_json(program)
-    persona = _generate_persona(program)
+    forced_archetype_id = str(payload.archetype_id or "").strip()
+    if forced_archetype_id not in ARCHETYPE_CONFIGS:
+        forced_archetype_id = None
+    persona = _generate_persona(program, forced_archetype_id=forced_archetype_id)
     persona = _to_plain_json(persona)
     session_id = str(uuid.uuid4())
     SESSION_STORE[session_id] = {
@@ -2148,13 +2160,13 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
         mode = str(config.mode or "ai_vs_ai").strip().lower()
         if mode not in {"ai_vs_ai", "human_vs_ai"}:
             mode = "ai_vs_ai"
-        if mode == "human_vs_ai":
-            allowed = {"desperate_switcher", "skeptical_shopper"}
+        forced_archetype_id = str(config.archetype_id or "").strip()
+        if forced_archetype_id in ARCHETYPE_CONFIGS:
             current_archetype = str(persona.get("archetype_id", "")).strip()
-            if current_archetype not in allowed:
-                forced_archetype = _pick_live_mode_archetype()
-                persona = _to_plain_json(_generate_persona(program, forced_archetype_id=forced_archetype))
+            if current_archetype != forced_archetype_id:
+                persona = _to_plain_json(_generate_persona(program, forced_archetype_id=forced_archetype_id))
                 session["persona"] = persona
+        if mode == "human_vs_ai":
             persona["language_style"] = "UK English"
 
         financials = _derive_financials(program, persona)
