@@ -16,12 +16,6 @@ const COMMITMENT_LABELS = {
   conditional_commitment: "Conditional Yes",
   strong_commitment: "Confirmed Enrollment",
 };
-const COMMITMENT_ICONS = {
-  none: "[ ]",
-  soft_commitment: "[~]",
-  conditional_commitment: "[!]",
-  strong_commitment: "[+]",
-};
 
 const PILLAR_ITEM_TRUNCATE = 120;
 const STUDENT_CONTROL_PREFIXES = [
@@ -75,6 +69,56 @@ const extractSpokenText = (value) => {
   return spoken.join(" ").trim();
 };
 
+const toTitleCase = (value) =>
+  String(value || "")
+    .replace(/[_-]+/g, " ")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(" ");
+
+const formatCareerStage = (value) => {
+  const normalized = String(value || "").trim().toLowerCase();
+  if (!normalized) return "N/A";
+  if (normalized === "early") return "Early Career";
+  if (normalized === "mid") return "Mid Career";
+  if (normalized === "late") return "Late Career";
+  return toTitleCase(normalized);
+};
+
+const formatArchetype = (persona) => {
+  const label = String(persona?.archetype_label || "").trim();
+  if (label) return label;
+  const fallback = String(persona?.persona_type || "").trim();
+  return fallback ? toTitleCase(fallback) : "Learner Profile";
+};
+
+const commitmentFromProbability = (probability) => {
+  const momentum = Math.max(0, Math.min(100, Number(probability ?? 0)));
+  if (momentum >= 80) return "strong_commitment";
+  if (momentum >= 60) return "conditional_commitment";
+  if (momentum >= 40) return "soft_commitment";
+  return "none";
+};
+
+const chipStateClass = (state) => {
+  if (state === "danger") return "chip-state-danger";
+  if (state === "warning") return "chip-state-warning";
+  if (state === "success") return "chip-state-success";
+  if (state === "magic") return "chip-state-magic";
+  if (state === "muted") return "chip-state-muted";
+  return "chip-state-neutral";
+};
+
+const commitmentSignalState = (signal) => {
+  const normalized = String(signal || "").toLowerCase();
+  if (normalized === "strong_commitment") return "magic";
+  if (normalized === "conditional_commitment") return "success";
+  if (normalized === "soft_commitment") return "warning";
+  return "muted";
+};
+
 function App() {
   const [programUrl, setProgramUrl] = useState("https://www.niit.com/india/building-agentic-ai-systems/");
   const [sessionId, setSessionId] = useState("");
@@ -101,6 +145,7 @@ function App() {
   const [pendingStart, setPendingStart] = useState(false);
   const [expandedContent, setExpandedContent] = useState(null);
   const [showReportDashboard, setShowReportDashboard] = useState(false);
+  const [chipFlash, setChipFlash] = useState({});
 
   const wsRef = useRef(null);
   const projectionRef = useRef(null);
@@ -108,6 +153,7 @@ function App() {
   const toastTimerRef = useRef({});
   const uiToastTimerRef = useRef({});
   const pendingThoughtsRef = useRef({});
+  const chipFlashTimerRef = useRef({});
 
   const orderedDrafts = useMemo(() => Object.values(drafts), [drafts]);
   const allCards = useMemo(
@@ -135,14 +181,8 @@ function App() {
     if (momentumValue <= 35) return "Student resistance";
     return "Balanced momentum";
   }, [momentumValue]);
-  const liveCommitment = useMemo(() => {
-    if (momentumValue >= 80) return "strong_commitment";
-    if (momentumValue >= 60) return "conditional_commitment";
-    if (momentumValue >= 40) return "soft_commitment";
-    return "none";
-  }, [momentumValue]);
+  const liveCommitment = useMemo(() => commitmentFromProbability(momentumValue), [momentumValue]);
   const liveCommitmentLabel = COMMITMENT_LABELS[liveCommitment] || COMMITMENT_LABELS.none;
-  const liveCommitmentIcon = COMMITMENT_ICONS[liveCommitment] || COMMITMENT_ICONS.none;
   const currentRound = metrics?.round ?? stateUpdate?.round ?? 1;
   const trustBaseline = 50 + (metrics?.retry_modifier ?? 0);
   const liveTrustDelta = (metrics?.trust_index ?? trustBaseline) - trustBaseline;
@@ -230,15 +270,83 @@ function App() {
     if (selectedTimelineRound == null) return roundInsights[roundInsights.length - 1];
     return roundInsights.find((item) => item.round === selectedTimelineRound) || roundInsights[roundInsights.length - 1];
   }, [roundInsights, selectedTimelineRound]);
+  const roundChipState = useMemo(() => {
+    const round = Number(metrics?.round || 1);
+    const max = Number(maxRounds || 1);
+    if (round >= max) return "danger";
+    if (round >= 4) return "warning";
+    return "neutral";
+  }, [metrics?.round, maxRounds]);
+  const concessionsChipState = useMemo(() => {
+    const coun = Number(metrics?.concession_count_counsellor || 0);
+    const stu = Number(metrics?.concession_count_student || 0);
+    if (coun === 0 && stu === 0) return "muted";
+    return "neutral";
+  }, [metrics?.concession_count_counsellor, metrics?.concession_count_student]);
+  const tensionChipState = useMemo(() => {
+    const tension = Number(metrics?.tone_escalation || 0);
+    if (tension > 65) return "danger";
+    if (tension >= 31) return "warning";
+    return "success";
+  }, [metrics?.tone_escalation]);
+  const enrollmentChipState = useMemo(() => {
+    const probability = Number(metrics?.close_probability || 0);
+    if (probability >= 80) return "magic";
+    if (probability >= 60) return "success";
+    if (probability >= 36) return "warning";
+    return "danger";
+  }, [metrics?.close_probability]);
+  const commitmentChipState = useMemo(() => {
+    if (liveCommitment === "strong_commitment") return "magic";
+    if (liveCommitment === "conditional_commitment") return "success";
+    if (liveCommitment === "soft_commitment") return "warning";
+    return "muted";
+  }, [liveCommitment]);
+  const trustChipState = useMemo(() => {
+    if (liveTrustDelta > 0) return "success";
+    if (liveTrustDelta < 0) return "danger";
+    return "neutral";
+  }, [liveTrustDelta]);
+  const sentimentChipState = useMemo(() => {
+    const sentiment = String(metrics?.sentiment_indicator || "").toLowerCase();
+    if (sentiment.includes("positive") || sentiment.includes("excited")) return "success";
+    if (sentiment.includes("negative") || sentiment.includes("frustrated")) return "danger";
+    return "warning";
+  }, [metrics?.sentiment_indicator]);
+
+  const pulseChip = (key) => {
+    setChipFlash((current) => ({ ...current, [key]: true }));
+    if (chipFlashTimerRef.current[key]) clearTimeout(chipFlashTimerRef.current[key]);
+    chipFlashTimerRef.current[key] = setTimeout(() => {
+      setChipFlash((current) => ({ ...current, [key]: false }));
+      delete chipFlashTimerRef.current[key];
+    }, 1000);
+  };
+
   const renderMetricChips = () => (
     <>
-      <span className="metricChip">Round {metrics?.round || 1} / {maxRounds}</span>
-      <span className="metricChip">Concessions {metrics?.concession_count_counsellor ?? 0} - {metrics?.concession_count_student ?? 0}</span>
-      <span className="metricChip">Tension {metrics?.tone_escalation ?? 0}%</span>
-      <span className="metricChip enrollmentChip">Enrollment Probability {metrics?.close_probability ?? 0}%</span>
-      <span className="metricChip">{liveCommitmentIcon} {liveCommitmentLabel}</span>
-      <span className="metricChip trustChip">Trust Delta {liveTrustDelta >= 0 ? "+" : ""}{liveTrustDelta}</span>
-      <span className="metricChip">Sentiment {metrics?.sentiment_indicator || "neutral"}</span>
+      <span className={`metricChip ${chipStateClass(roundChipState)} ${chipFlash.round ? "animate-flash-update" : ""}`}>
+        Round {metrics?.round || 1} / {maxRounds}
+      </span>
+      <span className={`metricChip ${chipStateClass(concessionsChipState)} ${chipFlash.concessions ? "animate-flash-update" : ""}`}>
+        Concessions {metrics?.concession_count_counsellor ?? 0} - {metrics?.concession_count_student ?? 0}
+      </span>
+      <span className={`metricChip ${chipStateClass(tensionChipState)} ${tensionChipState === "danger" ? "danger-pulse" : ""} ${chipFlash.tension ? "animate-flash-update" : ""}`}>
+        Tension {metrics?.tone_escalation ?? 0}%
+      </span>
+      <span className={`metricChip enrollmentChip ${chipStateClass(enrollmentChipState)} ${chipFlash.enrollment ? "animate-flash-update" : ""}`}>
+        Enrollment Probability {metrics?.close_probability ?? 0}%
+      </span>
+      <span className={`metricChip commitmentChip ${chipStateClass(commitmentChipState)} ${chipFlash.commitment ? "animate-flash-update" : ""}`}>
+        <span className="statusDot" />
+        {liveCommitmentLabel}
+      </span>
+      <span className={`metricChip trustChip ${chipStateClass(trustChipState)} ${chipFlash.trust ? "animate-flash-update" : ""}`}>
+        Trust Delta {liveTrustDelta >= 0 ? "+" : ""}{liveTrustDelta}
+      </span>
+      <span className={`metricChip ${chipStateClass(sentimentChipState)} ${chipFlash.sentiment ? "animate-flash-update" : ""}`}>
+        Sentiment {metrics?.sentiment_indicator || "neutral"}
+      </span>
     </>
   );
   const outcomeHeadline = useMemo(() => {
@@ -299,6 +407,7 @@ function App() {
     () => () => {
       Object.values(uiToastTimerRef.current).forEach((timer) => clearTimeout(timer));
       Object.values(toastTimerRef.current).forEach((timer) => clearTimeout(timer));
+      Object.values(chipFlashTimerRef.current).forEach((timer) => clearTimeout(timer));
     },
     []
   );
@@ -321,6 +430,18 @@ function App() {
     const trustDelta = (metrics.trust_index ?? 0) - (prev.trust_index ?? 0);
     const resistanceDelta = (metrics.objection_intensity ?? 0) - (prev.objection_intensity ?? 0);
     const closeDelta = (metrics.close_probability ?? 0) - (prev.close_probability ?? 0);
+    if ((metrics.round ?? 1) !== (prev.round ?? 1)) pulseChip("round");
+    if (
+      (metrics.concession_count_counsellor ?? 0) !== (prev.concession_count_counsellor ?? 0)
+      || (metrics.concession_count_student ?? 0) !== (prev.concession_count_student ?? 0)
+    ) pulseChip("concessions");
+    if ((metrics.tone_escalation ?? 0) !== (prev.tone_escalation ?? 0)) pulseChip("tension");
+    if (closeDelta !== 0) pulseChip("enrollment");
+    const prevCommitment = commitmentFromProbability(prev.close_probability ?? 50);
+    const nextCommitment = commitmentFromProbability(metrics.close_probability ?? 50);
+    if (prevCommitment !== nextCommitment) pulseChip("commitment");
+    if (trustDelta !== 0) pulseChip("trust");
+    if ((metrics.sentiment_indicator || "neutral") !== (prev.sentiment_indicator || "neutral")) pulseChip("sentiment");
 
     if (trustDelta !== 0) {
       nextToasts.push({
@@ -638,7 +759,7 @@ function App() {
       {stage === "idle" && (
         <section className="hero">
           <h1>Negotia</h1>
-          <p className="subtitle">Your Personal AI Powered Career Counseler</p>
+          <p className="subtitle">AI Bout Arena: Program Counselling</p>
           <div className="inputRow">
             <input
               type="url"
@@ -646,7 +767,7 @@ function App() {
               onChange={(e) => setProgramUrl(e.target.value)}
               placeholder="Enter Program URL here..."
             />
-            <button onClick={startNegotiation}>Start Counselling Session</button>
+            <button onClick={startNegotiation}>Agent vs Agent</button>
           </div>
         </section>
       )}
@@ -714,9 +835,6 @@ function App() {
               </button>
             </div>
           )}
-          <div className={`metricsRibbon ${(metrics?.close_probability ?? 0) > 80 ? "glow" : ""}`}>
-            {renderMetricChips()}
-          </div>
           <div className={`momentumBar ${momentumValue > 80 ? "hot" : ""}`}>
             <div className="momentumTrack">
               <div className="momentumLeft" style={{ width: `${momentumValue}%` }} />
@@ -730,14 +848,12 @@ function App() {
 
           <div className="agentLayer">
             <article className={`agentIdentity counsellor ${momentumValue > 65 ? "glow" : ""}`}>
-              <h3>{counsellorName || "Admissions Counsellor"}</h3>
-              <p>{program?.program_name || "Program"}</p>
-              <strong>Program Counseller</strong>
+              <h3>Program Counseller</h3>
+              <p>{`${counsellorName || "Admissions Counsellor"}, ${program?.program_name || "Program"}`}</p>
             </article>
             <article className={`agentIdentity student ${momentumValue < 40 ? "glow" : ""}`}>
               <h3>Prospective Student</h3>
-              <p>{persona?.name || "Persona"}</p>
-              <strong>{persona?.persona_type || "Learner Profile"}</strong>
+              <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
             </article>
           </div>
 
@@ -745,11 +861,14 @@ function App() {
             {allCards.map((msg, idx) => (
               <article key={`${msg.id || idx}`} className={`projectionCard ${msg.agent} ${msg.draft ? "draft" : ""}`}>
                 <header>
-                  <strong>
-                    {msg.agent === "counsellor"
-                      ? (counsellorName || "Admissions Counsellor")
-                      : (persona?.name || "Prospective Student")}
-                  </strong>
+                  <div className="speakerMeta">
+                    <strong>{msg.agent === "counsellor" ? "Program Counseller" : "Prospective Student"}</strong>
+                    <span>
+                      {msg.agent === "counsellor"
+                        ? `${counsellorName || "Admissions Counsellor"}, ${program?.program_name || "Program"}`
+                        : `${persona?.name || "Student"}, ${formatArchetype(persona)}`}
+                    </span>
+                  </div>
                   <span>{msg.round ? `Round ${msg.round}` : "Streaming"}</span>
                 </header>
                 <p>{msg.content}</p>
@@ -803,8 +922,8 @@ function App() {
                 <h3>Final Score: {analysis?.judge?.negotiation_score ?? 0} / 100</h3>
                 <p>{analysis?.judge?.why || "Simulation completed."}</p>
                 <div className="finalMetricChips">
-                  <span className="metricChip">
-                    {COMMITMENT_ICONS[analysis?.judge?.commitment_signal] || COMMITMENT_ICONS.none}{" "}
+                  <span className={`metricChip commitmentChip ${chipStateClass(commitmentSignalState(analysis?.judge?.commitment_signal))}`}>
+                    <span className="statusDot" />
                     {COMMITMENT_LABELS[analysis?.judge?.commitment_signal] || COMMITMENT_LABELS.none}
                   </span>
                   <span className="metricChip">Enrollment Likelihood {analysis?.judge?.enrollment_likelihood ?? 0}%</span>
@@ -817,12 +936,12 @@ function App() {
                   <span className="personaAvatar">{(persona?.name || "P").slice(0, 1).toUpperCase()}</span>
                   <div>
                     <h4>{persona?.name || "Prospective Student"}</h4>
-                    <p>{persona?.persona_type || "Learner Profile"}</p>
+                    <p>{formatArchetype(persona)}</p>
                   </div>
                 </div>
                 <div className="personaDetailRow">
-                  <span><strong>Career Stage:</strong> {persona?.career_stage || "n/a"}</span>
-                  <span><strong>Risk Tolerance:</strong> {persona?.risk_tolerance || "n/a"}</span>
+                  <span><strong>Career Stage:</strong> {formatCareerStage(persona?.career_stage)}</span>
+                  <span><strong>Risk Tolerance:</strong> {toTitleCase(persona?.risk_tolerance || "n/a")}</span>
                   <span><strong>Primary Objections:</strong> {(persona?.primary_objections || []).slice(0, 2).join(", ") || "n/a"}</span>
                 </div>
               </section>

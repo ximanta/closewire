@@ -263,14 +263,15 @@ textarea {
 .agentIdentity {
   min-width: 0;
   max-width: 46%;
-  padding: 6px 10px;
+  padding: 7px 12px;
   border-radius: 999px;
   background: rgba(16, 28, 48, 0.72);
   border: 1px solid rgba(172, 196, 244, 0.28);
   transition: box-shadow 0.35s ease;
   display: inline-flex;
-  align-items: center;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
   backdrop-filter: blur(3px);
 }
 
@@ -293,14 +294,6 @@ textarea {
   font-size: 0.72rem;
   letter-spacing: 0.01em;
   white-space: nowrap;
-}
-
-.agentIdentity.counsellor strong {
-  color: var(--counsellor);
-}
-
-.agentIdentity.student strong {
-  color: var(--student);
 }
 
 .agentIdentity.glow.counsellor {
@@ -355,6 +348,24 @@ textarea {
   color: var(--muted);
   margin-bottom: 6px;
   font-size: 0.86rem;
+}
+
+.speakerMeta {
+  min-width: 0;
+  display: grid;
+  gap: 1px;
+}
+
+.speakerMeta strong {
+  color: #e6efff;
+}
+
+.speakerMeta span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .projectionCard p {
@@ -515,11 +526,86 @@ textarea {
 .metricChip {
   display: inline-flex;
   align-items: center;
+  gap: 6px;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid rgba(169, 192, 240, 0.36);
-  background: rgba(22, 38, 66, 0.92);
+  border: 2px solid transparent;
+  background: #152440;
+  color: #ffffff;
   font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: currentColor;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.chip-state-danger {
+  border-color: #ef4444;
+  color: #ef4444;
+  box-shadow: 0 0 8px rgba(239, 68, 68, 0.2);
+}
+
+.chip-state-warning {
+  border-color: #f59e0b;
+  color: #f59e0b;
+  box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+}
+
+.chip-state-success {
+  border-color: #10b981;
+  color: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.chip-state-neutral {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+.chip-state-muted {
+  border-color: #64748b;
+  color: #64748b;
+  box-shadow: none;
+}
+
+.chip-state-magic {
+  border-color: #34d399;
+  color: #34d399;
+  border-width: 2px;
+  box-shadow: 0 0 15px rgba(52, 211, 153, 0.6);
+  animation: pulse-green 2s infinite;
+}
+
+.chip-state-magic::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image:
+    radial-gradient(#ffffff 1px, transparent 1px),
+    radial-gradient(#34d399 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  animation: sparkle-move 4s linear infinite;
+  pointer-events: none;
+}
+
+.danger-pulse {
+  animation: pulse-red 1.6s infinite;
+}
+
+.animate-flash-update {
+  animation: flash-border 0.7s ease-out;
 }
 
 .enrollmentChip {
@@ -906,6 +992,49 @@ textarea {
   }
   50% {
     box-shadow: 0 0 0 9px rgba(136, 179, 255, 0);
+  }
+}
+
+@keyframes pulse-green {
+  0% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(52, 211, 153, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(52, 211, 153, 0);
+  }
+}
+
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.65);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+  }
+}
+
+@keyframes sparkle-move {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-20px) rotate(10deg);
+  }
+}
+
+@keyframes flash-border {
+  0% {
+    border-color: #ffffff;
+    box-shadow: 0 0 20px #ffffff;
+  }
+  100% {
+    box-shadow: inherit;
   }
 }
 

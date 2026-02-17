@@ -860,6 +860,18 @@ def _student_program_snapshot(program: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
+def _build_retry_context_prompt(state: NegotiationState) -> str:
+    transcript = "\n".join(
+        f"{m['agent'].upper()}: {m['content']}" for m in _trim_messages(state.get("messages", []), 6)
+    )
+    return (
+        "RETRY_CONTEXT:\n"
+        f"PROGRAM_SNAPSHOT:\n{json.dumps(_student_program_snapshot(state.get('program', {})), ensure_ascii=False)}\n"
+        f"CURRENT_OFFER_FROM_COUNSELLOR:\n{state.get('counsellor_position', {}).get('current_offer', '')}\n"
+        f"TRANSCRIPT_CONTEXT:\n{transcript}"
+    )
+
+
 def _analyze_program(url: str) -> Tuple[ProgramSummary, str]:
     client, negotiation_model_name, _ = get_client_and_models()
     source = "url_content"
@@ -1243,7 +1255,7 @@ def _retry_with_structured_json(
     client: genai.Client,
     model_name: str,
     agent: str,
-    prompt: str,
+    retry_context_prompt: str,
 ) -> Dict[str, Any]:
     if agent == "student":
         fallback = {
@@ -1259,8 +1271,8 @@ def _retry_with_structured_json(
 You are recovering from a failed stream for a learner turn.
 Return a complete structured response in one function call.
 Keep MESSAGE under 180 words.
-ORIGINAL_PROMPT:
-{prompt}
+Use only this context and do not invent details outside it.
+{retry_context_prompt}
 """
         parsed = _call_function_json(
             client=client,
@@ -1296,8 +1308,8 @@ ORIGINAL_PROMPT:
 You are recovering from a failed stream for a counsellor turn.
 Return a complete spoken counsellor response only.
 Keep message under 180 words and end in a complete sentence.
-ORIGINAL_PROMPT:
-{prompt}
+Use only this context and do not invent details outside it.
+{retry_context_prompt}
 """
     parsed = _call_function_json(
         client=client,
@@ -1330,6 +1342,7 @@ async def _stream_agent_response(
     round_number: int,
     message_id: str,
     demo_mode: bool,
+    retry_context_prompt: str,
     student_inner_state: Optional[Dict[str, int]] = None,
 ) -> Dict[str, Any]:
     full_text = ""
@@ -1513,7 +1526,7 @@ async def _stream_agent_response(
             client=client,
             model_name=model_name,
             agent=agent,
-            prompt=prompt,
+            retry_context_prompt=retry_context_prompt,
         )
         retry_message = str(retry_payload.get("message", "")).strip()
         if not retry_message:
@@ -1972,6 +1985,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 state["round"],
                 counsellor_id,
                 config.demo_mode,
+                _build_retry_context_prompt(state),
             )
             state["messages"].append(counsellor_msg)
             state["history_for_reporting"].append(counsellor_msg)
@@ -1986,6 +2000,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 state["round"],
                 student_id,
                 config.demo_mode,
+                _build_retry_context_prompt(state),
                 student_inner_state=state["student_inner_state"],
             )
             if str(student_msg.get("generation_mode", "stream")) == "stream":
