@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import "./App.css";
 
 const BACKEND_URL = "http://localhost:8000";
@@ -17,8 +17,29 @@ const COMMITMENT_LABELS = {
   strong_commitment: "Confirmed Enrollment",
 };
 const LIVE_PROCESSING_LABELS = ["Analyzing Tone...", "Calculating Trust..."];
-const SILENCE_AUTO_SEND_MS = 2500;
+const SILENCE_AUTO_SEND_MS = 5000;
 const SILENCE_PROMPT_MS = 10000;
+const DEFAULT_VOICE_PROFILE_MAPPING = {
+  voice_preferences: {
+    male: ["Google UK English Male", "Microsoft David", "David", "Male"],
+    female: ["Google US English", "Microsoft Zira", "Zira", "Female"],
+    neutral: ["Google US English", "Google UK English Male", "Microsoft Zira"],
+  },
+  profile_gender_defaults: {
+    desperate_switcher: "male",
+    skeptical_shopper: "female",
+    stagnant_pro: "male",
+    credential_hunter: "female",
+    fomo_victim: "male",
+    drifter: "male",
+  },
+};
+const MALE_NAME_HINTS = new Set([
+  "rahul", "aman", "arjun", "karan", "vikram", "nikhil", "saurabh", "rohan", "rohit", "ankit", "aditya",
+]);
+const FEMALE_NAME_HINTS = new Set([
+  "riya", "neha", "sana", "anjali", "priya", "pooja", "isha", "shruti", "kavya", "simran",
+]);
 
 const PILLAR_ITEM_TRUNCATE = 120;
 const STUDENT_CONTROL_PREFIXES = [
@@ -167,6 +188,8 @@ function App() {
   const [humanInputText, setHumanInputText] = useState("");
   const [processingLabelIndex, setProcessingLabelIndex] = useState(0);
   const [waveformLevel, setWaveformLevel] = useState(0);
+  const [studentImageSrc, setStudentImageSrc] = useState("");
+  const [voiceProfileMapping, setVoiceProfileMapping] = useState(DEFAULT_VOICE_PROFILE_MAPPING);
 
   const wsRef = useRef(null);
   const projectionRef = useRef(null);
@@ -178,6 +201,7 @@ function App() {
   const runStartEpochRef = useRef(null);
   const recognitionRef = useRef(null);
   const silenceTimerRef = useRef(null);
+  const inactivityTimerRef = useRef(null);
   const silencePromptTimerRef = useRef(null);
   const processingLabelTimerRef = useRef(null);
   const liveTranscriptRef = useRef("");
@@ -187,23 +211,69 @@ function App() {
   const isTtsSpeakingRef = useRef(false);
   const utteranceRef = useRef(null);
   const selectedVoiceRef = useRef(null);
+  const ttsUnlockTimerRef = useRef(null);
+  const ttsWatchdogRef = useRef(null);
+  const stageRef = useRef("idle");
+  const modeRef = useRef("ai_vs_ai");
+  const micStateRef = useRef("inactive");
   const speechRecognitionCtor = typeof window !== "undefined"
     ? (window.SpeechRecognition || window.webkitSpeechRecognition || null)
     : null;
   const isHumanMode = negotiationMode === "human_vs_ai";
+  const profileImageName = String(persona?.archetype_id || "student-placeholder").trim().toLowerCase();
+  const inferredGender = useMemo(() => {
+    const explicit = String(persona?.gender || "").trim().toLowerCase();
+    if (explicit === "male" || explicit === "female" || explicit === "neutral") return explicit;
+    const mapped = String(voiceProfileMapping?.profile_gender_defaults?.[profileImageName] || "").trim().toLowerCase();
+    if (mapped === "male" || mapped === "female" || mapped === "neutral") return mapped;
+    const first = String(persona?.name || "").trim().split(/\s+/)[0].toLowerCase();
+    if (MALE_NAME_HINTS.has(first)) return "male";
+    if (FEMALE_NAME_HINTS.has(first)) return "female";
+    return "neutral";
+  }, [persona?.gender, persona?.name, profileImageName, voiceProfileMapping]);
 
-  const clearSpeechTimers = () => {
+  useEffect(() => {
+    stageRef.current = stage;
+  }, [stage]);
+
+  useEffect(() => {
+    modeRef.current = negotiationMode;
+  }, [negotiationMode]);
+
+  useEffect(() => {
+    micStateRef.current = micState;
+  }, [micState]);
+
+  const clearMicTimers = () => {
     if (silenceTimerRef.current) {
       clearTimeout(silenceTimerRef.current);
       silenceTimerRef.current = null;
+    }
+    if (inactivityTimerRef.current) {
+      clearTimeout(inactivityTimerRef.current);
+      inactivityTimerRef.current = null;
     }
     if (silencePromptTimerRef.current) {
       clearTimeout(silencePromptTimerRef.current);
       silencePromptTimerRef.current = null;
     }
+  };
+
+  const clearProcessingTicker = () => {
     if (processingLabelTimerRef.current) {
       clearInterval(processingLabelTimerRef.current);
       processingLabelTimerRef.current = null;
+    }
+  };
+
+  const clearTtsTimers = () => {
+    if (ttsUnlockTimerRef.current) {
+      clearTimeout(ttsUnlockTimerRef.current);
+      ttsUnlockTimerRef.current = null;
+    }
+    if (ttsWatchdogRef.current) {
+      clearInterval(ttsWatchdogRef.current);
+      ttsWatchdogRef.current = null;
     }
   };
 
@@ -238,31 +308,35 @@ function App() {
     }
     recognitionRef.current = null;
     stopWaveform();
-    clearSpeechTimers();
+    clearMicTimers();
   };
 
-  const selectSpeechVoice = () => {
+  const selectSpeechVoice = useCallback(() => {
     if (selectedVoiceRef.current) return selectedVoiceRef.current;
     const synth = window.speechSynthesis;
     if (!synth) return null;
     const voices = synth.getVoices() || [];
     if (!voices.length) return null;
-    const preferred = [
-      /Google US English/i,
-      /Microsoft Zira/i,
-      /Google UK English Male/i,
-    ];
-    for (const pattern of preferred) {
-      const matched = voices.find((voice) => pattern.test(voice.name));
+    const preferences = voiceProfileMapping?.voice_preferences || DEFAULT_VOICE_PROFILE_MAPPING.voice_preferences;
+    const preferredNames = preferences[inferredGender] || preferences.neutral || [];
+    for (const preference of preferredNames) {
+      const token = String(preference || "").toLowerCase();
+      if (!token) continue;
+      const matched = voices.find((voice) => String(voice.name || "").toLowerCase().includes(token));
       if (matched) {
         selectedVoiceRef.current = matched;
         return matched;
       }
     }
-    const english = voices.find((voice) => /^en/i.test(voice.lang));
+    const englishIndian = voices.find((voice) => /^en-in/i.test(String(voice.lang || "")));
+    if (englishIndian) {
+      selectedVoiceRef.current = englishIndian;
+      return englishIndian;
+    }
+    const english = voices.find((voice) => /^en/i.test(String(voice.lang || "")));
     selectedVoiceRef.current = english || voices[0];
     return selectedVoiceRef.current;
-  };
+  }, [inferredGender, voiceProfileMapping]);
 
   const orderedDrafts = useMemo(() => Object.values(drafts), [drafts]);
   const allCards = useMemo(
@@ -520,7 +594,9 @@ function App() {
     utteranceRef.current = null;
     window.currentUtterance = null;
     isTtsSpeakingRef.current = false;
-    clearSpeechTimers();
+    clearMicTimers();
+    clearProcessingTicker();
+    clearTtsTimers();
     setMicState("inactive");
     setLiveTranscript("");
     liveTranscriptRef.current = "";
@@ -539,6 +615,8 @@ function App() {
       if (window.speechSynthesis) {
         window.speechSynthesis.cancel();
       }
+      clearProcessingTicker();
+      clearTtsTimers();
       window.currentUtterance = null;
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -548,6 +626,41 @@ function App() {
   useEffect(() => {
     liveTranscriptRef.current = liveTranscript;
   }, [liveTranscript]);
+
+  useEffect(() => {
+    selectedVoiceRef.current = null;
+  }, [inferredGender, persona?.name]);
+
+  useEffect(() => {
+    const base = process.env.PUBLIC_URL || "";
+    setStudentImageSrc(`${base}/${profileImageName}.png`);
+  }, [profileImageName]);
+
+  useEffect(() => {
+    let cancelled = false;
+    const base = process.env.PUBLIC_URL || "";
+    fetch(`${base}/browservoice_profile_mapping.json`)
+      .then((response) => (response.ok ? response.json() : null))
+      .then((payload) => {
+        if (cancelled || !payload || typeof payload !== "object") return;
+        setVoiceProfileMapping({
+          ...DEFAULT_VOICE_PROFILE_MAPPING,
+          ...payload,
+          voice_preferences: {
+            ...DEFAULT_VOICE_PROFILE_MAPPING.voice_preferences,
+            ...(payload.voice_preferences || {}),
+          },
+          profile_gender_defaults: {
+            ...DEFAULT_VOICE_PROFILE_MAPPING.profile_gender_defaults,
+            ...(payload.profile_gender_defaults || {}),
+          },
+        });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   useEffect(() => {
     if (stage !== "analyzing") return undefined;
@@ -653,7 +766,7 @@ function App() {
   }, [allCards, stage]);
 
   const startProcessingTicker = () => {
-    if (processingLabelTimerRef.current) clearInterval(processingLabelTimerRef.current);
+    clearProcessingTicker();
     setProcessingLabelIndex(0);
     processingLabelTimerRef.current = setInterval(() => {
       setProcessingLabelIndex((current) => (current + 1) % LIVE_PROCESSING_LABELS.length);
@@ -663,14 +776,14 @@ function App() {
   const armSilencePromptTimer = () => {
     if (silencePromptTimerRef.current) clearTimeout(silencePromptTimerRef.current);
     silencePromptTimerRef.current = setTimeout(() => {
-      if (isHumanMode && stage === "negotiating" && micState === "listening") {
+      if (modeRef.current === "human_vs_ai" && stageRef.current === "negotiating" && micStateRef.current === "listening") {
         pushUiToast("Are you there? Please press Send manually.", "strategic", 3600);
       }
     }, SILENCE_PROMPT_MS);
   };
 
   const sendHumanInput = (rawText) => {
-    if (!isHumanMode) return;
+    if (modeRef.current !== "human_vs_ai") return;
     const socket = wsRef.current;
     if (!socket || socket.readyState !== WebSocket.OPEN) {
       pushUiToast("Connection is not ready for live coaching.");
@@ -685,14 +798,7 @@ function App() {
       pushUiToast("Please wait for student voice to finish.", "strategic");
       return;
     }
-    if (silenceTimerRef.current) {
-      clearTimeout(silenceTimerRef.current);
-      silenceTimerRef.current = null;
-    }
-    if (silencePromptTimerRef.current) {
-      clearTimeout(silencePromptTimerRef.current);
-      silencePromptTimerRef.current = null;
-    }
+    clearMicTimers();
     setMicState("processing");
     startProcessingTicker();
     socket.send(JSON.stringify({ type: "human_input", text }));
@@ -700,6 +806,19 @@ function App() {
     liveTranscriptRef.current = "";
     setHumanInputText("");
     stopRecognition();
+  };
+
+  const armAutoSendTimer = () => {
+    if (modeRef.current !== "human_vs_ai") return;
+    if (micStateRef.current !== "listening") return;
+    if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+    inactivityTimerRef.current = setTimeout(() => {
+      if (modeRef.current !== "human_vs_ai" || micStateRef.current !== "listening") return;
+      const candidate = String(liveTranscriptRef.current || "").trim();
+      if (candidate) {
+        sendHumanInput(candidate);
+      }
+    }, SILENCE_AUTO_SEND_MS);
   };
 
   const speakStudentTurn = (text, emotionalState = "calm") => {
@@ -729,10 +848,19 @@ function App() {
       stopRecognition();
     };
     const finishSpeech = () => {
+      if (!isTtsSpeakingRef.current && !utteranceRef.current) return;
       isTtsSpeakingRef.current = false;
+      if (ttsUnlockTimerRef.current) {
+        clearTimeout(ttsUnlockTimerRef.current);
+        ttsUnlockTimerRef.current = null;
+      }
+      if (ttsWatchdogRef.current) {
+        clearInterval(ttsWatchdogRef.current);
+        ttsWatchdogRef.current = null;
+      }
       utteranceRef.current = null;
       window.currentUtterance = null;
-      if (stage === "negotiating" && isHumanMode) {
+      if (stageRef.current === "negotiating" && modeRef.current === "human_vs_ai") {
         setMicState("inactive");
       }
     };
@@ -742,6 +870,15 @@ function App() {
     // Keep a hard reference to avoid Chrome GC ending speech early.
     window.currentUtterance = utterance;
     synth.speak(utterance);
+    const expectedMs = Math.min(22000, Math.max(4500, utterance.text.length * 70));
+    ttsUnlockTimerRef.current = setTimeout(() => {
+      finishSpeech();
+    }, expectedMs);
+    ttsWatchdogRef.current = setInterval(() => {
+      if (isTtsSpeakingRef.current && !window.speechSynthesis.speaking) {
+        finishSpeech();
+      }
+    }, 250);
   };
 
   const startListening = async () => {
@@ -784,7 +921,7 @@ function App() {
     }
 
     const recognition = new speechRecognitionCtor();
-    recognition.continuous = false;
+    recognition.continuous = true;
     recognition.interimResults = true;
     recognition.lang = "en-IN";
     recognition.onstart = () => {
@@ -809,13 +946,10 @@ function App() {
       liveTranscriptRef.current = merged;
       setHumanInputText(merged);
       armSilencePromptTimer();
+      armAutoSendTimer();
     };
     recognition.onspeechend = () => {
-      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-      silenceTimerRef.current = setTimeout(() => {
-        const candidate = String(liveTranscriptRef.current || "").trim();
-        if (candidate) sendHumanInput(candidate);
-      }, SILENCE_AUTO_SEND_MS);
+      armAutoSendTimer();
     };
     recognition.onerror = (event) => {
       const code = String(event?.error || "").toLowerCase();
@@ -831,6 +965,7 @@ function App() {
     recognition.onend = () => {
       setMicState((current) => (current === "processing" || current === "locked" ? current : "inactive"));
       stopWaveform();
+      armAutoSendTimer();
     };
     recognitionRef.current = recognition;
     try {
@@ -869,7 +1004,7 @@ function App() {
     bindVoices();
     window.speechSynthesis.addEventListener("voiceschanged", bindVoices);
     return () => window.speechSynthesis.removeEventListener("voiceschanged", bindVoices);
-  }, []);
+  }, [selectSpeechVoice]);
 
   useEffect(() => {
     if (micState !== "processing" && processingLabelTimerRef.current) {
@@ -1262,86 +1397,92 @@ function App() {
               </button>
             </div>
           )}
-          <div className={`momentumBar ${momentumValue > 80 ? "hot" : ""}`}>
-            <div className="momentumTrack">
-              <div className="momentumLeft" style={{ width: `${momentumValue}%` }} />
-              <div className="momentumRight" style={{ width: `${100 - momentumValue}%` }} />
+          <div className="arenaTopZone">
+            <div className={`momentumBar ${momentumValue > 80 ? "hot" : ""}`}>
+              <div className="momentumTrack">
+                <div className="momentumLeft" style={{ width: `${momentumValue}%` }} />
+                <div className="momentumRight" style={{ width: `${100 - momentumValue}%` }} />
+              </div>
+              <div className="momentumMeta">
+                <span>{momentumLabel}</span>
+                <strong>{momentumValue}%</strong>
+              </div>
             </div>
-            <div className="momentumMeta">
-              <span>{momentumLabel}</span>
-              <strong>{momentumValue}%</strong>
+            <div className="agentLayer">
+              <article className={`agentIdentity counsellor ${momentumValue > 65 ? "glow" : ""}`}>
+                <h3>Program Counseller</h3>
+                <p>{`${counsellorName || "Admissions Counsellor"}, ${program?.program_name || "Program"}`}</p>
+              </article>
+              <article className={`agentIdentity student ${momentumValue < 40 ? "glow" : ""}`}>
+                <h3>Prospective Student</h3>
+                <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
+              </article>
             </div>
-          </div>
 
-          <div className="agentLayer">
-            <article className={`agentIdentity counsellor ${momentumValue > 65 ? "glow" : ""}`}>
-              <h3>Program Counseller</h3>
-              <p>{`${counsellorName || "Admissions Counsellor"}, ${program?.program_name || "Program"}`}</p>
-            </article>
-            <article className={`agentIdentity student ${momentumValue < 40 ? "glow" : ""}`}>
-              <h3>Prospective Student</h3>
-              <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
-            </article>
-          </div>
-
-          {isHumanMode && stage === "negotiating" && (
-            <section className="liveCoachPanel">
-              <div className={`liveMicPanel state-${micState}`}>
-                <div className="liveMicHeader">
-                  <strong>Your Turn (Counsellor)</strong>
-                  <span>
-                    {micState === "listening" && "Listening..."}
-                    {micState === "processing" && LIVE_PROCESSING_LABELS[processingLabelIndex]}
-                    {micState === "locked" && "Mic locked while AI speaks"}
-                    {micState === "inactive" && "Ready"}
-                  </span>
-                </div>
-                <div className="waveWrap" aria-hidden="true">
-                  {Array.from({ length: 12 }).map((_, index) => {
-                    const variance = ((index % 4) + 1) / 4;
-                    const height = Math.max(8, Math.round(8 + waveformLevel * 34 * variance));
-                    return <i key={`wave-${index}`} style={{ height: `${height}px` }} />;
-                  })}
-                </div>
-                <textarea
-                  value={liveModeNeedsTextFallback ? humanInputText : liveTranscript}
-                  onChange={(event) => {
-                    setHumanInputText(event.target.value);
-                    setLiveTranscript(event.target.value);
-                    liveTranscriptRef.current = event.target.value;
-                  }}
-                  placeholder={liveModeNeedsTextFallback
-                    ? "Type your counsellor response here..."
-                    : "Live transcript appears here..."}
-                  disabled={micState === "locked"}
-                />
-                <div className="liveMicActions">
-                  {!liveModeNeedsTextFallback && (
+            {isHumanMode && stage === "negotiating" && (
+              <section className="liveCoachPanel">
+                <div className={`liveMicPanel state-${micState}`}>
+                  <div className="liveMicHeader">
+                    <strong>Your Turn (Counsellor)</strong>
+                    <span>
+                      {micState === "listening" && "Listening..."}
+                      {micState === "processing" && LIVE_PROCESSING_LABELS[processingLabelIndex]}
+                      {micState === "locked" && "Mic locked while AI speaks"}
+                      {micState === "inactive" && "Ready"}
+                    </span>
+                  </div>
+                  <div className="micSignalRow">
+                    <span
+                      className={`micOrb ${micState === "listening" ? "listening" : ""} ${micState === "locked" ? "locked" : ""}`}
+                      style={{ "--mic-intensity": waveformLevel }}
+                      aria-hidden="true"
+                    />
+                    <span className="micSignalText">
+                      {micState === "listening" ? "Live transcription running" : "Auto-listen enabled"}
+                    </span>
+                  </div>
+                  <textarea
+                    value={liveModeNeedsTextFallback ? humanInputText : liveTranscript}
+                    onChange={(event) => {
+                      setHumanInputText(event.target.value);
+                      setLiveTranscript(event.target.value);
+                      liveTranscriptRef.current = event.target.value;
+                    }}
+                    placeholder={liveModeNeedsTextFallback
+                      ? "Type your counsellor response here..."
+                      : "Live transcript appears here..."}
+                    disabled={micState === "locked"}
+                  />
+                  <div className="liveMicActions">
                     <button
                       type="button"
-                      className="ghostBtn"
-                      onClick={startListening}
-                      disabled={micState === "processing" || micState === "locked"}
+                      className="downloadBtn"
+                      onClick={() => sendHumanInput(liveModeNeedsTextFallback ? humanInputText : liveTranscriptRef.current)}
+                      disabled={micState === "locked" || micState === "processing"}
                     >
-                      Start Mic
+                      Send
                     </button>
-                  )}
-                  <button
-                    type="button"
-                    className="downloadBtn"
-                    onClick={() => sendHumanInput(liveModeNeedsTextFallback ? humanInputText : liveTranscriptRef.current)}
-                    disabled={micState === "locked" || micState === "processing"}
-                  >
-                    Send
-                  </button>
+                  </div>
                 </div>
-              </div>
-              <div className={`liveAiPanel ${micState === "locked" ? "speaking" : ""}`}>
-                <strong>Student Voice</strong>
-                <p>{micState === "locked" ? "Responding with voice..." : "Waiting for your input."}</p>
-              </div>
-            </section>
-          )}
+                <div className={`liveAiPanel ${micState === "locked" ? "speaking" : ""}`}>
+                  <img
+                    className="studentAvatar"
+                    src={studentImageSrc}
+                    alt={`${persona?.name || "Student"} profile`}
+                    onError={() => {
+                      const base = process.env.PUBLIC_URL || "";
+                      setStudentImageSrc(`${base}/student-placeholder.svg`);
+                    }}
+                  />
+                  <article className="studentMiniCard">
+                    <strong>Prospective Student</strong>
+                    <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
+                    <span>{micState === "locked" ? "Speaking..." : "Waiting..."}</span>
+                  </article>
+                </div>
+              </section>
+            )}
+          </div>
 
           <div className="projectionLane" ref={projectionRef}>
             {allCards.map((msg, idx) => (

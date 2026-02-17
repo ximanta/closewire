@@ -284,6 +284,17 @@ textarea {
   min-height: 0;
 }
 
+.arenaTopZone {
+  flex: 0 0 min(25vh, 240px);
+  min-height: 168px;
+  max-height: 25vh;
+  display: grid;
+  gap: 6px;
+  position: relative;
+  z-index: 6;
+  overflow: visible;
+}
+
 .momentumBar {
   width: min(58vw, 900px);
   margin: 0 auto 6px;
@@ -332,11 +343,14 @@ textarea {
 }
 
 .liveCoachPanel {
-  margin-top: 8px;
+  margin-top: 4px;
   display: grid;
   grid-template-columns: 1.3fr 0.7fr;
   gap: 10px;
   padding: 0 12px;
+  min-height: 0;
+  position: relative;
+  z-index: 7;
 }
 
 .liveMicPanel,
@@ -345,6 +359,9 @@ textarea {
   border: 1px solid rgba(124, 154, 211, 0.38);
   background: rgba(8, 18, 36, 0.82);
   padding: 10px;
+  position: relative;
+  z-index: 8;
+  pointer-events: auto;
 }
 
 .liveMicPanel.state-listening {
@@ -374,29 +391,46 @@ textarea {
   font-size: 0.82rem;
 }
 
-.waveWrap {
-  min-height: 44px;
-  border: 1px solid rgba(89, 126, 194, 0.32);
-  border-radius: 8px;
-  background: rgba(7, 15, 29, 0.78);
+.micSignalRow {
   display: flex;
   align-items: flex-end;
-  justify-content: space-between;
-  padding: 8px 10px;
+  gap: 8px;
+  min-height: 28px;
   margin-bottom: 8px;
 }
 
-.waveWrap i {
-  width: 4px;
+.micOrb {
+  width: 14px;
+  height: 14px;
   border-radius: 999px;
-  background: linear-gradient(180deg, #7ad5ff, #3f78e9);
-  transition: height 0.12s ease;
+  background: #8ba4ce;
+  box-shadow: 0 0 0 0 rgba(139, 164, 206, 0.22);
+  transition: opacity 0.2s ease, box-shadow 0.2s ease;
+  opacity: 0.6;
+}
+
+.micOrb.listening {
+  opacity: 1;
+  background: #49e68c;
+  box-shadow: 0 0 calc(6px + (var(--mic-intensity, 0) * 18px)) rgba(73, 230, 140, 0.65);
+  animation: micListenPulse 0.9s ease-in-out infinite;
+}
+
+.micOrb.locked {
+  opacity: 0.32;
+  background: #7e8da9;
+  animation: none;
+}
+
+.micSignalText {
+  font-size: 0.8rem;
+  color: #a2b8de;
 }
 
 .liveMicPanel textarea {
   width: 100%;
   min-height: 68px;
-  resize: vertical;
+  resize: none;
   border-radius: 8px;
   border: 1px solid rgba(129, 160, 218, 0.34);
   background: rgba(8, 15, 30, 0.9);
@@ -415,13 +449,45 @@ textarea {
 .liveAiPanel {
   display: grid;
   align-content: center;
+  justify-items: center;
   gap: 6px;
   text-align: center;
+  padding-top: 8px;
 }
 
 .liveAiPanel p {
   margin: 0;
   color: #adc2e7;
+}
+
+.studentAvatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 999px;
+  object-fit: cover;
+  border: 2px solid rgba(122, 155, 213, 0.55);
+  box-shadow: 0 0 10px rgba(66, 111, 198, 0.28);
+}
+
+.studentMiniCard {
+  width: min(260px, 100%);
+  border-radius: 10px;
+  border: 1px solid rgba(120, 152, 211, 0.35);
+  background: rgba(9, 18, 36, 0.74);
+  padding: 8px;
+  display: grid;
+  gap: 2px;
+}
+
+.studentMiniCard p {
+  margin: 0;
+  color: #cfdef8;
+  font-size: 0.84rem;
+}
+
+.studentMiniCard span {
+  color: #93acd6;
+  font-size: 0.74rem;
 }
 
 .liveAiPanel.speaking {
@@ -494,6 +560,8 @@ textarea {
   flex-direction: column;
   gap: 10px;
   padding: 0 12px;
+  position: relative;
+  z-index: 1;
 }
 
 .projectionCard {
@@ -1280,6 +1348,17 @@ textarea {
   }
 }
 
+@keyframes micListenPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.14);
+  }
+}
+
 @media (max-width: 1080px) {
   .projectionCard {
     width: min(88%, 860px);
@@ -1298,6 +1377,11 @@ textarea {
 
   .liveCoachPanel {
     grid-template-columns: 1fr;
+  }
+
+  .arenaTopZone {
+    flex-basis: min(33vh, 320px);
+    max-height: 33vh;
   }
 
   .agentIdentity {

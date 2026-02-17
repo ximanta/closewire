@@ -1,52 +1,53 @@
 {
-  "generated_at": "2026-02-17T15:04:33.403213",
-  "session_id": "8f09dec3-f0fb-4451-a612-8205f0213ea6",
+  "generated_at": "2026-02-17T16:19:20.145044",
+  "session_id": "f1fe9a0e-b0a6-4eb6-aa24-0a6520c76a6e",
   "deal_status": "failed",
-  "round": 4,
+  "round": 6,
   "max_rounds": 5,
   "persona": {
-    "hidden_secret": "He secretly fears he's not smart enough to grasp advanced AI concepts, especially mathematics, and worries about wasting his limited savings on another program that might not yield results, further burdening his family.",
-    "archetype_label": "Desperate Switcher",
-    "misconception": "He believes that a 'job guarantee' means he will definitely get a job offer with a specific high salary immediately after the program, irrespective of his own effort or market conditions. He might overlook the 'assistance' part.",
-    "skepticism": 7,
-    "city_tier": "Tier-2",
-    "financial_anxiety": 9,
-    "archetype_id": "desperate_switcher",
-    "ego_level": 4,
-    "confusion_level": 8,
-    "language_style": "Indian Academic English. Use 'Sir/Ma'am' often and terms like Batch, Passing out, Gap, Scope.",
-    "current_role": "Junior Software Developer (Maintenance)",
-    "name": "Rahul Sharma",
-    "trigger_event": "Witnessed a close friend, who was in a similar stagnant role, successfully transition into an AI/ML engineer role with a significant salary jump after completing an upskilling program. This fueled his intense desire to switch, coupled with the realization that his current job offers no real growth.",
+    "archetype_label": "Skeptical Shopper",
+    "trigger_event": "His company recently started an internal AI initiative, and he feels left out because he lacks the specialized skills. A junior colleague, who recently upskilled, got promoted, which hit his ego. He saw an ad for \"Building Agentic AI Systems\" and it piqued his interest, but he's very wary.",
+    "skepticism": 9,
+    "gender": "male",
+    "backstory": "Rohan started his career with a decent package after engineering, but now feels stuck in a routine job. He's seen friends jump to high-paying AI roles after doing some courses, but he's also heard horror stories of expensive programs that didn't deliver. His parents always push him for \"value for money\" for any investment. He's been burned before by a generic data science course that promised a lot but delivered very little practical exposure.",
+    "financial_anxiety": 8,
     "common_vocabulary": [
-      "Sir",
-      "Ma'am",
-      "Batch",
-      "Passing out",
-      "Gap",
-      "Scope",
-      "Placement",
-      "Package"
+      "bhaiya",
+      "scene kya hai",
+      "hidden charges",
+      "ROI",
+      "pakka",
+      "value for money",
+      "package",
+      "job lag jayegi"
     ],
+    "language_style": "Indian English",
+    "archetype_id": "skeptical_shopper",
+    "current_role": "Software Developer at a mid-sized IT firm",
+    "confusion_level": 6,
     "age": 28,
-    "backstory": "Rahul completed his B.Tech in Computer Science from a Tier-2 college 5 years ago. He immediately joined a service-based IT company, working on legacy system maintenance. While he's grateful for the job, he feels stuck, sees his peers from other colleges getting into high-growth tech roles, and fears his skills are becoming obsolete. He supports his elderly parents and has younger siblings whose education he contributes to.",
-    "persona_type": "desperate_switcher",
+    "name": "Rohan Sharma",
+    "hidden_secret": "He secretly fears that he's not smart enough to grasp advanced AI concepts, especially after his previous bad experience. He's also deeply worried about draining his savings on another \"useless\" course.",
+    "misconception": "He thinks all online programs are mostly theoretical, with outdated content, and the \"placement assistance\" is just a marketing gimmick. He believes the \"industry-recognized certification\" won't actually open doors unless he already has a strong network.",
+    "ego_level": 7,
+    "city_tier": "Tier-1",
+    "persona_type": "skeptical_shopper",
     "background": "Prospective learner evaluating an AI upskilling path.",
     "career_stage": "mid",
-    "financial_sensitivity": "medium",
+    "financial_sensitivity": "high",
     "risk_tolerance": "medium",
-    "emotional_tone": "skeptical",
+    "emotional_tone": "confused",
     "primary_objections": [
       "Placement credibility",
       "Fee value",
       "Difficulty for freshers",
       "Time commitment"
     ],
-    "walk_away_likelihood": 0.3,
-    "expected_roi_months": 15,
-    "affordability_concern_level": 74,
-    "willingness_to_invest_score": 65,
-    "communication_style": "challenging",
+    "walk_away_likelihood": 0.7,
+    "expected_roi_months": 4,
+    "affordability_concern_level": 89,
+    "willingness_to_invest_score": 68,
+    "communication_style": "timid",
     "common_phrases": [
       "Placement ka scene kya hai?",
       "Is this really worth it?",
@@ -55,297 +56,505 @@
   },
   "program": {
     "program_name": "Building Agentic AI Systems",
-    "program_fee_inr": "INR 1,50,000 + GST. Booking fees: INR 1,500 + GST. All fees are exclusive of 18% GST."
+    "program_fee_inr": "Program fees: 1,50,000 + GST. Booking fees: 1,500 + GST. Full upfront payment: 1,42,500 (inclusive of 5% fee concession, saving 7,500)."
   },
   "student_inner_state": {
-    "sentiment": "anxious",
-    "skepticism_level": 17,
-    "trust_score": 50,
+    "sentiment": "frustrated",
+    "skepticism_level": 50,
+    "trust_score": 25,
     "unresolved_concerns": [
-      "Effort/Time",
+      "Eligibility criteria for placement",
       "Job Guarantee",
-      "Price"
+      "Placement Assistance effectiveness",
+      "Price",
+      "ROI"
     ]
   },
   "negotiation_metrics": {
-    "round": 3,
+    "round": 5,
     "max_rounds": 5,
     "concession_count_counsellor": 0,
     "concession_count_student": 0,
-    "tone_escalation": 15,
+    "tone_escalation": 31,
     "objection_intensity": 23,
-    "trust_index": 50,
-    "close_probability": 65,
-    "sentiment_indicator": "positive",
+    "trust_index": 31,
+    "close_probability": 57,
+    "sentiment_indicator": "negative",
     "retry_modifier": 0
   },
   "final_offers": {
-    "counsellor": 169312,
-    "student": 129000
+    "counsellor": 171675,
+    "student": 130800
   },
   "analysis": {
-    "strengths": [
-      "Acknowledged and empathized with student's concerns (career shift, peer pressure).",
-      "Provided detailed and reassuring information on placement assistance, including statistics.",
-      "Offered various payment options (upfront discount, EMI, loans).",
-      "Maintained a polite, professional, and informative tone throughout.",
-      "Transparent about the job guarantee policy and third-party loan arrangements."
-    ],
-    "why": "The student's primary financial objection regarding the program fee and the ambiguity of third-party EMI options remained unresolved, preventing a commitment despite reassurance on placement. The student shifted focus without concluding on the financial discussion.",
-    "skill_recommendations": [
-      "Develop a clearer, more simplified way to explain third-party financing options, perhaps with typical examples or a direct connection path during the call.",
-      "Employ active listening and probing questions to uncover the depth of financial concerns and specific budget limitations.",
-      "Practice objection handling techniques for financial hurdles, even when direct solutions aren't available, by focusing on value proposition or next steps for resolution.",
-      "Improve techniques for guiding the conversation back to unresolved objections before moving to new topics."
-    ],
-    "winner": "student",
-    "negotiation_score": 55,
-    "primary_unresolved_objection": "Program fee clarity and manageable EMI options from third-party lenders.",
-    "pivotal_moments": [
-      "Student's initial strong interest in job prospects and deep concern about program fee (Round 1).",
-      "Counsellor's detailed explanation of placement assistance, which reassured the student (Round 2).",
-      "Counsellor's clarification that EMI plans are through third-party lenders, introducing ambiguity on total cost (Round 3).",
-      "Student's pivot to asking about program workload without resolving the financial details, indicating a stalled negotiation on the primary objection (Round 3)."
-    ],
+    "enrollment_likelihood": 15,
     "mistakes": [
-      "Did not proactively probe deeper into the student's specific financial constraints or budget.",
-      "The initial explanation of the EMI option (INR 24,750 as an example) was vague and created further confusion when elaborated upon in Round 3.",
-      "Did not effectively manage the transition when the student shifted focus from the unresolved financial objection to workload."
+      "Repeated student's questions verbatim in Round 3 and Round 5 instead of answering them.",
+      "Failed to provide specific, concrete details or guarantees regarding job placement claims and eligibility criteria for placement.",
+      "Did not effectively address the student's core concern about ROI for a significant investment."
     ],
-    "commitment_signal": "conditional_commitment",
-    "enrollment_likelihood": 45,
-    "trust_delta": 3
+    "trust_delta": -15,
+    "commitment_signal": "none",
+    "skill_recommendations": [
+      "Improve active listening skills to understand the student's core concerns.",
+      "Develop better objection handling techniques, providing specific evidence and verifiable details.",
+      "Avoid repeating questions back to the student.",
+      "Be prepared to articulate concrete ROI and guarantees with specific examples or data points.",
+      "Show empathy regarding the student's significant financial investment."
+    ],
+    "pivotal_moments": [
+      "Round 3: Counsellor repeated student's question, causing student frustration and a direct challenge.",
+      "Round 5: Counsellor repeated student's question again, further damaging rapport and trust, solidifying student's skepticism."
+    ],
+    "primary_unresolved_objection": "Lack of a solid, verifiable job guarantee and concrete ROI after investing, specifically regarding the criteria for 'eligible learners' and the proven effectiveness of the 'placement cell'.",
+    "why": "The counsellor repeatedly failed to provide concrete answers to the student's persistent questions regarding job guarantees, ROI, and the specifics of their placement claims. The counsellor even repeated the student's questions back to them, significantly eroding trust and confidence, and failing to convince the student.",
+    "winner": "student",
+    "strengths": [
+      "Counsellor stated the program fees and duration.",
+      "Counsellor mentioned a potential package range (10-15 LPA), though it was immediately questioned."
+    ],
+    "negotiation_score": 30
   },
   "transcript": [
     {
-      "id": "d3ac4b1e-a126-4640-9a6b-4b2b258e5488",
+      "id": "af0a0ca2-1040-4dfb-b379-18795a6ad05f",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello! Welcome to NIIT. I'm here to help you explore our 'Building Agentic AI Systems' program. To start, could you share a bit about what interests you most in this program or what you're hoping to achieve by enrolling?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
+      "content": "hello Rohan this is simanta Desai I see your trying to you know learn about building systems how can I help you",
+      "techniques": [
+        "introduction",
+        "acknowledgement",
+        "offering help"
+      ],
+      "strategic_intent": "establish rapport and understand user needs",
+      "confidence_score": 0,
+      "emotional_state": "calm and helpful",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T15:03:27.850416",
-      "generation_mode": "stream"
+      "timestamp": "2026-02-17T16:15:08.396586",
+      "generation_mode": "human_shadow"
     },
     {
-      "id": "30c8a7ae-dd7d-4334-90a4-9c153334beed",
+      "id": "49ca5924-64ef-4df6-b02b-a9fa5aa14aa9",
       "round": 1,
       "agent": "student",
-      "content": "Good morning, Sir. Thank you for asking. My main interest, Sir, is to switch my domain from legacy system maintenance to a high-growth field like AI. Many of my batchmates from other colleges are already in good product companies, earning very well. I am feeling quite stuck, Sir. So, I am hoping this program will give me the skills for a good job, with a good package. I wanted to know more about the placement support, Sir, and if there is a job guarantee after completing the program successfully. Also, the program fee, Sir, is a major concern for me.",
+      "content": "Hello Simanta. Yes, I saw this program, \"Building Agentic AI Systems.\" I'm Rohan. I'm just trying to understand more about it. My main question is, bhaiya, what's the actual scene here? Is it really worth it, you know, in terms of getting a good package and everything? And what about the fees?",
       "techniques": [],
-      "strategic_intent": "To express my core motivation and immediately bring up my two main unresolved concerns: job guarantee and price, as the counsellor's initial question was too vague for my primary need for security.",
+      "strategic_intent": "To immediately probe for value for money and practical outcomes, specifically job prospects and cost, as these are my primary concerns and unresolved issues.",
       "confidence_score": 60,
-      "emotional_state": "anxious",
+      "emotional_state": "skeptical",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T15:03:31.026667",
+      "timestamp": "2026-02-17T16:15:11.365062",
       "generation_mode": "stream"
     },
     {
-      "id": "5d0ffb35-a699-463f-8417-cf41c079a53f",
+      "id": "63f89439-fc61-45d2-97f2-7491c13c6f6f",
       "round": 2,
       "agent": "counsellor",
-      "content": "Good morning! I understand exactly why you're looking to make this shift and how important it is to find a program that truly prepares you for the high-growth AI sector. It's completely natural to feel that way when seeing your peers progress, and our 'Building Agentic AI Systems' program is specifically designed for job-readiness in these roles.\nRegarding your question about a job guarantee, it's important to clarify that while NIIT does not offer a job guarantee, we provide comprehensive placement assistance to eligible learners. This support includes access to NIIT's trusted recruiter network and our 800+ hiring partners. For learners with 6 months to 5 years of experience, we facilitate up to three interview opportunities within 120 days of program completion. We also offer career guidance for those with over 5 years of experience, along with placement preparation sessions and mentor guidance. Final selection, of course, depends on your performance and the employer's requirements. We're proud to share that 97% of our eligible learners are placed.\nNow, coming to the program fee, which you mentioned is a concern, the total program fee is INR 1,50,000 + GST, with a booking fee of INR 1,500 + GST. However, we have several options to make it more manageable. If you opt for a full upfront payment, you receive a 5% concession, bringing the fee to INR 1,42,500 inclusive of the concession. Alternatively, an EMI option is available, with payments such as INR 24,750 in equal installments after booking. We also facilitate loan facilities through third-party lenders, offering easy financing without moratorium, though approval depends on the lender's eligibility criteria, and NIIT does not guarantee loan approval. We can discuss these financing options in more detail if you'd like.\nDoes this initial information address your primary concerns about placement support and the program fee, or would you like to explore any of these points further?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
+      "content": "so the phrases around you know 1 lakh 50000 Indian rupees and this is a 300 avar course and its a pure engineering course that will help you to quickly obstell yourself and land jobs because the identity landscape is very much in demand in the industry",
+      "techniques": [
+        "providing course details",
+        "highlighting career benefits",
+        "justifying value proposition",
+        "addressing student's explicit questions"
+      ],
+      "strategic_intent": "To inform the student about course details and career benefits, directly addressing their concerns about fees and job prospects to build trust and persuade them of the course's value.",
+      "confidence_score": 85,
+      "emotional_state": "informative and reassuring",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T15:03:41.947415",
-      "generation_mode": "stream"
+      "timestamp": "2026-02-17T16:16:17.033744",
+      "generation_mode": "human_shadow"
     },
     {
-      "id": "81c19eaa-57e8-44b4-be6b-d36e34a3c372",
+      "id": "7db720a7-1c14-4b04-b442-096a38bf52df",
       "round": 2,
       "agent": "student",
-      "content": "Yes, Sir, this information is very helpful, thank you. The placement assistance details, especially the 97% placement rate for eligible learners, are reassuring. I understand there's no job guarantee, but the support sounds robust. Regarding the program fee, I'm still weighing the options. Could you elaborate a bit more on the EMI plan? What would be the total number of installments and the total cost under that option?",
+      "content": "Okay, so the fees are 1.5 lakhs plus GST. That's quite a significant amount, bhaiya. My main concern is still the same: what's the actual ROI for this kind of investment? You mentioned it will help me \"land jobs,\" but how concrete is that? What kind of packages are we talking about after completing this course? Is there any solid job guarantee, or is the \"placement assistance\" just a marketing gimmick like I've heard with many other online programs? How do I know for sure that after spending this much, meri job lag jayegi?",
       "techniques": [],
-      "strategic_intent": "Seek clarification on financing options",
+      "strategic_intent": "Seek concrete details on ROI, job outcomes, and the reality of placement assistance to justify the high program fee, challenging the counsellor's generic statements.",
       "confidence_score": 60,
-      "emotional_state": "Curious",
+      "emotional_state": "skeptical",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T15:03:52.707617",
-      "generation_mode": "structured_retry"
-    },
-    {
-      "id": "4cb21948-cb56-48d9-88f5-7bb9c08e1a71",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "That's a very practical question, and it's good to understand all the financial aspects clearly.\nThe total program fee, as we discussed, is INR 1,50,000 + 18% GST, which amounts to INR 1,77,000. There's also a booking fee of INR 1,500 + 18% GST, making it INR 1,770. The EMI option is facilitated through third-party lenders that NIIT partners with, offering easy financing without moratorium.\nThe figure of INR 24,750 was provided as an example of what an installment could be. However, the exact number of installments, the total cost inclusive of any interest, and the specific repayment schedule would depend on the individual loan plan you choose from our third-party lenders. NIIT does not directly provide these loans or set their terms, but we can connect you with these lenders so you can explore their specific offerings and find a plan that best suits your needs. Would you be interested in learning more about how to connect with these lenders for detailed EMI structures?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T15:04:07.548991",
+      "timestamp": "2026-02-17T16:16:22.165526",
       "generation_mode": "stream"
     },
     {
-      "id": "62970eb5-ebe6-4560-9dfb-3fe04dec018e",
+      "id": "d7a87ab2-9940-4160-9a03-e30bbb019f4a",
       "round": 3,
-      "agent": "student",
-      "content": "Understood, Sir. I appreciate the clarification regarding the EMI plans relying on third-party lenders and that NIIT doesn't directly set the terms or total costs. While the information on placement assistance was very reassuring, the program fee, and now the process of exploring third-party loan options, still presents a considerable challenge for me. It makes planning difficult without a clear total cost and installment breakdown. I will have to look into those external financing details. In the meantime, could you perhaps tell me more about the program's weekly time commitment and how it balances synchronous and asynchronous learning? I want to ensure I can manage the workload.",
-      "techniques": [],
-      "strategic_intent": "seek information; express ongoing financial concern",
-      "confidence_score": 60,
-      "emotional_state": "concerned",
+      "agent": "counsellor",
+      "content": "is there any solid job",
+      "techniques": [
+        "clarifying question",
+        "reflecting"
+      ],
+      "strategic_intent": "To understand and reconfirm the student's core concern regarding job solidity and guarantees.",
+      "confidence_score": 0,
+      "emotional_state": "inquisitive and focused",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T15:04:18.141109",
-      "generation_mode": "structured_retry"
+      "timestamp": "2026-02-17T16:17:01.790803",
+      "generation_mode": "human_shadow"
+    },
+    {
+      "id": "579fd8e8-807a-4fd8-a17d-3347376a2887",
+      "round": 3,
+      "agent": "student",
+      "content": "Bhaiya, you just repeated my question back to me. That's not an answer. My question was: Is there any *solid* job guarantee, or is this \"placement assistance\" just a marketing gimmick? How do I know for sure that after spending 1.5 lakhs plus GST, meri job lag jayegi? And what kind of package can I expect? I really need to understand the actual ROI here. This is a big investment for me, you know.",
+      "techniques": [],
+      "strategic_intent": "To demand a direct answer to the unanswered concerns, especially about job guarantee and ROI, due to the counsellor's incomplete and unhelpful response.",
+      "confidence_score": 60,
+      "emotional_state": "frustrated",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T16:17:04.657745",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "eae9d3f8-53a4-439d-84ff-a0d5a2de1455",
+      "round": 4,
+      "agent": "counsellor",
+      "content": "okay so yeah the market demand is very high for isn't AI you should learn jobs around 10 to 15 lakh per annum in companies you know and we have a very strong placement cell assistant that will help you we have in partners and our placement team to get placed in this our hiring partner companies",
+      "techniques": [
+        "providing market demand information",
+        "stating potential salary/ROI",
+        "explaining placement assistance mechanism",
+        "reassurance",
+        "addressing student's explicit questions"
+      ],
+      "strategic_intent": "To directly answer the student's persistent questions about job guarantees, potential salary packages, and the effectiveness of placement assistance, thereby justifying the program's ROI, reassuring the student, and building confidence in the program's ability to deliver employment outcomes.",
+      "confidence_score": 90,
+      "emotional_state": "reassuring and informative",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T16:18:14.282236",
+      "generation_mode": "human_shadow"
+    },
+    {
+      "id": "6f554efe-0e70-4f66-bf74-874552e854c9",
+      "round": 4,
+      "agent": "student",
+      "content": "Okay, bhaiya, 10 to 15 lakh per annum package sounds good, but everyone talks about \"strong placement cells\" and \"hiring partners.\" My question is still the same: what's the *guarantee* here? Is there a *solid* job guarantee, or is it just assistance? I mean, what does this \"strong placement cell\" actually *do*? I heard somewhere that you claim \"97% eligible learners placed.\" Is that true? And if so, what makes a learner \"eligible\"? How can I be *sure* that after investing 1.5 lakhs plus GST, meri job *pakka* lag jayegi in that range? This is a huge investment for me, you know, I really need to understand the concrete ROI.",
+      "techniques": [],
+      "strategic_intent": "seeking concrete details on job guarantee and placement effectiveness, specifically challenging the \"97% placed\" claim and eligibility",
+      "confidence_score": 60,
+      "emotional_state": "skeptical",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T16:18:19.958981",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "94136957-7c44-4bc5-aaf8-75719e93f378",
+      "round": 5,
+      "agent": "counsellor",
+      "content": "I heard somewhere that you came",
+      "techniques": [
+        "acknowledging",
+        "seeking clarification"
+      ],
+      "strategic_intent": "To acknowledge the student's statement about what they heard and to seek further clarity on the information they mentioned having heard, likely to understand the basis of their skepticism regarding the '97% eligible learners placed' claim.",
+      "confidence_score": 40,
+      "emotional_state": "inquisitive",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T16:19:06.980349",
+      "generation_mode": "human_shadow"
+    },
+    {
+      "id": "eb011b45-a63b-4b99-ad0c-b787206230e3",
+      "round": 5,
+      "agent": "student",
+      "content": "Bhaiya, please don't just repeat my question back to me. That's not helpful at all. My question was: Is it true that you claim \"97% eligible learners placed\"? And if it is true, then what exactly makes a learner \"eligible\" for this placement? What are the *exact* criteria? You keep talking about \"strong placement cells\" but you're not giving me any concrete details or guarantees. How can I be absolutely *pakka* sure that after investing 1.5 lakhs plus GST, I will actually get a job in that 10-15 lakh package range? I need to understand the actual, concrete ROI here, bhaiya. This is a very big investment for me.",
+      "techniques": [],
+      "strategic_intent": "to push for specific details on job guarantee and eligibility, as the counsellor is not addressing core concerns and is repeating questions.",
+      "confidence_score": 60,
+      "emotional_state": "frustrated",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T16:19:10.185237",
+      "generation_mode": "stream"
     }
   ],
   "history_for_reporting": [
     {
-      "id": "d3ac4b1e-a126-4640-9a6b-4b2b258e5488",
+      "id": "af0a0ca2-1040-4dfb-b379-18795a6ad05f",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello! Welcome to NIIT. I'm here to help you explore our 'Building Agentic AI Systems' program. To start, could you share a bit about what interests you most in this program or what you're hoping to achieve by enrolling?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
+      "content": "hello Rohan this is simanta Desai I see your trying to you know learn about building systems how can I help you",
+      "techniques": [
+        "introduction",
+        "acknowledgement",
+        "offering help"
+      ],
+      "strategic_intent": "establish rapport and understand user needs",
+      "confidence_score": 0,
+      "emotional_state": "calm and helpful",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T15:03:27.850416",
-      "generation_mode": "stream"
+      "timestamp": "2026-02-17T16:15:08.396586",
+      "generation_mode": "human_shadow"
     },
     {
-      "id": "30c8a7ae-dd7d-4334-90a4-9c153334beed",
+      "id": "49ca5924-64ef-4df6-b02b-a9fa5aa14aa9",
       "round": 1,
       "agent": "student",
-      "content": "Good morning, Sir. Thank you for asking. My main interest, Sir, is to switch my domain from legacy system maintenance to a high-growth field like AI. Many of my batchmates from other colleges are already in good product companies, earning very well. I am feeling quite stuck, Sir. So, I am hoping this program will give me the skills for a good job, with a good package. I wanted to know more about the placement support, Sir, and if there is a job guarantee after completing the program successfully. Also, the program fee, Sir, is a major concern for me.",
+      "content": "Hello Simanta. Yes, I saw this program, \"Building Agentic AI Systems.\" I'm Rohan. I'm just trying to understand more about it. My main question is, bhaiya, what's the actual scene here? Is it really worth it, you know, in terms of getting a good package and everything? And what about the fees?",
       "techniques": [],
-      "strategic_intent": "To express my core motivation and immediately bring up my two main unresolved concerns: job guarantee and price, as the counsellor's initial question was too vague for my primary need for security.",
+      "strategic_intent": "To immediately probe for value for money and practical outcomes, specifically job prospects and cost, as these are my primary concerns and unresolved issues.",
       "confidence_score": 60,
-      "emotional_state": "anxious",
-      "internal_thought": "Sir is asking very general questions, not directly about job guarantee or salary. This is making me anxious. I need to know if this program will actually get me a good job, not just what I 'hope' for. I'm already stuck in maintenance, I can't afford another risk. My peers are doing so well. I need concrete answers, not vague talk. My savings are limited. What about the fees, and what about placement? Will I truly get a job? This is stressing me out. I need reassurance.",
+      "emotional_state": "skeptical",
+      "internal_thought": "Okay, she's introduced herself. \"Simanta Desai.\" And she knows I'm interested in \"building systems.\" That's good, at least she knows why I'm calling. But \"building systems\" is a bit vague. It's too early for any red flags, so I'll just be polite and then jump straight to what I care about. My primary motivation is value for money and trust, and right now, I don't trust anything they say until I get concrete details. I need to ask about the practical aspects and the ROI. No point in wasting time with pleasantries.",
       "updated_stats": {
-        "sentiment": "anxious",
-        "skepticism_level": 17,
-        "trust_score": 50,
+        "sentiment": "curious",
+        "skepticism_level": 9,
+        "trust_score": 52,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
         ]
       },
       "updated_state": {
-        "sentiment": "anxious",
-        "skepticism_level": 17,
-        "trust_score": 50,
+        "sentiment": "curious",
+        "skepticism_level": 9,
+        "trust_score": 52,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
         ]
       },
-      "timestamp": "2026-02-17T15:03:31.026667",
+      "timestamp": "2026-02-17T16:15:11.365062",
       "generation_mode": "stream"
     },
     {
-      "id": "5d0ffb35-a699-463f-8417-cf41c079a53f",
+      "id": "63f89439-fc61-45d2-97f2-7491c13c6f6f",
       "round": 2,
       "agent": "counsellor",
-      "content": "Good morning! I understand exactly why you're looking to make this shift and how important it is to find a program that truly prepares you for the high-growth AI sector. It's completely natural to feel that way when seeing your peers progress, and our 'Building Agentic AI Systems' program is specifically designed for job-readiness in these roles.\nRegarding your question about a job guarantee, it's important to clarify that while NIIT does not offer a job guarantee, we provide comprehensive placement assistance to eligible learners. This support includes access to NIIT's trusted recruiter network and our 800+ hiring partners. For learners with 6 months to 5 years of experience, we facilitate up to three interview opportunities within 120 days of program completion. We also offer career guidance for those with over 5 years of experience, along with placement preparation sessions and mentor guidance. Final selection, of course, depends on your performance and the employer's requirements. We're proud to share that 97% of our eligible learners are placed.\nNow, coming to the program fee, which you mentioned is a concern, the total program fee is INR 1,50,000 + GST, with a booking fee of INR 1,500 + GST. However, we have several options to make it more manageable. If you opt for a full upfront payment, you receive a 5% concession, bringing the fee to INR 1,42,500 inclusive of the concession. Alternatively, an EMI option is available, with payments such as INR 24,750 in equal installments after booking. We also facilitate loan facilities through third-party lenders, offering easy financing without moratorium, though approval depends on the lender's eligibility criteria, and NIIT does not guarantee loan approval. We can discuss these financing options in more detail if you'd like.\nDoes this initial information address your primary concerns about placement support and the program fee, or would you like to explore any of these points further?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
+      "content": "so the phrases around you know 1 lakh 50000 Indian rupees and this is a 300 avar course and its a pure engineering course that will help you to quickly obstell yourself and land jobs because the identity landscape is very much in demand in the industry",
+      "techniques": [
+        "providing course details",
+        "highlighting career benefits",
+        "justifying value proposition",
+        "addressing student's explicit questions"
+      ],
+      "strategic_intent": "To inform the student about course details and career benefits, directly addressing their concerns about fees and job prospects to build trust and persuade them of the course's value.",
+      "confidence_score": 85,
+      "emotional_state": "informative and reassuring",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-17T15:03:41.947415",
-      "generation_mode": "stream"
+      "timestamp": "2026-02-17T16:16:17.033744",
+      "generation_mode": "human_shadow"
     },
     {
-      "id": "81c19eaa-57e8-44b4-be6b-d36e34a3c372",
+      "id": "7db720a7-1c14-4b04-b442-096a38bf52df",
       "round": 2,
       "agent": "student",
-      "content": "Yes, Sir, this information is very helpful, thank you. The placement assistance details, especially the 97% placement rate for eligible learners, are reassuring. I understand there's no job guarantee, but the support sounds robust. Regarding the program fee, I'm still weighing the options. Could you elaborate a bit more on the EMI plan? What would be the total number of installments and the total cost under that option?",
+      "content": "Okay, so the fees are 1.5 lakhs plus GST. That's quite a significant amount, bhaiya. My main concern is still the same: what's the actual ROI for this kind of investment? You mentioned it will help me \"land jobs,\" but how concrete is that? What kind of packages are we talking about after completing this course? Is there any solid job guarantee, or is the \"placement assistance\" just a marketing gimmick like I've heard with many other online programs? How do I know for sure that after spending this much, meri job lag jayegi?",
       "techniques": [],
-      "strategic_intent": "Seek clarification on financing options",
+      "strategic_intent": "Seek concrete details on ROI, job outcomes, and the reality of placement assistance to justify the high program fee, challenging the counsellor's generic statements.",
       "confidence_score": 60,
-      "emotional_state": "Curious",
-      "internal_thought": "The student is processing the details of the placement support and is reassured by the statistics, but the program fee remains a primary concern and they need more specifics on the EMI option to assess affordability.",
+      "emotional_state": "skeptical",
+      "internal_thought": "Okay, so 1.5 lakh plus GST, that's a big amount. And he just said \"quickly upskill yourself and land jobs\" because \"AI is in demand.\" That's what everyone says, bhaiya. This sounds like the same old story. My parents will kill me if I spend so much and don't get a good return. Is this really going to help me get a high-paying AI role, or is it just another theoretical course with empty promises? I need to know the *actual* ROI here, not just a vague assurance. What about the job guarantee he mentioned earlier on the website, is it pakka? This feels very sales-y, which is exactly what stresses me out.",
       "updated_stats": {
-        "sentiment": "anxious",
-        "skepticism_level": 17,
-        "trust_score": 50,
+        "sentiment": "skeptical",
+        "skepticism_level": 19,
+        "trust_score": 47,
         "unresolved_concerns": [
           "Job Guarantee",
           "Price"
         ]
       },
       "updated_state": {
-        "sentiment": "anxious",
-        "skepticism_level": 17,
-        "trust_score": 50,
+        "sentiment": "skeptical",
+        "skepticism_level": 19,
+        "trust_score": 47,
         "unresolved_concerns": [
           "Job Guarantee",
           "Price"
         ]
       },
-      "timestamp": "2026-02-17T15:03:52.707617",
-      "generation_mode": "structured_retry"
-    },
-    {
-      "id": "4cb21948-cb56-48d9-88f5-7bb9c08e1a71",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "That's a very practical question, and it's good to understand all the financial aspects clearly.\nThe total program fee, as we discussed, is INR 1,50,000 + 18% GST, which amounts to INR 1,77,000. There's also a booking fee of INR 1,500 + 18% GST, making it INR 1,770. The EMI option is facilitated through third-party lenders that NIIT partners with, offering easy financing without moratorium.\nThe figure of INR 24,750 was provided as an example of what an installment could be. However, the exact number of installments, the total cost inclusive of any interest, and the specific repayment schedule would depend on the individual loan plan you choose from our third-party lenders. NIIT does not directly provide these loans or set their terms, but we can connect you with these lenders so you can explore their specific offerings and find a plan that best suits your needs. Would you be interested in learning more about how to connect with these lenders for detailed EMI structures?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-17T15:04:07.548991",
+      "timestamp": "2026-02-17T16:16:22.165526",
       "generation_mode": "stream"
     },
     {
-      "id": "62970eb5-ebe6-4560-9dfb-3fe04dec018e",
+      "id": "d7a87ab2-9940-4160-9a03-e30bbb019f4a",
+      "round": 3,
+      "agent": "counsellor",
+      "content": "is there any solid job",
+      "techniques": [
+        "clarifying question",
+        "reflecting"
+      ],
+      "strategic_intent": "To understand and reconfirm the student's core concern regarding job solidity and guarantees.",
+      "confidence_score": 0,
+      "emotional_state": "inquisitive and focused",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T16:17:01.790803",
+      "generation_mode": "human_shadow"
+    },
+    {
+      "id": "579fd8e8-807a-4fd8-a17d-3347376a2887",
       "round": 3,
       "agent": "student",
-      "content": "Understood, Sir. I appreciate the clarification regarding the EMI plans relying on third-party lenders and that NIIT doesn't directly set the terms or total costs. While the information on placement assistance was very reassuring, the program fee, and now the process of exploring third-party loan options, still presents a considerable challenge for me. It makes planning difficult without a clear total cost and installment breakdown. I will have to look into those external financing details. In the meantime, could you perhaps tell me more about the program's weekly time commitment and how it balances synchronous and asynchronous learning? I want to ensure I can manage the workload.",
+      "content": "Bhaiya, you just repeated my question back to me. That's not an answer. My question was: Is there any *solid* job guarantee, or is this \"placement assistance\" just a marketing gimmick? How do I know for sure that after spending 1.5 lakhs plus GST, meri job lag jayegi? And what kind of package can I expect? I really need to understand the actual ROI here. This is a big investment for me, you know.",
       "techniques": [],
-      "strategic_intent": "seek information; express ongoing financial concern",
+      "strategic_intent": "To demand a direct answer to the unanswered concerns, especially about job guarantee and ROI, due to the counsellor's incomplete and unhelpful response.",
       "confidence_score": 60,
-      "emotional_state": "concerned",
-      "internal_thought": "The student acknowledges the clarification about third-party lenders for EMIs but still feels the fee is a significant barrier due to the lack of direct, clear installment and total cost information. They are shifting focus to another practical aspect of the program (time commitment) to ensure it's manageable while they process the financial details.",
+      "emotional_state": "frustrated",
+      "internal_thought": "Bhaiya, what kind of response is this? \"is there any solid job\"? They just repeated my question back to me. Are they even listening? This is exactly what I was afraid of. They're just going to beat around the bush and not give me a straight answer about the job guarantee or the package. This feels like a typical sales tactic to avoid giving commitments. My parents would kill me if I spent 1.5 lakhs on something with no clear ROI. I need a concrete answer, not just a rephrased question. This is really stressing me out. They didn't even acknowledge the fee amount again.",
       "updated_stats": {
-        "sentiment": "anxious",
-        "skepticism_level": 17,
-        "trust_score": 50,
+        "sentiment": "skeptical",
+        "skepticism_level": 29,
+        "trust_score": 40,
         "unresolved_concerns": [
           "Job Guarantee",
-          "Price"
+          "Price",
+          "ROI",
+          "Placement Assistance effectiveness"
         ]
       },
       "updated_state": {
-        "sentiment": "anxious",
-        "skepticism_level": 17,
-        "trust_score": 50,
+        "sentiment": "skeptical",
+        "skepticism_level": 29,
+        "trust_score": 40,
         "unresolved_concerns": [
           "Job Guarantee",
-          "Price"
+          "Price",
+          "ROI",
+          "Placement Assistance effectiveness"
         ]
       },
-      "timestamp": "2026-02-17T15:04:18.141109",
-      "generation_mode": "structured_retry"
+      "timestamp": "2026-02-17T16:17:04.657745",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "eae9d3f8-53a4-439d-84ff-a0d5a2de1455",
+      "round": 4,
+      "agent": "counsellor",
+      "content": "okay so yeah the market demand is very high for isn't AI you should learn jobs around 10 to 15 lakh per annum in companies you know and we have a very strong placement cell assistant that will help you we have in partners and our placement team to get placed in this our hiring partner companies",
+      "techniques": [
+        "providing market demand information",
+        "stating potential salary/ROI",
+        "explaining placement assistance mechanism",
+        "reassurance",
+        "addressing student's explicit questions"
+      ],
+      "strategic_intent": "To directly answer the student's persistent questions about job guarantees, potential salary packages, and the effectiveness of placement assistance, thereby justifying the program's ROI, reassuring the student, and building confidence in the program's ability to deliver employment outcomes.",
+      "confidence_score": 90,
+      "emotional_state": "reassuring and informative",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T16:18:14.282236",
+      "generation_mode": "human_shadow"
+    },
+    {
+      "id": "6f554efe-0e70-4f66-bf74-874552e854c9",
+      "round": 4,
+      "agent": "student",
+      "content": "Okay, bhaiya, 10 to 15 lakh per annum package sounds good, but everyone talks about \"strong placement cells\" and \"hiring partners.\" My question is still the same: what's the *guarantee* here? Is there a *solid* job guarantee, or is it just assistance? I mean, what does this \"strong placement cell\" actually *do*? I heard somewhere that you claim \"97% eligible learners placed.\" Is that true? And if so, what makes a learner \"eligible\"? How can I be *sure* that after investing 1.5 lakhs plus GST, meri job *pakka* lag jayegi in that range? This is a huge investment for me, you know, I really need to understand the concrete ROI.",
+      "techniques": [],
+      "strategic_intent": "seeking concrete details on job guarantee and placement effectiveness, specifically challenging the \"97% placed\" claim and eligibility",
+      "confidence_score": 60,
+      "emotional_state": "skeptical",
+      "internal_thought": "Bhaiya, this 10-15 LPA sounds good, but \"very strong placement cell assistance\" still feels like a generic line. Everyone says that. What does that *actually* mean? Are they just going to send my resume out, or is there a proper guarantee? I heard your program details mention something about \"97% eligible learners placed.\" Is that true? And what does \"eligible\" even mean? What if I'm not \"eligible\" for their 97%? I need to know *how* this assistance ensures *my* job, not just that they *have* partners. This is the main thing, yaar. I can't just spend 1.5 lakhs and then cross my fingers. My parents will kill me if I don't get a job after this.",
+      "updated_stats": {
+        "sentiment": "frustrated",
+        "skepticism_level": 35,
+        "trust_score": 35,
+        "unresolved_concerns": [
+          "Job Guarantee",
+          "Placement Assistance effectiveness",
+          "Price",
+          "ROI",
+          "Eligibility criteria for placement"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "frustrated",
+        "skepticism_level": 35,
+        "trust_score": 35,
+        "unresolved_concerns": [
+          "Job Guarantee",
+          "Placement Assistance effectiveness",
+          "Price",
+          "ROI",
+          "Eligibility criteria for placement"
+        ]
+      },
+      "timestamp": "2026-02-17T16:18:19.958981",
+      "generation_mode": "stream"
+    },
+    {
+      "id": "94136957-7c44-4bc5-aaf8-75719e93f378",
+      "round": 5,
+      "agent": "counsellor",
+      "content": "I heard somewhere that you came",
+      "techniques": [
+        "acknowledging",
+        "seeking clarification"
+      ],
+      "strategic_intent": "To acknowledge the student's statement about what they heard and to seek further clarity on the information they mentioned having heard, likely to understand the basis of their skepticism regarding the '97% eligible learners placed' claim.",
+      "confidence_score": 40,
+      "emotional_state": "inquisitive",
+      "internal_thought": "",
+      "updated_stats": {},
+      "updated_state": {},
+      "timestamp": "2026-02-17T16:19:06.980349",
+      "generation_mode": "human_shadow"
+    },
+    {
+      "id": "eb011b45-a63b-4b99-ad0c-b787206230e3",
+      "round": 5,
+      "agent": "student",
+      "content": "Bhaiya, please don't just repeat my question back to me. That's not helpful at all. My question was: Is it true that you claim \"97% eligible learners placed\"? And if it is true, then what exactly makes a learner \"eligible\" for this placement? What are the *exact* criteria? You keep talking about \"strong placement cells\" but you're not giving me any concrete details or guarantees. How can I be absolutely *pakka* sure that after investing 1.5 lakhs plus GST, I will actually get a job in that 10-15 lakh package range? I need to understand the actual, concrete ROI here, bhaiya. This is a very big investment for me.",
+      "techniques": [],
+      "strategic_intent": "to push for specific details on job guarantee and eligibility, as the counsellor is not addressing core concerns and is repeating questions.",
+      "confidence_score": 60,
+      "emotional_state": "frustrated",
+      "internal_thought": "Bhaiya, seriously? \"I heard somewhere that you came\"? Is this guy even listening to me? He's just repeating my words back like a broken record. This is exactly why I'm skeptical of all these online programs. They just have some script and can't answer actual questions. He's completely ignoring my main concerns about the job guarantee and the \"97% eligible learners placed\" claim. What's the scene here? Is he trying to dodge the question? This is not giving me any confidence. I'm getting really frustrated now. My parents will kill me if I spend 1.5 lakhs and don't get a job. I need concrete answers, not just buzzwords or repetitions.",
+      "updated_stats": {
+        "sentiment": "frustrated",
+        "skepticism_level": 50,
+        "trust_score": 25,
+        "unresolved_concerns": [
+          "Eligibility criteria for placement",
+          "Job Guarantee",
+          "Placement Assistance effectiveness",
+          "Price",
+          "ROI"
+        ]
+      },
+      "updated_state": {
+        "sentiment": "frustrated",
+        "skepticism_level": 50,
+        "trust_score": 25,
+        "unresolved_concerns": [
+          "Eligibility criteria for placement",
+          "Job Guarantee",
+          "Placement Assistance effectiveness",
+          "Price",
+          "ROI"
+        ]
+      },
+      "timestamp": "2026-02-17T16:19:10.185237",
+      "generation_mode": "stream"
     }
   ]
 }

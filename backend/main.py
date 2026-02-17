@@ -180,6 +180,7 @@ class ProgramSummary(TypedDict):
 
 class StudentPersona(TypedDict):
     name: str
+    gender: str
     archetype_id: str
     archetype_label: str
     age: int
@@ -1064,13 +1065,24 @@ Emotional response: {archetype['emotional_response']}
 Language instruction: {archetype['language_instruction']}
 
 Use realistic Indian context.
+Return learner gender explicitly as male/female/neutral.
 If archetype_id is skeptical_shopper, force language_style as Hinglish with code-mixing.
 No profanity.
 PROGRAM:
 {json.dumps(program)}
 """
+    fallback_name_gender_pool: List[Tuple[str, str]] = [
+        ("Aman", "male"),
+        ("Riya", "female"),
+        ("Saurabh", "male"),
+        ("Neha", "female"),
+        ("Anjali", "female"),
+        ("Nikhil", "male"),
+    ]
+    fallback_name, fallback_gender = random.choice(fallback_name_gender_pool)
     fallback: StudentPersona = {
-        "name": random.choice(["Aman", "Riya", "Saurabh", "Neha", "Anjali", "Nikhil"]),
+        "name": fallback_name,
+        "gender": fallback_gender,
         "archetype_id": archetype_id,
         "archetype_label": ARCHETYPE_LABELS.get(archetype_id, archetype_id),
         "age": random.randint(21, 34),
@@ -1113,6 +1125,7 @@ PROGRAM:
             "type": "object",
             "properties": {
                 "name": {"type": "string"},
+                "gender": {"type": "string", "enum": ["male", "female", "neutral"]},
                 "archetype_id": {"type": "string", "enum": list(ARCHETYPE_LABELS.keys())},
                 "archetype_label": {"type": "string"},
                 "age": {"type": "integer"},
@@ -1131,6 +1144,7 @@ PROGRAM:
             },
             "required": [
                 "name",
+                "gender",
                 "archetype_id",
                 "archetype_label",
                 "age",
@@ -1151,6 +1165,10 @@ PROGRAM:
         fallback=fallback,
     )
     parsed = _to_plain_json(parsed)
+    parsed["name"] = str(parsed.get("name") or fallback["name"]).strip() or fallback["name"]
+    parsed["gender"] = str(parsed.get("gender") or fallback["gender"]).strip().lower()
+    if parsed["gender"] not in {"male", "female", "neutral"}:
+        parsed["gender"] = fallback["gender"]
     parsed["archetype_id"] = str(parsed.get("archetype_id") or archetype_id)
     if parsed["archetype_id"] not in ARCHETYPE_LABELS:
         parsed["archetype_id"] = archetype_id
@@ -1187,6 +1205,7 @@ PROGRAM:
 
 def _is_valid_student_persona_schema(persona: Dict[str, Any]) -> bool:
     required = {
+        "gender",
         "archetype_id",
         "archetype_label",
         "age",
@@ -1276,8 +1295,19 @@ def _build_student_prompt(state: NegotiationState) -> str:
     persona = state["persona"]
     inner_state = state.get("student_inner_state", {})
     config = ARCHETYPE_CONFIGS.get(persona.get("archetype_id", "desperate_switcher"), ARCHETYPE_CONFIGS["desperate_switcher"])
+    mode = str(state.get("mode", "ai_vs_ai")).strip().lower()
     vocabulary = ", ".join(persona.get("common_vocabulary", []))
     program_snapshot = _student_program_snapshot(state["program"])
+    language_style = str(persona.get("language_style") or "Indian English")
+    language_instruction = str(config.get("language_instruction") or "Use clear Indian English.")
+    if mode == "human_vs_ai":
+        language_style = "Indian English"
+        language_instruction = (
+            "Pure English only. No Hinglish or code-mixing. Keep responses natural, conversational, and complete."
+        )
+    hinglish_note = ""
+    if mode != "human_vs_ai":
+        hinglish_note = "- If archetype is skeptical_shopper, code-mix Hinglish for emphasis."
     return f"""
 ROLE: You are {persona.get('name')}, a {persona.get('age')} year old {persona.get('current_role')}.
 ARCHETYPE: {persona.get('archetype_label')}
@@ -1291,8 +1321,8 @@ MISCONCEPTION: {_compact_text(persona.get('misconception'), 180)}
 PRIMARY MOTIVATION: {config.get('core_drive')}
 WHAT STRESSES YOU: {config.get('stress_trigger')}
 YOUR DEFAULT REACTION: {config.get('emotional_response')}
-LANGUAGE STYLE: {persona.get('language_style')}
-LANGUAGE INSTRUCTION: {config.get('language_instruction')}
+LANGUAGE STYLE: {language_style}
+LANGUAGE INSTRUCTION: {language_instruction}
 COMMON VOCABULARY: {vocabulary}
 
 CURRENT STATE:
@@ -1320,7 +1350,7 @@ TRANSCRIPT SO FAR:
 - Speak naturally per LANGUAGE STYLE and vocabulary.
 - Do not reveal hidden secret too early.
 - Repeat unresolved concerns if still unanswered.
-- If archetype is skeptical_shopper, code-mix Hinglish for emphasis.
+{hinglish_note}
 4. Keep MESSAGE complete and not cut mid sentence.
 
 --- OUTPUT FORMAT ---
@@ -1994,6 +2024,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 forced_archetype = _pick_live_mode_archetype()
                 persona = _to_plain_json(_generate_persona(program, forced_archetype_id=forced_archetype))
                 session["persona"] = persona
+            persona["language_style"] = "Indian English"
 
         financials = _derive_financials(program, persona)
         last_run = session.get("last_run", {})
@@ -2029,6 +2060,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             },
             "program": program,
             "persona": persona,
+            "mode": mode,
             "deal_status": "ongoing",
             "negotiation_metrics": {
                 "round": 1,

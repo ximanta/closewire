@@ -1,0 +1,29 @@
+{
+  "voice_preferences": {
+    "male": [
+      "Google UK English Male",
+      "Microsoft David",
+      "David",
+      "Male"
+    ],
+    "female": [
+      "Google US English",
+      "Microsoft Zira",
+      "Zira",
+      "Female"
+    ],
+    "neutral": [
+      "Google US English",
+      "Google UK English Male",
+      "Microsoft Zira"
+    ]
+  },
+  "profile_gender_defaults": {
+    "desperate_switcher": "male",
+    "skeptical_shopper": "female",
+    "stagnant_pro": "male",
+    "credential_hunter": "female",
+    "fomo_victim": "male",
+    "drifter": "male"
+  }
+}
