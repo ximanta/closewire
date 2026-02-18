@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import CopilotWidget from "./components/CopilotWidget";
 import "./App.css";
 
 const BACKEND_URL = "http://localhost:8000";
@@ -24,7 +25,7 @@ const SILENCE_PROMPT_MS = 10000;
 const PIPELINE_OPTIONS = [
   { id: "ai_vs_ai", title: "Agent vs Agent", subtitle: "Autonomous counsellor and student simulation.", status: "active" },
   { id: "human_vs_ai", title: "Human vs Agent", subtitle: "You speak as counsellor, AI responds as learner.", status: "active" },
-  { id: "agent_powered_human_vs_ai", title: "Agent Powered Human vs Agent", subtitle: "Human co-pilot with assistive prompts.", status: "coming_soon" },
+  { id: "agent_powered_human_vs_ai", title: "Agent Powered Human vs Agent", subtitle: "Voice-first counsellor with live coach cues.", status: "active" },
 ];
 const ARCHETYPE_CARDS = [
   { id: "desperate_switcher", icon: "SW", title: "Desperate Switcher", profile: "Urgent career pivot, seeks fast outcomes.", accent: "#ff8f5c" },
@@ -64,6 +65,7 @@ const STUDENT_CONTROL_PREFIXES = [
   "EMOTIONAL_STATE:",
   "STRATEGIC_INTENT:",
 ];
+const isHumanDrivenPipeline = (mode) => mode === "human_vs_ai" || mode === "agent_powered_human_vs_ai";
 
 const extractSpokenText = (value) => {
   const raw = String(value || "");
@@ -150,14 +152,6 @@ const chipStateClass = (state) => {
   return "chip-state-neutral";
 };
 
-const commitmentSignalState = (signal) => {
-  const normalized = String(signal || "").toLowerCase();
-  if (normalized === "strong_commitment") return "magic";
-  if (normalized === "conditional_commitment") return "success";
-  if (normalized === "soft_commitment") return "warning";
-  return "muted";
-};
-
 const commitmentReportState = (signal) => {
   const normalized = String(signal || "").toLowerCase();
   if (normalized === "none") return "danger";
@@ -216,6 +210,9 @@ function App() {
   const [selectedPipeline, setSelectedPipeline] = useState("ai_vs_ai");
   const [selectedArchetype, setSelectedArchetype] = useState("desperate_switcher");
   const [showControlModal, setShowControlModal] = useState(false);
+  const [copilotData, setCopilotData] = useState(null);
+  const [copilotState, setCopilotState] = useState("idle");
+  const [copilotPinnedSuggestion, setCopilotPinnedSuggestion] = useState("");
 
   const wsRef = useRef(null);
   const projectionRef = useRef(null);
@@ -231,6 +228,7 @@ function App() {
   const silencePromptTimerRef = useRef(null);
   const processingLabelTimerRef = useRef(null);
   const liveTranscriptRef = useRef("");
+  const humanInputRef = useRef(null);
   const committedTranscriptRef = useRef("");
   const audioContextRef = useRef(null);
   const analyserRef = useRef(null);
@@ -250,7 +248,8 @@ function App() {
   const speechRecognitionCtor = typeof window !== "undefined"
     ? (window.SpeechRecognition || window.webkitSpeechRecognition || null)
     : null;
-  const isHumanMode = negotiationMode === "human_vs_ai";
+  const isHumanMode = isHumanDrivenPipeline(negotiationMode);
+  const isAgentPoweredMode = negotiationMode === "agent_powered_human_vs_ai";
   const profileImageName = String(persona?.archetype_id || "student-placeholder").trim().toLowerCase();
   const inferredGender = useMemo(() => {
     const explicit = String(persona?.gender || "").trim().toLowerCase();
@@ -595,6 +594,31 @@ function App() {
     return "Agent vs Agent Duel Activated";
   }, [negotiationMode]);
 
+  useEffect(() => {
+    if (!isAgentPoweredMode) {
+      setCopilotState("idle");
+      setCopilotData(null);
+      setCopilotPinnedSuggestion("");
+      return;
+    }
+    if (micState === "listening" && copilotState === "ready") {
+      setCopilotState("minimized");
+    }
+  }, [copilotState, isAgentPoweredMode, micState]);
+
+  const handleApplyCopilotSuggestion = (suggestionText) => {
+    const text = String(suggestionText || "").trim();
+    if (!text) return;
+    setCopilotPinnedSuggestion(text);
+    if (!liveModeNeedsTextFallback) return;
+    setHumanInputText(text);
+    setLiveTranscript(text);
+    liveTranscriptRef.current = text;
+    if (humanInputRef.current) {
+      humanInputRef.current.focus();
+    }
+  };
+
   const pulseChip = (key) => {
     setChipFlash((current) => ({ ...current, [key]: true }));
     if (chipFlashTimerRef.current[key]) clearTimeout(chipFlashTimerRef.current[key]);
@@ -693,6 +717,9 @@ function App() {
     setHumanInputText("");
     setProcessingLabelIndex(0);
     setWaveformLevel(0);
+    setCopilotData(null);
+    setCopilotState("idle");
+    setCopilotPinnedSuggestion("");
   };
 
   useEffect(
@@ -715,7 +742,7 @@ function App() {
     const shutdown = () => hardStopAudioAndMic();
     const onVisibility = () => {
       if (document.visibilityState === "hidden") {
-        if (modeRef.current === "human_vs_ai" && stageRef.current === "negotiating") {
+        if (isHumanDrivenPipeline(modeRef.current) && stageRef.current === "negotiating") {
           visibilityPausedRef.current = true;
           stopRecognition();
           if (micStateRef.current !== "locked" && micStateRef.current !== "processing") {
@@ -729,7 +756,7 @@ function App() {
       if (
         document.visibilityState === "visible"
         && visibilityPausedRef.current
-        && modeRef.current === "human_vs_ai"
+        && isHumanDrivenPipeline(modeRef.current)
         && stageRef.current === "negotiating"
         && micStateRef.current !== "locked"
         && micStateRef.current !== "processing"
@@ -900,14 +927,14 @@ function App() {
   const armSilencePromptTimer = () => {
     if (silencePromptTimerRef.current) clearTimeout(silencePromptTimerRef.current);
     silencePromptTimerRef.current = setTimeout(() => {
-      if (modeRef.current === "human_vs_ai" && stageRef.current === "negotiating" && micStateRef.current === "listening") {
+      if (isHumanDrivenPipeline(modeRef.current) && stageRef.current === "negotiating" && micStateRef.current === "listening") {
         pushUiToast("Are you there? Please press Send manually.", "strategic", 3600);
       }
     }, SILENCE_PROMPT_MS);
   };
 
   const sendHumanInput = (rawText) => {
-    if (modeRef.current !== "human_vs_ai") return;
+    if (!isHumanDrivenPipeline(modeRef.current)) return;
     if (window.speechSynthesis?.speaking) return;
     const socket = wsRef.current;
     if (!socket || socket.readyState !== WebSocket.OPEN) {
@@ -929,7 +956,7 @@ function App() {
     socket.send(JSON.stringify({ type: "human_input", text }));
     clearProcessingFailSafe();
     processingFailSafeTimerRef.current = setTimeout(() => {
-      if (micStateRef.current === "processing" && modeRef.current === "human_vs_ai" && stageRef.current === "negotiating") {
+      if (micStateRef.current === "processing" && isHumanDrivenPipeline(modeRef.current) && stageRef.current === "negotiating") {
         setMicState("inactive");
         clearProcessingTicker();
         pushUiToast("Student response took too long. Mic resumed for retry.", "strategic", 3200);
@@ -943,11 +970,11 @@ function App() {
   };
 
   const armAutoSendTimer = () => {
-    if (modeRef.current !== "human_vs_ai") return;
+    if (!isHumanDrivenPipeline(modeRef.current)) return;
     if (micStateRef.current !== "listening") return;
     if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
     inactivityTimerRef.current = setTimeout(() => {
-      if (modeRef.current !== "human_vs_ai" || micStateRef.current !== "listening") return;
+      if (!isHumanDrivenPipeline(modeRef.current) || micStateRef.current !== "listening") return;
       if (window.speechSynthesis?.speaking || isTtsSpeakingRef.current) return;
       const candidate = String(liveTranscriptRef.current || "").trim();
       if (candidate) {
@@ -1003,7 +1030,7 @@ function App() {
       }
       utteranceRef.current = null;
       window.currentUtterance = null;
-      if (stageRef.current === "negotiating" && modeRef.current === "human_vs_ai") {
+      if (stageRef.current === "negotiating" && isHumanDrivenPipeline(modeRef.current)) {
         setMicState("inactive");
       }
     };
@@ -1202,10 +1229,6 @@ function App() {
   const startNegotiation = async () => {
     const requestedMode = selectedPipeline;
     const requestedArchetype = selectedArchetype;
-    if (requestedMode === "agent_powered_human_vs_ai") {
-      pushUiToast("Agent Powered Human vs Agent is coming soon.", "strategic", 3200);
-      return;
-    }
     setNegotiationMode(requestedMode);
     if (!authToken) {
       setShowAuthModal(true);
@@ -1224,7 +1247,7 @@ function App() {
       pushUiToast("Enter a valid program URL to continue.", "strategic");
       return;
     }
-    if (requestedMode === "human_vs_ai") {
+    if (isHumanDrivenPipeline(requestedMode)) {
       const permission = await ensureMicPermission();
       if (permission === "denied") {
         pushUiToast("Microphone unavailable. Live coaching will use text input fallback.", "strategic", 3800);
@@ -1331,14 +1354,28 @@ function App() {
           delete next[msg.id];
           pendingThoughtsRef.current = next;
         }
-        if (mode === "human_vs_ai" && normalized.agent === "counsellor") {
+        if (isHumanDrivenPipeline(mode) && normalized.agent === "counsellor") {
           clearProcessingFailSafe();
         }
-        if (mode === "human_vs_ai" && normalized.agent === "student") {
+        if (isHumanDrivenPipeline(mode) && normalized.agent === "student") {
           clearProcessingFailSafe();
+          if (mode === "agent_powered_human_vs_ai") {
+            setCopilotState("thinking");
+          }
           setMicState("locked");
           speakStudentTurn(normalized.content, normalized.emotional_state);
         }
+      } else if (payload.type === "copilot_update") {
+        const data = payload.data || {};
+        setCopilotData({
+          analysis: String(data.analysis || "").trim(),
+          suggestions: Array.isArray(data.suggestions) ? data.suggestions.map((item) => String(item || "").trim()).filter(Boolean).slice(0, 3) : [],
+          fact_check: String(data.fact_check || data.relevant_fact || "").trim(),
+          round: Number(data.round || 0),
+          updatedAt: Date.now(),
+        });
+        setCopilotState("ready");
+        setCopilotPinnedSuggestion("");
       } else if (payload.type === "metrics_update") {
         setMetrics(payload.data);
       } else if (payload.type === "state_update") {
@@ -1370,7 +1407,7 @@ function App() {
         // eslint-disable-next-line no-console
         console.error("Backend negotiation error", payload.data);
         pushUiToast(payload.data?.message || "Unexpected backend error");
-        if (mode === "human_vs_ai") {
+        if (isHumanDrivenPipeline(mode)) {
           setMicState("inactive");
         }
       }
@@ -1549,6 +1586,19 @@ function App() {
           </div>
         ))}
       </div>
+
+      {stage === "negotiating" && isAgentPoweredMode && createPortal(
+        <CopilotWidget
+          visible
+          state={copilotState}
+          data={copilotData}
+          pinnedSuggestion={copilotPinnedSuggestion}
+          onApplySuggestion={handleApplyCopilotSuggestion}
+          onExpand={() => setCopilotState(copilotData ? "ready" : "thinking")}
+          onMinimize={() => setCopilotState("minimized")}
+        />,
+        document.body
+      )}
 
       {showAuthModal && createPortal(
         <div className="authModalBackdrop">
@@ -1777,6 +1827,7 @@ function App() {
                     </span>
                   </div>
                   <textarea
+                    ref={humanInputRef}
                     value={liveModeNeedsTextFallback ? humanInputText : liveTranscript}
                     onChange={(event) => {
                       setHumanInputText(event.target.value);

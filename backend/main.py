@@ -17,7 +17,7 @@ import uuid
 from datetime import datetime
 from io import BytesIO
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Set, Tuple
 
 import requests
 from bs4 import BeautifulSoup
@@ -349,7 +349,7 @@ def _write_debug_trace(event: str, payload: Dict[str, Any]) -> None:
     if not NEGOTIATION_DEBUG_TRACE:
         return
     mode = str(payload.get("mode", "ai_vs_ai")).strip().lower()
-    target_file = HUMAN_DEBUG_TRACE_FILE if mode == "human_vs_ai" else DEBUG_TRACE_FILE
+    target_file = HUMAN_DEBUG_TRACE_FILE if mode in {"human_vs_ai", "agent_powered_human_vs_ai"} else DEBUG_TRACE_FILE
     entry = {
         "ts": datetime.now().isoformat(),
         "event": event,
@@ -385,7 +385,7 @@ def _emit_conversation_traceability(session_id: str, state: NegotiationState, an
         "history_for_reporting": state.get("history_for_reporting", []),
     }
     mode = str(state.get("mode", "ai_vs_ai")).strip().lower()
-    target_file = HUMAN_TRACEABILITY_FILE if mode == "human_vs_ai" else TRACEABILITY_FILE
+    target_file = HUMAN_TRACEABILITY_FILE if mode in {"human_vs_ai", "agent_powered_human_vs_ai"} else TRACEABILITY_FILE
     target_file.write_text(json.dumps(trace_payload, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
@@ -919,6 +919,117 @@ def _pick_live_mode_archetype() -> str:
     return random.choice(["desperate_switcher", "skeptical_shopper"])
 
 
+async def _generate_coaching_tips(
+    client: genai.Client,
+    model_name: str,
+    state: NegotiationState,
+    last_student_msg: Dict[str, Any],
+) -> Dict[str, Any]:
+    mode = str(state.get("mode", "ai_vs_ai")).strip().lower()
+    round_number = int(state.get("round", 1))
+    fallback = {
+        "analysis": "Primary concern is still unresolved.",
+        "suggestions": [
+            "Acknowledge concern first.",
+            "Probe one constraint.",
+            "Ask a closing question.",
+        ],
+        "fact_check": "Use one concrete programme fact relevant to the objection.",
+    }
+    transcript_tail = _trim_messages(state.get("messages", []), 8)
+    program_snapshot = _student_program_snapshot(state.get("program", {}))
+    last_student_text = str(last_student_msg.get("content", "")).strip()
+    prompt = f"""
+ROLE: Real-time Negotiation Coach.
+You are whispering to a junior counsellor in a live call.
+Be short, direct, and actionable.
+
+CONTEXT:
+- Pipeline mode: {mode}
+- Round: {round_number}
+- Prospect archetype: {state.get("persona", {}).get("archetype_label", "Prospect")}
+- Program: {state.get("program", {}).get("program_name", "Program")}
+
+PROGRAM FACTS:
+{json.dumps(program_snapshot, ensure_ascii=False)}
+
+TRANSCRIPT TAIL:
+{json.dumps(transcript_tail, ensure_ascii=False)}
+
+LAST STUDENT MESSAGE:
+{last_student_text}
+
+TASK:
+1. Decode subtext in one line.
+2. Provide exactly 3 suggestions for counsellor speech.
+   - Each suggestion must be < 6 words.
+   - Imperative verb only.
+   - No softeners like "you should".
+3. Provide one fact_check line tied to the objection.
+
+OUTPUT JSON:
+{{
+  "analysis": "<one-line subtext>",
+  "suggestions": ["<short move>", "<short move>", "<short move>"],
+  "fact_check": "<single concrete fact>"
+}}
+"""
+    _write_debug_trace(
+        "copilot_generate_start",
+        {
+            "mode": mode,
+            "round": round_number,
+            "student_head": _truncate_trace_text(last_student_text, 160),
+        },
+    )
+    parsed = await asyncio.to_thread(
+        _call_function_json,
+        client,
+        model_name,
+        prompt,
+        "set_copilot_coaching_tips",
+        "Return concise coaching analysis, three imperative suggestions, and one fact check.",
+        {
+            "type": "object",
+            "properties": {
+                "analysis": {"type": "string"},
+                "suggestions": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "minItems": 3,
+                    "maxItems": 3,
+                },
+                "fact_check": {"type": "string"},
+            },
+            "required": ["analysis", "suggestions", "fact_check"],
+        },
+        fallback,
+    )
+    parsed = _to_plain_json(parsed)
+    suggestions = [str(item).strip() for item in (parsed.get("suggestions") or []) if str(item).strip()]
+    if not suggestions:
+        suggestions = list(fallback["suggestions"])
+    suggestions = suggestions[:3]
+    while len(suggestions) < 3:
+        suggestions.append(fallback["suggestions"][len(suggestions)])
+    normalized = {
+        "analysis": str(parsed.get("analysis") or fallback["analysis"]).strip(),
+        "suggestions": suggestions,
+        "fact_check": str(parsed.get("fact_check") or fallback["fact_check"]).strip(),
+    }
+    _write_debug_trace(
+        "copilot_generate_complete",
+        {
+            "mode": mode,
+            "round": round_number,
+            "analysis_head": _truncate_trace_text(normalized["analysis"], 140),
+            "suggestion_count": len(normalized["suggestions"]),
+            "fact_head": _truncate_trace_text(normalized["fact_check"], 140),
+        },
+    )
+    return normalized
+
+
 async def _classify_human_input(
     client: genai.Client,
     model_name: str,
@@ -1358,7 +1469,7 @@ def _build_student_prompt(state: NegotiationState) -> str:
     mode = str(state.get("mode", "ai_vs_ai")).strip().lower()
     vocabulary = ", ".join(persona.get("common_vocabulary", []))
     program_snapshot = _student_program_snapshot(state["program"])
-    if mode == "human_vs_ai":
+    if mode in {"human_vs_ai", "agent_powered_human_vs_ai"}:
         language_style = "UK English"
         language_instruction = (
             "Use pure UK English only. No Hinglish, no Hindi words, and no code-mixing."
@@ -2158,7 +2269,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             persona = _to_plain_json(_generate_persona(program))
             session["persona"] = persona
         mode = str(config.mode or "ai_vs_ai").strip().lower()
-        if mode not in {"ai_vs_ai", "human_vs_ai"}:
+        if mode not in {"ai_vs_ai", "human_vs_ai", "agent_powered_human_vs_ai"}:
             mode = "ai_vs_ai"
         forced_archetype_id = str(config.archetype_id or "").strip()
         if forced_archetype_id in ARCHETYPE_CONFIGS:
@@ -2166,7 +2277,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             if current_archetype != forced_archetype_id:
                 persona = _to_plain_json(_generate_persona(program, forced_archetype_id=forced_archetype_id))
                 session["persona"] = persona
-        if mode == "human_vs_ai":
+        if mode in {"human_vs_ai", "agent_powered_human_vs_ai"}:
             persona["language_style"] = "UK English"
 
         financials = _derive_financials(program, persona)
@@ -2241,15 +2352,16 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
 
         client, negotiation_model_name, _ = get_client_and_models()
         student_generation_failures = 0
+        background_tasks: Set[asyncio.Task] = set()
 
         while state["round"] <= state["max_rounds"] and state["deal_status"] == "ongoing":
-            if mode == "human_vs_ai":
+            if mode in {"human_vs_ai", "agent_powered_human_vs_ai"}:
                 inbound = await websocket.receive_json()
                 inbound_type = str(inbound.get("type", "")).strip().lower()
                 if inbound_type != "human_input":
                     await _ws_send_json(
                         websocket,
-                        {"type": "error", "data": {"message": "Expected human_input payload in human_vs_ai mode"}},
+                        {"type": "error", "data": {"message": "Expected human_input payload in human-driven mode"}},
                     )
                     continue
                 human_text = str(inbound.get("text", "")).strip()
@@ -2342,6 +2454,45 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             state["messages"].append(spoken_student_msg)
             state["history_for_reporting"].append(student_msg)
 
+            if mode == "agent_powered_human_vs_ai":
+                current_round = int(state["round"])
+
+                async def _dispatch_copilot_update() -> None:
+                    try:
+                        tips = await _generate_coaching_tips(
+                            client=client,
+                            model_name=negotiation_model_name,
+                            state=state,
+                            last_student_msg=spoken_student_msg,
+                        )
+                        payload = {
+                            "type": "copilot_update",
+                            "data": {
+                                "analysis": tips.get("analysis", ""),
+                                "suggestions": tips.get("suggestions", []),
+                                "fact_check": tips.get("fact_check", ""),
+                                "relevant_fact": tips.get("fact_check", ""),
+                                "round": current_round,
+                            },
+                        }
+                        await _ws_send_json(websocket, payload)
+                    except ClientStreamClosed:
+                        logger.info("Skipped copilot_update send because websocket already closed")
+                    except Exception as copilot_exc:
+                        _write_debug_trace(
+                            "copilot_dispatch_failed",
+                            {
+                                "mode": mode,
+                                "round": current_round,
+                                "error_type": type(copilot_exc).__name__,
+                                "error": _truncate_trace_text(copilot_exc),
+                            },
+                        )
+
+                task = asyncio.create_task(_dispatch_copilot_update())
+                background_tasks.add(task)
+                task.add_done_callback(background_tasks.discard)
+
             _update_metrics(state, counsellor_msg, spoken_student_msg)
             state["negotiation_metrics"]["round"] = state["round"]
             state["negotiation_metrics"]["max_rounds"] = state["max_rounds"]
@@ -2391,6 +2542,8 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             "analysis": analysis,
             "deal_status": state["deal_status"],
         }
+        if background_tasks:
+            await asyncio.gather(*background_tasks, return_exceptions=True)
         _emit_conversation_traceability(config.session_id, state, analysis)
         logger.info("Session %s finished with %s", config.session_id, state["deal_status"])
     except WebSocketDisconnect:

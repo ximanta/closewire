@@ -844,6 +844,120 @@ textarea {
   animation: studentSpeakPulse 1.05s ease-in-out infinite;
 }
 
+.copilotWidget {
+  position: fixed;
+  right: 16px;
+  bottom: 96px;
+  z-index: 7;
+}
+
+.copilotCard {
+  width: min(320px, 90vw);
+  border-radius: 12px;
+  border: 1px solid rgba(171, 193, 236, 0.28);
+  background: rgba(10, 20, 38, 0.78);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.copilotDragHandle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  cursor: move;
+}
+
+.copilotDragHandle strong {
+  font-size: 0.86rem;
+  color: #dce8ff;
+}
+
+.copilotDragHandle button {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 1px solid rgba(130, 161, 215, 0.4);
+  background: rgba(10, 20, 36, 0.84);
+  color: #d0e1ff;
+  cursor: pointer;
+}
+
+.copilotAnalysis {
+  margin: 0;
+  color: #bdd0f0;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.copilotSuggestionRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.copilotSuggestionChip {
+  border: 1px solid rgba(137, 165, 214, 0.46);
+  border-radius: 999px;
+  background: rgba(20, 37, 66, 0.86);
+  color: #d2e3ff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 5px 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.copilotSuggestionChip:hover {
+  border-color: rgba(168, 196, 248, 0.72);
+}
+
+.copilotSuggestionChip.pinned {
+  border-color: rgba(73, 230, 140, 0.85);
+  background: rgba(17, 65, 45, 0.58);
+  box-shadow: 0 0 10px rgba(73, 230, 140, 0.22);
+}
+
+.copilotFact {
+  border-top: 1px solid rgba(126, 154, 206, 0.24);
+  padding-top: 6px;
+  display: grid;
+  gap: 3px;
+}
+
+.copilotFact span {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #9eb7dd;
+}
+
+.copilotFact p {
+  margin: 0;
+  font-size: 0.77rem;
+  color: #d6e4ff;
+  line-height: 1.35;
+}
+
+.copilotOrb {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  border: 1px solid rgba(154, 182, 240, 0.54);
+  background: radial-gradient(circle at 30% 30%, rgba(139, 174, 255, 0.88), rgba(79, 108, 198, 0.94));
+  color: #f0f5ff;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 0 14px rgba(128, 160, 236, 0.36);
+}
+
+.copilotOrb.thinking {
+  animation: copilotPulse 1.15s ease-in-out infinite;
+}
+
 .agentIdentity {
   min-width: 0;
   max-width: 46%;
@@ -1725,6 +1839,17 @@ textarea {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes copilotPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 12px rgba(128, 160, 236, 0.34);
+  }
+
+  50% {
+    box-shadow: 0 0 22px rgba(128, 160, 236, 0.58);
   }
 }
 
