@@ -76,9 +76,15 @@ textarea {
   object-position: center 55%;
   transform: scale(1.0);
   transform-origin: 48% 52%;
-  will-change: transform;
+  will-change: transform, opacity;
   pointer-events: none;
   z-index: 0;
+  opacity: 0;
+  transition: opacity 5s ease-in-out;
+}
+
+.hero-bg.hero-bg-active {
+  opacity: 1;
 }
 
 /* Breathing animation only on landing and loading pages */
@@ -508,10 +514,11 @@ textarea {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 50% 40%,
-      rgba(255, 255, 255, 0.07),
-      rgba(0, 0, 0, 0.5) 70%);
-  opacity: 0.4;
+  background: radial-gradient(ellipse at 50% 38%,
+      rgba(255, 255, 255, 0.48),
+      rgba(255, 255, 255, 0.04) 40%,
+      rgba(0, 0, 0, 0.30) 75%);
+  opacity: 0.7;
   animation: spotlightBreathe 10s ease-in-out infinite alternate;
   pointer-events: none;
   z-index: 0;
@@ -1828,11 +1835,11 @@ textarea {
 
 @keyframes spotlightBreathe {
   from {
-    opacity: 0.4;
+    opacity: 0.5;
   }
 
   to {
-    opacity: 0.85;
+    opacity: 1.0;
   }
 }
 

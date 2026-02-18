@@ -348,7 +348,7 @@ function App() {
     utteranceRef.current = null;
     window.currentUtterance = null;
     setMicState("inactive");
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const stopWaveform = () => {
@@ -357,7 +357,7 @@ function App() {
       waveformRafRef.current = null;
     }
     if (audioContextRef.current) {
-      audioContextRef.current.close().catch(() => {});
+      audioContextRef.current.close().catch(() => { });
       audioContextRef.current = null;
     }
     analyserRef.current = null;
@@ -701,9 +701,8 @@ function App() {
     return "Outcome: No Deal";
   }, [analysis, counsellorName, persona]);
 
-  const bgUrl = (stage === "negotiating" || stage === "completed")
-    ? `${process.env.PUBLIC_URL || ""}/negotiation_transparent.png`
-    : `${process.env.PUBLIC_URL || ""}/negotiation.png`;
+  const baseUrl = process.env.PUBLIC_URL || "";
+  const isTransparentStage = stage === "negotiating" || stage === "completed";
 
   const generateCounsellorName = () => {
     const firstNames = ["Preetam", "Riya", "Arjun", "Neha", "Aman", "Karan", "Sana", "Vikram"];
@@ -813,7 +812,7 @@ function App() {
       window.removeEventListener("pagehide", shutdown);
       document.removeEventListener("visibilitychange", onVisibility);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hardStopAudioAndMic]);
 
   useEffect(() => {
@@ -845,7 +844,7 @@ function App() {
           },
         });
       })
-      .catch(() => {});
+      .catch(() => { });
     return () => {
       cancelled = true;
     };
@@ -1253,7 +1252,7 @@ function App() {
       startListening();
     }
     return undefined;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isHumanMode, stage, micState]);
 
   useEffect(() => {
@@ -1601,7 +1600,8 @@ function App() {
 
   return (
     <main className={`app stage-${stage}`}>
-      <img className="hero-bg" src={bgUrl} alt="" aria-hidden="true" />
+      <img className={`hero-bg ${!isTransparentStage ? "hero-bg-active" : ""}`} src={`${baseUrl}/negotiation.png`} alt="" aria-hidden="true" />
+      <img className={`hero-bg ${isTransparentStage ? "hero-bg-active" : ""}`} src={`${baseUrl}/negotiation_transparent.png`} alt="" aria-hidden="true" />
       <div className="sceneOverlay" />
 
       {stage === "idle" && (
