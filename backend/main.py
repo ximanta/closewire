@@ -302,6 +302,16 @@ def _pipeline_traceability_file(mode: str) -> Path:
     return _pipeline_trace_dir(mode) / "conversation_traceability.json"
 
 
+def _is_rag_pipeline_enabled() -> bool:
+    raw = str(os.getenv("RAG_PIPELINE_ENABLED", "false")).strip().lower()
+    # Accept common typo "flase" as false to avoid accidental activation.
+    if raw in {"1", "true", "yes", "on"}:
+        return True
+    if raw in {"0", "false", "flase", "no", "off", ""}:
+        return False
+    return False
+
+
 def _has_devanagari(value: str) -> bool:
     text = str(value or "")
     return any("\u0900" <= ch <= "\u097F" for ch in text)
@@ -342,8 +352,21 @@ def _configure_pdf_fonts() -> Tuple[str, str]:
 
 
 async def _run_post_session_jobs_safe(session_id: str, mode: str, trace_payload: Dict[str, Any]) -> None:
+    if not _is_rag_pipeline_enabled():
+        _write_debug_trace(
+            "post_session_jobs_skipped",
+            {
+                "mode": mode,
+                "session_id": session_id,
+                "reason": "RAG_PIPELINE_ENABLED is false",
+            },
+        )
+        return
     try:
-        from backend.rag.post_session_runner import run_post_session_jobs
+        try:
+            from backend.rag.post_session_runner import run_post_session_jobs
+        except ImportError:
+            from rag.post_session_runner import run_post_session_jobs
 
         result = await run_post_session_jobs(session_id=session_id, mode=mode, trace_payload=trace_payload)
         _write_debug_trace(
@@ -2699,14 +2722,24 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
         if background_tasks:
             await asyncio.gather(*background_tasks, return_exceptions=True)
         _emit_conversation_traceability(config.session_id, state, analysis)
-        trace_payload = _build_traceability_payload(config.session_id, state, analysis)
-        asyncio.create_task(
-            _run_post_session_jobs_safe(
-                session_id=config.session_id,
-                mode=mode,
-                trace_payload=trace_payload,
+        if _is_rag_pipeline_enabled():
+            trace_payload = _build_traceability_payload(config.session_id, state, analysis)
+            asyncio.create_task(
+                _run_post_session_jobs_safe(
+                    session_id=config.session_id,
+                    mode=mode,
+                    trace_payload=trace_payload,
+                )
             )
-        )
+        else:
+            _write_debug_trace(
+                "post_session_jobs_skipped",
+                {
+                    "mode": mode,
+                    "session_id": config.session_id,
+                    "reason": "RAG_PIPELINE_ENABLED is false",
+                },
+            )
         logger.info("Session %s finished with %s", config.session_id, state["deal_status"])
     except WebSocketDisconnect:
         logger.info("WebSocket disconnected")
