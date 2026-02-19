@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap');
 :root {
   --base: #112233;
   --text: #ecf2ff;
@@ -152,21 +153,89 @@ textarea {
   gap: 12px;
   justify-items: center;
 }
-
 .launchBtn {
-  min-width: 220px;
+  all: unset; /* nuclear reset */
+}
+
+/* New Launch Button */
+
+.btn-armed-wrap {
+  position: relative;
+  display: inline-block;
+  padding: 1.5px;
+  background: #c0392b;
+  clip-path: polygon(14px 0%, 100% 0%, calc(100% - 14px) 100%, 0% 100%);
+}
+
+.btn-armed-wrap .btn-armed {
+  all: unset;                        /* ← kills ALL inherited/global button styles */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 32px 0 24px;
+  height: 52px;
+  background: #0d1520;               /* ← match your exact hero bg color */
+  cursor: pointer;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #fff;
+  text-transform: uppercase;
+  clip-path: polygon(13px 0%, 100% 0%, calc(100% - 13px) 100%, 0% 100%);
+  transition: background 0.25s;
+}
+
+.btn-armed-wrap .btn-armed:hover {
+  background: rgba(192, 57, 43, 0.2);
+}
+
+.btn-armed-wrap .btn-armed:hover .btn-armed__chevron {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+.btn-armed__icon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c0392b;
+  flex-shrink: 0;
+  animation: armPulse 1.4s ease-in-out infinite;
+}
+
+.btn-armed__text,
+.btn-armed__chevron {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-armed__chevron {
+  font-size: 0.9rem;
+  opacity: 0.5;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+@keyframes armPulse {
+  0%, 100% { box-shadow: 0 0 6px #c0392b, 0 0 16px rgba(192, 57, 43, 0.4); }
+  50%       { box-shadow: 0 0 12px #e74c3c, 0 0 30px rgba(231, 76, 60, 0.7); }
+}
+/* 
+.launchBtn {
+  min-width: 130px;
   min-height: 52px;
   padding: 12px 24px;
   border-radius: 999px;
   border: 1px solid rgba(146, 194, 255, 0.55);
   background: linear-gradient(100deg, #74dbff, #85a9ff);
   color: #04162f;
-  font-size: 1rem;
+  font-size: 3rem;
   font-weight: 800;
   letter-spacing: 0.04em;
   box-shadow: 0 0 18px rgba(116, 219, 255, 0.36);
-  animation: launchPulse 1.8s ease-in-out infinite;
-}
+  animation: launchPulse 2.8s ease-in-out infinite;
+} */
 
 .commandDockBtn {
   position: absolute;
@@ -2085,9 +2154,9 @@ textarea {
     width: 50%;
   }
 
-  .launchBtn {
+  /* .launchBtn {
     animation: none;
-  }
+  } */
 }
 
 @keyframes pulse-green {

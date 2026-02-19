@@ -14,11 +14,11 @@ const ACTIVATION_STEPS = [
   "Entering the CloseWire...",
 ];
 const HINDI_ACTIVATION_STEPS = [
-  "à¤¡à¥à¤¯à¥‚à¤² à¤à¤°à¥€à¤¨à¤¾ à¤¤à¥ˆà¤¯à¤¾à¤° à¤¹à¥‹ à¤°à¤¹à¤¾ à¤¹à¥ˆ...",
-  "à¤¨à¥‡à¤—à¥‹à¤¶à¤¿à¤à¤¶à¤¨ à¤°à¤¿à¤«à¥à¤²à¥‡à¤•à¥à¤¸ à¤•à¥ˆà¤²à¤¿à¤¬à¥à¤°à¥‡à¤Ÿ à¤¹à¥‹ à¤°à¤¹à¥‡ à¤¹à¥ˆà¤‚...",
-  "à¤ªà¤°à¥à¤¸à¥‹à¤¨à¤¾ à¤¡à¥€à¤à¤¨à¤ à¤²à¥‹à¤¡ à¤¹à¥‹ à¤°à¤¹à¤¾ à¤¹à¥ˆ...",
-  "à¤®à¤¨à¥‹à¤µà¥ˆà¤œà¥à¤žà¤¾à¤¨à¤¿à¤• à¤ªà¥à¤°à¥‹à¤«à¤¾à¤‡à¤² à¤µà¤¿à¤¶à¥à¤²à¥‡à¤·à¤¿à¤¤ à¤¹à¥‹ à¤°à¤¹à¥€ à¤¹à¥ˆ...",
-  "à¤•à¥à¤²à¥‹à¤œà¤µà¤¾à¤¯à¤° à¤®à¥‡à¤‚ à¤ªà¥à¤°à¤µà¥‡à¤¶ à¤¹à¥‹ à¤°à¤¹à¤¾ à¤¹à¥ˆ...",
+  "\u0921\u094d\u092f\u0942\u0932 \u090f\u0930\u0940\u0928\u093e \u0924\u0948\u092f\u093e\u0930 \u0939\u094b \u0930\u0939\u093e \u0939\u0948...",
+  "\u0928\u0947\u0917\u094b\u0936\u093f\u090f\u0936\u0928 \u0930\u093f\u092b\u094d\u0932\u0947\u0915\u094d\u0938 \u0915\u0948\u0932\u093f\u092c\u094d\u0930\u0947\u091f \u0939\u094b \u0930\u0939\u0947 \u0939\u0948\u0902...",
+  "\u092a\u0930\u094d\u0938\u094b\u0928\u093e \u0921\u0940\u090f\u0928\u090f \u0932\u094b\u0921 \u0939\u094b \u0930\u0939\u093e \u0939\u0948...",
+  "\u092e\u0928\u094b\u0935\u0948\u091c\u094d\u091e\u093e\u0928\u093f\u0915 \u092a\u094d\u0930\u094b\u092b\u093e\u0907\u0932 \u0935\u093f\u0936\u094d\u0932\u0947\u0937\u093f\u0924 \u0939\u094b \u0930\u0939\u0940 \u0939\u0948...",
+  "\u0915\u094d\u0932\u094b\u091c\u0935\u093e\u092f\u0930 \u092e\u0947\u0902 \u092a\u094d\u0930\u0935\u0947\u0936 \u0939\u094b \u0930\u0939\u093e \u0939\u0948...",
 ];
 const COMMITMENT_LABELS = {
   none: "No Commitment",
@@ -42,7 +42,7 @@ const ARCHETYPE_CARDS = [
   { id: "intellectual_buyer", icon: "IB", title: "Intellectual Buyer", profile: "Dissects syllabus depth; demands technical specificity.", accent: "#6fd4ff" },
   { id: "fomo_victim", icon: "FV", title: "FOMO Victim", profile: "Fear-driven urgency, reacts to momentum.", accent: "#ff6f95" },
   { id: "drifter", icon: "DR", title: "Drifter", profile: "Low clarity, needs structure and direction.", accent: "#74d9a4" },
-  { id: "skeptical_shopper", icon: "SK", title: "Skeptical Shopper", profile: "हिंदी वक्ता: प्रमाण मांगता है और दावों को चुनौती देता है।", accent: "#f4c15d" },
+  { id: "skeptical_shopper", icon: "SK", title: "संदेहशील ग्राहक", profile: "\u0939\u093f\u0902\u0926\u0940 \u0935\u0915\u094d\u0924\u093e: \u092a\u094d\u0930\u092e\u093e\u0923 \u092e\u093e\u0902\u0917\u0924\u093e \u0939\u0948 \u0914\u0930 \u0926\u093e\u0935\u094b\u0902 \u0915\u094b \u091a\u0941\u0928\u094c\u0924\u0940 \u0926\u0947\u0924\u093e \u0939\u0948\u0964", accent: "#f4c15d" },
 ];
 const DEFAULT_VOICE_PROFILE_MAPPING = {
   voice_preferences: {
@@ -50,8 +50,8 @@ const DEFAULT_VOICE_PROFILE_MAPPING = {
     female: ["Google US English", "Microsoft Zira", "Zira", "Female"],
   },
   hindi_voice_preferences: {
-    male: ["Google हिन्दी", "Microsoft Heera", "Hindi Male"],
-    female: ["Google हिन्दी", "Microsoft Heera", "Hindi Female"],
+    male: ["Google Hindi", "Microsoft Heera", "Hindi Male"],
+    female: ["Google Hindi", "Microsoft Heera", "Hindi Female"],
   },
 };
 
@@ -653,12 +653,12 @@ function App() {
   }, [metrics?.sentiment_indicator]);
   const activationTitle = useMemo(() => {
     if (selectedArchetype === "skeptical_shopper") {
-      if (negotiationMode === "human_vs_ai") return "à¤¹à¥à¤¯à¥‚à¤®à¤¨ à¤¬à¤¨à¤¾à¤® à¤à¤œà¥‡à¤‚à¤Ÿ à¤¡à¥à¤¯à¥‚à¤² à¤¸à¤•à¥à¤°à¤¿à¤¯";
-      if (negotiationMode === "agent_powered_human_vs_ai") return "à¤à¤œà¥‡à¤‚à¤Ÿ à¤…à¤¸à¤¿à¤¸à¥à¤Ÿà¥‡à¤¡ à¤¹à¥à¤¯à¥‚à¤®à¤¨ à¤¬à¤¨à¤¾à¤® à¤à¤œà¥‡à¤‚à¤Ÿ à¤¡à¥à¤¯à¥‚à¤² à¤¸à¤•à¥à¤°à¤¿à¤¯";
-      return "à¤à¤œà¥‡à¤‚à¤Ÿ à¤¬à¤¨à¤¾à¤® à¤à¤œà¥‡à¤‚à¤Ÿ à¤¡à¥à¤¯à¥‚à¤² à¤¸à¤•à¥à¤°à¤¿à¤¯";
+      if (negotiationMode === "human_vs_ai") return "\u0939\u094d\u092f\u0942\u092e\u0928 \u092c\u0928\u093e\u092e \u090f\u091c\u0947\u0902\u091f \u0921\u094d\u092f\u0942\u0932 \u0938\u0915\u094d\u0930\u093f\u092f";
+      if (negotiationMode === "agent_powered_human_vs_ai") return "\u090f\u091c\u0947\u0902\u091f \u0905\u0938\u093f\u0938\u094d\u091f\u0947\u0921 \u0939\u094d\u092f\u0942\u092e\u0928 \u092c\u0928\u093e\u092e \u090f\u091c\u0947\u0902\u091f \u0921\u094d\u092f\u0942\u0932 \u0938\u0915\u094d\u0930\u093f\u092f";
+      return "\u090f\u091c\u0947\u0902\u091f \u092c\u0928\u093e\u092e \u090f\u091c\u0947\u0902\u091f \u0921\u094d\u092f\u0942\u0932 \u0938\u0915\u094d\u0930\u093f\u092f";
     }
-    if (negotiationMode === "human_vs_ai") return "Human vs Agent Duel Activated";
-    if (negotiationMode === "agent_powered_human_vs_ai") return "Agent Assisted Human vs Agent Duel Activated";
+    if (negotiationMode === "human_vs_ai") return "\u0939\u094d\u092f\u0942\u092e\u0928 \u092c\u0928\u093e\u092e \u090f\u091c\u0947\u0902\u091f \u0921\u094d\u092f\u0942\u0932 \u0938\u0915\u094d\u0930\u093f\u092f";
+    if (negotiationMode === "agent_powered_human_vs_ai") return "\u090f\u091c\u0947\u0902\u091f \u0905\u0938\u093f\u0938\u094d\u091f\u0947\u0921 \u0939\u094d\u092f\u0942\u092e\u0928 \u092c\u0928\u093e\u092e \u090f\u091c\u0947\u0902\u091f \u0921\u094d\u092f\u0942\u0932 \u0938\u0915\u094d\u0930\u093f\u092f";
     return "Agent vs Agent Duel Activated";
   }, [negotiationMode, selectedArchetype]);
   const activationSteps = selectedArchetype === "skeptical_shopper" ? HINDI_ACTIVATION_STEPS : ACTIVATION_STEPS;
@@ -1720,8 +1720,13 @@ function App() {
               onChange={(e) => setProgramUrl(e.target.value)}
               placeholder="Enter Program URL here..."
             />
-            <button className="launchBtn" onClick={startNegotiation}>Launch</button>
-          </div>
+<div class="btn-armed-wrap">
+  <button class="btn-armed">
+    <span class="btn-armed__icon"></span>
+    <span class="btn-armed__text">Launch Arena</span>
+    <span class="btn-armed__chevron">›</span>
+  </button>
+</div>     </div>
         </section>
       )}
 
