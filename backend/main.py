@@ -2781,6 +2781,18 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 await asyncio.sleep(0.6)
 
         analysis = await _judge_outcome(state)
+        # Sync live state with judge analysis to ensure UI consistency
+        if "enrollment_likelihood" in analysis:
+            state["negotiation_metrics"]["close_probability"] = int(analysis["enrollment_likelihood"])
+        
+        baseline_trust = 50 + state["negotiation_metrics"]["retry_modifier"]
+        if "trust_delta" in analysis:
+            new_trust_index = baseline_trust + int(analysis["trust_delta"])
+            state["negotiation_metrics"]["trust_index"] = max(0, min(100, new_trust_index))
+
+        # Push final synced metrics to frontend (updates bottom ribbon)
+        await _ws_send_json(websocket, {"type": "metrics_update", "data": state["negotiation_metrics"]})
+
         state["deal_status"] = _decide_outcome_from_judge(state, analysis)
         await _ws_send_json(
             websocket,
@@ -2845,6 +2857,55 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
             await _ws_send_json(websocket, {"type": "error", "data": {"message": str(exc)}})
         except ClientStreamClosed:
             logger.info("Skipped error send because websocket already closed")
+
+
+
+def _clean_transcript_content(content: str) -> str:
+    # 1. XML Block Match
+    xml_match = re.search(r"<message>\s*(.*?)\s*</message>", content, re.IGNORECASE | re.DOTALL)
+    if xml_match:
+        return xml_match.group(1).strip()
+    
+    # 2. Inline prefix Match
+    inline_match = re.search(r"MESSAGE:\s*(.*?)(?:(?:\n|\r|\s)(?:INTERNAL_THOUGHT|UPDATED_STATS|UPDATED_STATE|EMOTIONAL_STATE|STRATEGIC_INTENT|TECHNIQUES_USED|CONFIDENCE_SCORE)\s*:|$)", content, re.IGNORECASE | re.DOTALL)
+    if inline_match:
+        return inline_match.group(1).strip()
+
+    # 3. Line-by-line filtering fallback
+    lines = []
+    for line in content.splitlines():
+        line = line.strip()
+        if not line: 
+            continue
+        upper = line.upper()
+        if any(upper.startswith(p) for p in ["INTERNAL_THOUGHT:", "UPDATED_STATS:", "UPDATED_STATE:", "EMOTIONAL_STATE:", "STRATEGIC_INTENT:", "TECHNIQUES_USED:"]):
+            continue
+        if upper.startswith("<THOUGHT>") or upper.startswith("</THOUGHT>"):
+            continue
+        if upper.startswith("<STATS>") or upper.startswith("</STATS>"):
+            continue
+        if upper.startswith("<INTENT>") or upper.startswith("</INTENT>"):
+            continue
+        if upper.startswith("<EMOTIONAL_STATE>") or upper.startswith("</EMOTIONAL_STATE>"):
+            continue
+            
+        # Handle <message> tags on single lines
+        if upper.startswith("<MESSAGE>") or upper.startswith("</MESSAGE>"):
+            clean = re.sub(r"</?message>", "", line, flags=re.IGNORECASE).strip()
+            if clean:
+                lines.append(clean)
+            continue
+            
+        # Handle MESSAGE: prefix on single line
+        if upper.startswith("MESSAGE:"):
+            clean = line[8:].strip()
+            if clean:
+                lines.append(clean)
+            continue
+            
+        lines.append(line)
+        
+    return " ".join(lines).strip()
 
 
 @app.post("/generate-report")
@@ -3025,7 +3086,7 @@ async def generate_report(payload: ReportRequest) -> StreamingResponse:
         ["Duration", duration_hms],
         ["Final Score", f"{judge.get('negotiation_score', 0)} / 100"],
         ["Commitment Signal", commitment_map.get(commitment, commitment)],
-        ["Enrollment Likelihood", f"{judge.get('enrollment_likelihood', 0)}%"],
+        ["Enrollment Probability", f"{judge.get('enrollment_likelihood', 0)}%"],
         ["Trust Delta", str(judge.get("trust_delta", 0))],
     ]
     story.append(_make_paragraph("Outcome Summary", section_style))
@@ -3129,7 +3190,7 @@ async def generate_report(payload: ReportRequest) -> StreamingResponse:
     for msg in transcript_for_report:
         agent = str(msg.get("agent", "")).upper() or "UNKNOWN"
         rnd = msg.get("round", "-")
-        content = str(msg.get("content", ""))
+        content = _clean_transcript_content(str(msg.get("content", "")))
         story.append(_make_paragraph(f"Round {rnd} - {agent}", meta_style))
         thought = str(msg.get("internal_thought", "")).strip()
         if thought and str(msg.get("agent", "")).lower() == "student":

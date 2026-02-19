@@ -47,7 +47,7 @@ def _write_human_readable_log(
     lines.append(f"Result: {trace_payload.get('deal_status', 'unknown')}")
     lines.append(f"Winner: {analysis.get('winner', 'unknown')}")
     lines.append(f"Commitment Signal: {analysis.get('commitment_signal', 'none')}")
-    lines.append(f"Enrollment Likelihood: {analysis.get('enrollment_likelihood', 0)}")
+    lines.append(f"Enrollment Probability: {analysis.get('enrollment_likelihood', 0)}")
     lines.append(f"Final Trust Index: {metrics.get('trust_index', 'n/a')}")
     lines.append(f"Final Close Probability: {metrics.get('close_probability', 'n/a')}")
     lines.append("")
