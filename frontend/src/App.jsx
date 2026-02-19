@@ -30,9 +30,9 @@ const LIVE_PROCESSING_LABELS = ["Analyzing Tone...", "Calculating Trust..."];
 const SILENCE_AUTO_SEND_MS = 5000;
 const SILENCE_PROMPT_MS = 10000;
 const PIPELINE_OPTIONS = [
-  { id: "ai_vs_ai", title: "Agent vs Agent", subtitle: "Autonomous counsellor and student simulation.", status: "active" },
-  { id: "human_vs_ai", title: "Human vs Agent", subtitle: "You speak as counsellor, AI responds as learner.", status: "active" },
-  { id: "agent_powered_human_vs_ai", title: "Agent Powered Human vs Agent", subtitle: "Voice-first counsellor with live coach cues.", status: "active" },
+  { id: "ai_vs_ai", title: "LAB: Agent vs Agent", subtitle: "Autonomous counsellor and prospect simulation.", status: "active" },
+  { id: "human_vs_ai", title: "GYM: Human vs Agent", subtitle: "You speak as counsellor, AI responds as prospect.", status: "active" },
+  { id: "agent_powered_human_vs_ai", title: "ARENA: Agent Powered Human vs Agent", subtitle: "Voice-first counsellor with live Agent cues.", status: "active" },
 ];
 const ARCHETYPE_CARDS = [
   { id: "random", icon: "??", title: "Random Profile", profile: "Let CloseWire pick one profile at random.", accent: "#9aa6c8" },
@@ -42,7 +42,7 @@ const ARCHETYPE_CARDS = [
   { id: "intellectual_buyer", icon: "IB", title: "Intellectual Buyer", profile: "Dissects syllabus depth; demands technical specificity.", accent: "#6fd4ff" },
   { id: "fomo_victim", icon: "FV", title: "FOMO Victim", profile: "Fear-driven urgency, reacts to momentum.", accent: "#ff6f95" },
   { id: "drifter", icon: "DR", title: "Drifter", profile: "Low clarity, needs structure and direction.", accent: "#74d9a4" },
-  { id: "skeptical_shopper", icon: "SK", title: "Skeptical Shopper", profile: "Hindi speaker: asks for proof and challenges claims.", accent: "#f4c15d" },
+  { id: "skeptical_shopper", icon: "SK", title: "Skeptical Shopper", profile: "हिंदी वक्ता: प्रमाण मांगता है और दावों को चुनौती देता है।", accent: "#f4c15d" },
 ];
 const DEFAULT_VOICE_PROFILE_MAPPING = {
   voice_preferences: {
@@ -2064,7 +2064,7 @@ function App() {
                     </div>
                     <div className={`retryDeltaCallout ${retryPerformance.latest.deltaFromPrevious >= 0 ? "improved" : "degraded"}`}>
                       <div className="deltaValue">
-                        {retryPerformance.latest.deltaFromPrevious >= 0 ? "Ã¢â€ â€”" : "Ã¢â€ Ëœ"} {retryPerformance.latest.deltaFromPrevious >= 0 ? "+" : ""}
+                        {retryPerformance.latest.deltaFromPrevious >= 0 ? "Up" : "Down"} {retryPerformance.latest.deltaFromPrevious >= 0 ? "+" : ""}
                         {retryPerformance.latest.deltaFromPrevious}
                       </div>
                       <div className="deltaMeta">
@@ -2211,4 +2211,3 @@ function App() {
 }
 
 export default App;
-
