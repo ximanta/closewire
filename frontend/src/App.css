@@ -633,6 +633,10 @@ textarea {
   left: 12px;
   z-index: 32;
   pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 320px;
 }
 
 .reportBrandMark {
@@ -656,11 +660,17 @@ textarea {
 
 .arenaTopZone.human-mode {
   gap: 4px;
+  padding-top: 60px;
 }
 
 .momentumBar {
   width: min(44vw, 740px);
   margin: 0 auto 6px;
+}
+
+.arenaBrandMark .momentumBar {
+  width: 100%;
+  margin: 0;
 }
 
 .momentumTrack {
@@ -705,15 +715,41 @@ textarea {
   margin-top: 6px;
 }
 
-.liveCoachPanel {
-  margin-top: 4px;
-  display: grid;
-  grid-template-columns: 1.3fr 0.7fr;
-  gap: 10px;
+/* Main Content Area (Sidebar + Projection) */
+.arenaMainContent {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  gap: 16px;
+  position: relative;
+  width: 100%;
   padding: 0 12px;
+  /* Match arenaBrandMark left: 12px */
+}
+
+/* Sidebar for Counsellor Input */
+.arenaSidebar {
+  flex: 0 0 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  /* Align input to bottom if preferred, or remove for top */
+  padding-bottom: 20px;
+  min-width: 0;
+  height: 100%;
+  /* Ensure it takes full height of the parent */
+}
+
+.liveCoachPanel {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
   min-height: 0;
   position: relative;
   z-index: 7;
+  width: 100%;
+  flex: 1;
 }
 
 .liveMicPanel,
@@ -725,6 +761,12 @@ textarea {
   position: relative;
   z-index: 8;
   pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.liveMicPanel {
+  flex: 1;
 }
 
 .liveMicPanel.state-listening {
@@ -745,14 +787,39 @@ textarea {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 0;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(124, 154, 211, 0.15);
+}
+
+.counsellorIdentityCompact {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.counsellorIdentityCompact strong {
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.counsellorIdentityCompact p {
+  font-size: 0.75rem;
+  color: #8da4ca;
+  margin: 0;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .liveMicHeaderActions {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
 }
 
 .liveMicHeader span {
@@ -761,30 +828,133 @@ textarea {
 }
 
 .shutdownBtn {
-  min-width: 44px;
+  width: 32px;
+  height: 32px;
+  min-width: 0;
+  border-radius: 8px;
+  border: 1px solid rgba(167, 188, 226, 0.45);
+  background: rgba(12, 22, 42, 0.88);
+  color: #ffb5be;
+  /* Default reddish tint for stop */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.shutdownBtn:hover {
+  background: rgba(45, 20, 30, 0.75);
+  border-color: rgba(255, 125, 138, 0.82);
+  color: #ffdae0;
+  box-shadow: 0 0 10px rgba(255, 125, 138, 0.25);
+}
+
+.micStatusIndicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
   height: 28px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  /* Removed margin-right as per user request to tighten layout */
+}
+
+.micStatusIndicator.active {
+  color: #49e68c;
+  filter: drop-shadow(0 0 4px rgba(73, 230, 140, 0.5));
+}
+
+.micStatusIndicator.inactive {
+  color: #5870a3;
+  opacity: 0.6;
+}
+
+.pauseAutoSendBtn {
+  width: 32px;
+  height: 32px;
+  min-width: 0;
   border-radius: 8px;
   border: 1px solid rgba(167, 188, 226, 0.45);
   background: rgba(12, 22, 42, 0.88);
   color: #d4e4ff;
   cursor: pointer;
-  line-height: 1;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.3s ease;
 }
 
-.shutdownBtn:hover {
-  border-color: rgba(255, 125, 138, 0.62);
-  color: #ffb5be;
+.pauseAutoSendBtn.auto-on {
+  border-color: rgba(73, 230, 140, 0.65);
+  box-shadow: 0 0 10px rgba(73, 230, 140, 0.25);
+  color: #49e68c;
+}
+
+.pauseAutoSendBtn.auto-off {
+  background: rgba(22, 38, 65, 0.4);
+  border-color: rgba(140, 164, 212, 0.25);
+  color: #6a85ad;
+}
+
+.pauseAutoSendBtn:hover {
+  background: rgba(26, 42, 68, 0.75);
+}
+
+.pauseAutoSendBtn {
+  width: 32px;
+  height: 32px;
+  min-width: 0;
+  border-radius: 8px;
+  border: 1px solid rgba(167, 188, 226, 0.45);
+  background: rgba(12, 22, 42, 0.88);
+  color: #d4e4ff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.pauseAutoSendBtn.auto-on {
+  border-color: rgba(73, 230, 140, 0.65);
+  box-shadow: 0 0 10px rgba(73, 230, 140, 0.25);
+  color: #49e68c;
+}
+
+.pauseAutoSendBtn.auto-off {
+  background: rgba(22, 38, 65, 0.4);
+  border-color: rgba(140, 164, 212, 0.25);
+  color: #6a85ad;
+}
+
+.pauseAutoSendBtn:hover {
+  background: rgba(26, 42, 68, 0.75);
 }
 
 .micSignalRow {
   display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  min-height: 28px;
-  margin-bottom: 8px;
+  align-items: center;
+  gap: 12px;
+  background: rgba(13, 22, 35, 0.4);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(88, 112, 163, 0.15);
+  margin-bottom: 12px;
+  min-height: 42px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.micSignalRow:not([style*="default"]):hover {
+  background: rgba(22, 38, 65, 0.6);
+  border-color: rgba(98, 137, 212, 0.35);
+  box-shadow: 0 0 12px rgba(69, 105, 179, 0.15);
+  cursor: pointer;
 }
 
 .micOrb {
@@ -818,6 +988,7 @@ textarea {
 .liveMicPanel textarea {
   width: 100%;
   min-height: 56px;
+  flex: 1;
   resize: none;
   border-radius: 8px;
   border: 1px solid rgba(129, 160, 218, 0.34);
@@ -846,37 +1017,56 @@ textarea {
   color: #9db3d8;
 }
 
-.liveAiPanel {
-  display: grid;
-  align-content: center;
-  justify-items: center;
-  gap: 6px;
-  text-align: center;
-  padding-top: 8px;
+
+.micActiveGlowBar {
+  height: 2px;
+  width: 100%;
+  background: #49e68c;
+  box-shadow: 0 0 8px rgba(73, 230, 140, 0.8), 0 0 16px rgba(73, 230, 140, 0.4);
+  opacity: 0.8;
+  position: relative;
+  transition: opacity 0.2s ease;
 }
 
-.liveAiPanel p {
-  margin: 0;
-  color: #adc2e7;
+.liveAiPanel {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(124, 154, 211, 0.25);
+  background: rgba(8, 18, 36, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 40;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  pointer-events: auto;
 }
 
 .studentAvatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 999px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
   object-fit: cover;
   border: 2px solid rgba(122, 155, 213, 0.55);
   box-shadow: 0 0 10px rgba(66, 111, 198, 0.28);
 }
 
 .studentMiniCard {
-  width: min(260px, 100%);
-  border-radius: 10px;
-  border: 1px solid rgba(120, 152, 211, 0.35);
-  background: rgba(9, 18, 36, 0.74);
-  padding: 8px;
-  display: grid;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
   gap: 2px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  width: auto;
+  margin: 0;
 }
 
 .studentMiniCard p {
@@ -1078,6 +1268,12 @@ textarea {
   z-index: 1;
 }
 
+.projectionLane.human-mode-projection {
+  margin-top: 0;
+  border-left: 1px solid rgba(124, 154, 211, 0.15);
+  padding-left: 20px;
+}
+
 .projectionCard {
   width: min(74%, 980px);
   background: rgba(17, 34, 51, 0.85);
@@ -1144,21 +1340,28 @@ textarea {
   padding-inline-start: 2px;
 }
 
-.projectionCard details {
+/* Internal Thought and Strategic Intent styling */
+.projectionCard details,
+.internalThoughtDetails {
   color: var(--muted);
   font-size: 0.84rem;
+  margin-top: 4px;
 }
 
-.thoughtBtn {
-  margin: 2px 0 8px;
-  border: 1px solid rgba(140, 164, 212, 0.38);
-  background: rgba(19, 36, 63, 0.82);
-  color: #d5e5ff;
-  border-radius: 999px;
-  font-size: 0.74rem;
-  font-weight: 700;
-  padding: 4px 9px;
+.projectionCard summary,
+.internalThoughtDetails summary {
   cursor: pointer;
+  user-select: none;
+  font-weight: 600;
+  color: #8da4ca;
+}
+
+.internalThoughtDetails summary {
+  color: #a4beea;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(164, 190, 234, 0.4);
 }
 
 .thoughtBtn:hover {

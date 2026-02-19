@@ -212,6 +212,7 @@ function App() {
   const [copilotData, setCopilotData] = useState(null);
   const [copilotState, setCopilotState] = useState("idle");
   const [copilotPinnedSuggestion, setCopilotPinnedSuggestion] = useState("");
+  const [isAutoSendEnabled, setIsAutoSendEnabled] = useState(true);
 
   const wsRef = useRef(null);
   const projectionRef = useRef(null);
@@ -244,6 +245,8 @@ function App() {
   const stageRef = useRef("idle");
   const modeRef = useRef("ai_vs_ai");
   const micStateRef = useRef("inactive");
+  const isAutoSendEnabledRef = useRef(true);
+  const micPausedRef = useRef(false);
   const speechRecognitionCtor = typeof window !== "undefined"
     ? (window.SpeechRecognition || window.webkitSpeechRecognition || null)
     : null;
@@ -258,6 +261,19 @@ function App() {
     if (explicit === "male" || explicit === "female") return explicit;
     return "male";
   }, [persona?.gender]);
+
+  useEffect(() => {
+    isAutoSendEnabledRef.current = isAutoSendEnabled;
+    // Sync pause ref with active state to prevent desync
+    micPausedRef.current = !isAutoSendEnabled;
+    // eslint-disable-next-line no-console
+    console.log("[MIC-DEBUG] Syncing micPausedRef to", !isAutoSendEnabled, "bases on isAutoSendEnabled:", isAutoSendEnabled);
+
+    if (!isAutoSendEnabled && inactivityTimerRef.current) {
+      clearTimeout(inactivityTimerRef.current);
+      inactivityTimerRef.current = null;
+    }
+  }, [isAutoSendEnabled]);
 
   useEffect(() => {
     stageRef.current = stage;
@@ -365,8 +381,13 @@ function App() {
   };
 
   const stopRecognition = () => {
+    // eslint-disable-next-line no-console
+    console.log("[MIC-DEBUG] stopRecognition called");
     const recognition = recognitionRef.current;
-    if (!recognition) return;
+    if (!recognition) {
+      setMicState((current) => (current === "processing" || current === "locked" ? current : "inactive"));
+      return;
+    }
     try {
       recognition.onend = null;
       recognition.onresult = null;
@@ -384,6 +405,7 @@ function App() {
     isStartingRecognitionRef.current = false;
     stopWaveform();
     clearMicTimers();
+    setMicState((current) => (current === "processing" || current === "locked" ? current : "inactive"));
   };
 
   const selectSpeechVoice = useCallback(() => {
@@ -1009,9 +1031,11 @@ function App() {
   const armAutoSendTimer = () => {
     if (!isHumanDrivenPipeline(modeRef.current)) return;
     if (micStateRef.current !== "listening") return;
+    if (!isAutoSendEnabledRef.current) return;
     if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
     inactivityTimerRef.current = setTimeout(() => {
       if (!isHumanDrivenPipeline(modeRef.current) || micStateRef.current !== "listening") return;
+      if (!isAutoSendEnabledRef.current) return;
       if (window.speechSynthesis?.speaking || isTtsSpeakingRef.current) return;
       const candidate = String(liveTranscriptRef.current || "").trim();
       if (candidate) {
@@ -1101,7 +1125,17 @@ function App() {
   };
 
   const startListening = async () => {
+    // eslint-disable-next-line no-console
+    console.log("[MIC-DEBUG] startListening called", {
+      isHumanMode,
+      stage,
+      isStarting: isStartingRecognitionRef.current,
+      isTtsSpeaking: isTtsSpeakingRef.current,
+      micState: micStateRef.current,
+      micPaused: micPausedRef.current
+    });
     if (!isHumanMode || stage !== "negotiating") return;
+    if (micPausedRef.current) return;
     if (isStartingRecognitionRef.current) return;
     if (isTtsSpeakingRef.current || window.speechSynthesis?.speaking || micStateRef.current === "locked" || micStateRef.current === "processing") return;
     if (!speechRecognitionCtor || micPermissionStatus === "denied") {
@@ -1189,6 +1223,8 @@ function App() {
       stopRecognition();
     };
     recognition.onend = () => {
+      // eslint-disable-next-line no-console
+      console.log("[MIC-DEBUG] recognition.onend fired");
       setMicState((current) => (current === "processing" || current === "locked" ? current : "inactive"));
       stopWaveform();
       armAutoSendTimer();
@@ -1245,10 +1281,13 @@ function App() {
     }
   }, [micState]);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (!isHumanMode || stage !== "negotiating") return undefined;
-    if (micState === "inactive" && !isTtsSpeakingRef.current) {
+    // Prevent restart if:
+    // 1. TTS is speaking
+    // 2. Mic is explicitly paused (user action)
+    // 3. Mic is already starting (prevent startListening -> stopRecognition -> setMicState(inactive) -> loop)
+    if (micState === "inactive" && !isTtsSpeakingRef.current && !micPausedRef.current && !isStartingRecognitionRef.current) {
       startListening();
     }
     return undefined;
@@ -1262,7 +1301,9 @@ function App() {
       if (document.visibilityState !== "visible") return;
       if (isTtsSpeakingRef.current || window.speechSynthesis?.speaking) return;
       if (micStateRef.current === "processing" || micStateRef.current === "locked") return;
-      if (!recognitionRef.current && !isStartingRecognitionRef.current) {
+      if (!recognitionRef.current && !isStartingRecognitionRef.current && !micPausedRef.current) {
+        // eslint-disable-next-line no-console
+        console.log("[MIC-DEBUG] Watchdog setting inactive (not paused)");
         setMicState("inactive");
       }
     }, 1200);
@@ -1815,14 +1856,26 @@ function App() {
 
       {(stage === "negotiating" || (stage === "completed" && !showReportDashboard)) && (
         <section className="arenaScene">
-          <div className="arenaBrandMark">
-            <button type="button" className="brandWordmarkBtn brandWordmarkBtnSm" onClick={closeArena} title="Close Arena">
-              <span className="brandWordmark brandWordmarkSm">
-                <span className="brandClose">CLOSE</span>
-                <span className="brandWire">WIRE</span>
-              </span>
-            </button>
-          </div>
+          {isHumanMode && (
+            <div className="arenaBrandMark">
+              <button type="button" className="brandWordmarkBtn brandWordmarkBtnSm" onClick={closeArena} title="Close Arena">
+                <span className="brandWordmark brandWordmarkSm">
+                  <span className="brandClose">CLOSE</span>
+                  <span className="brandWire">WIRE</span>
+                </span>
+              </button>
+              <div className={`momentumBar ${momentumValue > 80 ? "hot" : ""}`}>
+                <div className="momentumTrack">
+                  <div className="momentumLeft" style={{ width: `${momentumValue}%` }} />
+                  <div className="momentumRight" style={{ width: `${100 - momentumValue}%` }} />
+                </div>
+                <div className="momentumMeta">
+                  <span>{momentumLabel}</span>
+                  <strong>{momentumValue}%</strong>
+                </div>
+              </div>
+            </div>
+          )}
           {stage === "completed" && !showReportDashboard && (
             <div className="arenaBottomActions">
               <button className="ghostBtn viewReportBtn" onClick={() => setShowReportDashboard(true)}>
@@ -1831,118 +1884,150 @@ function App() {
             </div>
           )}
           <div className={`arenaTopZone ${isHumanMode ? "human-mode" : ""}`}>
-            <div className={`momentumBar ${momentumValue > 80 ? "hot" : ""}`}>
-              <div className="momentumTrack">
-                <div className="momentumLeft" style={{ width: `${momentumValue}%` }} />
-                <div className="momentumRight" style={{ width: `${100 - momentumValue}%` }} />
+            {!isHumanMode && (
+              <div className={`momentumBar ${momentumValue > 80 ? "hot" : ""}`}>
+                <div className="momentumTrack">
+                  <div className="momentumLeft" style={{ width: `${momentumValue}%` }} />
+                  <div className="momentumRight" style={{ width: `${100 - momentumValue}%` }} />
+                </div>
+                <div className="momentumMeta">
+                  <span>{momentumLabel}</span>
+                  <strong>{momentumValue}%</strong>
+                </div>
               </div>
-              <div className="momentumMeta">
-                <span>{momentumLabel}</span>
-                <strong>{momentumValue}%</strong>
-              </div>
-            </div>
+            )}
             <div className="agentLayer">
-              <article className={`agentIdentity counsellor ${momentumValue > 65 ? "glow" : ""}`}>
-                <h3>Program Counseller</h3>
-                <p>{`${counsellorName || "Admissions Counsellor"}, ${program?.program_name || "Program"}`}</p>
-              </article>
-              <article className={`agentIdentity student ${momentumValue < 40 ? "glow" : ""}`}>
-                <h3>Prospective Student</h3>
-                <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
-              </article>
+              {!isHumanMode && (
+                <article className={`agentIdentity counsellor ${momentumValue > 65 ? "glow" : ""}`}>
+                  <h3>Program Counseller</h3>
+                  <p>{`${counsellorName || "Admissions Counsellor"}, ${program?.program_name || "Program"}`}</p>
+                </article>
+              )}
+              {!isHumanMode && (
+                <article className={`agentIdentity student ${momentumValue < 40 ? "glow" : ""}`}>
+                  <h3>Prospective Student</h3>
+                  <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
+                </article>
+              )}
             </div>
+            
+            {isHumanMode && (
+              <div className={`liveAiPanel ${micState === "locked" ? "speaking" : ""}`}>
+                <img
+                  className="studentAvatar"
+                  src={studentImageSrc}
+                  alt={`${persona?.name || "Student"} profile`}
+                  onError={() => {
+                    const base = process.env.PUBLIC_URL || "";
+                    setStudentImageSrc(`${base}/student-placeholder.svg`);
+                  }}
+                />
+                <article className="studentMiniCard">
+                  <strong>Prospective Student</strong>
+                  <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
+                  <span>{micState === "locked" ? "Speaking..." : "Waiting..."}</span>
+                </article>
+              </div>
+            )}
 
+
+          </div>
+
+          <div className="arenaMainContent">
             {isHumanMode && stage === "negotiating" && (
-              <section className="liveCoachPanel">
-                <div className={`liveMicPanel state-${micState}`}>
-                  <div className="liveMicHeader">
-                    <strong>Your Turn (Counsellor)</strong>
-                    <div className="liveMicHeaderActions">
-                      <span>
-                        {micState === "listening" && "Listening..."}
-                        {micState === "processing" && LIVE_PROCESSING_LABELS[processingLabelIndex]}
-                        {micState === "locked" && "Mic locked while AI speaks"}
-                        {micState === "inactive" && "Ready"}
-                      </span>
-                      <button
-                        type="button"
-                        className="shutdownBtn"
-                        onClick={hardStopAudioAndMic}
-                        title="Stop microphone and voice"
-                        aria-label="Stop microphone and voice"
-                      >
-                        Stop</button>
+              <aside className="arenaSidebar">
+                <section className="liveCoachPanel">
+                  <div className={`liveMicPanel state-${micState}`}>
+                    <div className="liveMicHeader">
+                      <article className="counsellorIdentityCompact">
+                        <strong>Your Turn (Counsellor)</strong>
+                        <p>{counsellorName || "Admissions Counsellor"}, {program?.program_name || "Program"}</p>
+                      </article>
+                      <div className="liveMicHeaderActions">
+                        {/* Visual Mic Indicator (Not a button) */}
+                        <div className={`micStatusIndicator ${micState === "listening" ? "active" : "inactive"}`} style={{ marginRight: "8px" }}>
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                            <line x1="12" y1="19" x2="12" y2="23" />
+                            <line x1="8" y1="23" x2="16" y2="23" />
+                          </svg>
+                        </div>
+
+                        {/* Pause/Resume Button */}
+                        <button
+                          type="button"
+                          className={`pauseAutoSendBtn ${isAutoSendEnabled ? "auto-on" : "auto-off"}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const nextState = !isAutoSendEnabled;
+                            // eslint-disable-next-line no-console
+                            console.log("[MIC-DEBUG] Pause button clicked. Current isAutoSendEnabled:", isAutoSendEnabled, "Next:", nextState);
+                            
+                            setIsAutoSendEnabled(nextState);
+                            micPausedRef.current = !nextState;
+
+                            if (nextState) {
+                              micPausedRef.current = false;
+                              // eslint-disable-next-line no-console
+                              console.log("[MIC-DEBUG] Resuming mic (User Action)");
+                              startListening();
+                            } else {
+                              micPausedRef.current = true;
+                              // eslint-disable-next-line no-console
+                              console.log("[MIC-DEBUG] Pausing mic (User Action)");
+                              stopRecognition();
+                            }
+                          }}
+                          title={isAutoSendEnabled ? "Pause Auto-Send & Mic" : "Resume Auto-Send & Mic"}
+                        >
+                          {isAutoSendEnabled ? (
+                            // Pause Icon
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <rect x="6" y="4" width="4" height="16" />
+                              <rect x="14" y="4" width="4" height="16" />
+                            </svg>
+                          ) : (
+                            // Play Icon
+                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <polygon points="5 3 19 12 5 21 5 3" />
+                            </svg>
+                          )}
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                  <div className="micSignalRow">
-                    <span
-                      className={`micOrb ${micState === "listening" ? "listening" : ""} ${micState === "locked" ? "locked" : ""}`}
-                      style={{ "--mic-intensity": waveformLevel }}
-                      aria-hidden="true"
-                    />
-                    <span className="micSignalText">
-                      {micState === "listening" ? "Live transcription running" : "Auto-listen enabled"}
-                    </span>
-                  </div>
+
+                    {micState === "listening" && (
+                    <div className="micActiveGlowBar" style={{ "--mic-intensity": waveformLevel }} />
+                    )}
                   <textarea
                     ref={humanInputRef}
+                    className="humanInputArea"
                     value={liveModeNeedsTextFallback ? humanInputText : liveTranscript}
                     onChange={(event) => {
                       setHumanInputText(event.target.value);
                       setLiveTranscript(event.target.value);
                       liveTranscriptRef.current = event.target.value;
                     }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        if (micState === "locked" || micState === "processing") return;
+                        sendHumanInput(liveModeNeedsTextFallback ? humanInputText : liveTranscriptRef.current);
+                      }
+                    }}
                     placeholder={liveModeNeedsTextFallback
-                      ? "Type your counsellor response here..."
-                      : "Live transcript appears here..."}
+                      ? "Type your response and press Enter..."
+                      : "Listening... (Press Enter to force send)"}
                     disabled={micState === "locked"}
                   />
-                  <div className="liveMicActions">
-                    {!liveModeNeedsTextFallback && (
-                      <button
-                        type="button"
-                        className="ghostBtn"
-                        onClick={() => {
-                          if (micStateRef.current === "locked" || micStateRef.current === "processing") return;
-                          setMicState("inactive");
-                          startListening();
-                        }}
-                        disabled={micState === "locked" || micState === "processing"}
-                      >
-                        Resume Mic
-                      </button>
-                    )}
-                    <button
-                      type="button"
-                      className="downloadBtn"
-                      onClick={() => sendHumanInput(liveModeNeedsTextFallback ? humanInputText : liveTranscriptRef.current)}
-                      disabled={micState === "locked" || micState === "processing"}
-                    >
-                      Send
-                    </button>
                   </div>
-                </div>
-                <div className={`liveAiPanel ${micState === "locked" ? "speaking" : ""}`}>
-                  <img
-                    className="studentAvatar"
-                    src={studentImageSrc}
-                    alt={`${persona?.name || "Student"} profile`}
-                    onError={() => {
-                      const base = process.env.PUBLIC_URL || "";
-                      setStudentImageSrc(`${base}/student-placeholder.svg`);
-                    }}
-                  />
-                  <article className="studentMiniCard">
-                    <strong>Prospective Student</strong>
-                    <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
-                    <span>{micState === "locked" ? "Speaking..." : "Waiting..."}</span>
-                  </article>
-                </div>
-              </section>
+                </section>
+              </aside>
             )}
-          </div>
 
-          <div className="projectionLane" ref={projectionRef}>
+            <div className={`projectionLane ${isHumanMode ? "human-mode-projection" : ""}`} ref={projectionRef}>
             {allCards.map((msg, idx) => (
               <article key={`${msg.id || idx}`} className={`projectionCard ${msg.agent} ${msg.draft ? "draft" : ""}`}>
                 <header>
@@ -1958,13 +2043,10 @@ function App() {
                 </header>
                 <p>{msg.content}</p>
                 {msg.agent === "student" && msg.internal_thought && (
-                  <button
-                    type="button"
-                    className="thoughtBtn"
-                    onClick={() => setExpandedContent({ title: "Internal Thought", text: msg.internal_thought })}
-                  >
-                    Internal Thought
-                  </button>
+                  <details className="internalThoughtDetails">
+                    <summary>Internal Thought</summary>
+                    <div>{msg.internal_thought}</div>
+                  </details>
                 )}
                 {msg.strategic_intent && (
                   <details>
@@ -1983,6 +2065,7 @@ function App() {
             ))}
           </div>
 
+          </div>
           <div className="popupLayer">
             {metricToasts.map((toast) => (
               <div key={toast.id} className={`metricToast ${toast.tone}`}>

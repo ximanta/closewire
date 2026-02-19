@@ -1,40 +1,40 @@
 {
-  "generated_at": "2026-02-18T10:13:18.617960",
-  "session_id": "2018decc-234e-49e5-9b0f-e2ccd5169c98",
+  "generated_at": "2026-02-18T20:30:09.199588",
+  "session_id": "cafcce5d-e110-4c34-a2ad-ead9c749b916",
   "deal_status": "failed",
-  "round": 6,
-  "max_rounds": 5,
+  "round": 3,
+  "max_rounds": 2,
   "persona": {
-    "common_vocabulary": [
-      "ChatGPT",
-      "Prompt Engineering",
-      "Trending",
-      "Viral",
-      "GenAI",
-      "AI",
-      "next big thing",
-      "hustle"
-    ],
-    "age": 23,
-    "ego_level": 7,
-    "archetype_id": "fomo_victim",
-    "trigger_event": "A close friend recently landed a role as an 'AI Prompt Engineer' in a startup with a substantial salary hike, which intensified Aryan's pressure to immediately reskill in trending technologies.",
-    "skepticism": 3,
-    "confusion_level": 6,
-    "gender": "male",
-    "financial_anxiety": 8,
-    "current_role": "Junior Marketing Executive",
-    "hidden_secret": "He secretly harbors a fear that he lacks the foundational programming and mathematical skills required for these advanced technologies, but he's too embarrassed to admit it, always striving to appear well-informed and up-to-date.",
-    "misconception": "He firmly believes that mastering a few trending tools like ChatGPT or specific prompt engineering techniques will directly lead to a high-paying job, underestimating the critical importance of core programming concepts and a strong problem-solving base.",
-    "name": "Aryan Sharma",
-    "language_style": "UK English",
-    "backstory": "Aryan, a recent graduate from a Tier-1 city, constantly scrolls through LinkedIn and Instagram, seeing his peers land 'hot' AI jobs with impressive packages. He feels a significant fear of missing out on the next big wave in technology and often feels left behind.",
+    "archetype_label": "Desperate Switcher",
+    "confusion_level": 8,
+    "current_role": "Associate Software Engineer",
+    "financial_anxiety": 9,
+    "ego_level": 4,
+    "trigger_event": "A recent conversation with a former junior colleague, who just landed a high-paying role in Generative AI after a specialized course, combined with his company hinting at downsizing older projects, has sent him into a panic. He feels this is his last chance to upskill and secure his future.",
+    "age": 28,
+    "archetype_id": "desperate_switcher",
     "city_tier": "Tier-1",
-    "archetype_label": "FOMO Victim",
-    "persona_type": "fomo_victim",
+    "skepticism": 7,
+    "backstory": "Ravi, 28, has been an Associate Software Engineer at a mid-sized IT firm in Bangalore for the past three years. He's stuck working on legacy systems, watching his college batchmates soar in AI/ML roles. His salary has stagnated, and he's constantly worried about job security in an industry that's leaving him behind. He feels immense pressure from family expectations and the rising cost of living in Bangalore.",
+    "common_vocabulary": [
+      "Sir",
+      "Ma'am",
+      "Batch",
+      "Passing out",
+      "Gap",
+      "Scope",
+      "Placement",
+      "Job guarantee"
+    ],
+    "hidden_secret": "He often browses job portals fantasizing about high-paying AI roles, but deep down, he doubts if he truly has the aptitude to master complex AI concepts, fearing he might fail again despite the financial sacrifice.",
+    "gender": "male",
+    "language_style": "UK English",
+    "misconception": "He strongly believes that getting any AI certification will be a silver bullet, instantly guaranteeing him a job with a significant salary hike, without fully understanding the practical skills and continuous effort needed for real-world application.",
+    "name": "Ravi Sharma",
+    "persona_type": "desperate_switcher",
     "background": "Prospective learner evaluating an AI upskilling path.",
-    "career_stage": "mid",
-    "financial_sensitivity": "medium",
+    "career_stage": "early",
+    "financial_sensitivity": "high",
     "risk_tolerance": "low",
     "emotional_tone": "anxious",
     "primary_objections": [
@@ -43,10 +43,10 @@
       "Difficulty for freshers",
       "Time commitment"
     ],
-    "walk_away_likelihood": 0.53,
-    "expected_roi_months": 8,
-    "affordability_concern_level": 84,
-    "willingness_to_invest_score": 72,
+    "walk_away_likelihood": 0.5,
+    "expected_roi_months": 11,
+    "affordability_concern_level": 60,
+    "willingness_to_invest_score": 68,
     "communication_style": "confused",
     "common_phrases": [
       "Placement ka scene kya hai?",
@@ -55,267 +55,155 @@
     ]
   },
   "program": {
-    "program_name": "Java: Object-Oriented Programming",
-    "program_fee_inr": "9,999 + 18% GST"
+    "program_name": "Building Agentic AI Systems",
+    "program_fee_inr": "Program fees: 1,50,000 + GST. Booking fees: 1,500 + GST. Full upfront payment: 1,42,500 (inclusive of 5% fee concession)."
   },
   "student_inner_state": {
     "sentiment": "confused",
-    "skepticism_level": 40,
-    "trust_score": 30,
+    "skepticism_level": 50,
+    "trust_score": 10,
     "unresolved_concerns": [
-      "AI/GenAI relevance",
-      "Career Progression",
       "Job Guarantee",
       "Price"
     ]
   },
   "negotiation_metrics": {
-    "round": 5,
-    "max_rounds": 5,
+    "round": 2,
+    "max_rounds": 2,
     "concession_count_counsellor": 0,
     "concession_count_student": 0,
-    "tone_escalation": 47,
-    "objection_intensity": 21,
-    "trust_index": 26,
-    "close_probability": 54,
+    "tone_escalation": 23,
+    "objection_intensity": 31,
+    "trust_index": 35,
+    "close_probability": 58,
     "sentiment_indicator": "negative",
     "retry_modifier": 0
   },
   "final_offers": {
-    "counsellor": 11652,
-    "student": 8878
+    "counsellor": 171675,
+    "student": 130800
   },
   "analysis": {
-    "strengths": [
-      "Counsellor acknowledged AI/GenAI trends in Round 4 by mentioning Spring AI and LLMs, attempting to connect Java to these areas.",
-      "Counsellor offered to connect the student with a program architect, showing an attempt to resolve the issue, even if it wasn't a direct answer."
-    ],
-    "primary_unresolved_objection": "The student's primary and consistently reiterated objection is 'how the specific curriculum of *this* Java programme genuinely leads to direct career progression and actual placement outcomes in trending AI or GenAI roles, given that these topics are not explicitly detailed in the course modules.'",
-    "winner": "student",
-    "pivotal_moments": [
-      "Round 1: Student clearly articulates interest in AI/GenAI and career progression/placement outcomes in that landscape.",
-      "Round 3: Student explicitly states they are 'still unclear' on the Java program's connection to AI/GenAI and reiterates their primary concern about direct career progression in those areas. This highlights the counsellor's initial failure to address the core issue.",
-      "Round 5: Counsellor offers redirection to a program architect, indicating an inability to provide the requested information. The student's rejection of this offer and continued insistence on direct clarification confirms the complete failure to resolve the primary objection."
-    ],
-    "why": "The student maintained their primary objection regarding the Java program's specific integration with AI/GenAI and direct career progression, which the counsellor failed to address directly throughout the conversation. The counsellor's answers were either too general, evasive, or ultimately led to an offer of redirection, which the student also pushed back on, indicating a complete lack of satisfaction.",
-    "negotiation_score": 30,
-    "skill_recommendations": [
-      "Active Listening and Objection Handling: Develop skills to accurately identify and directly address student's core objections early in the conversation.",
-      "Deep Product Knowledge: Acquire detailed knowledge of how program curricula specifically align with current industry trends and career paths, including concrete examples.",
-      "Tailored Communication: Practice customizing program benefits and information to directly match the specific interests and career aspirations of the prospective student.",
-      "Proactive Information Provision: Instead of waiting for repeated questions, proactively offer specific details and evidence (e.g., curriculum snippets, alumni testimonials in AI/GenAI) to address anticipated concerns."
-    ],
     "mistakes": [
-      "Failed to actively listen and precisely identify the student's core objection in earlier rounds, leading to generic responses about placement rates rather than specific curriculum alignment with AI/GenAI.",
-      "Provided vague and unclear answers (e.g., Round 2 and parts of Round 4), which further confused the student.",
-      "Lacked specific product knowledge regarding how the Java program's curriculum *directly* equips students for AI/GenAI roles, despite the student's repeated requests for this detail.",
-      "Failed to tailor information to the student's specific interest in AI/GenAI career paths.",
-      "Resorting to redirection after multiple rounds of failing to answer the primary concern directly, which the student then rejected."
+      "Counsellor provided an irrelevant and nonsensical response in Round 2.",
+      "Counsellor completely failed to address the student's core and repeated objection regarding job guarantees and salary increments."
+    ],
+    "negotiation_score": 10,
+    "skill_recommendations": [
+      "Counsellor needs significant training in active listening, understanding and directly addressing student's primary concerns, clear and relevant communication, and deep program knowledge to answer specific career outcome questions."
+    ],
+    "pivotal_moments": [
+      "The counsellor's second response, 'Aaj Aaoge Aaja Seene Aaja', which was nonsensical and caused the student to reiterate their unresolved objection, completely halting any negotiation progress and eroding trust."
+    ],
+    "enrollment_likelihood": 15,
+    "why": "The counsellor completely failed to address the student's primary and repeated concern regarding job guarantees and salary increments, instead providing a nonsensical and irrelevant response in Round 2 which further confused the student and eroded trust. This led to a complete breakdown in communication and no progress on the student's main objection.",
+    "primary_unresolved_objection": "Job guarantee and significant salary hike in the AI sector after completing the program.",
+    "trust_delta": -12,
+    "strengths": [
+      "Student clearly and consistently articulated their primary concern regarding career progression and job outcomes."
     ],
     "commitment_signal": "none",
-    "trust_delta": -10,
-    "enrollment_likelihood": 15
+    "winner": "student"
   },
   "transcript": [
     {
-      "id": "c5f62c2e-52e8-431d-b043-b62aa3d34e56",
+      "id": "12a7840a-8a02-418d-bf8b-6b96d74c5c4a",
       "round": 1,
       "agent": "counsellor",
-      "content": "so ok hello I am Samantha and hello Aryan I see you are looking for Java object on programming can you tell me what how I can help you what you are looking for  I am not touching",
+      "content": "hello how are you",
       "techniques": [
-        "Greeting and Introduction",
-        "Acknowledgement of Client's Stated Purpose/Problem",
-        "Open-ended Questioning for Elaboration"
+        "rapport building",
+        "open questioning"
       ],
-      "strategic_intent": "Establish rapport, welcome the client, clarify their needs/goals, and encourage client disclosure to initiate the counselling process.",
+      "strategic_intent": "to initiate conversation and assess client's current state",
       "confidence_score": 0,
-      "emotional_state": "engaged and welcoming",
+      "emotional_state": "neutral and inviting",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:09:04.591773",
+      "timestamp": "2026-02-18T20:28:07.891959",
       "generation_mode": "human_shadow"
     },
     {
-      "id": "2b05091c-098c-472e-bb40-6fd8a5634603",
+      "id": "d0feac18-2fde-4014-9551-7fb8304ab69a",
       "round": 1,
       "agent": "student",
-      "content": "Right, well, I'm just exploring options, really. I've been seeing a lot of buzz around AI and GenAI lately, and I'm keen to understand how this Java programme would fit into that landscape. What kind of career progression and placement outcomes can one truly expect after completing it, especially in today's rapidly evolving tech market?",
+      "content": "Hello there. I'm well, thank you. I'm quite eager to learn more about the \"Building Agentic AI Systems\" programme. My primary concern, frankly, revolves around the career progression and practical placement outcomes after completing it. Will this programme genuinely guarantee me a job with a significant salary hike in the AI sector?",
       "techniques": [],
-      "strategic_intent": "To steer the conversation towards trending technologies and career progression, expressing a subtle doubt about Java's immediate relevance to current \"buzz\" while also probing for concrete outcomes.",
+      "strategic_intent": "To immediately address his primary motivation of job security and guarantee, and to check if the programme aligns with his misconception of an AI certification being a silver bullet for a high-paying job.",
       "confidence_score": 60,
-      "emotional_state": "skeptical",
+      "emotional_state": "anxious",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:09:09.169553",
+      "timestamp": "2026-02-18T20:28:14.681431",
       "generation_mode": "stream"
     },
     {
-      "id": "f3682486-20e7-454a-bd3f-b126e6a29f34",
+      "id": "46c5fabf-1391-4862-be46-1ad23e879065",
       "round": 2,
       "agent": "counsellor",
-      "content": "Yadav program on entered include how you can you know Ambassador via spring AR you will be taught in this course",
+      "content": "Aaj Aaoge Aaja Seene Aaja",
       "techniques": [
-        "Providing Information"
+        "inappropriate language",
+        "boundary violation"
       ],
-      "strategic_intent": "To provide specific details about the program's content and learning outcomes.",
-      "confidence_score": 90,
-      "emotional_state": "informative and direct",
+      "strategic_intent": "to establish an overly personal and informal connection",
+      "confidence_score": 0,
+      "emotional_state": "overly familiar",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:09:52.445592",
+      "timestamp": "2026-02-18T20:29:55.662258",
       "generation_mode": "human_shadow"
     },
     {
-      "id": "2b2820c7-b207-468a-88ab-c476393cd06d",
+      "id": "c5ec0be3-0ebe-4815-9386-37128e00076b",
       "round": 2,
       "agent": "student",
-      "content": "I'm afraid I didn't quite catch that last part. Could you perhaps clarify how this specific Java programme genuinely integrates with the current AI and GenAI landscape? My main concern is understanding the direct career progression and placement outcomes one can realistically expect, particularly in those trending areas, as I want to ensure I'm making a worthwhile investment in my future.",
+      "content": "I'm sorry, I don't quite understand your last message. It seems to be… well, not an answer to my query. Could you please clarify if this programme offers a genuine job guarantee with a significant salary increment in the AI sector? That's really my main concern at this point.",
       "techniques": [],
-      "strategic_intent": "Seek clarification, reiterate primary motivation and unresolved concerns about career progression/AI relevance after a confusing response.",
+      "strategic_intent": "To clarify the previous non-response and re-state the primary concern clearly, expressing confusion over the counsellor's gibberish reply.",
       "confidence_score": 60,
       "emotional_state": "confused",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:09:56.328120",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "94a6ea79-2290-420a-b44d-43b9ffb50f98",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "we are very high qualified placement team with over you know 95% placement with our enrol companies premium companies like Wipro and Cognizant so once you complete the course your placement cell will help you to get you placed in a premium company",
-      "techniques": [
-        "Providing Information",
-        "Addressing Concerns/Reassurance",
-        "Building Credibility/Trust"
-      ],
-      "strategic_intent": "To reassure the student about career prospects and placement success by highlighting the high placement rate and associations with premium companies, thereby addressing their concerns about career progression and making the course seem like a worthwhile investment.",
-      "confidence_score": 90,
-      "emotional_state": "confident and reassuring",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:10:51.811896",
-      "generation_mode": "human_shadow"
-    },
-    {
-      "id": "6bb5179c-3809-4a1b-90e5-4b7d99578fe2",
-      "round": 3,
-      "agent": "student",
-      "content": "I appreciate the information about your placement team and their success rate, but I'm still unclear on how this specific Java programme genuinely connects with the *current* AI and GenAI landscape. My primary concern remains the direct career progression and placement outcomes specifically within those trending areas. Can you provide more detail on how Java skills from this course lead to roles in AI or GenAI?",
-      "techniques": [],
-      "strategic_intent": "reiterate core concern about AI/GenAI relevance and specific career progression within that domain, as counsellor's response was generic",
-      "confidence_score": 60,
-      "emotional_state": "confused",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:10:55.832332",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "fa778682-35a4-4cd1-a3da-ad66e41ea2bb",
-      "round": 4,
-      "agent": "counsellor",
-      "content": "okay so Java is you know the ecosystem is here towards creating AI agents and jni Java along with spring boot provides spring AI where you can develop applications that use LLM model does Rag and find tuning so this is out of program and I will see you to the current",
-      "techniques": [
-        "Providing Information",
-        "Clarification/Elaboration"
-      ],
-      "strategic_intent": "To directly address the student's repeated query by explaining the program's relevance to AI/GenAI, providing specific technical examples of how Java is used in these areas.",
-      "confidence_score": 90,
-      "emotional_state": "informative and clarifying",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:11:59.452543",
-      "generation_mode": "human_shadow"
-    },
-    {
-      "id": "578adf40-ac06-4df7-8f8d-251fb01479bc",
-      "round": 4,
-      "agent": "student",
-      "content": "I appreciate you mentioning Spring AI and LLMs, but I'm trying to connect the dots more clearly. Given this specific Java programme's curriculum, how precisely does it equip me for those trending AI or GenAI roles you just mentioned? My main concern is still the direct career progression and actual placement outcomes specifically within those advanced areas, as I don't see those topics explicitly detailed in the course modules.",
-      "techniques": [],
-      "strategic_intent": "Clarify direct career path to AI/GenAI from *this specific curriculum*, questioning the explicit mention of advanced AI topics in the course modules.",
-      "confidence_score": 60,
-      "emotional_state": "confused",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:12:07.200653",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "82af2b90-eb47-4870-a15c-78c163876fd4",
-      "round": 5,
-      "agent": "counsellor",
-      "content": "okay so will it help Aryan if I redirect you to our you know the program architect who is a domain expert and can help you guide you more precisely",
-      "techniques": [
-        "Redirection/Referral",
-        "Offering Assistance"
-      ],
-      "strategic_intent": "To address the student's persistent and detailed questions by referring them to a domain expert (program architect) who can provide more precise and in-depth guidance on AI/GenAI relevance and career progression.",
-      "confidence_score": 85,
-      "emotional_state": "helpful and proactive",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:13:00.233224",
-      "generation_mode": "human_shadow"
-    },
-    {
-      "id": "5123e44b-0b1c-469f-9a9b-af98d1958518",
-      "round": 5,
-      "agent": "student",
-      "content": "I appreciate the offer to connect with a programme architect, but I was hoping you could clarify this directly. My main concern is still understanding how the specific curriculum of *this* Java programme genuinely leads to direct career progression and actual placement outcomes in those trending AI or GenAI roles you mentioned. I need to ensure the programme structure directly aligns with those opportunities.",
-      "techniques": [],
-      "strategic_intent": "Seek specific curriculum-to-career alignment for trending roles.",
-      "confidence_score": 60,
-      "emotional_state": "confused",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:13:04.006888",
+      "timestamp": "2026-02-18T20:29:58.373169",
       "generation_mode": "stream"
     }
   ],
   "history_for_reporting": [
     {
-      "id": "c5f62c2e-52e8-431d-b043-b62aa3d34e56",
+      "id": "12a7840a-8a02-418d-bf8b-6b96d74c5c4a",
       "round": 1,
       "agent": "counsellor",
-      "content": "so ok hello I am Samantha and hello Aryan I see you are looking for Java object on programming can you tell me what how I can help you what you are looking for  I am not touching",
+      "content": "hello how are you",
       "techniques": [
-        "Greeting and Introduction",
-        "Acknowledgement of Client's Stated Purpose/Problem",
-        "Open-ended Questioning for Elaboration"
+        "rapport building",
+        "open questioning"
       ],
-      "strategic_intent": "Establish rapport, welcome the client, clarify their needs/goals, and encourage client disclosure to initiate the counselling process.",
+      "strategic_intent": "to initiate conversation and assess client's current state",
       "confidence_score": 0,
-      "emotional_state": "engaged and welcoming",
+      "emotional_state": "neutral and inviting",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:09:04.591773",
+      "timestamp": "2026-02-18T20:28:07.891959",
       "generation_mode": "human_shadow"
     },
     {
-      "id": "2b05091c-098c-472e-bb40-6fd8a5634603",
+      "id": "d0feac18-2fde-4014-9551-7fb8304ab69a",
       "round": 1,
       "agent": "student",
-      "content": "Right, well, I'm just exploring options, really. I've been seeing a lot of buzz around AI and GenAI lately, and I'm keen to understand how this Java programme would fit into that landscape. What kind of career progression and placement outcomes can one truly expect after completing it, especially in today's rapidly evolving tech market?",
+      "content": "Hello there. I'm well, thank you. I'm quite eager to learn more about the \"Building Agentic AI Systems\" programme. My primary concern, frankly, revolves around the career progression and practical placement outcomes after completing it. Will this programme genuinely guarantee me a job with a significant salary hike in the AI sector?",
       "techniques": [],
-      "strategic_intent": "To steer the conversation towards trending technologies and career progression, expressing a subtle doubt about Java's immediate relevance to current \"buzz\" while also probing for concrete outcomes.",
+      "strategic_intent": "To immediately address his primary motivation of job security and guarantee, and to check if the programme aligns with his misconception of an AI certification being a silver bullet for a high-paying job.",
       "confidence_score": 60,
-      "emotional_state": "skeptical",
-      "internal_thought": "Right, \"Java object on programming,\" she says. She's clearly just reading off a list or something. She hasn't even bothered to ask why I'm looking at *this* specific program, or what my career goals are. I'm here because I'm trying to figure out how to jump on the next big tech wave, like all my mates are doing with their fancy AI jobs. Java sounds a bit... well, not exactly \"trending AI\" in the way I'm thinking. This feels like foundational stuff, which is a bit of a turn-off. I need to make sure whatever I do has a strong return on investment and quick career progression, not just some long, theoretical slog. I'm keen to get ahead, not get bogged down.",
+      "emotional_state": "anxious",
+      "internal_thought": "Right, let's cut to the chase. I don't have time for small talk. I'm 28, stuck, and worried sick. I need to know if this programme is actually going to get me a proper job, not just another certificate that sits on my CV. I've seen enough of my peers getting ahead while I'm stuck in the mud. I need a guarantee, a solid outcome, something that will actually change my life. Will it really work? Will it give me that career progression I desperately need? I can't afford to waste time or money on something that doesn't deliver.",
       "updated_stats": {
-        "sentiment": "skeptical",
+        "sentiment": "anxious",
         "skepticism_level": 10,
         "trust_score": 50,
         "unresolved_concerns": [
@@ -324,7 +212,7 @@
         ]
       },
       "updated_state": {
-        "sentiment": "skeptical",
+        "sentiment": "anxious",
         "skepticism_level": 10,
         "trust_score": 50,
         "unresolved_concerns": [
@@ -332,219 +220,56 @@
           "Job Guarantee"
         ]
       },
-      "timestamp": "2026-02-18T10:09:09.169553",
+      "timestamp": "2026-02-18T20:28:14.681431",
       "generation_mode": "stream"
     },
     {
-      "id": "f3682486-20e7-454a-bd3f-b126e6a29f34",
+      "id": "46c5fabf-1391-4862-be46-1ad23e879065",
       "round": 2,
       "agent": "counsellor",
-      "content": "Yadav program on entered include how you can you know Ambassador via spring AR you will be taught in this course",
+      "content": "Aaj Aaoge Aaja Seene Aaja",
       "techniques": [
-        "Providing Information"
+        "inappropriate language",
+        "boundary violation"
       ],
-      "strategic_intent": "To provide specific details about the program's content and learning outcomes.",
-      "confidence_score": 90,
-      "emotional_state": "informative and direct",
+      "strategic_intent": "to establish an overly personal and informal connection",
+      "confidence_score": 0,
+      "emotional_state": "overly familiar",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:09:52.445592",
+      "timestamp": "2026-02-18T20:29:55.662258",
       "generation_mode": "human_shadow"
     },
     {
-      "id": "2b2820c7-b207-468a-88ab-c476393cd06d",
+      "id": "c5ec0be3-0ebe-4815-9386-37128e00076b",
       "round": 2,
       "agent": "student",
-      "content": "I'm afraid I didn't quite catch that last part. Could you perhaps clarify how this specific Java programme genuinely integrates with the current AI and GenAI landscape? My main concern is understanding the direct career progression and placement outcomes one can realistically expect, particularly in those trending areas, as I want to ensure I'm making a worthwhile investment in my future.",
+      "content": "I'm sorry, I don't quite understand your last message. It seems to be… well, not an answer to my query. Could you please clarify if this programme offers a genuine job guarantee with a significant salary increment in the AI sector? That's really my main concern at this point.",
       "techniques": [],
-      "strategic_intent": "Seek clarification, reiterate primary motivation and unresolved concerns about career progression/AI relevance after a confusing response.",
+      "strategic_intent": "To clarify the previous non-response and re-state the primary concern clearly, expressing confusion over the counsellor's gibberish reply.",
       "confidence_score": 60,
       "emotional_state": "confused",
-      "internal_thought": "What on earth did they just say? \"Yadav program on entered include how you can you know Ambassador via spring AR\"? That makes absolutely no sense. Are they even listening to me? I asked about AI and GenAI and career progression, not whatever that garbled mess was. This is exactly what I'm afraid of – these programmes just teaching old stuff and trying to shoehorn it into the \"new tech\" conversation. I need them to be clearer and actually address my points. I'm feeling even more skeptical now. This isn't building any trust at all. I have no idea how this Java programme relates to AI or high-paying jobs if they can't even articulate it properly. And my job guarantee and price concerns are still completely untouched.",
+      "internal_thought": "What on earth was that? \"Aaj Aaoge Aaja Seene Aaja\"? That's not even English, let alone UK English. It's completely irrelevant and makes absolutely no sense. Is this a bot? Did the counsellor just have a stroke? This is precisely what stresses me out – vague, unhelpful answers. My primary motivation for security and a job guarantee was completely ignored. My trust has just taken a nosedive. I need to repeat my question, very clearly, and express my confusion. This feels like a waste of time already.",
       "updated_stats": {
-        "sentiment": "skeptical",
-        "skepticism_level": 20,
-        "trust_score": 40,
+        "sentiment": "anxious",
+        "skepticism_level": 50,
+        "trust_score": 10,
         "unresolved_concerns": [
-          "Job Guarantee",
-          "Price",
-          "Career Progression",
-          "AI/GenAI relevance"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "skeptical",
-        "skepticism_level": 20,
-        "trust_score": 40,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price",
-          "Career Progression",
-          "AI/GenAI relevance"
-        ]
-      },
-      "timestamp": "2026-02-18T10:09:56.328120",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "94a6ea79-2290-420a-b44d-43b9ffb50f98",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "we are very high qualified placement team with over you know 95% placement with our enrol companies premium companies like Wipro and Cognizant so once you complete the course your placement cell will help you to get you placed in a premium company",
-      "techniques": [
-        "Providing Information",
-        "Addressing Concerns/Reassurance",
-        "Building Credibility/Trust"
-      ],
-      "strategic_intent": "To reassure the student about career prospects and placement success by highlighting the high placement rate and associations with premium companies, thereby addressing their concerns about career progression and making the course seem like a worthwhile investment.",
-      "confidence_score": 90,
-      "emotional_state": "confident and reassuring",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:10:51.811896",
-      "generation_mode": "human_shadow"
-    },
-    {
-      "id": "6bb5179c-3809-4a1b-90e5-4b7d99578fe2",
-      "round": 3,
-      "agent": "student",
-      "content": "I appreciate the information about your placement team and their success rate, but I'm still unclear on how this specific Java programme genuinely connects with the *current* AI and GenAI landscape. My primary concern remains the direct career progression and placement outcomes specifically within those trending areas. Can you provide more detail on how Java skills from this course lead to roles in AI or GenAI?",
-      "techniques": [],
-      "strategic_intent": "reiterate core concern about AI/GenAI relevance and specific career progression within that domain, as counsellor's response was generic",
-      "confidence_score": 60,
-      "emotional_state": "confused",
-      "internal_thought": "This is exactly what I mean! They're just rattling off generic placement stats and company names like Wipro and Cognizant. That's not what I'm asking about. I want to know about AI and GenAI, the 'hot' jobs, not just any job. They've completely ignored my question about how Java integrates with the *current* AI landscape. This feels like a deflection, and it's making me doubt if this programme is actually relevant to what I'm seeing everywhere. My peers are getting into these cutting-edge roles, and this sounds like a standard developer job. It doesn't address my fear of missing out on the next big wave. I need specifics about AI, not just general placement support. And they haven't mentioned anything about the price or job guarantee again, but the AI relevance is the burning issue right now.",
-      "updated_stats": {
-        "sentiment": "confused",
-        "skepticism_level": 30,
-        "trust_score": 35,
-        "unresolved_concerns": [
-          "AI/GenAI relevance",
-          "Career Progression",
           "Job Guarantee",
           "Price"
         ]
       },
       "updated_state": {
-        "sentiment": "confused",
-        "skepticism_level": 30,
-        "trust_score": 35,
+        "sentiment": "anxious",
+        "skepticism_level": 50,
+        "trust_score": 10,
         "unresolved_concerns": [
-          "AI/GenAI relevance",
-          "Career Progression",
           "Job Guarantee",
           "Price"
         ]
       },
-      "timestamp": "2026-02-18T10:10:55.832332",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "fa778682-35a4-4cd1-a3da-ad66e41ea2bb",
-      "round": 4,
-      "agent": "counsellor",
-      "content": "okay so Java is you know the ecosystem is here towards creating AI agents and jni Java along with spring boot provides spring AI where you can develop applications that use LLM model does Rag and find tuning so this is out of program and I will see you to the current",
-      "techniques": [
-        "Providing Information",
-        "Clarification/Elaboration"
-      ],
-      "strategic_intent": "To directly address the student's repeated query by explaining the program's relevance to AI/GenAI, providing specific technical examples of how Java is used in these areas.",
-      "confidence_score": 90,
-      "emotional_state": "informative and clarifying",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:11:59.452543",
-      "generation_mode": "human_shadow"
-    },
-    {
-      "id": "578adf40-ac06-4df7-8f8d-251fb01479bc",
-      "round": 4,
-      "agent": "student",
-      "content": "I appreciate you mentioning Spring AI and LLMs, but I'm trying to connect the dots more clearly. Given this specific Java programme's curriculum, how precisely does it equip me for those trending AI or GenAI roles you just mentioned? My main concern is still the direct career progression and actual placement outcomes specifically within those advanced areas, as I don't see those topics explicitly detailed in the course modules.",
-      "techniques": [],
-      "strategic_intent": "Clarify direct career path to AI/GenAI from *this specific curriculum*, questioning the explicit mention of advanced AI topics in the course modules.",
-      "confidence_score": 60,
-      "emotional_state": "confused",
-      "internal_thought": "Right, so they're talking about Spring AI and LLMs, which sounds quite advanced. But how does this specific 60-hour Java programme, with its listed curriculum, actually prepare me for roles developing AI agents or working with LLMs? I don't see \"Spring AI\" or anything like \"RAG\" explicitly mentioned in the course modules. I need a clear connection between what I'd be learning here and the actual high-paying AI jobs people are getting. It still feels like a generic 'Java can do AI' statement rather than a direct career path from *this* programme.",
-      "updated_stats": {
-        "sentiment": "confused",
-        "skepticism_level": 30,
-        "trust_score": 35,
-        "unresolved_concerns": [
-          "AI/GenAI relevance",
-          "Career Progression",
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "confused",
-        "skepticism_level": 30,
-        "trust_score": 35,
-        "unresolved_concerns": [
-          "AI/GenAI relevance",
-          "Career Progression",
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "timestamp": "2026-02-18T10:12:07.200653",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "82af2b90-eb47-4870-a15c-78c163876fd4",
-      "round": 5,
-      "agent": "counsellor",
-      "content": "okay so will it help Aryan if I redirect you to our you know the program architect who is a domain expert and can help you guide you more precisely",
-      "techniques": [
-        "Redirection/Referral",
-        "Offering Assistance"
-      ],
-      "strategic_intent": "To address the student's persistent and detailed questions by referring them to a domain expert (program architect) who can provide more precise and in-depth guidance on AI/GenAI relevance and career progression.",
-      "confidence_score": 85,
-      "emotional_state": "helpful and proactive",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:13:00.233224",
-      "generation_mode": "human_shadow"
-    },
-    {
-      "id": "5123e44b-0b1c-469f-9a9b-af98d1958518",
-      "round": 5,
-      "agent": "student",
-      "content": "I appreciate the offer to connect with a programme architect, but I was hoping you could clarify this directly. My main concern is still understanding how the specific curriculum of *this* Java programme genuinely leads to direct career progression and actual placement outcomes in those trending AI or GenAI roles you mentioned. I need to ensure the programme structure directly aligns with those opportunities.",
-      "techniques": [],
-      "strategic_intent": "Seek specific curriculum-to-career alignment for trending roles.",
-      "confidence_score": 60,
-      "emotional_state": "confused",
-      "internal_thought": "Ugh, a 'programme architect'? That feels like a deflection. They still haven't explained how *this exact curriculum* prepares me for those 'trending' AI/GenAI roles. It's like they're trying to avoid giving a straight answer about the direct career progression. I don't want to talk to someone else just to get the same vague answers. My peers are getting into these 'hot' jobs, and I'm here trying to figure out if basic Java is going to cut it. It feels like a roundabout way of saying they don't have a clear path for AI/GenAI with this programme. I'm getting impatient; I need direct answers about placement outcomes and programme structure for *AI*. This isn't 'speedy' at all.",
-      "updated_stats": {
-        "sentiment": "confused",
-        "skepticism_level": 40,
-        "trust_score": 30,
-        "unresolved_concerns": [
-          "AI/GenAI relevance",
-          "Career Progression",
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "confused",
-        "skepticism_level": 40,
-        "trust_score": 30,
-        "unresolved_concerns": [
-          "AI/GenAI relevance",
-          "Career Progression",
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "timestamp": "2026-02-18T10:13:04.006888",
+      "timestamp": "2026-02-18T20:29:58.373169",
       "generation_mode": "stream"
     }
   ]

@@ -1,38 +1,41 @@
 {
-  "generated_at": "2026-02-18T10:02:59.151323",
-  "session_id": "c07b7210-f315-4f60-bc73-66069d90381d",
+  "generated_at": "2026-02-18T16:45:36.410222",
+  "session_id": "8c61dd2b-cd44-429f-9ffd-c52348630210",
   "deal_status": "failed",
-  "round": 6,
-  "max_rounds": 5,
+  "round": 3,
+  "max_rounds": 2,
   "persona": {
+    "misconception": "He believes that learning AI is purely about mastering complex algorithms and that a single certification will guarantee a high-paying job immediately, without needing to apply conceptual understanding to real-world problems.",
+    "archetype_label": "Desperate Switcher",
+    "ego_level": 3,
+    "current_role": "Quality Assurance Engineer",
+    "hidden_secret": "He secretly fears he might not be smart enough to transition into AI, despite his strong desire to do so. He worries about the \"gap\" in his resume regarding modern tech.",
+    "name": "Rajesh Kumar",
+    "financial_anxiety": 9,
+    "language_style": "Indian Academic English. Uses 'Sir/Ma'am' often and terms like Batch, Passing out, Gap, Scope.",
+    "backstory": "Rajesh graduated with a B.Tech in Computer Science five years ago from a Tier-2 college. He joined a mid-sized IT firm as a QA Engineer and has been in the same role, witnessing his peers from other specializations advance rapidly. He feels stuck in a low-growth trajectory, constantly worried about job security in an evolving tech landscape where AI skills are becoming paramount. His parents are getting older, and he feels immense pressure to secure a stable and well-paying job to support them and eventually start his own family.",
+    "age": 28,
+    "trigger_event": "A recent company-wide restructuring and a conversation with a senior colleague who mentioned that QA roles are increasingly being automated, making him fear for his job. He also saw a LinkedIn post from a junior batchmate talking about their high-paying AI role, which intensified his panic.",
+    "confusion_level": 7,
+    "city_tier": "Tier-2",
     "skepticism": 5,
-    "city_tier": "Tier-1",
+    "gender": "male",
     "common_vocabulary": [
-      "Sir/Ma'am",
+      "Sir",
+      "Ma'am",
       "Batch",
       "Passing out",
       "Gap",
-      "Scope"
+      "Scope",
+      "Job Security",
+      "Career Growth"
     ],
-    "ego_level": 4,
-    "financial_anxiety": 9,
-    "archetype_label": "Desperate Switcher",
-    "gender": "male",
-    "current_role": "Junior Java Developer",
-    "language_style": "Indian Academic English. Use 'Sir/Ma'am' often and terms like Batch, Passing out, Gap, Scope.",
-    "name": "Rohan Sharma",
-    "trigger_event": "A recent performance review where he was told his \"skillset needs significant upgrading to align with future company initiatives,\" combined with a college batchmate, who had a similar profile, landing a lucrative role as an AI Engineer after completing an intensive program. This has fueled his fear of being left behind and the urgent need for a career switch.",
-    "backstory": "Rohan completed his B.Tech in Computer Science 4 years ago. He started as a Java developer in a service-based company, expecting steady growth. However, his career has stagnated, and he feels he's falling behind peers who are now working in cutting-edge AI roles with significantly better compensation. He's stuck doing maintenance work, and his skills feel increasingly irrelevant. He's the eldest son and feels immense pressure to secure a stable, high-paying job to support his family and possibly pay off an education loan.",
     "archetype_id": "desperate_switcher",
-    "age": 26,
-    "hidden_secret": "He secretly feels incompetent compared to his peers and fears that he might not be smart enough to grasp complex AI concepts. He's also deeply ashamed of his current salary and the lack of progress in his career, which he hides from his extended family. He took a small personal loan recently to cover some family expenses, adding to his financial burden and desperation for a better job.",
-    "misconception": "He believes that once he completes this program, he is guaranteed a high-paying AI job, and the program will teach him specific \"hacks\" or \"shortcuts\" to impress recruiters, rather than focusing on foundational understanding and problem-solving. He also thinks that just knowing the tools (like LangChain or LlamaIndex) is enough, without truly understanding the underlying principles.",
-    "confusion_level": 7,
     "persona_type": "desperate_switcher",
     "background": "Prospective learner evaluating an AI upskilling path.",
     "career_stage": "mid",
     "financial_sensitivity": "medium",
-    "risk_tolerance": "medium",
+    "risk_tolerance": "low",
     "emotional_tone": "anxious",
     "primary_objections": [
       "Placement credibility",
@@ -40,11 +43,11 @@
       "Difficulty for freshers",
       "Time commitment"
     ],
-    "walk_away_likelihood": 0.58,
-    "expected_roi_months": 10,
-    "affordability_concern_level": 58,
-    "willingness_to_invest_score": 30,
-    "communication_style": "timid",
+    "walk_away_likelihood": 0.47,
+    "expected_roi_months": 15,
+    "affordability_concern_level": 48,
+    "willingness_to_invest_score": 42,
+    "communication_style": "aggressive",
     "common_phrases": [
       "Placement ka scene kya hai?",
       "Is this really worth it?",
@@ -52,73 +55,72 @@
     ]
   },
   "program": {
-    "program_name": "Building Agentic AI Systems",
-    "program_fee_inr": "1,50,000 + Taxes. Full upfront payment with a 5% concession (7,500 INR off) amounts to 1,42,500 + Taxes."
+    "program_name": "NIIT Building Agentic AI Systems",
+    "program_fee_inr": "The program fee is INR 1,50,000 + GST. A booking fee of INR 1,500 + GST is also required. All fees are exclusive of 18% GST. A 5% concession (INR 7,500 off) is available for full upfront payment, making it INR 1,42,500 (inclusive of concession)."
   },
   "student_inner_state": {
-    "sentiment": "frustrated",
-    "skepticism_level": 60,
-    "trust_score": 35,
+    "sentiment": "anxious",
+    "skepticism_level": 20,
+    "trust_score": 55,
     "unresolved_concerns": [
       "Job Guarantee",
       "Price"
     ]
   },
   "negotiation_metrics": {
-    "round": 5,
-    "max_rounds": 5,
+    "round": 2,
+    "max_rounds": 2,
     "concession_count_counsellor": 0,
     "concession_count_student": 0,
-    "tone_escalation": 29,
-    "objection_intensity": 29,
-    "trust_index": 35,
-    "close_probability": 49,
-    "sentiment_indicator": "negative",
-    "retry_modifier": 2
+    "tone_escalation": 15,
+    "objection_intensity": 25,
+    "trust_index": 52,
+    "close_probability": 60,
+    "sentiment_indicator": "positive",
+    "retry_modifier": 0
   },
   "final_offers": {
     "counsellor": 165000,
-    "student": 108000
+    "student": 115200
   },
   "analysis": {
-    "mistakes": [
-      "Failed to effectively reframe the student's rigid demand for a 'job guarantee' into an understanding of 'employability assurance' built through skills and portfolio.",
-      "Did not pivot the conversation or explore alternative ways to build reassurance when it became clear the direct explanations were not landing.",
-      "Repeated similar arguments across multiple rounds without introducing new angles or addressing the student's deeper emotional or psychological drivers behind the guarantee demand.",
-      "Did not offer concrete examples or testimonials of past students who achieved similar outcomes without a direct guarantee."
-    ],
-    "enrollment_likelihood": 15,
-    "trust_delta": -5,
-    "strengths": [
-      "Maintained a professional, empathetic, and patient tone throughout the conversation.",
-      "Consistently provided detailed explanations of the program's features, curriculum, hands-on projects, and placement assistance to address the student's underlying goal of securing an AI role.",
-      "Accurately represented the program's offerings without making false promises of a direct job guarantee.",
-      "Acknowledged and validated the student's concerns regarding financial investment and family expectations."
-    ],
-    "skill_recommendations": [
-      "Develop advanced objection handling techniques to move beyond direct responses, focusing on exploring underlying needs and motivations when faced with rigid demands like a 'job guarantee'.",
-      "Learn to creatively reframe value propositions, translating program features into direct outcomes and addressing student anxieties with more tailored reassurance, possibly through case studies or success metrics.",
-      "Practice active listening and probing questions to uncover the deeper 'why' behind a student's non-negotiable demands, enabling more targeted and effective persuasion strategies.",
-      "Implement strategies for pivoting the conversation when a particular line of reasoning is clearly not resonating, introducing new forms of evidence or addressing fears from a different perspective."
-    ],
-    "commitment_signal": "none",
-    "pivotal_moments": [
-      "Round 2: Student's initial strong and clear articulation of the need for a 'job guarantee' as their biggest concern.",
-      "Round 3: Student explicitly linking the 'job guarantee' to the 'significant program fee' (1.5 lakhs), raising the stakes of the financial investment.",
-      "Round 4: Student bringing in 'family's involvement' and peer comparisons ('like my batchmates have'), adding emotional weight and external validation to their demand.",
-      "Round 5: Counsellor's transparent admission that a direct contractual job guarantee is not offered, which ultimately created an impasse as the student's core concern remained unresolved."
-    ],
+    "enrollment_likelihood": 60,
     "winner": "student",
-    "why": "The student repeatedly stated the need for a 'direct job guarantee to ensure a high-paying AI role' as their core concern, and despite detailed explanations about skills, projects, and placement assistance, the counsellor could not provide this specific guarantee. The student's fear of being 'stuck' and inability to justify the significant program fee to their family without a guarantee remained unaddressed to their satisfaction, leading to a stalemate.",
-    "primary_unresolved_objection": "Direct job guarantee and assurance of a high-paying AI role post-program, especially given the significant program fees.",
-    "negotiation_score": 35
+    "pivotal_moments": [
+      "The student's initial clear articulation of career goals (growth, stability, AI transition) and specific questions about placement guarantee and financial commitment in Round 1.",
+      "The counsellor's comprehensive response in Round 2 detailing the program's offerings, placement support, and financial aspects, which the student found 'detailed' and the placement statistic 'very promising'.",
+      "The student's explicit and strong articulation of their primary unresolved objection in Round 2, directly questioning the program's efficacy for *their specific* 5-year QA background and its ability to secure an AI job."
+    ],
+    "primary_unresolved_objection": "The student is worried their five years of experience as a QA Engineer might create a significant gap, questioning if the program can truly help someone with their specific background secure a good job in AI and provide a clear path to job security in a high-growth scope.",
+    "mistakes": [
+      "The counsellor failed to proactively address the potential concerns a QA Engineer might have about transitioning to AI, despite the student explicitly stating their QA background in the first round.",
+      "The response regarding placement assistance was general, not specifically tailored to how the program has successfully transitioned individuals with a similar five-year QA background into AI roles.",
+      "Did not delve deeper into the student's specific fears or anxieties about their background before providing the general program overview, leading to a strong, personalized objection at the end of the round."
+    ],
+    "strengths": [
+      "The counsellor effectively acknowledged and validated the student's career aspirations and the desire for growth and stability.",
+      "Provided a comprehensive and detailed explanation of the program curriculum, its benefits (job-readiness, industry certification), and practical projects.",
+      "Clearly addressed both of the student's initial key questions regarding placement assistance (including eligibility, support, and statistics) and financial commitment (fees, concessions, EMI, loan facilities).",
+      "Maintained a professional and informative tone throughout the interaction.",
+      "Used a compelling statistic (97% placement) to highlight program success."
+    ],
+    "why": "The counsellor provided a detailed overview of the program, placement assistance, and financial options, which the student acknowledged as helpful and promising. However, the counsellor failed to proactively or adequately address the student's specific, deeply-rooted concern about their 5-year QA background and its impact on securing an AI job after the program. The student's primary unresolved objection clearly indicates they are not yet convinced the program is the right fit for *them* given their unique professional history.",
+    "skill_recommendations": [
+      "**Active Listening and Empathy:** The counsellor needs to listen more attentively to underlying anxieties (e.g., job security fears related to specific background) and demonstrate greater empathy, moving beyond just acknowledging aspirations.",
+      "**Proactive Objection Handling:** Based on the student's profile (QA background, 5 years experience), the counsellor should have anticipated and proactively addressed potential concerns about transition success for such profiles, perhaps by sharing relevant success stories or tailored information.",
+      "**Customized Value Proposition:** Instead of a generic program pitch, the counsellor should aim to customize the value proposition by connecting program features directly to the student's specific background and career transition needs.",
+      "**Evidence-Based Reassurance:** Provide specific case studies or testimonials of former QA engineers who successfully transitioned through the program to directly mitigate the student's concerns about their background."
+    ],
+    "trust_delta": 5,
+    "commitment_signal": "none",
+    "negotiation_score": 6.5
   },
   "transcript": [
     {
-      "id": "a3f1b1cc-8e40-484e-bd34-535fd6db3ad1",
+      "id": "b5c424a7-8af0-4e00-ad89-966a685758bf",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello! I'm a Senior Admissions Counsellor here. I see you're interested in our \"Building Agentic AI Systems\" program. To help me provide the most relevant information for you, could you share a bit about what initially drew you to this program and what you're hoping to achieve by enrolling?",
+      "content": "Hello! Thank you for reaching out. I'm here to help you understand if the NIIT Building Agentic AI Systems program is the right fit for you. To start, could you tell me a little about what you're hoping to achieve by exploring this program, and what aspects of Agentic AI particularly interest you?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -126,59 +128,29 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:01:43.448037",
+      "timestamp": "2026-02-18T16:45:00.593493",
       "generation_mode": "stream"
     },
     {
-      "id": "0b4061ec-d236-4d34-9bdf-b74dc9501ac7",
+      "id": "40bf0377-ea94-49ab-bfbe-c1bfb5bacedb",
       "round": 1,
       "agent": "student",
-      "content": "Good morning, Sir/Ma'am. Thank you for asking. See, I completed my B.Tech a few years back, and I'm currently working as a Junior Java Developer. But my career growth has been quite stagnant. I've noticed many of my batchmates, my peers, are getting into these high-paying AI roles, and the scope seems immense. I am really hoping this program can provide me with the necessary skills and, more importantly, a strong job guarantee to transition into a good AI role with a competitive salary. I really want to secure my career path and ensure a better future, Sir.",
+      "content": "Thank you, Sir/Ma'am. My main objective is certainly career growth and stability. I have been in a QA role for five years since my passing out batch, and honestly, the scope for advancement seems very limited here. I see my peers from other specializations progressing rapidly. I am hoping to transition into a high-growth area like AI for better job security and a promising career path. Agentic AI seems to be the future, and I am keen to understand how this program can guarantee a good placement and what the financial commitment will be.",
       "techniques": [],
-      "strategic_intent": "To clearly state my primary motivation (job guarantee, better salary) and unresolved concern, while also hinting at my current stagnation and desire for career security.",
-      "confidence_score": 60,
-      "emotional_state": "hopeful",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:01:46.514042",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "a7cd8555-4fa4-44c3-9b64-e5d0c2bf158f",
-      "round": 2,
-      "agent": "counsellor",
-      "content": "Hello! I completely understand your ambition to transition into a high-paying AI role and secure a strong career path, especially seeing your peers advance. It's a very common and valid aspiration given the immense scope in AI right now.\nRegarding a \"job guarantee,\" it's important to be clear: the \"Building Agentic AI Systems\" program, like most professional development programs, focuses on equipping you with in-demand skills and providing career support, but it does not offer a direct job guarantee.\nHowever, what the program *does* offer is designed precisely to help you achieve that successful transition. Our \"Placement Assistance via NIIT's trusted recruiter connect\" is a key feature, aimed at accelerating your career by connecting you with opportunities. The program is specifically positioned to develop \"job-ready capabilities for high-growth AI and automation roles,\" focusing on practical, real-world skill development.\nYou'll earn an \"NIIT certification for GenAI career readiness\" and, crucially, \"build a portfolio of agentic AI projects across real-world use cases,\" including a \"Capstone project: Engineer an autonomous agentic AI system.\" This portfolio will be your strongest asset in interviews, demonstrating your ability to design and build autonomous agentic AI systems.\nThe curriculum is hands-on, covering vital tools like Python, LangChain, LlamaIndex, LangGraph, CrewAI, and GuardrailsAI. You'll learn to \"develop conversational AI agents,\" \"engineer multimodal RAG pipelines,\" and \"build multi-agent systems,\" which are the core competencies for today's AI roles. With \"300 hours of guided learning and practice\" over 25 or 19 weeks, and \"mentor-led classes\" from experienced professionals, the program is structured to transform your capabilities.\nDoes understanding this distinction, where the program focuses on building your capabilities and providing strong placement assistance rather than a direct guarantee, address your primary concern about securing an AI role?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:01:54.227582",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "d4a4f6fb-b4dc-4bd4-bad6-bd8b23876316",
-      "round": 2,
-      "agent": "student",
-      "content": "Thank you for explaining, Sir/Ma'am. I understand about the capabilities and assistance. But honestly, my biggest concern is still the job guarantee. Without that direct assurance, it feels very risky, especially considering the program fees. I really need to secure a good, high-paying AI role after passing out from this program, like my batchmates have, and that guarantee would truly give me peace of mind, Sir.",
-      "techniques": [],
-      "strategic_intent": "reiterate the primary concern about job guarantee and link it to the financial investment, expressing self-doubt and need for reassurance",
+      "strategic_intent": "To express my primary motivation (job security/career growth), state my current predicament, and reiterate my key unresolved concerns (job guarantee and price), while subtly hinting at my desperation.",
       "confidence_score": 60,
       "emotional_state": "anxious",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:01:58.378872",
+      "timestamp": "2026-02-18T16:45:05.577569",
       "generation_mode": "stream"
     },
     {
-      "id": "a5840c75-895f-4592-96fb-ef96b9cb1174",
-      "round": 3,
+      "id": "7dba8104-cc3c-4774-bae7-8b6e636f02ce",
+      "round": 2,
       "agent": "counsellor",
-      "content": "I completely hear you. Your concern about the investment and the need for peace of mind regarding a secure, high-paying AI role is absolutely valid, especially when considering a career transition like this. It's natural to seek that definitive assurance.\nWhile a direct job guarantee isn't part of any professional development program, let's look at how the \"Building Agentic AI Systems\" program is meticulously structured to provide you with the strongest possible *assurance* of success in securing such roles, by focusing on what employers truly value: demonstrated capability and practical experience.\nThink of it this way: instead of a promise, we provide you with a powerful toolkit and a clear pathway to achieve your goal. The program is designed to equip you with \"job-ready capabilities for high-growth AI and automation roles.\"\nHere's how we build that assurance for you:\n1.  **Cutting-Edge Skills for In-Demand Roles:** The curriculum is built around the exact tools and technologies that drive high-paying AI roles today. You will master Python for AI-embedded applications, learn to build \"Intelligent Conversational Agents,\" \"RAG based Systems,\" and critically, \"Autonomous Multi Agent Systems\" using frameworks like LangChain, LlamaIndex, LangGraph, and CrewAI. These are the advanced skills employers are actively seeking for agentic AI development.\n2.  **Tangible Portfolio of Real-World Projects:** Your strongest asset will be the \"portfolio of agentic AI projects across real-world use cases\" you build. This includes creating and presenting practical AI projects from chatbots to agent teams, culminating in a \"Capstone project: Engineer an autonomous agentic AI system.\" This hands-on experience, developed through \"sprints modeled on industry workflows,\" directly demonstrates your ability to design, build, test, and deploy complex AI solutions. This is the concrete proof that makes you competitive with your peers.\n3.  **Dedicated Placement Assistance:** We provide \"Placement Assistance via NIIT's trusted recruiter connect.\" This means you won't be navigating the job market alone; our connections are there to help accelerate your career by linking you to relevant opportunities that align with the advanced skills you've gained.\n4.  **Expert Mentorship and NIIT Certification:** You'll learn AI from \"experienced mentors and professionals\" through \"interactive, mentor-led classes,\" ensuring you gain practical insights. Earning the \"NIIT certification for GenAI career readiness\" further validates your expertise to potential employers.\nSo, while we don't offer a direct \"job guarantee,\" the program focuses on maximizing your employability and market value through a highly practical curriculum, a robust project portfolio, and targeted placement support. This is how we empower you to confidently compete for and secure those high-paying AI roles, much like your peers.\nDoes understanding how these specific elements of the program are designed to build your job-readiness and career assurance help address your primary concern about securing a strong AI role?",
+      "content": "Thank you for sharing your career aspirations. It's completely understandable to seek growth and stability, especially after five years in a QA role where you feel advancement is limited. The drive to transition into a high-growth area like AI, particularly Agentic AI, is a strategic and promising move for long-term career security.\nThe NIIT Building Agentic AI Systems program is specifically positioned to develop job-ready capabilities for high-growth AI and automation roles. It focuses on designing, building, and deploying real-world Agentic AI systems using modern LLM frameworks, leading to an industry-recognized certification that signals job-readiness. The curriculum is designed to bridge software engineering and applied AI system development, guiding learners from building clean APIs to designing intelligent, autonomous agents. It covers modules such as Python for AI Embedded Applications, Intelligent Conversational Agents, RAG-Based Systems, and Autonomous Multi-agent Systems, culminating in a Capstone Project. You'll work on industry-relevant projects like building a Multi-Agent System for Code Review & Optimization or a Multi-Agent Software Customer Support with Human in the Loop, which helps you build a strong portfolio of working AI projects.\nRegarding your question about placement, NIIT provides placement assistance for eligible learners. To qualify, you would need to complete the program with at least a 70% score, hold a regular graduation degree, and reside in India. Given your five years of experience, this support would include access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days of program completion. While NIIT facilitates job opportunities and partners with over 800 hiring partners, final selection ultimately depends on your performance in interviews and the specific requirements of the employer. NIIT states that 97% of eligible learners have been placed.\nFor the financial commitment, the program fee is INR 1,50,000 plus GST. We offer a 5% concession, which is INR 7,500 off, if you choose to make a full upfront payment, bringing the fee to INR 1,42,500 plus GST. Alternatively, EMI options are available, with equal installments of INR 24,750 plus GST after the initial booking fee. Loan facilities are also facilitated through third-party lenders. It's important to note that NIIT has no role in the loan approval process; that depends on the lender's eligibility criteria and documentation. You would need to review the loan terms carefully, including EMIs, interest rates, processing fees, and repayment schedules, directly with the lender.\nDoes this initial overview help clarify how the program addresses your career goals and the associated financial aspects?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -186,91 +158,31 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:02:06.388214",
+      "timestamp": "2026-02-18T16:45:18.640194",
       "generation_mode": "stream"
     },
     {
-      "id": "9100b0b8-1fbd-4491-adaf-c10d71f8d1f4",
-      "round": 3,
+      "id": "b4cb6621-5629-4b71-ae61-6db15c68bbe2",
+      "round": 2,
       "agent": "student",
-      "content": "Thank you for explaining, Sir/Ma'am. I appreciate the detailed points about skills and projects. But still, for me, the primary issue is the job guarantee, especially with such a significant program fee. Investing 1.5 lakhs without a direct guarantee of securing a high-paying AI role feels very uncertain. My family is also asking about the job security post-program. I really need to understand how this program *guarantees* that competitive salary and role like my batchmates have achieved, Sir.",
+      "content": "Thank you, Sir/Ma'am, for the detailed explanation. The 97% placement statistic sounds very promising. However, I am quite worried about my background as a QA Engineer for five years. Will this program truly help someone from my batch, with this kind of experience, secure a good job in AI, or is there still a significant gap that I need to cover? I am looking for a clear path to job security in a high-growth scope.",
       "techniques": [],
-      "strategic_intent": "reiterate core concern about job guarantee and link it to program cost, seeking concrete assurance",
+      "strategic_intent": "seeking more specific reassurance on job guarantee given my background and expressing continued anxiety about career gap",
       "confidence_score": 60,
       "emotional_state": "anxious",
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:02:10.238202",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "6a8561bf-e751-45d1-a08d-ca82a30f7f60",
-      "round": 4,
-      "agent": "counsellor",
-      "content": "I completely understand, and it's absolutely natural to feel that way, especially with your family's support and involvement, and the significant investment required for a program like this. Your desire for clarity on job security and a competitive salary, like your batchmates, is a very serious and valid concern.\nLet's address this directly. While NIIT's \"Building Agentic AI Systems\" program does not offer a direct job guarantee, it is meticulously designed to provide you with the *strongest possible strategic advantage* to secure those high-paying AI roles your peers are achieving. Think of it not as a guarantee of a job being handed to you, but as a robust pathway and an investment in making you *irresistibly competitive* for those exact roles.\nHere's how this program is structured to directly lead to securing a competitive salary and role:\n1.  **Direct Alignment with \"High-Growth AI Roles\":** The program's core \"positioning angle\" is \"focused on equipping professionals with job-ready capabilities to design and build autonomous agentic AI systems for high-growth AI and automation roles.\" This means the entire curriculum is tailored precisely to the skills demanded by the industry's most sought-after and well-compensated positions.\n2.  **Mastering In-Demand Tools and Frameworks:** You will gain expertise in Python, LangChain, LlamaIndex, LangGraph, CrewAI, and GuardrailsAI. These are the advanced tools that companies are actively hiring for in roles building \"Intelligent Conversational Agents,\" \"RAG based Systems,\" and \"Autonomous Multi Agent Systems.\" Proficiency in these specific, cutting-edge technologies directly translates to higher earning potential.\n3.  **Building a Powerful, Differentiator Portfolio:** The program ensures you \"create and present practical AI projects from chatbots to agent teams\" and \"build a portfolio of agentic AI projects across real-world use cases.\" Crucially, you'll complete a \"Capstone project: Engineer an autonomous agentic AI system.\" This portfolio is your concrete proof of ability to design and build complex AI solutions, which is what employers pay top dollar for. It demonstrates you're not just theoretical, but a capable practitioner.\n4.  **Accelerated Career Opportunities:** Our \"Placement Assistance via NIIT's trusted recruiter connect\" is designed to accelerate your career by directly linking you with relevant opportunities. This network acts as a bridge, connecting your newly acquired, in-demand skills and portfolio with companies actively seeking talent for high-paying AI roles, helping you cut through the noise of general job applications.\n5.  **NIIT Certification for GenAI Career Readiness:** Earning this certification is a recognized validation of your expertise, enhancing your credibility and marketability to potential employers looking for skilled professionals in Generative AI.\nSo, while we cannot offer a contractual job guarantee, every aspect of the program, from its curriculum and hands-on projects to its placement support and certification, is strategically aligned to empower you to *earn* and *secure* those competitive, high-paying AI roles, by making you an exceptionally qualified candidate.\nDoes understanding how these integrated components provide a robust, practical path to securing such roles, rather than a direct guarantee, help address your and your family's primary concern about job security and competitive salary?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:02:21.403302",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "eabf9692-90e7-4bee-9dd4-8a7ef676775f",
-      "round": 4,
-      "agent": "student",
-      "content": "Sir/Ma'am, I understand the points about skills and the portfolio, but honestly, this isn't addressing my core concern. For a fee of 1.5 lakhs, I need a direct job guarantee to ensure I secure a high-paying AI role after passing out. My peers got good roles, and I fear if this program doesn't *guarantee* a similar outcome, I'll still be stuck. How can you assure me of a competitive salary and role without that guarantee, Sir?",
-      "techniques": [],
-      "strategic_intent": "reiterating the core unresolved concern (job guarantee) and linking it to the program fee and the desired outcome, while expressing anxiety and self-doubt about the lack of direct assurance.",
-      "confidence_score": 60,
-      "emotional_state": "frustrated",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:02:26.208712",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "d8dbe289-ed2b-476c-ba46-e7375d5e6f37",
-      "round": 5,
-      "agent": "counsellor",
-      "content": "Sir/Ma'am, I completely understand. For an investment of 1.5 lakhs, especially with your family's involvement and your concern about being 'stuck' while your peers advance, seeking a direct guarantee of a high-paying AI role is a very serious and valid request.\nLet me be transparent: a direct, contractual job guarantee for a specific salary and role after any professional development program is not something NIIT, or indeed most reputable institutions, can offer. The job market is dynamic, and individual success always involves a combination of program quality, market demand, and your personal effort.\nHowever, what I *can* assure you is how the \"Building Agentic AI Systems\" program is meticulously built to provide you with the *most powerful strategic advantage* to become one of those highly sought-after candidates who secure competitive roles and salaries, much like your batchmates. Think of your investment as directly enabling you to become an *irresistible candidate* for these opportunities.\nHere's how we ensure you're equipped to secure that competitive salary and role:\n1.  **Mastering High-Value, In-Demand Skills:** The program focuses on \"equipping professionals with job-ready capabilities to design and build autonomous agentic AI systems for high-growth AI and automation roles.\" You won't just learn about AI; you will master the specific \"tools, frameworks, and technologies\" like Python, LangChain, LlamaIndex, LangGraph, CrewAI, and GuardrailsAI. These are the advanced, specialized skills companies are actively seeking and willing to pay premium salaries for, to build \"Intelligent Conversational Agents,\" \"RAG based Systems,\" and \"Autonomous Multi Agent Systems.\"\n2.  **Building an Undeniable Portfolio of Proof:** Your strongest asset, and your most compelling 'guarantee' to any employer, will be the \"portfolio of agentic AI projects across real-world use cases\" you build. This includes creating and presenting practical AI projects, culminating in a rigorous \"Capstone project: Engineer an autonomous agentic AI system.\" This hands-on, demonstrable experience, developed through \"sprints modeled on industry workflows,\" proves your ability to design, build, test, and deploy complex AI solutions. This tangible proof is what commands top salaries.\n3.  **Targeted Industry Connections:** Our \"Placement Assistance via NIIT's trusted recruiter connect\" is designed to strategically introduce your newly acquired, in-demand skills and robust project portfolio directly to companies actively seeking talent for these exact high-value roles. This connection helps streamline your path to opportunities that match your advanced capabilities.\n4.  **Validated Expertise:** Earning the \"NIIT certification for GenAI career readiness\" officially validates your expertise, enhancing your credibility and marketability to recruiters and hiring managers looking for skilled professionals.\nSo, while we cannot *guarantee* a job, every aspect of this 1.5 lakh investment is channeled into making you exceptionally qualified, highly visible to employers, and capable of *earning* a high-paying AI role. It's about empowering you with the competitive edge to confidently secure the career path you desire.\nDoes understanding how these integrated elements create a robust, practical pathway for you to achieve a competitive salary and role, even without a direct job guarantee, help address your and your family's primary concern about job security and competitive salary?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:02:39.825970",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "268936fb-2946-4cbc-b5fd-98c657af3cb8",
-      "round": 5,
-      "agent": "student",
-      "content": "Sir/Ma'am, I am really trying to understand, but my core concern about the job guarantee is still not addressed. Investing 1.5 lakhs is a very significant amount, and without a direct assurance of a high-paying AI role after passing out, I fear I might still be stuck like I am now. How can I justify this fee to my family if there's no direct guarantee that I will secure a competitive salary and role, like my batchmates have already achieved, Sir?",
-      "techniques": [],
-      "strategic_intent": "reiterate the need for a job guarantee and express fear of stagnation despite the investment",
-      "confidence_score": 60,
-      "emotional_state": "frustrated",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:02:44.554512",
+      "timestamp": "2026-02-18T16:45:22.882118",
       "generation_mode": "stream"
     }
   ],
   "history_for_reporting": [
     {
-      "id": "a3f1b1cc-8e40-484e-bd34-535fd6db3ad1",
+      "id": "b5c424a7-8af0-4e00-ad89-966a685758bf",
       "round": 1,
       "agent": "counsellor",
-      "content": "Hello! I'm a Senior Admissions Counsellor here. I see you're interested in our \"Building Agentic AI Systems\" program. To help me provide the most relevant information for you, could you share a bit about what initially drew you to this program and what you're hoping to achieve by enrolling?",
+      "content": "Hello! Thank you for reaching out. I'm here to help you understand if the NIIT Building Agentic AI Systems program is the right fit for you. To start, could you tell me a little about what you're hoping to achieve by exploring this program, and what aspects of Agentic AI particularly interest you?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -278,45 +190,45 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:01:43.448037",
+      "timestamp": "2026-02-18T16:45:00.593493",
       "generation_mode": "stream"
     },
     {
-      "id": "0b4061ec-d236-4d34-9bdf-b74dc9501ac7",
+      "id": "40bf0377-ea94-49ab-bfbe-c1bfb5bacedb",
       "round": 1,
       "agent": "student",
-      "content": "Good morning, Sir/Ma'am. Thank you for asking. See, I completed my B.Tech a few years back, and I'm currently working as a Junior Java Developer. But my career growth has been quite stagnant. I've noticed many of my batchmates, my peers, are getting into these high-paying AI roles, and the scope seems immense. I am really hoping this program can provide me with the necessary skills and, more importantly, a strong job guarantee to transition into a good AI role with a competitive salary. I really want to secure my career path and ensure a better future, Sir.",
+      "content": "Thank you, Sir/Ma'am. My main objective is certainly career growth and stability. I have been in a QA role for five years since my passing out batch, and honestly, the scope for advancement seems very limited here. I see my peers from other specializations progressing rapidly. I am hoping to transition into a high-growth area like AI for better job security and a promising career path. Agentic AI seems to be the future, and I am keen to understand how this program can guarantee a good placement and what the financial commitment will be.",
       "techniques": [],
-      "strategic_intent": "To clearly state my primary motivation (job guarantee, better salary) and unresolved concern, while also hinting at my current stagnation and desire for career security.",
+      "strategic_intent": "To express my primary motivation (job security/career growth), state my current predicament, and reiterate my key unresolved concerns (job guarantee and price), while subtly hinting at my desperation.",
       "confidence_score": 60,
-      "emotional_state": "hopeful",
-      "internal_thought": "Okay, Sir/Ma'am is asking why I'm interested. This is my chance to tell them what I *really* want, which is a good job and to escape this current situation. I need to make it clear that I'm looking for a guaranteed outcome, not just learning. My peers are doing so well, and I'm just stuck. This program *has* to be my way out. I need to mention the job part and the salary, without sounding too desperate or revealing my incompetence. The job guarantee is paramount. I'm hoping this program will finally give me the career boost I desperately need, something stable and high-paying, unlike my current stagnated Java role. I need to make sure they understand I'm looking for a *solution*, not just another course.",
+      "emotional_state": "anxious",
+      "internal_thought": "Sir/Ma'am is asking about my hopes and what interests me. My main hope is to get out of this stagnant QA role and find a field with good career growth and job security. My peers are moving ahead, and I feel stuck. I need to make sure this program actually guarantees a job, and the price is a huge concern. I'm worried about the technical side, but I can't let that show. I need to frame my answer around my desperation for a better career path and link it to the 'scope' of AI, without delving too deep into the technical 'aspects' which I fear I might not understand. I must ensure they understand my need for job guarantee and not just skill development.",
       "updated_stats": {
-        "sentiment": "curious",
-        "skepticism_level": 5,
-        "trust_score": 55,
+        "sentiment": "anxious",
+        "skepticism_level": 10,
+        "trust_score": 54,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
         ]
       },
       "updated_state": {
-        "sentiment": "curious",
-        "skepticism_level": 5,
-        "trust_score": 55,
+        "sentiment": "anxious",
+        "skepticism_level": 10,
+        "trust_score": 54,
         "unresolved_concerns": [
           "Price",
           "Job Guarantee"
         ]
       },
-      "timestamp": "2026-02-18T10:01:46.514042",
+      "timestamp": "2026-02-18T16:45:05.577569",
       "generation_mode": "stream"
     },
     {
-      "id": "a7cd8555-4fa4-44c3-9b64-e5d0c2bf158f",
+      "id": "7dba8104-cc3c-4774-bae7-8b6e636f02ce",
       "round": 2,
       "agent": "counsellor",
-      "content": "Hello! I completely understand your ambition to transition into a high-paying AI role and secure a strong career path, especially seeing your peers advance. It's a very common and valid aspiration given the immense scope in AI right now.\nRegarding a \"job guarantee,\" it's important to be clear: the \"Building Agentic AI Systems\" program, like most professional development programs, focuses on equipping you with in-demand skills and providing career support, but it does not offer a direct job guarantee.\nHowever, what the program *does* offer is designed precisely to help you achieve that successful transition. Our \"Placement Assistance via NIIT's trusted recruiter connect\" is a key feature, aimed at accelerating your career by connecting you with opportunities. The program is specifically positioned to develop \"job-ready capabilities for high-growth AI and automation roles,\" focusing on practical, real-world skill development.\nYou'll earn an \"NIIT certification for GenAI career readiness\" and, crucially, \"build a portfolio of agentic AI projects across real-world use cases,\" including a \"Capstone project: Engineer an autonomous agentic AI system.\" This portfolio will be your strongest asset in interviews, demonstrating your ability to design and build autonomous agentic AI systems.\nThe curriculum is hands-on, covering vital tools like Python, LangChain, LlamaIndex, LangGraph, CrewAI, and GuardrailsAI. You'll learn to \"develop conversational AI agents,\" \"engineer multimodal RAG pipelines,\" and \"build multi-agent systems,\" which are the core competencies for today's AI roles. With \"300 hours of guided learning and practice\" over 25 or 19 weeks, and \"mentor-led classes\" from experienced professionals, the program is structured to transform your capabilities.\nDoes understanding this distinction, where the program focuses on building your capabilities and providing strong placement assistance rather than a direct guarantee, address your primary concern about securing an AI role?",
+      "content": "Thank you for sharing your career aspirations. It's completely understandable to seek growth and stability, especially after five years in a QA role where you feel advancement is limited. The drive to transition into a high-growth area like AI, particularly Agentic AI, is a strategic and promising move for long-term career security.\nThe NIIT Building Agentic AI Systems program is specifically positioned to develop job-ready capabilities for high-growth AI and automation roles. It focuses on designing, building, and deploying real-world Agentic AI systems using modern LLM frameworks, leading to an industry-recognized certification that signals job-readiness. The curriculum is designed to bridge software engineering and applied AI system development, guiding learners from building clean APIs to designing intelligent, autonomous agents. It covers modules such as Python for AI Embedded Applications, Intelligent Conversational Agents, RAG-Based Systems, and Autonomous Multi-agent Systems, culminating in a Capstone Project. You'll work on industry-relevant projects like building a Multi-Agent System for Code Review & Optimization or a Multi-Agent Software Customer Support with Human in the Loop, which helps you build a strong portfolio of working AI projects.\nRegarding your question about placement, NIIT provides placement assistance for eligible learners. To qualify, you would need to complete the program with at least a 70% score, hold a regular graduation degree, and reside in India. Given your five years of experience, this support would include access to placement preparation sessions, mentor guidance, and up to three interview opportunities within 120 days of program completion. While NIIT facilitates job opportunities and partners with over 800 hiring partners, final selection ultimately depends on your performance in interviews and the specific requirements of the employer. NIIT states that 97% of eligible learners have been placed.\nFor the financial commitment, the program fee is INR 1,50,000 plus GST. We offer a 5% concession, which is INR 7,500 off, if you choose to make a full upfront payment, bringing the fee to INR 1,42,500 plus GST. Alternatively, EMI options are available, with equal installments of INR 24,750 plus GST after the initial booking fee. Loan facilities are also facilitated through third-party lenders. It's important to note that NIIT has no role in the loan approval process; that depends on the lender's eligibility criteria and documentation. You would need to review the loan terms carefully, including EMIs, interest rates, processing fees, and repayment schedules, directly with the lender.\nDoes this initial overview help clarify how the program addresses your career goals and the associated financial aspects?",
       "techniques": [],
       "strategic_intent": "",
       "confidence_score": 60,
@@ -324,23 +236,23 @@
       "internal_thought": "",
       "updated_stats": {},
       "updated_state": {},
-      "timestamp": "2026-02-18T10:01:54.227582",
+      "timestamp": "2026-02-18T16:45:18.640194",
       "generation_mode": "stream"
     },
     {
-      "id": "d4a4f6fb-b4dc-4bd4-bad6-bd8b23876316",
+      "id": "b4cb6621-5629-4b71-ae61-6db15c68bbe2",
       "round": 2,
       "agent": "student",
-      "content": "Thank you for explaining, Sir/Ma'am. I understand about the capabilities and assistance. But honestly, my biggest concern is still the job guarantee. Without that direct assurance, it feels very risky, especially considering the program fees. I really need to secure a good, high-paying AI role after passing out from this program, like my batchmates have, and that guarantee would truly give me peace of mind, Sir.",
+      "content": "Thank you, Sir/Ma'am, for the detailed explanation. The 97% placement statistic sounds very promising. However, I am quite worried about my background as a QA Engineer for five years. Will this program truly help someone from my batch, with this kind of experience, secure a good job in AI, or is there still a significant gap that I need to cover? I am looking for a clear path to job security in a high-growth scope.",
       "techniques": [],
-      "strategic_intent": "reiterate the primary concern about job guarantee and link it to the financial investment, expressing self-doubt and need for reassurance",
+      "strategic_intent": "seeking more specific reassurance on job guarantee given my background and expressing continued anxiety about career gap",
       "confidence_score": 60,
       "emotional_state": "anxious",
-      "internal_thought": "Sir/Ma'am is saying there's no direct job guarantee? This is not what I was hoping for. What if, after all this effort and money, I still don't get a good AI role? My peers are already so far ahead. I need that assurance, Sir. The scope is there, but without a guarantee, how can I be truly confident to switch? It feels like a big risk, especially with the fees.",
+      "internal_thought": "Sir/Ma'am has provided a lot of information, which is good, but the \"final selection depends on performance\" part and \"NIIT has no role in loan approval\" is making me very anxious. I need something more concrete about the job guarantee. 97% is impressive, but does that apply to someone like me, a QA from a Tier-2 college, after a five-year gap in cutting-edge tech? And the fee is substantial. I am panicking a little thinking about the risk versus reward. I need more reassurance on the job front.",
       "updated_stats": {
         "sentiment": "anxious",
         "skepticism_level": 20,
-        "trust_score": 50,
+        "trust_score": 55,
         "unresolved_concerns": [
           "Job Guarantee",
           "Price"
@@ -349,151 +261,13 @@
       "updated_state": {
         "sentiment": "anxious",
         "skepticism_level": 20,
-        "trust_score": 50,
+        "trust_score": 55,
         "unresolved_concerns": [
           "Job Guarantee",
           "Price"
         ]
       },
-      "timestamp": "2026-02-18T10:01:58.378872",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "a5840c75-895f-4592-96fb-ef96b9cb1174",
-      "round": 3,
-      "agent": "counsellor",
-      "content": "I completely hear you. Your concern about the investment and the need for peace of mind regarding a secure, high-paying AI role is absolutely valid, especially when considering a career transition like this. It's natural to seek that definitive assurance.\nWhile a direct job guarantee isn't part of any professional development program, let's look at how the \"Building Agentic AI Systems\" program is meticulously structured to provide you with the strongest possible *assurance* of success in securing such roles, by focusing on what employers truly value: demonstrated capability and practical experience.\nThink of it this way: instead of a promise, we provide you with a powerful toolkit and a clear pathway to achieve your goal. The program is designed to equip you with \"job-ready capabilities for high-growth AI and automation roles.\"\nHere's how we build that assurance for you:\n1.  **Cutting-Edge Skills for In-Demand Roles:** The curriculum is built around the exact tools and technologies that drive high-paying AI roles today. You will master Python for AI-embedded applications, learn to build \"Intelligent Conversational Agents,\" \"RAG based Systems,\" and critically, \"Autonomous Multi Agent Systems\" using frameworks like LangChain, LlamaIndex, LangGraph, and CrewAI. These are the advanced skills employers are actively seeking for agentic AI development.\n2.  **Tangible Portfolio of Real-World Projects:** Your strongest asset will be the \"portfolio of agentic AI projects across real-world use cases\" you build. This includes creating and presenting practical AI projects from chatbots to agent teams, culminating in a \"Capstone project: Engineer an autonomous agentic AI system.\" This hands-on experience, developed through \"sprints modeled on industry workflows,\" directly demonstrates your ability to design, build, test, and deploy complex AI solutions. This is the concrete proof that makes you competitive with your peers.\n3.  **Dedicated Placement Assistance:** We provide \"Placement Assistance via NIIT's trusted recruiter connect.\" This means you won't be navigating the job market alone; our connections are there to help accelerate your career by linking you to relevant opportunities that align with the advanced skills you've gained.\n4.  **Expert Mentorship and NIIT Certification:** You'll learn AI from \"experienced mentors and professionals\" through \"interactive, mentor-led classes,\" ensuring you gain practical insights. Earning the \"NIIT certification for GenAI career readiness\" further validates your expertise to potential employers.\nSo, while we don't offer a direct \"job guarantee,\" the program focuses on maximizing your employability and market value through a highly practical curriculum, a robust project portfolio, and targeted placement support. This is how we empower you to confidently compete for and secure those high-paying AI roles, much like your peers.\nDoes understanding how these specific elements of the program are designed to build your job-readiness and career assurance help address your primary concern about securing a strong AI role?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:02:06.388214",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "9100b0b8-1fbd-4491-adaf-c10d71f8d1f4",
-      "round": 3,
-      "agent": "student",
-      "content": "Thank you for explaining, Sir/Ma'am. I appreciate the detailed points about skills and projects. But still, for me, the primary issue is the job guarantee, especially with such a significant program fee. Investing 1.5 lakhs without a direct guarantee of securing a high-paying AI role feels very uncertain. My family is also asking about the job security post-program. I really need to understand how this program *guarantees* that competitive salary and role like my batchmates have achieved, Sir.",
-      "techniques": [],
-      "strategic_intent": "reiterate core concern about job guarantee and link it to program cost, seeking concrete assurance",
-      "confidence_score": 60,
-      "emotional_state": "anxious",
-      "internal_thought": "Sir/Ma'am is still not giving a direct job guarantee. It's all about \"capabilities\" and \"pathway\" and \"toolkit.\" But what if I build all these projects and still don't get a job? My peers are getting jobs with guarantees or through direct campus placements. This program is expensive, 1,50,000 rupees! How can I invest so much without knowing for sure I will get a high-paying AI job? My salary is so low right now. This is making me panic. I need that peace of mind, Sir. This is not helping. I feel like I'm not smart enough to figure this out or convince them.",
-      "updated_stats": {
-        "sentiment": "anxious",
-        "skepticism_level": 35,
-        "trust_score": 45,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "anxious",
-        "skepticism_level": 35,
-        "trust_score": 45,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "timestamp": "2026-02-18T10:02:10.238202",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "6a8561bf-e751-45d1-a08d-ca82a30f7f60",
-      "round": 4,
-      "agent": "counsellor",
-      "content": "I completely understand, and it's absolutely natural to feel that way, especially with your family's support and involvement, and the significant investment required for a program like this. Your desire for clarity on job security and a competitive salary, like your batchmates, is a very serious and valid concern.\nLet's address this directly. While NIIT's \"Building Agentic AI Systems\" program does not offer a direct job guarantee, it is meticulously designed to provide you with the *strongest possible strategic advantage* to secure those high-paying AI roles your peers are achieving. Think of it not as a guarantee of a job being handed to you, but as a robust pathway and an investment in making you *irresistibly competitive* for those exact roles.\nHere's how this program is structured to directly lead to securing a competitive salary and role:\n1.  **Direct Alignment with \"High-Growth AI Roles\":** The program's core \"positioning angle\" is \"focused on equipping professionals with job-ready capabilities to design and build autonomous agentic AI systems for high-growth AI and automation roles.\" This means the entire curriculum is tailored precisely to the skills demanded by the industry's most sought-after and well-compensated positions.\n2.  **Mastering In-Demand Tools and Frameworks:** You will gain expertise in Python, LangChain, LlamaIndex, LangGraph, CrewAI, and GuardrailsAI. These are the advanced tools that companies are actively hiring for in roles building \"Intelligent Conversational Agents,\" \"RAG based Systems,\" and \"Autonomous Multi Agent Systems.\" Proficiency in these specific, cutting-edge technologies directly translates to higher earning potential.\n3.  **Building a Powerful, Differentiator Portfolio:** The program ensures you \"create and present practical AI projects from chatbots to agent teams\" and \"build a portfolio of agentic AI projects across real-world use cases.\" Crucially, you'll complete a \"Capstone project: Engineer an autonomous agentic AI system.\" This portfolio is your concrete proof of ability to design and build complex AI solutions, which is what employers pay top dollar for. It demonstrates you're not just theoretical, but a capable practitioner.\n4.  **Accelerated Career Opportunities:** Our \"Placement Assistance via NIIT's trusted recruiter connect\" is designed to accelerate your career by directly linking you with relevant opportunities. This network acts as a bridge, connecting your newly acquired, in-demand skills and portfolio with companies actively seeking talent for high-paying AI roles, helping you cut through the noise of general job applications.\n5.  **NIIT Certification for GenAI Career Readiness:** Earning this certification is a recognized validation of your expertise, enhancing your credibility and marketability to potential employers looking for skilled professionals in Generative AI.\nSo, while we cannot offer a contractual job guarantee, every aspect of the program, from its curriculum and hands-on projects to its placement support and certification, is strategically aligned to empower you to *earn* and *secure* those competitive, high-paying AI roles, by making you an exceptionally qualified candidate.\nDoes understanding how these integrated components provide a robust, practical path to securing such roles, rather than a direct guarantee, help address your and your family's primary concern about job security and competitive salary?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:02:21.403302",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "eabf9692-90e7-4bee-9dd4-8a7ef676775f",
-      "round": 4,
-      "agent": "student",
-      "content": "Sir/Ma'am, I understand the points about skills and the portfolio, but honestly, this isn't addressing my core concern. For a fee of 1.5 lakhs, I need a direct job guarantee to ensure I secure a high-paying AI role after passing out. My peers got good roles, and I fear if this program doesn't *guarantee* a similar outcome, I'll still be stuck. How can you assure me of a competitive salary and role without that guarantee, Sir?",
-      "techniques": [],
-      "strategic_intent": "reiterating the core unresolved concern (job guarantee) and linking it to the program fee and the desired outcome, while expressing anxiety and self-doubt about the lack of direct assurance.",
-      "confidence_score": 60,
-      "emotional_state": "frustrated",
-      "internal_thought": "Sir/Ma'am is still not giving a direct job guarantee. They are explaining *around* it, talking about \"capabilities\" and \"pathway,\" but my family and I need that clear assurance, especially for such a big fee. I'm feeling very anxious because it still feels like a huge risk. How can I be sure I'll get a high-paying job like my batchmates if there's no guarantee? It's not just about learning skills, it's about *securing* that job. I need a clear commitment, not just strong capabilities. I feel like my point isn't being understood. My fear of not being smart enough means I need something *guaranteed* to work. I'm feeling a bit frustrated now, and my self-doubt is kicking in again. I have to push for the guarantee again.",
-      "updated_stats": {
-        "sentiment": "anxious",
-        "skepticism_level": 50,
-        "trust_score": 40,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "anxious",
-        "skepticism_level": 50,
-        "trust_score": 40,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "timestamp": "2026-02-18T10:02:26.208712",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "d8dbe289-ed2b-476c-ba46-e7375d5e6f37",
-      "round": 5,
-      "agent": "counsellor",
-      "content": "Sir/Ma'am, I completely understand. For an investment of 1.5 lakhs, especially with your family's involvement and your concern about being 'stuck' while your peers advance, seeking a direct guarantee of a high-paying AI role is a very serious and valid request.\nLet me be transparent: a direct, contractual job guarantee for a specific salary and role after any professional development program is not something NIIT, or indeed most reputable institutions, can offer. The job market is dynamic, and individual success always involves a combination of program quality, market demand, and your personal effort.\nHowever, what I *can* assure you is how the \"Building Agentic AI Systems\" program is meticulously built to provide you with the *most powerful strategic advantage* to become one of those highly sought-after candidates who secure competitive roles and salaries, much like your batchmates. Think of your investment as directly enabling you to become an *irresistible candidate* for these opportunities.\nHere's how we ensure you're equipped to secure that competitive salary and role:\n1.  **Mastering High-Value, In-Demand Skills:** The program focuses on \"equipping professionals with job-ready capabilities to design and build autonomous agentic AI systems for high-growth AI and automation roles.\" You won't just learn about AI; you will master the specific \"tools, frameworks, and technologies\" like Python, LangChain, LlamaIndex, LangGraph, CrewAI, and GuardrailsAI. These are the advanced, specialized skills companies are actively seeking and willing to pay premium salaries for, to build \"Intelligent Conversational Agents,\" \"RAG based Systems,\" and \"Autonomous Multi Agent Systems.\"\n2.  **Building an Undeniable Portfolio of Proof:** Your strongest asset, and your most compelling 'guarantee' to any employer, will be the \"portfolio of agentic AI projects across real-world use cases\" you build. This includes creating and presenting practical AI projects, culminating in a rigorous \"Capstone project: Engineer an autonomous agentic AI system.\" This hands-on, demonstrable experience, developed through \"sprints modeled on industry workflows,\" proves your ability to design, build, test, and deploy complex AI solutions. This tangible proof is what commands top salaries.\n3.  **Targeted Industry Connections:** Our \"Placement Assistance via NIIT's trusted recruiter connect\" is designed to strategically introduce your newly acquired, in-demand skills and robust project portfolio directly to companies actively seeking talent for these exact high-value roles. This connection helps streamline your path to opportunities that match your advanced capabilities.\n4.  **Validated Expertise:** Earning the \"NIIT certification for GenAI career readiness\" officially validates your expertise, enhancing your credibility and marketability to recruiters and hiring managers looking for skilled professionals.\nSo, while we cannot *guarantee* a job, every aspect of this 1.5 lakh investment is channeled into making you exceptionally qualified, highly visible to employers, and capable of *earning* a high-paying AI role. It's about empowering you with the competitive edge to confidently secure the career path you desire.\nDoes understanding how these integrated elements create a robust, practical pathway for you to achieve a competitive salary and role, even without a direct job guarantee, help address your and your family's primary concern about job security and competitive salary?",
-      "techniques": [],
-      "strategic_intent": "",
-      "confidence_score": 60,
-      "emotional_state": "calm",
-      "internal_thought": "",
-      "updated_stats": {},
-      "updated_state": {},
-      "timestamp": "2026-02-18T10:02:39.825970",
-      "generation_mode": "stream"
-    },
-    {
-      "id": "268936fb-2946-4cbc-b5fd-98c657af3cb8",
-      "round": 5,
-      "agent": "student",
-      "content": "Sir/Ma'am, I am really trying to understand, but my core concern about the job guarantee is still not addressed. Investing 1.5 lakhs is a very significant amount, and without a direct assurance of a high-paying AI role after passing out, I fear I might still be stuck like I am now. How can I justify this fee to my family if there's no direct guarantee that I will secure a competitive salary and role, like my batchmates have already achieved, Sir?",
-      "techniques": [],
-      "strategic_intent": "reiterate the need for a job guarantee and express fear of stagnation despite the investment",
-      "confidence_score": 60,
-      "emotional_state": "frustrated",
-      "internal_thought": "Sir/Ma'am is still not giving me a direct job guarantee. They keep explaining *how* the program helps, but I need to know it *guarantees* a good role. My family is asking, and 1.5 lakhs is a huge amount for just 'assistance' and 'pathway'. What if I still don't get a good role after all this? My batchmates are already so far ahead. I feel like I'm falling further behind and this program is my last chance. If there's no guarantee, how can I be sure it's not a waste, especially when I already feel so insecure about my own capabilities? This is making me panic. I need a clear assurance for my future, not just possibilities. I'm afraid I'll be stuck even after passing out.",
-      "updated_stats": {
-        "sentiment": "frustrated",
-        "skepticism_level": 60,
-        "trust_score": 35,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "updated_state": {
-        "sentiment": "frustrated",
-        "skepticism_level": 60,
-        "trust_score": 35,
-        "unresolved_concerns": [
-          "Job Guarantee",
-          "Price"
-        ]
-      },
-      "timestamp": "2026-02-18T10:02:44.554512",
+      "timestamp": "2026-02-18T16:45:22.882118",
       "generation_mode": "stream"
     }
   ]
