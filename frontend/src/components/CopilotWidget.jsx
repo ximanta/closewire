@@ -13,6 +13,19 @@ const CopilotWidget = function CopilotWidget({
   onMinimize,
 }) {
   const [expandedSuggestionId, setExpandedSuggestionId] = useState(null);
+  const [expandedHistorySet, setExpandedHistorySet] = useState(new Set());
+
+  const toggleHistoryItem = (id) => {
+    setExpandedHistorySet(prev => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
 
   const historyItems = useMemo(() => {
     if (!history || history.length === 0) return [];
@@ -27,7 +40,7 @@ const CopilotWidget = function CopilotWidget({
 
   if (!visible) return null;
 
-  const showCard = state === "ready";
+  const showCard = state === "ready" || state === "thinking";
   const showThinking = state === "thinking";
   
   const heading = isHindi ? "कॉर्टेक्स कोपायलट" : "Cortex Copilot";
@@ -110,11 +123,16 @@ const CopilotWidget = function CopilotWidget({
             </header>
             
             <div className="copilotScrollArea">
+              {showThinking && (
+                <div className="copilotItem latest">
+                  <p className="copilotAnalysis">{thinkingLabel}</p>
+                </div>
+              )}
               {/* If history is empty, show the current data state manually */}
-              {historyItems.length === 0 && (
+              {!showThinking && historyItems.length === 0 && (
                  <div className="copilotItem latest">
                     <p className="copilotAnalysis">
-                        {data?.analysis || (showThinking ? thinkingLabel : "")}
+                        {data?.analysis}
                     </p>
                     {renderSuggestionList(currentSuggestions, "current")}
                     {data?.fact_check && (
@@ -129,19 +147,35 @@ const CopilotWidget = function CopilotWidget({
               {/* Render History Items (Newest First) */}
               {historyItems.map((item, index) => {
                 const isLatest = index === 0;
+                const itemId = item.updatedAt || index;
+                // Latest is always treated as expanded for display. Older ones check the set.
+                const isExpanded = isLatest || expandedHistorySet.has(itemId);
                 const itemSuggestions = Array.isArray(item.suggestions) ? item.suggestions.slice(0, 3) : [];
+
                 return (
-                  <div key={item.updatedAt || index} className={`copilotItem ${isLatest ? "latest" : "history"}`}>
+                  <div key={itemId} className={`copilotItem ${isLatest ? "latest" : "history"} ${isExpanded ? "expanded" : "collapsed"}`}>
                      {item.round > 0 && (
-                      <div className="copilotRoundLabel">Round {item.round}</div>
-                    )}
-                    <p className="copilotAnalysis">{item.analysis}</p>
-                    {renderSuggestionList(itemSuggestions, `hist-${index}`)}
-                    {item.fact_check && (
-                      <div className="copilotFact">
-                        <span>{factLabel}</span>
-                        <p>{item.fact_check}</p>
+                      <div 
+                        className={`copilotRoundLabel ${!isLatest ? "clickable" : ""}`}
+                        onClick={() => !isLatest && toggleHistoryItem(itemId)}
+                        title={!isLatest ? "Click to toggle" : ""}
+                      >
+                        Round {item.round}
+                        {!isLatest && <span className="toggle-icon">{isExpanded ? " ▼" : " ▶"}</span>}
                       </div>
+                    )}
+                    
+                    {isExpanded && (
+                      <>
+                        <p className="copilotAnalysis">{item.analysis}</p>
+                        {renderSuggestionList(itemSuggestions, `hist-${index}`)}
+                        {item.fact_check && (
+                          <div className="copilotFact">
+                            <span>{factLabel}</span>
+                            <p>{item.fact_check}</p>
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
                 );

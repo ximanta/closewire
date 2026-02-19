@@ -1772,10 +1772,10 @@ function App() {
         ))}
       </div>
 
-      {stage === "negotiating" && isAgentPoweredMode && createPortal(
+      {(stage === "negotiating" || stage === "completed") && isAgentPoweredMode && createPortal(
         <CopilotWidget
           visible
-          state={copilotState}
+          state={stage === "completed" && copilotState !== "minimized" ? "ready" : copilotState}
           data={copilotData}
           history={copilotHistory}
           pinnedSuggestion={copilotPinnedSuggestion}

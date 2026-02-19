@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap');
+
 :root {
   --base: #112233;
   --text: #ecf2ff;
@@ -153,8 +154,10 @@ textarea {
   gap: 12px;
   justify-items: center;
 }
+
 .launchBtn {
-  all: unset; /* nuclear reset */
+  all: unset;
+  /* nuclear reset */
 }
 
 /* New Launch Button */
@@ -168,14 +171,16 @@ textarea {
 }
 
 .btn-armed-wrap .btn-armed {
-  all: unset;                        /* ← kills ALL inherited/global button styles */
+  all: unset;
+  /* ← kills ALL inherited/global button styles */
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 12px;
   padding: 0 32px 0 24px;
   height: 52px;
-  background: #0d1520;               /* ← match your exact hero bg color */
+  background: #0d1520;
+  /* ← match your exact hero bg color */
   cursor: pointer;
   font-family: 'Rajdhani', sans-serif;
   font-size: 1rem;
@@ -218,9 +223,17 @@ textarea {
 }
 
 @keyframes armPulse {
-  0%, 100% { box-shadow: 0 0 6px #c0392b, 0 0 16px rgba(192, 57, 43, 0.4); }
-  50%       { box-shadow: 0 0 12px #e74c3c, 0 0 30px rgba(231, 76, 60, 0.7); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 6px #c0392b, 0 0 16px rgba(192, 57, 43, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 12px #e74c3c, 0 0 30px rgba(231, 76, 60, 0.7);
+  }
 }
+
 /* 
 .launchBtn {
   min-width: 130px;
@@ -1159,7 +1172,7 @@ textarea {
   position: fixed;
   right: 16px;
   bottom: 96px;
-  z-index: 7;
+  z-index: 50 !important;
 }
 
 .copilotCard {
@@ -1170,7 +1183,9 @@ textarea {
   backdrop-filter: blur(12px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.32);
   padding: 10px;
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  max-height: 70vh;
   gap: 8px;
 }
 
@@ -1473,7 +1488,7 @@ textarea {
   font-size: 0.96rem;
   font-weight: 700;
   text-align: center;
-  animation: toastUp 3.2s ease forwards;
+  animation: toastFloatHigh 4s ease-out forwards;
   box-shadow: 0 0 18px rgba(0, 0, 0, 0.28);
 }
 
@@ -3177,8 +3192,8 @@ textarea {
 
 /* Copilot History Updates */
 .copilotScrollArea {
-  max-height: 400px;
-  /* Limit height */
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -3238,6 +3253,24 @@ textarea {
   margin-bottom: 2px;
   width: fit-content;
 }
+
+.copilotRoundLabel.clickable {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.copilotRoundLabel.clickable:hover {
+  background: rgba(42, 59, 85, 0.9);
+  border-color: rgba(130, 161, 215, 0.6);
+}
+
+.toggle-icon {
+  font-size: 0.65rem;
+  opacity: 0.7;
+}
+
 /* Copilot Expanded Chip Styles */
 .copilotSuggestionWrapper {
   display: flex;
@@ -3275,6 +3308,58 @@ textarea {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toastFloatHigh {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+
+  10% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translateY(-85vh) scale(1.05);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-92vh) scale(0.95);
+  }
+}
+
+@keyframes toastFloatHigh {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+
+  15% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  85% {
+    opacity: 0.8;
+    transform: translateY(-80vh) scale(1.05);
+    /* Float up most of the screen */
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-90vh) scale(0.9);
+  }
 }
