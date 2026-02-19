@@ -570,22 +570,24 @@ function App() {
       const latestCounsellor = counsellorMessages[counsellorMessages.length - 1];
       const studentText = (latestStudent?.content || "").toLowerCase();
       const objectionHits = objectionTokens.reduce((count, token) => count + (studentText.includes(token) ? 1 : 0), 0);
-      const trustDelta = row.events
-        .filter((event) => event.text.toLowerCase().includes("trust"))
-        .reduce((sum, event) => sum + (parseInt(event.text, 10) || 0), 0);
-      const closeDelta = row.events
-        .filter((event) => event.text.toLowerCase().includes("close"))
-        .reduce((sum, event) => sum + (parseInt(event.text, 10) || 0), 0);
-      const resistanceDelta = row.events
-        .filter((event) => event.text.toLowerCase().includes("resistance"))
-        .reduce((sum, event) => sum + (parseInt(event.text, 10) || 0), 0);
+      const trustDeltaArr = row.events.filter((event) => event.text.toLowerCase().includes("trust"));
+      const trustDelta = trustDeltaArr.reduce((sum, event) => sum + (parseInt(event.text, 10) || 0), 0);
+
+      const closeDeltaArr = row.events.filter((event) => event.text.toLowerCase().includes("interest") || event.text.toLowerCase().includes("close"));
+      const closeDelta = closeDeltaArr.reduce((sum, event) => sum + (parseInt(event.text, 10) || 0), 0);
+
+      const resistanceDeltaArr = row.events.filter((event) => event.text.toLowerCase().includes("resistance"));
+      const resistanceDelta = resistanceDeltaArr.reduce((sum, event) => sum + (parseInt(event.text, 10) || 0), 0);
+
       const tacticalMove = latestCounsellor?.strategic_intent
         || (latestCounsellor?.techniques || []).slice(0, 2).join(", ")
         || "Consultative follow-up";
+
       const compactDelta = row.events
         .slice(0, 3)
-        .map((event) => event.text.replace(" Resistance", "R").replace(" Trust", "T").replace(" Close Prob", "CP"))
+        .map((event) => event.text.replace(" Resistance", "R").replace(" Trust", "T").replace(" Interest", "I").replace(" Close Prob", "CP"))
         .join("  ");
+
       const metricChips = row.events.slice(0, 3).map((event) => ({
         text: event.text,
         tone: event.tone || "strategic",
@@ -944,14 +946,11 @@ function App() {
     }
 
     if (trustDelta !== 0) {
-      // suppressed to avoid duplicate bubble/toast.
-      /*
       nextToasts.push({
         id: `${Date.now()}-trust`,
         tone: trustDelta > 0 ? "positive" : "negative",
         text: `${trustDelta > 0 ? "+" : ""}${trustDelta} Trust`,
       });
-      */
     }
     if (resistanceDelta !== 0) {
       nextToasts.push({
@@ -960,15 +959,12 @@ function App() {
         text: `${resistanceDelta > 0 ? "+" : ""}${resistanceDelta} Resistance`,
       });
     }
-    if (Math.abs(closeDelta) >= 4) {
-      // suppressed
-      /*
+    if (closeDelta !== 0) {
       nextToasts.push({
-        id: `${Date.now()}-close`,
-        tone: "strategic",
-        text: `${closeDelta > 0 ? "+" : ""}${closeDelta} Close Prob`,
+        id: `${Date.now()}-interest`,
+        tone: closeDelta > 0 ? "positive" : "negative",
+        text: `${closeDelta > 0 ? "+" : ""}${closeDelta} Interest`,
       });
-      */
     }
 
     if (!nextToasts.length) return;
@@ -2220,7 +2216,7 @@ function App() {
                     <span className="statusDot" />
                     {COMMITMENT_LABELS[analysis?.judge?.commitment_signal] || COMMITMENT_LABELS.none}
                   </span>
-                  <span className="metricChip">Enrollment Likelihood {analysis?.judge?.enrollment_likelihood ?? 0}%</span>
+                  <span className="metricChip">Enrollment Probability {analysis?.judge?.enrollment_likelihood ?? 0}%</span>
                   <span className="metricChip">Trust Delta {analysis?.judge?.trust_delta ?? 0}</span>
                   <span className="metricChip">Duration {analysis?.duration_hms || formatDurationHms(runDurationSeconds)}</span>
                 </div>
@@ -2352,7 +2348,6 @@ function App() {
                         type="button"
                       >
                         <span className="roundNode">Round {row.round}</span>
-                        <span className="roundDelta">{row.compactDelta}</span>
                         <div className="roundMetricChips">
                           {row.metricChips.map((chip, chipIndex) => (
                             <span key={`${row.round}-${chipIndex}`} className={`miniMetricChip ${chip.tone}`}>
@@ -2372,7 +2367,7 @@ function App() {
                     <div><strong>Objection Spike:</strong> {activeRoundInsight.objectionSpike}</div>
                     <div><strong>Trust Change:</strong> {activeRoundInsight.trustDelta >= 0 ? "+" : ""}{activeRoundInsight.trustDelta}</div>
                     <div><strong>Resistance Change:</strong> {activeRoundInsight.resistanceDelta >= 0 ? "+" : ""}{activeRoundInsight.resistanceDelta}</div>
-                    <div><strong>Close Probability Shift:</strong> {activeRoundInsight.closeDelta >= 0 ? "+" : ""}{activeRoundInsight.closeDelta}</div>
+                    <div><strong>Interest Shift:</strong> {activeRoundInsight.closeDelta >= 0 ? "+" : ""}{activeRoundInsight.closeDelta}</div>
                     <div><strong>Tactical Move:</strong> {activeRoundInsight.tacticalMove}</div>
                   </div>
                 )}
