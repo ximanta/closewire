@@ -657,8 +657,8 @@ function App() {
       if (negotiationMode === "agent_powered_human_vs_ai") return "\u090f\u091c\u0947\u0902\u091f \u0905\u0938\u093f\u0938\u094d\u091f\u0947\u0921 \u0939\u094d\u092f\u0942\u092e\u0928 \u092c\u0928\u093e\u092e \u090f\u091c\u0947\u0902\u091f \u0921\u094d\u092f\u0942\u0932 \u0938\u0915\u094d\u0930\u093f\u092f";
       return "\u090f\u091c\u0947\u0902\u091f \u092c\u0928\u093e\u092e \u090f\u091c\u0947\u0902\u091f \u0921\u094d\u092f\u0942\u0932 \u0938\u0915\u094d\u0930\u093f\u092f";
     }
-    if (negotiationMode === "human_vs_ai") return "\u0939\u094d\u092f\u0942\u092e\u0928 \u092c\u0928\u093e\u092e \u090f\u091c\u0947\u0902\u091f \u0921\u094d\u092f\u0942\u0932 \u0938\u0915\u094d\u0930\u093f\u092f";
-    if (negotiationMode === "agent_powered_human_vs_ai") return "\u090f\u091c\u0947\u0902\u091f \u0905\u0938\u093f\u0938\u094d\u091f\u0947\u0921 \u0939\u094d\u092f\u0942\u092e\u0928 \u092c\u0928\u093e\u092e \u090f\u091c\u0947\u0902\u091f \u0921\u094d\u092f\u0942\u0932 \u0938\u0915\u094d\u0930\u093f\u092f";
+    if (negotiationMode === "human_vs_ai") return "Human vs Agent Duel Activated";
+    if (negotiationMode === "agent_powered_human_vs_ai") return "Agent Assisted Human vs Agent Duel Activated";
     return "Agent vs Agent Duel Activated";
   }, [negotiationMode, selectedArchetype]);
   const activationSteps = selectedArchetype === "skeptical_shopper" ? HINDI_ACTIVATION_STEPS : ACTIVATION_STEPS;
@@ -1721,7 +1721,7 @@ function App() {
               placeholder="Enter Program URL here..."
             />
 <div class="btn-armed-wrap">
-  <button class="btn-armed">
+  <button class="btn-armed" onClick={startNegotiation}>
     <span class="btn-armed__icon"></span>
     <span class="btn-armed__text">Launch Arena</span>
     <span class="btn-armed__chevron">›</span>
