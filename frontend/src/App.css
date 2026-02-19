@@ -1375,6 +1375,7 @@ textarea {
   border-left: 2px solid rgba(59, 185, 255, 0.95);
   box-shadow: 0 0 14px rgba(59, 185, 255, 0.2);
   transform: none;
+  position: relative;
 }
 
 .projectionCard.student {
@@ -1570,6 +1571,58 @@ textarea {
   bottom: 74px;
 }
 
+.conversationOverLabel {
+  font-size: 0.75rem;
+  color: #a8c5e6;
+  text-align: center;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  margin-bottom: 2px;
+}
+
+.conversationOverBanner {
+  position: absolute;
+  top: auto;
+  bottom: 165px;
+  left: 14px;
+  transform: none;
+  z-index: 60;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  pointer-events: none;
+  background: rgba(10, 20, 35, 0.85);
+  border: 1px solid rgba(100, 140, 220, 0.3);
+  padding: 8px 16px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+}
+
+.conversationOverBanner h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #dcebff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow: none;
+  background: none;
+  -webkit-text-fill-color: initial;
+  margin: 0;
+  animation: bannerIn 0.4s ease-out forwards;
+}
+
+@keyframes bannerIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .viewReportBtn {
   min-height: 10px;
   padding: 3px 5px;
@@ -1684,6 +1737,47 @@ textarea {
 
 .freeze {
   filter: blur(1.8px);
+}
+
+.processingLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  color: #a0c4ff;
+  margin-top: 4px;
+}
+
+.processingLabel.card-inline {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  margin: 0;
+  background: rgba(14, 25, 45, 0.4);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  border: 1px solid rgba(160, 196, 255, 0.2);
+}
+
+.processingDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #a0c4ff;
+  animation: processingPulse 1s infinite alternate;
+}
+
+@keyframes processingPulse {
+  from {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 
 .resultOverlay {
@@ -3152,7 +3246,7 @@ textarea {
   font-weight: 800;
   font-size: 1.2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  animation: floatUp 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation: floatUp 4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   display: flex;
   align-items: center;
   gap: 8px;

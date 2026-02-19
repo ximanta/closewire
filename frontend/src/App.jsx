@@ -26,8 +26,8 @@ const COMMITMENT_LABELS = {
   conditional_commitment: "Conditional Yes",
   strong_commitment: "Confirmed Enrollment",
 };
-const LIVE_PROCESSING_LABELS = ["Analyzing Tone...", "Calculating Trust..."];
-const SILENCE_AUTO_SEND_MS = 5000;
+const LIVE_PROCESSING_LABELS = ["Processing input...", "Analyzing sentiment...", "Consulting persona...", "Formulating response..."];
+const SILENCE_AUTO_SEND_MS = 3000;
 const SILENCE_PROMPT_MS = 10000;
 const PIPELINE_OPTIONS = [
   { id: "ai_vs_ai", title: "LAB: Agent vs Agent", subtitle: "Autonomous counsellor and prospect simulation.", status: "active" },
@@ -207,7 +207,7 @@ function App() {
     bubbleTimerRef.current[id] = setTimeout(() => {
       setBubbles((prev) => prev.filter((b) => b.id !== id));
       delete bubbleTimerRef.current[id];
-    }, 2400);
+    }, 4000);
   }, []);
   const [micState, setMicState] = useState("inactive");
   const [liveTranscript, setLiveTranscript] = useState("");
@@ -1563,7 +1563,7 @@ function App() {
         setMicState("inactive");
         stopRecognition();
         setShowReportDashboard(false);
-        pushUiToast(`Conversation Completed\nDuration (mins) ${durationHms}`, "positive", 5200);
+
       } else if (payload.type === "warning") {
         clearProcessingFailSafe();
         pushUiToast(payload.data?.message || "Warning from server", "strategic", 3400);
@@ -1787,6 +1787,17 @@ function App() {
         document.body
       )}
 
+      {createPortal(
+        <div className="floatingBubbleLayer">
+          {bubbles.map((b) => (
+            <div key={b.id} className={`floatingBubble ${b.tone}`} style={{ left: `${b.left}%`, top: `${b.top}%` }}>
+              {b.text}
+            </div>
+          ))}
+        </div>,
+        document.body
+      )}
+
       {showAuthModal && createPortal(
         <div className="authModalBackdrop">
           <form className="authModal" onSubmit={handlePasswordSubmit}>
@@ -1943,7 +1954,7 @@ function App() {
 
       {(stage === "negotiating" || (stage === "completed" && !showReportDashboard)) && (
         <section className="arenaScene">
-          {isHumanMode && (
+            {/* Branding - Visible in all modes now */}
             <div className="arenaBrandMark">
               <button type="button" className="brandWordmarkBtn brandWordmarkBtnSm" onClick={closeArena} title="Close Arena">
                 <span className="brandWordmark brandWordmarkSm">
@@ -1951,24 +1962,31 @@ function App() {
                   <span className="brandWire">WIRE</span>
                 </span>
               </button>
-              <div className={`momentumBar ${momentumValue > 80 ? "hot" : ""}`}>
-                <div className="momentumTrack">
-                  <div className="momentumLeft" style={{ width: `${momentumValue}%` }} />
-                  <div className="momentumRight" style={{ width: `${100 - momentumValue}%` }} />
+              {/* Momentum Bar - Only here for Human Mode. For Agent Mode, it's in arenaTopZone */}
+              {isHumanMode && (
+                <div className={`momentumBar ${momentumValue > 80 ? "hot" : ""}`}>
+                  <div className="momentumTrack">
+                    <div className="momentumLeft" style={{ width: `${momentumValue}%` }} />
+                    <div className="momentumRight" style={{ width: `${100 - momentumValue}%` }} />
+                  </div>
+                  <div className="momentumMeta">
+                    <span>{momentumLabel}</span>
+                    <strong>{momentumValue}%</strong>
+                  </div>
                 </div>
-                <div className="momentumMeta">
-                  <span>{momentumLabel}</span>
-                  <strong>{momentumValue}%</strong>
-                </div>
-              </div>
+              )}
             </div>
-          )}
           {stage === "completed" && !showReportDashboard && (
-            <div className={`arenaBottomActions ${stage === "completed" ? "raised" : ""}`}>
-              <button className="ghostBtn viewReportBtn" onClick={() => setShowReportDashboard(true)}>
-                View Report
-              </button>
-            </div>
+            <>
+              <div className="conversationOverBanner">
+                <h2>Conversation Over</h2>
+              </div>
+              <div className={`arenaBottomActions ${stage === "completed" ? "raised" : ""}`}>
+                <button className="ghostBtn viewReportBtn" onClick={() => setShowReportDashboard(true)}>
+                  View Report
+                </button>
+              </div>
+            </>
           )}
           <div className={`arenaTopZone ${isHumanMode ? "human-mode" : ""}`}>
             {!isHumanMode && (
@@ -2130,9 +2148,15 @@ function App() {
                         : `${persona?.name || "Student"}, ${formatArchetype(persona)}`}
                     </span>
                   </div>
-                  <span>{`Round ${msg.round || currentRound}`}</span>
+
                 </header>
                 <p>{msg.content}</p>
+                {msg.id === "optimistic-human" && micState === "processing" && (
+                   <span className="processingLabel card-inline">
+                    <span className="processingDot" />
+                    {LIVE_PROCESSING_LABELS[processingLabelIndex]}
+                  </span>
+                )}
                 {msg.agent === "student" && msg.internal_thought && (
                   <details className="internalThoughtDetails">
                     <summary>Internal Thought</summary>
@@ -2157,13 +2181,7 @@ function App() {
           </div>
 
           </div>
-          <div className="floatingBubbleLayer">
-            {bubbles.map((b) => (
-              <div key={b.id} className={`floatingBubble ${b.tone}`} style={{ left: `${b.left}%`, top: `${b.top}%` }}>
-                {b.text}
-              </div>
-            ))}
-          </div>
+
           <div className="popupLayer">
             {metricToasts.map((toast) => (
               <div key={toast.id} className={`metricToast ${toast.tone}`}>
