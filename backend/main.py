@@ -3086,7 +3086,7 @@ async def generate_report(payload: ReportRequest) -> StreamingResponse:
         ["Duration", duration_hms],
         ["Final Score", f"{judge.get('negotiation_score', 0)} / 100"],
         ["Commitment Signal", commitment_map.get(commitment, commitment)],
-        ["Enrollment Probability", f"{judge.get('enrollment_likelihood', 0)}%"],
+        ["Win Probability", f"{judge.get('enrollment_likelihood', 0)}%"],
         ["Trust Delta", str(judge.get("trust_delta", 0))],
     ]
     story.append(_make_paragraph("Outcome Summary", section_style))

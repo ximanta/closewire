@@ -717,7 +717,7 @@ function App() {
         Tension {metrics?.tone_escalation ?? 0}%
       </span>
       <span className={`metricChip enrollmentChip ${chipStateClass(enrollmentChipState)} ${chipFlash.enrollment ? "animate-flash-update" : ""}`}>
-        Enrollment Probability {metrics?.close_probability ?? 0}%
+        Win Probability {metrics?.close_probability ?? 0}%
       </span>
       <span className={`metricChip commitmentChip ${chipStateClass(commitmentChipState)} ${chipFlash.commitment ? "animate-flash-update" : ""}`}>
         <span className="statusDot" />
@@ -2216,7 +2216,7 @@ function App() {
                     <span className="statusDot" />
                     {COMMITMENT_LABELS[analysis?.judge?.commitment_signal] || COMMITMENT_LABELS.none}
                   </span>
-                  <span className="metricChip">Enrollment Probability {analysis?.judge?.enrollment_likelihood ?? 0}%</span>
+                  <span className="metricChip">Win Probability {analysis?.judge?.enrollment_likelihood ?? 0}%</span>
                   <span className="metricChip">Trust Delta {analysis?.judge?.trust_delta ?? 0}</span>
                   <span className="metricChip">Duration {analysis?.duration_hms || formatDurationHms(runDurationSeconds)}</span>
                 </div>

@@ -50,7 +50,7 @@ The result: Humans and AI co-evolve to achieve measurable quality benchmarks.
 
 ### Frontend (`frontend/src/App.jsx`)
 - Single-page cinematic experience
-- Real-time metric visualization (Trust, Tension, Enrollment Probability)
+- Real-time metric visualization (Trust, Tension, Win Probability)
 - Copilot/Whispering Coach UI for live assistance
 
 ---
