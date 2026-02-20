@@ -31,7 +31,7 @@
 ├──────────────────────────────────────────────────────────────────────┤
 │                                                                       │
 │  ┌────────────────────────────────────────────────────────────┐     │
-│  │                   LangGraph Workflow                        │     │
+│  │                   Agent Workflow                        │     │
 │  │                                                              │     │
 │  │    ┌──────────┐      ┌──────────┐      ┌──────────┐       │     │
 │  │    │  Sales   │◄────▶│ Customer │◄────▶│  Judge   │       │     │
@@ -115,7 +115,7 @@
 │                          SALES AGENT                                 │
 ├─────────────────────────────────────────────────────────────────────┤
 │ Knowledge:                                                           │
-│ • Product brochure (PDF uploaded)                                   │
+│ • Product brochure (web link)                                   │
 │ • Target/minimum prices                                             │
 │ • NIIT value propositions                                           │
 │                                                                      │

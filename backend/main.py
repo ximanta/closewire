@@ -109,7 +109,7 @@ ARCHETYPE_LABELS: Dict[str, str] = {
     "fomo_victim": "FOMO Victim",
     "drifter": "Drifter",
     "intellectual_buyer": "Intellectual Buyer",
-    "car_buyer": "Car Buyer",
+    "car_buyer": "Sh",
     "discount_hunter": "Discount Hunter",
 }
 

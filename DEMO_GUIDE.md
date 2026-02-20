@@ -2,16 +2,16 @@
 
 ## Pre-Demo Checklist
 - [ ] Verify **Gemini API** connectivity
-- [ ] Ensure **RAG Pipeline** is enabled (`RAG_PIPELINE_ENABLED=true`)
-- [ ] Populate local Vector DB with a few sample "Knowledge Nuggets"
-- [ ] Navigate to the Dashboard for metric visual verification
+- [ ] Ensure **RAG Pipeline** is enabled (`RAG_PIPELINE_ENABLED=true`) or set it to false if you don't have Postgres with pgvector running
+- [ ] Optional -Populate local Vector DB with a few sample "Knowledge Nuggets"
+- [ ] Optional - Navigate to the Dashboard for metric visual verification
 
 ---
 
 ## Demo Script (15 minutes)
 
 ### 1. Introduction: The Simulation Barrier (2 min)
-**"Today we're looking at CloseWire—not just as a tool, but as the infrastructure for the Cognitive Enterprise. We're solving the 'Simulation Barrier.' Humans learn best through focused practice, and we've built the engine to model nuanced human interactions at scale."**
+**"Today we're looking at CloseWire not just as a tool, but as the infrastructure for the Cognitive Enterprise. We're solving the 'Simulation Barrier.' Humans learn best through focused practice, and we've built the engine to model nuanced human interactions at scale."**
 
 ### 2. Pipeline 1 & 2: The Lab & The Gym (5 min)
 - Show the **AI vs AI** (The Lab) capability on the dashboard.
@@ -35,7 +35,7 @@
 - **To**: "A Data & Psychology problem where conversations are calibrated by AI."
 
 ### The Multi-Agent Advantage
-- "It’s not just one AI. It’s THREE: The Counsellor, The Student, and The Judge, all powered by Gemini."
+- "It’s not just one AI. It’s THREE: The Counsellor, The Student, and The Judge, all powered by AI."
 - "Institutional Memory creates a system that gets smarter every single day."
 
 ---

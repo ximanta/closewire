@@ -35,16 +35,16 @@ const PIPELINE_OPTIONS = [
   { id: "agent_powered_human_vs_ai", title: "ARENA: Agent Powered Human vs Agent", subtitle: "Voice-first counsellor with live Agent cues.", status: "active" },
 ];
 const ARCHETYPE_CARDS = [
-  { id: "random", icon: "??", title: "Random Profile", profile: "Let CloseWire pick one profile at random.", accent: "#9aa6c8", category: "Learning Prospect" },
-  { id: "desperate_switcher", icon: "SW", title: "Desperate Switcher", profile: "Urgent career pivot, seeks fast outcomes.", accent: "#ff8f5c", category: "Learning Prospect" },
-  { id: "stagnant_pro", icon: "SP", title: "Stagnant Pro", profile: "Plateaued growth, wants clear progression.", accent: "#5ec7ff", category: "Learning Prospect" },
-  { id: "credential_hunter", icon: "CH", title: "Credential Hunter", profile: "Status-driven, prioritizes recognition signals.", accent: "#c38dff", category: "Learning Prospect" },
-  { id: "intellectual_buyer", icon: "IB", title: "Intellectual Buyer", profile: "Dissects syllabus depth; demands technical specificity.", accent: "#6fd4ff", category: "Learning Prospect" },
-  { id: "fomo_victim", icon: "FV", title: "FOMO Victim", profile: "Fear-driven urgency, reacts to momentum.", accent: "#ff6f95", category: "Learning Prospect" },
-  { id: "drifter", icon: "DR", title: "Drifter", profile: "Low clarity, needs structure and direction.", accent: "#74d9a4", category: "Learning Prospect" },
-  { id: "skeptical_shopper", icon: "SK", title: "संदेहशील ग्राहक", profile: "हिंदी वक्ता: प्रमाण मांगता है और दावों को चुनौती देता है।", accent: "#f4c15d", category: "Learning Prospect" },
-  { id: "car_buyer", icon: "CB", title: "Car Buyer", profile: "Negotiation-focused, seeking reliability, status, and features.", accent: "#f5a623", category: "Car Buyer" },
-  { id: "discount_hunter", icon: "DH", title: "Discount Hunter", profile: "Relentless seeker of savings, freebies, and exchange bonuses.", accent: "#ff4d4d", category: "Car Buyer" },
+  { id: "random", icon: "??", title: "Random Profile", profile: "Let CloseWire pick one profile at random.", accent: "#9aa6c8", category: "Training Enrollment Personas" },
+  { id: "desperate_switcher", icon: "SW", title: "Desperate Switcher", profile: "Urgent career pivot, seeks fast outcomes.", accent: "#ff8f5c", category: "Training Enrollment Personas"},
+  { id: "stagnant_pro", icon: "SP", title: "Stagnant Pro", profile: "Plateaued growth, wants clear progression.", accent: "#5ec7ff", category: "Training Enrollment Personas" },
+  { id: "credential_hunter", icon: "CH", title: "Credential Hunter", profile: "Status-driven, prioritizes recognition signals.", accent: "#c38dff", category: "Training Enrollment Personas" },
+  { id: "intellectual_buyer", icon: "IB", title: "Intellectual Buyer", profile: "Dissects syllabus depth; demands technical specificity.", accent: "#6fd4ff", category: "Training Enrollment Personas" },
+  { id: "fomo_victim", icon: "FV", title: "FOMO Victim", profile: "Fear-driven urgency, reacts to momentum.", accent: "#ff6f95", category: "Training Enrollment Personas" },
+  { id: "drifter", icon: "DR", title: "Drifter", profile: "Low clarity, needs structure and direction.", accent: "#74d9a4", category: "Training Enrollment Personas" },
+  { id: "skeptical_shopper", icon: "SK", title: "संदेहशील ग्राहक", profile: "हिंदी वक्ता: प्रमाण मांगता है और दावों को चुनौती देता है।", accent: "#f4c15d", category: "Training Enrollment Personas" },
+  { id: "car_buyer", icon: "CB", title: "Value Guardian", profile: "Negotiation-focused, seeking reliability, status, and features.", accent: "#f5a623", category: "Automotive Purchase Personas " },
+  { id: "discount_hunter", icon: "DH", title: "Discount Hunter", profile: "Relentless seeker of savings, freebies, and exchange bonuses.", accent: "#ff4d4d", category: "Automotive Purchase Personas " },
 ];
 const DEFAULT_VOICE_PROFILE_MAPPING = {
   voice_preferences: {
@@ -169,7 +169,7 @@ const formatDurationHms = (totalSeconds) => {
 };
 
 function App() {
-  const [programUrl, setProgramUrl] = useState("https://www.niit.com/india/building-agentic-ai-systems/");
+  const [programUrl, setProgramUrl] = useState("https://");
   const [sessionId, setSessionId] = useState("");
   const [stage, setStage] = useState("idle");
   const [program, setProgram] = useState(null);
@@ -229,7 +229,7 @@ function App() {
   const [isAutoSendEnabled, setIsAutoSendEnabled] = useState(true);
   const [collapsedCategories, setCollapsedCategories] = useState({});
 
-  // Global detect for product vs learning prospect context
+  // Global detect for product vs  context
   const isProductBuyer = useMemo(() => {
     const activeArchetype = String(persona?.persona_type || persona?.archetype_id || selectedArchetype || "").toLowerCase();
     return ["car_buyer", "discount_hunter"].includes(activeArchetype);
@@ -1936,13 +1936,13 @@ function App() {
                     <path d="M2 14a6 6 0 1 1 12 0H2Z" />
                   </svg>
                 </span>
-                Prospect Archetype
+                Domain Personas
               </h4>
               <div className="archetypeContainer">
-                {["Learning Prospect", "Car Buyer"]
+                {["Training Enrollment Personas", "Automotive Purchase Personas "]
                   .map((cat) => ({
                     category: cat,
-                    cards: ARCHETYPE_CARDS.filter((c) => (c.category || "Learning Prospect") === cat),
+                    cards: ARCHETYPE_CARDS.filter((c) => (c.category || "Training Enrollment Personas") === cat),
                   }))
                   .filter((group) => group.cards.length > 0)
                   .map((group) => {
