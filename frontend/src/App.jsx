@@ -1979,11 +1979,6 @@ function App() {
               <div className="conversationOverBanner">
                 <h2>Conversation Over</h2>
               </div>
-              <div className={`arenaBottomActions ${stage === "completed" ? "raised" : ""}`}>
-                <button className="ghostBtn viewReportBtn" onClick={() => setShowReportDashboard(true)}>
-                  View Report
-                </button>
-              </div>
             </>
           )}
           <div className={`arenaTopZone ${isHumanMode ? "human-mode" : ""}`}>
@@ -2188,8 +2183,21 @@ function App() {
             ))}
           </div>
           {(stage === "negotiating" || stage === "completed") && (
-            <div className={`metricsRibbon bottomRibbon ${(metrics?.close_probability ?? 0) > 80 ? "glow" : ""}`}>
-              {renderMetricChips()}
+            <div className="arenaMetricsLayout">
+              {stage === "completed" && !showReportDashboard && (
+                <div className="viewReportRibbon">
+                  <button
+                    type="button"
+                    className="viewReportBtn glow"
+                    onClick={() => setShowReportDashboard(true)}
+                  >
+                    View Report
+                  </button>
+                </div>
+              )}
+              <div className={`metricsRibbon bottomRibbon ${(metrics?.close_probability ?? 0) > 80 ? "glow" : ""}`}>
+                {renderMetricChips()}
+              </div>
             </div>
           )}
         </section>

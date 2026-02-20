@@ -533,6 +533,7 @@ textarea {
   margin: 0;
   color: var(--muted);
 }
+
 .inputRow {
   margin-top: var(--space-3);
   display: flex;
@@ -575,7 +576,7 @@ textarea {
 .input-armed-wrap:focus-within {
   border-color: rgba(192, 57, 43, 1);
   box-shadow: 0 0 20px rgba(192, 57, 43, 0.25),
-              inset 0 0 10px rgba(192, 57, 43, 0.05);
+    inset 0 0 10px rgba(192, 57, 43, 0.05);
 }
 
 .inputRow input {
@@ -583,8 +584,10 @@ textarea {
   display: block;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;   /* ← this was missing */
-  padding: 0 16px;          /* ← symmetric, no transform offset */
+  box-sizing: border-box;
+  /* ← this was missing */
+  padding: 0 16px;
+  /* ← symmetric, no transform offset */
   background: transparent;
   font-family: 'DM Mono', 'Courier New', monospace;
   font-size: 0.82rem;
@@ -1412,7 +1415,7 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0 12px;
+  padding: 0 12px 22px 12px;
   position: relative;
   z-index: 1;
 }
@@ -1578,30 +1581,67 @@ textarea {
 
 .metricsRibbon {
   position: sticky;
-  top: 8px;
+  top: 7px;
   z-index: 20;
   margin: 0 auto 6px;
   width: fit-content;
   max-width: calc(100vw - 24px);
   display: flex;
+  align-items: center;
   gap: 8px;
   overflow-x: auto;
   white-space: nowrap;
   flex-wrap: nowrap;
-  padding: 8px 10px;
+  padding: 0 10px;
   border-radius: 10px;
   border: 1px solid rgba(152, 177, 230, 0.28);
   background: rgba(9, 18, 34, 0.94);
   color: #dce8ff;
+  min-height: 44px;
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.metricsRibbon::-webkit-scrollbar {
+  display: none;
 }
 
 .bottomRibbon {
-  position: sticky;
-  bottom: 0;
+  position: relative;
+  top: 0;
+  bottom: auto;
   left: auto;
   transform: none;
   z-index: 25;
-  margin: 4px auto 0;
+  margin: 0;
+}
+
+.arenaMetricsLayout {
+  position: sticky;
+  bottom: 12px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px auto 0;
+  width: fit-content;
+}
+
+.viewReportRibbon {
+  border: none;
+  background: transparent;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 10px;
+  min-height: 44px;
+  box-sizing: border-box;
 }
 
 .postInterviewActions {
@@ -1648,19 +1688,20 @@ textarea {
 .conversationOverBanner {
   position: absolute;
   top: auto;
-  bottom: 165px;
-  left: 14px;
-  transform: none;
+  bottom: 120px;
+  left: 20px;
   z-index: 60;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
-  background: rgba(10, 20, 35, 0.85);
-  border: 1px solid rgba(100, 140, 220, 0.3);
-  padding: 8px 16px;
-  border-radius: 8px;
-  backdrop-filter: blur(4px);
+  background: rgba(14, 25, 44, 0.95);
+  border: 1px solid rgba(100, 140, 220, 0.4);
+  padding: 12px 28px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  animation: bannerToastInOut 4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .conversationOverBanner h2 {
@@ -1673,29 +1714,50 @@ textarea {
   background: none;
   -webkit-text-fill-color: initial;
   margin: 0;
-  animation: bannerIn 0.4s ease-out forwards;
 }
 
-@keyframes bannerIn {
-  from {
+@keyframes bannerToastInOut {
+  0% {
     opacity: 0;
-    transform: scale(0.8);
+    transform: translateY(20px) scale(0.9);
   }
 
-  to {
+  10% {
     opacity: 1;
-    transform: scale(1);
+    transform: translateY(0) scale(1);
+  }
+
+  90% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.95);
+    visibility: hidden;
   }
 }
 
 .viewReportBtn {
-  min-height: 10px;
-  padding: 3px 5px;
-  font-size: 0.78rem;
-  border-radius: 9px;
-  border: 1px solid rgba(150, 181, 236, 0.42);
-  background: rgba(63, 163, 33, 0.85);
-  color: #dce9ff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 999px;
+  border: 1px solid rgba(16, 185, 129, 0.6);
+  background: rgba(14, 25, 44, 0.95);
+  color: #10b981;
+  height: 52px;
+  min-width: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  white-space: nowrap;
+  box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
 }
 
 .metricsRibbon.glow {
@@ -1710,7 +1772,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
   border: 2px solid transparent;
   background: #152440;
@@ -1718,7 +1780,21 @@ textarea {
   font-weight: 600;
   position: relative;
   overflow: hidden;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+  transition: all 0.3s ease;
+}
+
+button.metricChip {
+  cursor: pointer;
+}
+
+button.metricChip:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+button.metricChip:active {
+  transform: translateY(0);
 }
 
 .statusDot {

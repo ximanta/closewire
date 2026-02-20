@@ -123,30 +123,10 @@ const CopilotWidget = function CopilotWidget({
             </header>
             
             <div className="copilotScrollArea">
-              {showThinking && (
-                <div className="copilotItem latest">
-                  <p className="copilotAnalysis">{thinkingLabel}</p>
-                </div>
-              )}
-              {/* If history is empty, show the current data state manually */}
-              {!showThinking && historyItems.length === 0 && (
-                 <div className="copilotItem latest">
-                    <p className="copilotAnalysis">
-                        {data?.analysis}
-                    </p>
-                    {renderSuggestionList(currentSuggestions, "current")}
-                    {data?.fact_check && (
-                      <div className="copilotFact">
-                        <span>{factLabel}</span>
-                        <p>{data.fact_check}</p>
-                      </div>
-                    )}
-                 </div>
-              )}
-
-              {/* Render History Items (Newest First) */}
-              {historyItems.map((item, index) => {
-                const isLatest = index === 0;
+              {/* Render History Items (Oldest First) */}
+              {[...historyItems].reverse().map((item, originalIndex, arr) => {
+                const isLatest = originalIndex === arr.length - 1;
+                const index = arr.length - 1 - originalIndex; // Keep index consistent with data map
                 const itemId = item.updatedAt || index;
                 // Latest is always treated as expanded for display. Older ones check the set.
                 const isExpanded = isLatest || expandedHistorySet.has(itemId);
@@ -180,6 +160,28 @@ const CopilotWidget = function CopilotWidget({
                   </div>
                 );
               })}
+
+              {/* If history is empty, show the current data state manually */}
+              {!showThinking && historyItems.length === 0 && (
+                 <div className="copilotItem latest">
+                    <p className="copilotAnalysis">
+                        {data?.analysis}
+                    </p>
+                    {renderSuggestionList(currentSuggestions, "current")}
+                    {data?.fact_check && (
+                      <div className="copilotFact">
+                        <span>{factLabel}</span>
+                        <p>{data.fact_check}</p>
+                      </div>
+                    )}
+                 </div>
+              )}
+
+              {showThinking && (
+                <div className="copilotItem latest">
+                  <p className="copilotAnalysis">{thinkingLabel}</p>
+                </div>
+              )}
             </div>
           </section>
         ) : (
