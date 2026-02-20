@@ -35,14 +35,16 @@ const PIPELINE_OPTIONS = [
   { id: "agent_powered_human_vs_ai", title: "ARENA: Agent Powered Human vs Agent", subtitle: "Voice-first counsellor with live Agent cues.", status: "active" },
 ];
 const ARCHETYPE_CARDS = [
-  { id: "random", icon: "??", title: "Random Profile", profile: "Let CloseWire pick one profile at random.", accent: "#9aa6c8" },
-  { id: "desperate_switcher", icon: "SW", title: "Desperate Switcher", profile: "Urgent career pivot, seeks fast outcomes.", accent: "#ff8f5c" },
-  { id: "stagnant_pro", icon: "SP", title: "Stagnant Pro", profile: "Plateaued growth, wants clear progression.", accent: "#5ec7ff" },
-  { id: "credential_hunter", icon: "CH", title: "Credential Hunter", profile: "Status-driven, prioritizes recognition signals.", accent: "#c38dff" },
-  { id: "intellectual_buyer", icon: "IB", title: "Intellectual Buyer", profile: "Dissects syllabus depth; demands technical specificity.", accent: "#6fd4ff" },
-  { id: "fomo_victim", icon: "FV", title: "FOMO Victim", profile: "Fear-driven urgency, reacts to momentum.", accent: "#ff6f95" },
-  { id: "drifter", icon: "DR", title: "Drifter", profile: "Low clarity, needs structure and direction.", accent: "#74d9a4" },
-  { id: "skeptical_shopper", icon: "SK", title: "संदेहशील ग्राहक", profile: "\u0939\u093f\u0902\u0926\u0940 \u0935\u0915\u094d\u0924\u093e: \u092a\u094d\u0930\u092e\u093e\u0923 \u092e\u093e\u0902\u0917\u0924\u093e \u0939\u0948 \u0914\u0930 \u0926\u093e\u0935\u094b\u0902 \u0915\u094b \u091a\u0941\u0928\u094c\u0924\u0940 \u0926\u0947\u0924\u093e \u0939\u0948\u0964", accent: "#f4c15d" },
+  { id: "random", icon: "??", title: "Random Profile", profile: "Let CloseWire pick one profile at random.", accent: "#9aa6c8", category: "Learning Prospect" },
+  { id: "desperate_switcher", icon: "SW", title: "Desperate Switcher", profile: "Urgent career pivot, seeks fast outcomes.", accent: "#ff8f5c", category: "Learning Prospect" },
+  { id: "stagnant_pro", icon: "SP", title: "Stagnant Pro", profile: "Plateaued growth, wants clear progression.", accent: "#5ec7ff", category: "Learning Prospect" },
+  { id: "credential_hunter", icon: "CH", title: "Credential Hunter", profile: "Status-driven, prioritizes recognition signals.", accent: "#c38dff", category: "Learning Prospect" },
+  { id: "intellectual_buyer", icon: "IB", title: "Intellectual Buyer", profile: "Dissects syllabus depth; demands technical specificity.", accent: "#6fd4ff", category: "Learning Prospect" },
+  { id: "fomo_victim", icon: "FV", title: "FOMO Victim", profile: "Fear-driven urgency, reacts to momentum.", accent: "#ff6f95", category: "Learning Prospect" },
+  { id: "drifter", icon: "DR", title: "Drifter", profile: "Low clarity, needs structure and direction.", accent: "#74d9a4", category: "Learning Prospect" },
+  { id: "skeptical_shopper", icon: "SK", title: "संदेहशील ग्राहक", profile: "हिंदी वक्ता: प्रमाण मांगता है और दावों को चुनौती देता है।", accent: "#f4c15d", category: "Learning Prospect" },
+  { id: "car_buyer", icon: "CB", title: "Car Buyer", profile: "Negotiation-focused, seeking reliability, status, and features.", accent: "#f5a623", category: "Car Buyer" },
+  { id: "discount_hunter", icon: "DH", title: "Discount Hunter", profile: "Relentless seeker of savings, freebies, and exchange bonuses.", accent: "#ff4d4d", category: "Car Buyer" },
 ];
 const DEFAULT_VOICE_PROFILE_MAPPING = {
   voice_preferences: {
@@ -225,6 +227,18 @@ function App() {
   const [copilotState, setCopilotState] = useState("idle");
   const [copilotPinnedSuggestion, setCopilotPinnedSuggestion] = useState("");
   const [isAutoSendEnabled, setIsAutoSendEnabled] = useState(true);
+  const [collapsedCategories, setCollapsedCategories] = useState({});
+
+  // Global detect for product vs learning prospect context
+  const isProductBuyer = useMemo(() => {
+    const activeArchetype = String(persona?.persona_type || persona?.archetype_id || selectedArchetype || "").toLowerCase();
+    return ["car_buyer", "discount_hunter"].includes(activeArchetype);
+  }, [persona, selectedArchetype]);
+
+  const counsellorLabel = isProductBuyer ? "Specialist" : "Counsellor";
+  const enrollmentLabel = isProductBuyer ? "Purchase" : "Enrollment";
+  const studentLabel = isProductBuyer ? "Customer" : "Student";
+  const winProbabilityLabel = isProductBuyer ? "Purchase Likelihood" : "Win Probability";
 
   const wsRef = useRef(null);
   const projectionRef = useRef(null);
@@ -515,12 +529,23 @@ function App() {
   }, [metrics]);
 
   const momentumLabel = useMemo(() => {
-    if (momentumValue >= 70) return "Counsellor momentum";
-    if (momentumValue <= 35) return "Student resistance";
+    if (momentumValue >= 70) return `${counsellorLabel} momentum`;
+    if (momentumValue <= 35) return `${studentLabel} resistance`;
     return "Balanced momentum";
   }, [momentumValue]);
   const liveCommitment = useMemo(() => commitmentFromProbability(momentumValue), [momentumValue]);
-  const liveCommitmentLabel = COMMITMENT_LABELS[liveCommitment] || COMMITMENT_LABELS.none;
+  const displayCommitmentLabels = useMemo(() => {
+    if (isProductBuyer) {
+      return {
+        none: "No Commitment",
+        soft_commitment: "Exploring Purchase",
+        conditional_commitment: "Conditional Yes",
+        strong_commitment: "Confirmed Purchase",
+      };
+    }
+    return COMMITMENT_LABELS;
+  }, [isProductBuyer]);
+  const liveCommitmentLabel = displayCommitmentLabels[liveCommitment] || displayCommitmentLabels.none;
   const currentRound = metrics?.round ?? stateUpdate?.round ?? 1;
   const trustBaseline = 50 + (metrics?.retry_modifier ?? 0);
   const liveTrustDelta = (metrics?.trust_index ?? trustBaseline) - trustBaseline;
@@ -618,11 +643,12 @@ function App() {
     return "neutral";
   }, [metrics?.round, maxRounds]);
   const concessionsChipState = useMemo(() => {
-    const coun = Number(metrics?.concession_count_counsellor || 0);
-    const stu = Number(metrics?.concession_count_student || 0);
-    if (coun === 0 && stu === 0) return "muted";
-    return "neutral";
-  }, [metrics?.concession_count_counsellor, metrics?.concession_count_student]);
+    const score = Number(metrics?.concession_score || 0);
+    if (score > 75) return "warning";
+    if (score > 40) return "neutral";
+    if (score > 10) return "success";
+    return "muted";
+  }, [metrics?.concession_score]);
   const tensionChipState = useMemo(() => {
     const tension = Number(metrics?.tone_escalation || 0);
     if (tension > 65) return "danger";
@@ -711,13 +737,13 @@ function App() {
         Round {metrics?.round || 1} / {maxRounds}
       </span>
       <span className={`metricChip ${chipStateClass(concessionsChipState)} ${chipFlash.concessions ? "animate-flash-update" : ""}`}>
-        Concessions {metrics?.concession_count_counsellor ?? 0} - {metrics?.concession_count_student ?? 0}
+        Concession Score {metrics?.concession_score ?? 0}%
       </span>
       <span className={`metricChip ${chipStateClass(tensionChipState)} ${tensionChipState === "danger" ? "danger-pulse" : ""} ${chipFlash.tension ? "animate-flash-update" : ""}`}>
         Tension {metrics?.tone_escalation ?? 0}%
       </span>
       <span className={`metricChip enrollmentChip ${chipStateClass(enrollmentChipState)} ${chipFlash.enrollment ? "animate-flash-update" : ""}`}>
-        Win Probability {metrics?.close_probability ?? 0}%
+        {winProbabilityLabel} {metrics?.close_probability ?? 0}%
       </span>
       <span className={`metricChip commitmentChip ${chipStateClass(commitmentChipState)} ${chipFlash.commitment ? "animate-flash-update" : ""}`}>
         <span className="statusDot" />
@@ -734,10 +760,10 @@ function App() {
   const outcomeHeadline = useMemo(() => {
     const winner = analysis?.judge?.winner || analysis?.winner || "no-deal";
     if (winner === "counsellor") {
-      return `${counsellorName || "Counsellor"} Successfully Secured Enrollment`;
+      return `${counsellorName || counsellorLabel} Successfully Secured ${enrollmentLabel}`;
     }
     if (winner === "student") {
-      return `${persona?.name || "Student"} Was Not Convinced`;
+      return `${persona?.name || studentLabel} Was Not Convinced`;
     }
     return "Outcome: No Deal";
   }, [analysis, counsellorName, persona]);
@@ -1716,6 +1742,8 @@ function App() {
     </ul>
   );
 
+
+
   return (
     <main className={`app stage-${stage}`}>
       <img className={`hero-bg ${!isTransparentStage ? "hero-bg-active" : ""}`} src={`${baseUrl}/negotiation.png`} alt="" aria-hidden="true" />
@@ -1858,30 +1886,45 @@ function App() {
                 Pipeline
               </h4>
               <div className="pipelineSegments">
-                {PIPELINE_OPTIONS.map((pipeline) => {
-                  const isComingSoon = pipeline.status === "coming_soon";
-                  return (
-                    <button
-                      key={pipeline.id}
-                      type="button"
-                      className={`pipelineSegment ${selectedPipeline === pipeline.id ? "selected" : ""} ${isComingSoon ? "comingSoon" : ""}`}
-                      onClick={() => {
-                        if (!isComingSoon) setSelectedPipeline(pipeline.id);
-                      }}
-                      disabled={isComingSoon}
-                    >
-                      <strong>{pipeline.title}</strong>
-                      <span>{pipeline.subtitle}</span>
-                      {isComingSoon && (
-                        <em className="pipelineLock" aria-hidden="true">
-                          <svg viewBox="0 0 16 16" focusable="false">
-                            <path d="M4 7V5a4 4 0 1 1 8 0v2h1a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1Zm2 0h4V5a2 2 0 1 0-4 0v2Z" />
-                          </svg>
-                        </em>
-                      )}
-                    </button>
-                  );
-                })}
+                  {PIPELINE_OPTIONS.map((pipeline) => {
+                    const isComingSoon = pipeline.status === "coming_soon";
+                    
+                    // Dynamic roles based on selected archetype
+                    const isSelectedProductBuyer = ["car_buyer", "discount_hunter"].includes(selectedArchetype);
+                    const cRole = isSelectedProductBuyer ? "specialist" : "counsellor";
+                    const pRole = isSelectedProductBuyer ? "customer" : "prospect";
+                    
+                    let displaySubtitle = pipeline.subtitle;
+                    if (pipeline.id === "ai_vs_ai") {
+                      displaySubtitle = `Autonomous ${cRole} and ${pRole} simulation.`;
+                    } else if (pipeline.id === "human_vs_ai") {
+                      displaySubtitle = `You speak as ${cRole}, AI responds as ${pRole}.`;
+                    } else if (pipeline.id === "agent_powered_human_vs_ai") {
+                      displaySubtitle = `Voice-first ${cRole} with live Agent cues.`;
+                    }
+
+                    return (
+                      <button
+                        key={pipeline.id}
+                        type="button"
+                        className={`pipelineSegment ${selectedPipeline === pipeline.id ? "selected" : ""} ${isComingSoon ? "comingSoon" : ""}`}
+                        onClick={() => {
+                          if (!isComingSoon) setSelectedPipeline(pipeline.id);
+                        }}
+                        disabled={isComingSoon}
+                      >
+                        <strong>{pipeline.title}</strong>
+                        <span>{displaySubtitle}</span>
+                        {isComingSoon && (
+                          <em className="pipelineLock" aria-hidden="true">
+                            <svg viewBox="0 0 16 16" focusable="false">
+                              <path d="M4 7V5a4 4 0 1 1 8 0v2h1a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h1Zm2 0h4V5a2 2 0 1 0-4 0v2Z" />
+                            </svg>
+                          </em>
+                        )}
+                      </button>
+                    );
+                  })}
               </div>
             </section>
             <div className="controlSplitBar" />
@@ -1895,20 +1938,49 @@ function App() {
                 </span>
                 Prospect Archetype
               </h4>
-              <div className="archetypeGrid">
-                {ARCHETYPE_CARDS.map((card) => (
-                  <button
-                    key={card.id}
-                    type="button"
-                    className={`archetypeCard ${selectedArchetype === card.id ? "selected" : ""}`}
-                    style={{ "--archetype-accent": card.accent }}
-                    onClick={() => setSelectedArchetype(card.id)}
-                  >
-                    <span className="archetypeIcon">{card.icon}</span>
-                    <strong>{card.title}</strong>
-                    <p>{card.profile}</p>
-                  </button>
-                ))}
+              <div className="archetypeContainer">
+                {["Learning Prospect", "Car Buyer"]
+                  .map((cat) => ({
+                    category: cat,
+                    cards: ARCHETYPE_CARDS.filter((c) => (c.category || "Learning Prospect") === cat),
+                  }))
+                  .filter((group) => group.cards.length > 0)
+                  .map((group) => {
+                    const isCollapsed = collapsedCategories[group.category];
+                    return (
+                      <div key={group.category} className={`archetypeCategoryGroup ${isCollapsed ? "collapsed" : ""}`}>
+                        <button
+                          type="button"
+                          className="archetypeCategoryHeader"
+                          onClick={() => setCollapsedCategories(prev => ({ ...prev, [group.category]: !prev[group.category] }))}
+                        >
+                          <h5 className="archetypeCategoryTitle">{group.category}</h5>
+                          <span className="archetypeCategoryToggle">
+                            <svg viewBox="0 0 16 16" width="12" height="12">
+                              <path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </span>
+                        </button>
+                        {!isCollapsed && (
+                          <div className="archetypeGrid">
+                            {group.cards.map((card) => (
+                              <button
+                                key={card.id}
+                                type="button"
+                                className={`archetypeCard ${selectedArchetype === card.id ? "selected" : ""}`}
+                                style={{ "--archetype-accent": card.accent }}
+                                onClick={() => setSelectedArchetype(card.id)}
+                              >
+                                <span className="archetypeIcon">{card.icon}</span>
+                                <strong>{card.title}</strong>
+                                <p>{card.profile}</p>
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
               </div>
             </section>
           </section>
@@ -1997,13 +2069,13 @@ function App() {
             <div className="agentLayer">
               {!isHumanMode && (
                 <article className={`agentIdentity counsellor ${momentumValue > 65 ? "glow" : ""}`}>
-                  <h3>Program Counseller</h3>
+                  <h3>{isProductBuyer ? "Expert Product Specialist" : "Program Counseller"}</h3>
                   <p>{`${counsellorName || "Admissions Counsellor"}, ${program?.program_name || "Program"}`}</p>
                 </article>
               )}
               {!isHumanMode && (
                 <article className={`agentIdentity student ${momentumValue < 40 ? "glow" : ""}`}>
-                  <h3>Prospective Student</h3>
+                  <h3>{isProductBuyer ? "Customer" : "Prospective Student"}</h3>
                   <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
                 </article>
               )}
@@ -2021,7 +2093,7 @@ function App() {
                   }}
                 />
                 <article className="studentMiniCard">
-                  <strong>Prospective Student</strong>
+                  <strong>{isProductBuyer ? "Customer" : "Prospective Student"}</strong>
                   <p>{`${persona?.name || "Student"}, ${formatArchetype(persona)}`}</p>
                   {stage !== "completed" && (
                     <span>{micState === "locked" ? "Speaking..." : "Waiting..."}</span>
@@ -2134,7 +2206,7 @@ function App() {
               <article key={`${msg.id || idx}`} className={`projectionCard ${msg.agent}`}>
                 <header>
                   <div className="speakerMeta">
-                    <strong>{msg.agent === "counsellor" ? "Program Counseller" : "Prospective Student"}</strong>
+                    <strong>{msg.agent === "counsellor" ? (isProductBuyer ? "Expert Product Specialist" : "Program Counseller") : (isProductBuyer ? "Customer" : "Prospective Student")}</strong>
                     <span>
                       {msg.agent === "counsellor"
                         ? `${counsellorName || "Admissions Counsellor"}, ${program?.program_name || "Program"}`
@@ -2222,9 +2294,10 @@ function App() {
                 <div className="finalMetricChips">
                   <span className={`metricChip commitmentChip ${chipStateClass(commitmentReportState(analysis?.judge?.commitment_signal))}`}>
                     <span className="statusDot" />
-                    {COMMITMENT_LABELS[analysis?.judge?.commitment_signal] || COMMITMENT_LABELS.none}
+                    {displayCommitmentLabels[analysis?.judge?.commitment_signal] || displayCommitmentLabels.none}
                   </span>
-                  <span className="metricChip">Win Probability {analysis?.judge?.enrollment_likelihood ?? 0}%</span>
+                  <span className="metricChip">{winProbabilityLabel} {analysis?.judge?.enrollment_likelihood ?? 0}%</span>
+                  <span className="metricChip">Concession Score {analysis?.final_metrics?.concession_score ?? 0}%</span>
                   <span className="metricChip">Trust Delta {analysis?.judge?.trust_delta ?? 0}</span>
                   <span className="metricChip">Duration {analysis?.duration_hms || formatDurationHms(runDurationSeconds)}</span>
                 </div>
@@ -2234,12 +2307,12 @@ function App() {
                 <div className="personaIdentity">
                   <span className="personaAvatar">{(persona?.name || "P").slice(0, 1).toUpperCase()}</span>
                   <div>
-                    <h4>{persona?.name || "Prospective Student"}</h4>
+                    <h4>{persona?.name || (isProductBuyer ? "Customer" : "Prospective Student")}</h4>
                     <p>{formatArchetype(persona)}</p>
                   </div>
                 </div>
                 <div className="personaDetailRow">
-                  <span><strong>Career Stage:</strong> {formatCareerStage(persona?.career_stage)}</span>
+                  <span><strong>{isProductBuyer ? "Profession/Stage" : "Career Stage"}:</strong> {formatCareerStage(persona?.career_stage)}</span>
                   <span><strong>Risk Tolerance:</strong> {toTitleCase(persona?.risk_tolerance || "n/a")}</span>
                   <span><strong>Primary Objections:</strong> {(persona?.primary_objections || []).slice(0, 2).join(", ") || "n/a"}</span>
                 </div>

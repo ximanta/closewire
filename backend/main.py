@@ -109,6 +109,8 @@ ARCHETYPE_LABELS: Dict[str, str] = {
     "fomo_victim": "FOMO Victim",
     "drifter": "Drifter",
     "intellectual_buyer": "Intellectual Buyer",
+    "car_buyer": "Car Buyer",
+    "discount_hunter": "Discount Hunter",
 }
 
 ARCHETYPE_CONFIGS: Dict[str, Dict[str, str]] = {
@@ -163,6 +165,18 @@ ARCHETYPE_CONFIGS: Dict[str, Dict[str, str]] = {
             "Ask for specific tools, frameworks, architecture choices, trade-offs, "
             "evaluation methodology, and expected depth by module."
         ),
+    },
+    "car_buyer": {
+        "core_drive": "Reliability, Status & Features",
+        "stress_trigger": "Hidden costs, aggressive upselling, or lack of clear specifications",
+        "emotional_response": "Negotiation-focused, skeptical of dealership tactics, comparing alternatives",
+        "language_instruction": "Conversational, asking about mileage, warranty, on-road prices, and financing.",
+    },
+    "discount_hunter": {
+        "core_drive": "Maximum Savings & Freebies",
+        "stress_trigger": "High processing fees or rigid pricing",
+        "emotional_response": "Relentless, comparing with every competitor, walking away early",
+        "language_instruction": "Direct, focused on discounts, corporate loyalty, exchange bonuses, and referral benefits.",
     },
 }
 
@@ -707,9 +721,16 @@ def sanitize_text(text: str) -> str:
 
 
 def extract_inr_amount(text: str) -> int:
-    raw = text or ""
+    raw = (text or "").lower()
+    
+    # Check for Lakhs/L
+    lakh_matches = re.findall(r"(\d+(?:\.\d+)?)\s*(?:lakh|l\b)", raw)
+    if lakh_matches:
+        values = [int(float(v) * 100_000) for v in lakh_matches]
+        return max(1000, max(values))
+
     currency_matches = re.findall(
-        r"(?:\u20b9|inr|rs\.?)\s*([0-9][0-9,]{3,9})",
+        r"(?:\u20b9|inr|rs\.?)\s*([0-9][0-9,]{3,10})",
         raw,
         flags=re.IGNORECASE,
     )
@@ -717,27 +738,51 @@ def extract_inr_amount(text: str) -> int:
         values = [int(v.replace(",", "")) for v in currency_matches]
         return max(1000, max(values))
 
-    generic_matches = re.findall(r"\b([0-9][0-9,]{3,9})\b", raw)
+    generic_matches = re.findall(r"\b([0-9][0-9,]{3,10})\b", raw)
     if generic_matches:
         values = [int(v.replace(",", "")) for v in generic_matches]
         return max(1000, max(values))
     return 4500
 
 
-def _extract_offer_amount(text: str) -> Optional[int]:
-    raw = text or ""
-    inr_match = re.findall(
-        r"(?:\u20b9|inr|rs\.?)\s*([0-9][0-9,]{2,9})",
-        raw,
-        flags=re.IGNORECASE,
-    )
-    if inr_match:
-        return int(inr_match[-1].replace(",", ""))
+def _extract_all_offer_candidates(text: str) -> List[int]:
+    raw = (text or "").lower()
+    candidates = []
+    
+    # 1. Handle Lakhs/L
+    lakh_matches = re.findall(r"(\d+(?:\.\d+)?)\s*(?:lakh|l\b)", raw)
+    for m in lakh_matches:
+        try:
+            candidates.append(int(float(m) * 100_000))
+        except ValueError:
+            pass
 
-    usd_match = re.findall(r"\$([0-9][0-9,]{2,9})", raw)
-    if usd_match:
-        return int(usd_match[-1].replace(",", ""))
-    return None
+    # 2. INR prefix
+    inr_matches = re.findall(r"(?:\u20b9|inr|rs\.?)\s*([0-9][0-9,]{2,10})", raw)
+    for m in inr_matches:
+        try:
+            candidates.append(int(m.replace(",", "")))
+        except ValueError:
+            pass
+
+    # 3. Generic large numbers
+    generic_matches = re.findall(r"\b([1-9][0-9,]{4,10})\b", raw)
+    for m in generic_matches:
+        try:
+            val = int(m.replace(",", ""))
+            if val > 5000:
+                candidates.append(val)
+        except ValueError:
+            pass
+
+    usd_matches = re.findall(r"\$([0-9][0-9,]{2,10})", raw)
+    for m in usd_matches:
+        try:
+            candidates.append(int(m.replace(",", "")))
+        except ValueError:
+            pass
+
+    return candidates
 
 
 def _derive_financials(program: Dict[str, Any], persona: Dict[str, Any]) -> Dict[str, int]:
@@ -762,8 +807,18 @@ def _derive_financials(program: Dict[str, Any], persona: Dict[str, Any]) -> Dict
 
 def extract_from_url(url: str) -> str:
     """
-    Scrapes text from a URL, stripping non-content tags.
+    Scrapes text from a URL. Uses Jina Reader as a primary method for better LLM formatting.
     """
+    # Try Jina Reader first
+    try:
+        jina_url = f"https://r.jina.ai/{url}"
+        response = requests.get(jina_url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
+        if response.status_code == 200 and len(response.text.strip()) > 200:
+            return sanitize_text(response.text)
+    except Exception as exc:
+        logger.warning("Jina Reader failed for %s: %s. Falling back to direct scraping.", url, str(exc))
+
+    # Fallback to direct requests
     try:
         response = requests.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
         response.raise_for_status()
@@ -773,6 +828,7 @@ def extract_from_url(url: str) -> str:
         text = soup.get_text(separator=" ")
         return sanitize_text(text)
     except Exception as exc:
+        logger.error("Scraping fully failed for %s: %s", url, str(exc))
         return f"Error extracting from URL: {str(exc)}"
 
 
@@ -1348,35 +1404,46 @@ CONTEXT:
     }
 
 
-def _analyze_program(url: str) -> Tuple[ProgramSummary, str]:
+def _analyze_program(url: str, archetype_id: Optional[str] = None) -> Tuple[ProgramSummary, str]:
     client, negotiation_model_name, _ = get_client_and_models()
     source = "url_content"
     clean_text = extract_from_url(url)[:25000]
-    if clean_text.startswith("Error extracting from URL:"):
+    
+    is_product = str(archetype_id).strip().lower() in ["car_buyer", "discount_hunter"]
+    
+    if clean_text.startswith("Error extracting from URL:") or len(clean_text) < 300:
         source = "fallback"
+        
     fallback = {
-        "program_name": "Unknown Program",
-        "value_proposition": "Career outcomes through practical learning.",
-        "key_features": ["Structured curriculum", "Industry relevance"],
-        "target_audience": "Early and mid-career professionals",
-        "positioning_angle": "Outcome-focused upskilling",
-        "duration": "Not specified",
-        "format": "Not specified",
-        "weekly_time_commitment": "Not specified",
-        "program_fee_inr": "INR 4,500",
-        "placement_support_details": "General career guidance.",
-        "certification_details": "Certificate on successful completion.",
-        "curriculum_modules": ["Foundations", "Hands-on projects"],
-        "learning_outcomes": ["Practical skills", "Career readiness"],
+        "program_name": "Unknown Product" if is_product else "Unknown Program",
+        "value_proposition": "High-quality product value." if is_product else "Career outcomes through practical learning.",
+        "key_features": ["Reliability", "Performance"] if is_product else ["Structured curriculum", "Industry relevance"],
+        "target_audience": "General consumers" if is_product else "Early and mid-career professionals",
+        "positioning_angle": "Value-driven purchase" if is_product else "Outcome-focused upskilling",
+        "duration": "N/A",
+        "format": "N/A",
+        "weekly_time_commitment": "N/A",
+        "program_fee_inr": "Price on Request",
+        "placement_support_details": "N/A",
+        "certification_details": "N/A",
+        "curriculum_modules": [],
+        "learning_outcomes": [],
         "cohort_start_dates": [],
         "faqs": [],
         "projects_use_cases": [],
-        "program_curriculum_coverage": "Not specified",
+        "program_curriculum_coverage": "N/A",
         "tools_frameworks_technologies": [],
-        "emi_or_financing_options": "Not specified",
+        "emi_or_financing_options": "Available",
     }
+    
+    product_type_hint = "PRODUCT (e.g., Car, Gadget)" if is_product else "PROGRAM (e.g., Course, Bootcamp)"
+    
     prompt = f"""
-Analyze content of this URL for an enrollment counsellor. Extract concrete facts only.
+Analyze content of this URL for an expert specialist. Extract concrete facts only.
+If the content is missing or unreachable, return the fallback values provided in the tool schema.
+DO NOT hallucinate product names or features if they are not explicitly mentioned in the text.
+If you don't know the name, use "Unknown {product_type_hint}".
+
 URL: {url}
 PAGE_TEXT:
 {clean_text}
@@ -1386,11 +1453,11 @@ PAGE_TEXT:
         model_name=negotiation_model_name,
         prompt=prompt,
         function_name="set_program_summary",
-        function_description="Return structured program positioning details extracted from URL content.",
+        function_description=f"Return structured details extracted from URL content for a {product_type_hint}.",
         parameters_schema={
             "type": "object",
             "properties": {
-                "program_name": {"type": "string"},
+                "program_name": {"type": "string", "description": "The specific name of the car/gadget/course."},
                 "value_proposition": {"type": "string"},
                 "key_features": {"type": "array", "items": {"type": "string"}},
                 "target_audience": {"type": "string"},
@@ -1448,8 +1515,11 @@ def _generate_persona(program: ProgramSummary, forced_archetype_id: Optional[str
     language_style = "Hindi" if archetype_id == "skeptical_shopper" else random.choice(
         ["Indian Academic English", "Corporate Indian English", "Formal Indian English", "Passive Indian English"]
     )
+    is_product = archetype_id in ["car_buyer", "discount_hunter"]
+    subject_type = "Consumer/Product Buyer" if is_product else "Learner/Student"
+    
     prompt = f"""
-Generate a realistic Indian learner persona and call the function.
+Generate a realistic Indian {subject_type} persona and call the function.
 You MUST keep archetype_id exactly as: {archetype_id}
 Archetype label: {ARCHETYPE_LABELS.get(archetype_id, archetype_id)}
 Core drive: {archetype['core_drive']}
@@ -1458,12 +1528,16 @@ Emotional response: {archetype['emotional_response']}
 Language instruction: {archetype['language_instruction']}
 
 Use realistic Indian context.
-Do NOT invent learner identity.
-Use exactly this learner name: "{selected_name}"
-Use exactly this learner gender: "{selected_gender}".
+Do NOT invent identity beyond the parameters.
+Use exactly this name: "{selected_name}"
+Use exactly this gender: "{selected_gender}".
 If archetype_id is skeptical_shopper, force language_style as pure Hindi (Devanagari). No Hinglish.
 No profanity.
-PROGRAM:
+
+{subject_type.upper()} CONTEXT:
+{"Evaluate a high-value purchase (Car/Gadget). Focus on ownership value, specifications, and family needs." if is_product else "Evaluate an educational path. Focus on career growth, skills, and placements."}
+
+PROGRAM/PRODUCT:
 {json.dumps(program)}
 """
     fallback_name, fallback_gender = selected_name, selected_gender
@@ -1472,35 +1546,33 @@ PROGRAM:
         "gender": fallback_gender,
         "archetype_id": archetype_id,
         "archetype_label": ARCHETYPE_LABELS.get(archetype_id, archetype_id),
-        "age": random.randint(21, 34),
-        "current_role": random.choice(
-            ["BPO Employee", "Final Year B.Tech Student", "Manual Tester", "Support Engineer", "Job Seeker"]
-        ),
+        "age": random.randint(25, 45) if is_product else random.randint(21, 34),
+        "current_role": random.choice(["Business Owner", "Senior Lead", "Software Engineer", "Consultant"]) if is_product else random.choice(["BPO Employee", "Final Year B.Tech Student", "Manual Tester", "Support Engineer", "Job Seeker"]),
         "city_tier": random.choice(["Tier-1", "Tier-2"]),
-        "backstory": "Family expectations are rising and career progress feels stuck.",
-        "trigger_event": "Saw a friend get a better package after upskilling.",
-        "hidden_secret": "Scared of wasting money and failing to complete what is started.",
-        "misconception": "Certificate alone guarantees shortlisting and placement.",
+        "backstory": "Needs a reliable vehicle for family and daily commute." if is_product else "Family expectations are rising and career progress feels stuck.",
+        "trigger_event": "Expanding family needs or upgrading for better status." if is_product else "Saw a friend get a better package after upskilling.",
+        "hidden_secret": "Checking multiple dealerships for the best exchange bonus." if is_product else "Scared of wasting money and failing to complete what is started.",
+        "misconception": "Highest price always means highest reliability." if is_product else "Certificate alone guarantees shortlisting and placement.",
         "language_style": language_style,
-        "common_vocabulary": ["Package", "Placement", "Fresher", "Backlog", "Refund", "Scope"],
-        "financial_anxiety": random.randint(45, 95),
-        "skepticism": random.randint(30, 95),
-        "confusion_level": random.randint(25, 85),
-        "ego_level": random.randint(20, 85),
+        "common_vocabulary": ["Mileage", "On-road", "Warranty", "Service", "Discount", "Exchange"] if is_product else ["Package", "Placement", "Fresher", "Backlog", "Refund", "Scope"],
+        "financial_anxiety": random.randint(30, 80),
+        "skepticism": random.randint(40, 95),
+        "confusion_level": random.randint(20, 70),
+        "ego_level": random.randint(30, 90),
         # Legacy compatibility
         "persona_type": archetype_id,
-        "background": "Prospective learner evaluating an AI upskilling path.",
-        "career_stage": random.choice(["early", "mid"]),
+        "background": "Evaluating a high-value purchase." if is_product else "Prospective learner evaluating an AI upskilling path.",
+        "career_stage": random.choice(["mid", "senior"]) if is_product else random.choice(["early", "mid"]),
         "financial_sensitivity": random.choice(["medium", "high"]),
         "risk_tolerance": random.choice(["low", "medium"]),
-        "emotional_tone": random.choice(["skeptical", "confused", "anxious"]),
-        "primary_objections": ["Placement credibility", "Fee value", "Difficulty for freshers", "Time commitment"],
-        "walk_away_likelihood": round(random.uniform(0.25, 0.75), 2),
-        "expected_roi_months": random.randint(4, 18),
-        "affordability_concern_level": random.randint(45, 90),
-        "willingness_to_invest_score": random.randint(25, 75),
-        "communication_style": random.choice(["timid", "aggressive", "confused", "challenging"]),
-        "common_phrases": ["Placement ka scene kya hai?", "Is this really worth it?", "Mera paisa waste toh nahi hoga?"],
+        "emotional_tone": random.choice(["skeptical", "negotiating", "anxious"]),
+        "primary_objections": ["On-road price", "Maintenance costs", "Resale value", "Tech features"] if is_product else ["Placement credibility", "Fee value", "Difficulty for freshers", "Time commitment"],
+        "walk_away_likelihood": round(random.uniform(0.2, 0.6), 2),
+        "expected_roi_months": random.randint(24, 60) if is_product else random.randint(4, 18),
+        "affordability_concern_level": random.randint(30, 85),
+        "willingness_to_invest_score": random.randint(40, 80),
+        "communication_style": random.choice(["direct", "aggressive", "skeptical", "demanding"]),
+        "common_phrases": ["Best final price kya hai?", "Exchange bonus kitna milega?", "Maintenance cost ka scene kya hai?"] if is_product else ["Placement ka scene kya hai?", "Is this really worth it?", "Mera paisa waste toh nahi hoga?"],
     }
     if archetype_id == "skeptical_shopper":
         fallback["common_vocabulary"] = ["फीस", "प्लेसमेंट", "भरोसा", "करियर", "नौकरी", "परिणाम"]
@@ -1513,8 +1585,8 @@ PROGRAM:
         client=client,
         model_name=negotiation_model_name,
         prompt=prompt,
-        function_name="set_student_persona",
-        function_description="Return a structured Indian student persona with narrative depth and hidden blockers.",
+        function_name="set_persona",
+        function_description=f"Return a structured Indian {subject_type} persona with narrative depth and hidden blockers.",
         parameters_schema={
             "type": "object",
             "properties": {
@@ -1654,19 +1726,69 @@ In this run:
             "LANGUAGE REQUIREMENT:\n"
             "- Use clear, professional English matching the active simulation style."
         )
+        
+    role_title = "Senior Admissions Counsellor"
+    objective_term = "enrollment"
+    product_label = "PROGRAM"
+    do_not_rules = (
+        "- Promise guaranteed jobs\n"
+        "- Overstate placement outcomes\n"
+        "- Invent program details"
+    )
+    customer_term = "student"
+    intent_examples = "fee, placement, eligibility, curriculum, duration, financing, outcomes, comparison, trust-risk"
+    nudge_examples = (
+        "  - \"Would you like a quick view of the capstone outcomes?\"\n"
+        "  - \"Should I break down placement eligibility in 30 seconds?\"\n"
+        "  - \"Do you want a fee + EMI snapshot for your case?\""
+    )
+    
+    if archetype_id in ["car_buyer", "discount_hunter"]:
+        role_title = "Expert Product Specialist / Sales Executive"
+        objective_term = "purchase"
+        product_label = "PRODUCT"
+        do_not_rules = (
+            "- Promise unrealistic discounts\n"
+            "- Overstate product features or warranty\n"
+            "- Invent product specifications"
+        )
+        customer_term = "customer"
+        intent_examples = "price, features, warranty, specifications, financing, delivery, comparison, trust-risk"
+        nudge_examples = (
+          "  - \"Would you like a quick breakdown of the key features?\"\n"
+          "  - \"Should I explain the warranty and service terms in 30 seconds?\"\n"
+          "  - \"Do you want a price + EMI snapshot for this model?\""
+        )
+        # Map program keys to product keys for better LLM alignment
+        p = state['program']
+        data_block = f"""
+SPECIFIC {product_label} IDENTITY:
+- Name: {p.get('program_name')}
+- Type: {p.get('target_audience')} (derived from context)
+- Value Prop: {p.get('value_proposition')}
+
+TECHNICAL SPECIFICATIONS & DETAILS:
+- Key Features: {", ".join(p.get('key_features', []))}
+- Price/Fee: {p.get('program_fee_inr')}
+- Financing: {p.get('emi_or_financing_options')}
+- Other Details: {p.get('positioning_angle')}
+"""
+    else:
+        # Default Admissions context
+        data_block = f"{product_label} DATA:\n{json.dumps(state['program'])}"
+
     return f"""
-ROLE: Senior Admissions Counsellor.
+ROLE: {role_title}.
+CRITICAL IDENTITY RULE: You are selling the {product_label} named "{state['program'].get('program_name')}". 
+DO NOT mention or sell any other items, routers, courses, or programs.
 
 PRIMARY OBJECTIVE:
-Guide the student toward a confident enrollment decision using only factual program data.
+Guide the {customer_term} toward a confident {objective_term} decision using only factual {product_label.lower()} data.
 
 DO NOT:
-- Promise guaranteed jobs
-- Overstate placement outcomes
-- Invent program details
+{do_not_rules}
 
-PROGRAM DATA:
-{json.dumps(state['program'])}
+{data_block}
 
 PRIOR TRANSCRIPT:
 {transcript}
@@ -1674,9 +1796,9 @@ PRIOR TRANSCRIPT:
 {counsellor_language_rules}
 
 STRATEGY REQUIREMENTS:
-- First detect student intent from transcript (fee, placement, eligibility, curriculum, duration, financing, outcomes, comparison, trust-risk).
+- First detect {customer_term} intent from transcript ({intent_examples}).
 - Answer the detected intent first and directly.
-- If the student asks a specific question, do NOT dump unrelated information.
+- If the {customer_term} asks a specific question, do NOT dump unrelated information.
 - Use exactly one concrete proof point (number, criterion, timeline, or policy) relevant to the asked intent.
 - Keep language conversational and crisp; avoid lecture-like tone.
 - Build trust gradually and reduce anxiety using facts, not hype.
@@ -1686,9 +1808,7 @@ STRATEGY REQUIREMENTS:
 ENGAGEMENT / SALES QUALITY RULE:
 - After answering, optionally add one high-value engagement nudge only when context supports it.
 - Good nudge examples:
-  - "Would you like a quick view of the capstone outcomes?"
-  - "Should I break down placement eligibility in 30 seconds?"
-  - "Do you want a fee + EMI snapshot for your case?"
+{nudge_examples}
 - Use at most one nudge per turn.
 - Do not nudge if user asked to be brief or is visibly frustrated.
 
@@ -1743,6 +1863,9 @@ def _build_student_prompt(state: NegotiationState) -> str:
         language_style = str(persona.get("language_style") or "Indian English")
         language_instruction = str(config.get("language_instruction") or "Use clear Indian English.")
         pipeline_language_fragment = "- Keep language aligned with archetype profile."
+        
+    product_label = "PRODUCT" if archetype_id in ["car_buyer", "discount_hunter"] else "PROGRAM"
+
     return f"""
 ROLE: You are {persona.get('name')}, a {persona.get('age')} year old {persona.get('current_role')}.
 ARCHETYPE: {persona.get('archetype_label')}
@@ -1766,7 +1889,7 @@ CURRENT STATE:
 - trust_level: {inner_state.get('trust_score', 50)}/100
 - unresolved_concerns: {", ".join(inner_state.get('unresolved_concerns', [])) or "none"}
 
-PROGRAM:
+{product_label}:
 {json.dumps(program_snapshot)}
 
 TRANSCRIPT SO FAR:
@@ -2301,18 +2424,47 @@ def _update_metrics(state: NegotiationState, counsellor_msg: Dict[str, Any], stu
     prev_offer = state["counsellor_position"]["current_offer"]
     prev_student_offer = state["student_position"]["current_offer"]
 
+    # --- Specialist (Counsellor) Concession Logic ---
     coun_offer = prev_offer
-    candidate = _extract_offer_amount(counsellor_msg["content"])
-    if candidate is not None:
-        floor = state["counsellor_position"]["floor_offer"]
-        if floor <= candidate <= prev_offer:
-            coun_offer = candidate
+    counsellor_text = counsellor_msg["content"].lower()
+    coun_candidates = _extract_all_offer_candidates(counsellor_text)
+    
+    # Also detect "discount of X" and apply as relative reduction
+    discount_match = re.search(r"discount\s*(?:of|up\s*to)?\s*(?:\u20b9|inr|rs\.?)?\s*([0-9][0-9,]{3,10})", counsellor_text)
+    if discount_match:
+        try:
+            d_val = int(discount_match.group(1).replace(",", ""))
+            if d_val < (prev_offer * 0.6):
+                coun_candidates.append(prev_offer - d_val)
+        except ValueError:
+            pass
 
+    if coun_candidates:
+        floor = state["counsellor_position"]["floor_offer"]
+        valid_coun = [c for c in coun_candidates if floor <= c <= prev_offer]
+        if valid_coun:
+            best_c = min(valid_coun)
+            # Only count as concession if they aren't just quoting the student's current bid
+            if best_c != prev_student_offer:
+                coun_offer = best_c
+
+    # --- Customer (Student) Concession Logic ---
     stu_offer = prev_student_offer
-    candidate = _extract_offer_amount(student_msg["content"])
-    if candidate is not None:
-        if 0 < candidate <= state["student_position"]["budget"]:
-            stu_offer = candidate
+    student_text = student_msg["content"].lower()
+    stu_candidates = _extract_all_offer_candidates(student_text)
+    
+    if stu_candidates:
+        budget = state["student_position"]["budget"]
+        valid_stu = [c for c in stu_candidates if prev_student_offer <= c <= budget]
+        if valid_stu:
+            candidate_bid = max(valid_stu)
+            # If they mention the EXACT current offer of the specialist, 
+            # check if it's an agreement or just a reference.
+            is_referencing = any(ref in student_text for ref in ["the price of", "listed price", "original price", "price for the", "reduction of"])
+            if candidate_bid == prev_offer and is_referencing:
+                pass
+            else:
+                stu_offer = candidate_bid
 
     if coun_offer < prev_offer:
         metrics["concession_count_counsellor"] += 1
@@ -2321,6 +2473,14 @@ def _update_metrics(state: NegotiationState, counsellor_msg: Dict[str, Any], stu
 
     state["counsellor_position"]["current_offer"] = coun_offer
     state["student_position"]["current_offer"] = stu_offer
+
+    # Calculate Concession Score (0-100)
+    # 100 means they reached the floor. 0 means they haven't budged from target.
+    target = state["counsellor_position"]["target_offer"]
+    floor = state["counsellor_position"]["floor_offer"]
+    margin = max(1, target - floor)
+    metrics["concession_score"] = int(100 * (target - coun_offer) / margin)
+    metrics["concession_score"] = min(100, max(0, metrics["concession_score"]))
 
     emotional = (student_msg.get("emotional_state") or "calm").lower()
     if emotional in {"frustrated", "confused"}:
@@ -2389,33 +2549,56 @@ async def _judge_outcome(state: NegotiationState) -> Dict[str, Any]:
     transcript = "\n\n".join(
         f"Round {m['round']} {m['agent'].upper()}: {m['content']}" for m in state["messages"]
     )
-    prompt = f"""
-You are an expert admissions audit evaluator.
+    
+    archetype_id = str(state.get("persona", {}).get("archetype_id", "")).strip().lower()
+    if archetype_id in ["car_buyer", "discount_hunter"]:
+        evaluator_role = "expert automotive sales auditor and retail experience evaluator"
+        interaction_type = "automotive sales consultation transcript"
+        metrics_focus = "Purchase likelihood (intent to book or test-drive)"
+        winner_counsellor = "specialist (customer ready to proceed or booked)"
+        winner_student = "customer (remained unconvinced or walked away)"
+        specific_rules = """
+        - Evaluate objection handling regarding pricing, financing, features, and test-drives.
+        - Check if the specialist focused on value-selling and consultative advice.
+        - Look for signals of 'Dealer Trust' vs 'Sales Pressure Anxiety'.
+        """
+    else:
+        evaluator_role = "expert academic admissions auditor and enrollment counselor"
+        interaction_type = "enrollment counselling transcript"
+        metrics_focus = "Enrollment likelihood (intent to apply or pay fee)"
+        winner_counsellor = "counsellor (student likely to enroll)"
+        winner_student = "student (remained unconvinced)"
+        specific_rules = """
+        - Evaluate objection handling regarding curriculum, career outcomes, and eligibility.
+        - Check if the counsellor focused on career ROI and skill gaps.
+        - Look for signals of 'Learning Confidence' vs 'Academic/Career Anxiety'.
+        """
 
-Analyze the full enrollment counselling transcript.
+    prompt = f"""
+You are an {evaluator_role}.
+
+Analyze the full {interaction_type}.
 
 Determine:
-1. Commitment signal level:
-   - none
-   - soft_commitment
-   - conditional_commitment
-   - strong_commitment
-2. Enrollment likelihood (0-100)
+1. Commitment signal level (none, soft, conditional, strong)
+2. {metrics_focus} (0-100)
 3. Primary unresolved objection
 4. Trust delta (-20 to +20)
 5. Who won:
-   - counsellor (student likely to enroll)
-   - student (not convinced)
+   - {winner_counsellor}
+   - {winner_student}
    - no-deal
 
-Do NOT evaluate based on price convergence alone.
-Focus on emotional trajectory and objection handling.
+EVALUATION RULES:
+{specific_rules}
+- Do NOT evaluate based on price convergence alone.
+- Focus on emotional trajectory and objection handling.
+- Be realistic and critical; high scores (85+) must be earned through exceptional handling.
 
-Be realistic and critical.
 Return structured function output only.
-
 Call the function with the final structured verdict.
-METRICS:
+
+METRICS_SNAPSHOT:
 {json.dumps(state['negotiation_metrics'])}
 
 DEAL_STATUS:
@@ -2445,7 +2628,6 @@ TRANSCRIPT:
                 "strengths": {"type": "array", "items": {"type": "string"}},
                 "mistakes": {"type": "array", "items": {"type": "string"}},
                 "pivotal_moments": {"type": "array", "items": {"type": "string"}},
-                "negotiation_score": {"type": "number"},
                 "skill_recommendations": {"type": "array", "items": {"type": "string"}},
             },
             "required": [
@@ -2458,7 +2640,6 @@ TRANSCRIPT:
                 "strengths",
                 "mistakes",
                 "pivotal_moments",
-                "negotiation_score",
                 "skill_recommendations",
             ],
         },
@@ -2472,10 +2653,31 @@ TRANSCRIPT:
             "strengths": [],
             "mistakes": [],
             "pivotal_moments": [],
-            "negotiation_score": 0,
             "skill_recommendations": [],
         },
     )
+
+    # Calculate Negotiation Score via math formula instead of LLM
+    # Win Probability (40%) + Trust Index (30%) + (100 - Concession Score) (30%)
+    # Note: Higher score for GIVING LESS discount while still getting a "Win".
+    metrics = state["negotiation_metrics"]
+    
+    # Use fresh values from judge analysis for win prob and trust
+    final_win_prob = int(parsed.get("enrollment_likelihood", metrics.get("close_probability", 0)))
+    final_trust = max(0, min(100, metrics.get("trust_index", 50) + int(parsed.get("trust_delta", 0))))
+    concession_score = metrics.get("concession_score", 0)
+
+    base_score = int(
+        (final_win_prob * 0.4)
+        + (final_trust * 0.3)
+        + ((100 - concession_score) * 0.3)
+    )
+    
+    # Bonus for winner status
+    winner = str(parsed.get("winner", "")).lower()
+    bonus = 10 if ("specialist" in winner or "counsellor" in winner) else 0
+    parsed["negotiation_score"] = min(100, base_score + bonus)
+    return parsed
     return parsed
 
 
@@ -2492,9 +2694,10 @@ async def auth_login(payload: LoginRequest) -> LoginResponse:
 async def analyze_url(payload: AnalyzeUrlRequest) -> AnalyzeUrlResponse:
     _require_auth_token(payload.auth_token)
     url = str(payload.url)
-    program, source = _analyze_program(url)
+    archetype_id = payload.archetype_id
+    program, source = _analyze_program(url, archetype_id=archetype_id)
     program = _to_plain_json(program)
-    forced_archetype_id = _resolve_selected_archetype(payload.archetype_id)
+    forced_archetype_id = _resolve_selected_archetype(archetype_id)
     persona = _generate_persona(program, forced_archetype_id=forced_archetype_id)
     persona = _to_plain_json(persona)
     session_id = str(uuid.uuid4())
@@ -2588,6 +2791,7 @@ async def negotiate_websocket(websocket: WebSocket) -> None:
                 "objection_intensity": 45,
                 "trust_index": min(100, 50 + retry_modifier),
                 "close_probability": 45,
+                "concession_score": 0,
                 "sentiment_indicator": "neutral",
                 "retry_modifier": retry_modifier,
             },

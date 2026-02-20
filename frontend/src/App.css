@@ -422,6 +422,57 @@ textarea {
   border: 1px solid rgba(169, 118, 148, 0.24);
 }
 
+.archetypeContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.archetypeCategoryGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.archetypeCategoryHeader {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 4px 8px;
+  background: rgba(125, 152, 196, 0.05);
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.archetypeCategoryHeader:hover {
+  background: rgba(125, 152, 196, 0.12);
+}
+
+.archetypeCategoryTitle {
+  margin: 0;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #7d98c4;
+  width: fit-content;
+}
+
+.archetypeCategoryToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #7d98c4;
+  transition: transform 0.2s ease;
+}
+
+.archetypeCategoryGroup.collapsed .archetypeCategoryToggle {
+  transform: rotate(-90deg);
+}
+
 .archetypeGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
